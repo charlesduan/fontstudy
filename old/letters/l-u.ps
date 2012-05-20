@@ -1,0 +1,11 @@
+%
+% l-u.ps
+%
+% Unit is 1/5 width of "l".
+%
+gsave
+newpath 0 0 moveto 0 300 lineto stroke
+(l) stringwidth pop /lWidth exch def
+lWidth 0 moveto 0 300 rlineto stroke
+grestore
+(Unit based on l) lWidth 5 div stringOfText

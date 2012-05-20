@@ -1,0 +1,27 @@
+%
+% L-tiny-sans.ps
+%
+
+
+pathExtremes dup
+sortByY lastElt /LTop defPoint
+sortByX firstElt /LLeft defPoint
+
+LTop pointbox LLeft pointbox
+
+mark
+LTop horizLineThrough drawLine
+LLeft vertLineThrough drawLine
+cleartomark
+
+LLeft xcoor LTop ycoor /LCorner defPoint
+LCorner pointbox
+
+LCorner -100 100 addPoint LCorner 1000 -1000 addPoint drawLine
+pathLineIntc sortByX firstElt /LPathCorner defPoint
+
+LPathCorner pointbox
+
+LCorner LPathCorner 90 penDiameter
+(Tiny by L top curvature) exch stringOfText
+

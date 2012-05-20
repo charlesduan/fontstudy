@@ -1,0 +1,10 @@
+%
+% =-rule_thickness.ps
+%
+0.5 vertSplitLine pathLineIntc sortByY 0 2 getinterval loadArray
+/EqualRuleTop defPoint /EqualRuleBot defPoint
+EqualRuleTop uppointbox EqualRuleBot pointbox
+
+(Rule thickness)
+EqualRuleTop ycoor EqualRuleBot ycoor sub
+stringOfText

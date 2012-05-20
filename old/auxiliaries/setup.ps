@@ -1,0 +1,21 @@
+/doTranslation {
+    50 200 translate
+    0.6 0.6 scale
+} def
+
+/resetPage {
+    doTranslation
+    resetExtremes
+    resetIntc
+    resetText
+} def
+
+
+% Measure height of path
+gsave
+    nulldevice
+    0 0 moveto (x) true charpath flattenpath
+    pathbbox /XHeight exch def pop pop pop
+grestore
+
+/TextToConsole true def

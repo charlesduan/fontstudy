@@ -1,0 +1,34 @@
+%
+% l-slab.ps
+%
+% Thickness of serif of "l"
+%
+0.5 vertSplitLine pathLineIntc sortByY firstElt /lBottomPoint defPoint
+0.5 horizSplitLine pathLineIntc sortByX lastElt /lRightPoint defPoint
+lBottomPoint pointbox
+lRightPoint rtpointbox
+
+% Find the place where the top of the serif begins.
+{ lBottomPoint startAtPoint lRightPoint endAtPoint } traceSubpath
+{ {
+    flattenpath
+    { 45 90 withinRange } startWhenAngle 
+    { 135 90 withinRange } endBeforeAngle
+  } traceSubpath
+} useSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByY lastElt /lTopSlab defPoint
+lTopSlab uppointbox
+
+% Take a weighted average of lRightPoint and lTopSlab, ratio 4:1.
+lTopSlab 0.8 scalePoint lRightPoint 0.2 scalePoint addPoint
+vertLineThrough pathLineIntc sortByY 0 2 getinterval loadArray
+/lSlabTop defPoint /lSlabBot defPoint
+
+lSlabTop uppointbox lSlabBot pointbox
+
+(Serif thickness)
+lSlabTop ycoor
+lSlabBot ycoor sub
+stringOfText

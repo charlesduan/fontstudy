@@ -1,0 +1,9 @@
+output_prefix: zmn
+output_dir: poetica
+font_file: ppori8a.pfa
+roman_name: Poetica-ChanceryI
+italic_name: Poetica-ChanceryI
+roman_tfm: ppori8t
+italic_tfm: ppori8t
+sans_serif: no
+square_ends: yes

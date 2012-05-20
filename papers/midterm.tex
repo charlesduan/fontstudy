@@ -1,0 +1,702 @@
+\documentclass[12pt]{article}
+\usepackage{myarticle,switcheml,mflogo,garamond}
+
+\title{Automatic Greek Font Generation}
+\author{Charles Duan \\ \switchemail{cduan@fas.harvard.edu}}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+The advent of computer technology has led to significant advances in the world
+of typography. Rather than being fixed to the typographical conventions of a
+publishing house or a typewriter, an author has the freedom of formatting a
+document in the way that author prefers. In particular, computerized typesetting
+engines and word processors such as \TeX\ and Microsoft Word allow the creator
+of a document to choose the typeface, or font, of the document, and the ease of
+computer-aided design has produced myriad fonts from which the author may
+choose.
+
+Unfortunately, these computer-designed fonts are almost exclusively created for
+an English or Romance-language world. Practically every font available contains
+the uppercase and lowercase of the Roman alphabet---and practically no font
+contains any other alphabet.
+
+This is not problematic for documents \emph{entirely} in other languages. A
+document in Chinese will simply choose from a restricted but complete set of
+Chinese fonts. However, consider the case in which \emph{both} a Roman alphabet
+and another are used in the same document. This is a common case in mathematics
+typesetting, where the majority of the text uses the Roman alphabet but Greek
+letters and symbols are interspersed throughout. In these cases, the author
+might wish to choose the font for the Roman text out of the many fonts
+available, but what font is to be used for the Greek text and the symbols?
+
+The first option is for the author to choose \emph{only} from fonts that have a
+companion Greek set. The Computer Modern font, developed by Donald Knuth,
+includes one; other fonts such as Lucida Bright and Times New Roman have them as
+well. A second solution is to simply choose an unrelated font for the Greek
+alphabet and symbols. All too often papers today are published using, say, the
+Computer Modern fonts for the symbols and Greek letters, and another font for
+the Roman text. However, if the fonts are \emph{visually incompatible}---the
+thickness, height, and features of the letters differ---the result can be
+displeasing and distracting to the reader. The sensitivity of the human eye can
+detect even minor incompatibilities.
+
+An ideal solution would be to take a given Roman text font, perform some
+analysis on it, and automatically generate a Greek font that is visually
+compatible with the Roman font. There are two requirements necessary to
+implement this solution: an abstract template for generating the Greek and
+symbol fonts, and a mechanism for capturing the salient features of the Roman
+font so that those features may be transfered to the Greek and symbol
+letterforms.
+
+The first requirement, an abstract template for the Greek and symbol fonts, in
+fact already exists. The Computer Modern fonts are in fact a set of highly
+parametrized \emph{programs} that can generate a variety of different fonts. The
+programs are controlled by 62 parameters defining the height of various letters,
+the thickness of stems and curves, and other features of the letters. What
+remains, then, is the development of a program to automatically calculate, based
+on the existing Roman font, the appropriate parameters to generate a visually
+compatible set of Greek and symbol fonts.
+
+\section{Overview of the Algorithm}
+
+Of the 62 parameters to the Computer Modern font programs, nine of them define
+broad features of the font, such as whether the font should be sans serif. The
+remaining parameters are numeric dimensions of various features of the letters.
+The first task of the automated font generation system, then, is to use the
+outline descriptions of the Roman letterforms to take the appropriate
+measurements.
+
+Once those raw measurements are taken, they may be processed to form the final
+set of parameters. In some cases, several measurements may be taken for the same
+parameter, and the values will be averaged. Other parameters may be calculated
+based on several of the measurements. Once the processing of the parameters is
+complete, the final set of parameters is produced, and the \MF\ program can be
+run to interpret the Computer Modern font programs and produce the new, visually
+compatible Greek and symbol fonts.
+
+The produced fonts are in a rasterized bitmap form, which does not display well
+on computer screens. To make the fonts optimally usable, they are run through an
+outline tracing program to generate outline fonts. This is a well-known
+procedure; the outline versions of the Computer Modern fonts were developed in
+this way.
+
+Finally, we must make the fonts usable to the typesetting system. We make the
+fonts usable to \LaTeX\ because the output of \MF\ is particularly suitable to
+\LaTeX, and it is also very easy to automatically test the appearance of
+mathematics typesetting with it. The FontInst program is used to install the
+fonts so that they can be used just as easily as any other font.
+
+\section{The Choice of Technologies}
+
+Two key design choices in developing this system were the choice to use the
+Adobe Type 1 format and the PostScript language to perform the parameter
+measurements and the choice to use \MF\ and the Computer Modern programs to
+produce the new fonts. Each of these choices has advantages and disadvantages,
+and it is worthwhile exploring them and considering alternatives.
+
+The primary reason for using Type 1 fonts is simply that \TeX\ and its
+associated programs can support it best. Other outline font formats, such as
+TrueType, are commonly used in \TeX\ by first converting them to Type 1.
+Additionally, using an outline format makes it very easy to deal with the
+boundaries of letters, so it is easy to find, for instance, intersections
+between the outline of a letter and a straight line. The measurement programs
+are written in PostScript because that is the native language of the Type 1
+format.
+
+One difficulty of implementing the measurement programs in PostScript is that a
+great deal of numerical instability arises. For example, a common procedure in
+the measurements is to find the intersection of two straight line segments. This
+is easy to implement, but if one of the line segments is very short, the
+calculations may report that they do not intersect even if they do, because of
+rounding errors in the floating-point calculations. As a result, the programs
+need to be very carefully written to deal with these rounding errors. However,
+most of the checks to deal with these problems can be tucked away in library
+routines, so the actual measurement programs do not have to deal with them.
+
+The use of \MF\ and the Computer Modern fonts is generally because they are the
+only commonly used parametrizable font system readily available. Additionally,
+since the Greek and symbol fonts are already programmed, there is no need to
+write an entirely new set of font generation programs to create the new
+characters.
+
+One issue with using \MF\ is the fact that it outputs rasterized bitmap fonts
+rather than outline fonts. This is unfortunate given that, internally, \MF\
+deals with the same Bezier curves and lines that an outline font would use. One
+solution would be to use \MP, an interpreter for \MF\ programs that produces
+PostScript output. In fact, there is a program (mf2pt1) that can execute \MP\
+and then put together the Type 1 font from its output. However, mf2pt1 is not
+sufficiently mature for current use (it cannot handle all of the drawing
+capabilities of \MF\ or \MP).\footnote{There is a mature program for this
+purpose, MetaFog, but it is only commercially available.} Additionally, there
+are certain drawing operations employed by \MF\ that \emph{cannot} be reasonably
+transferred to a Type 1 font, such as the ability to erase parts of curves. As a
+result, it is necessary to use an outline tracing utility to produce an outline
+font from the raster. Luckily, the shapes of the letterforms are simple enough,
+so a tracing utility can do a very acceptable job.
+
+Another possible way of generating Greek and symbol fonts from the Roman set is
+to devise some sort of modifications to the Roman letters to obtain the Greek
+and symbol ones. For certain Greek letters this is a simple task: the Greek
+capital letters Gamma and Lambda ($\Gamma$, $\Lambda$) can be obtained by
+removing the middle horizontal strokes of the Roman letters F and A,
+respectively. This would be an optimal solution since it would not only capture
+not only the measurable aspects of the letterforms but also the artistic design,
+such as the calligraphic effect at the top of the capital A in Adobe Garamond.
+However, other letters and symbols (e.g., $\pi$ and $\wp$) would be much harder
+to form by some modification to Roman letters.
+
+\section{The Measurement Libraries}
+
+In order to perform measurements on the Roman letterforms, we first need a
+library of routines that give sufficient functionality to make any sort of
+general measurement on a letter. In this section we describe this library of
+PostScript routines that can be used to perform these operations.
+
+In the PostScript language, the interpreter maintains a ``current path,'' a set
+of line segments and Bezier curves that define a path through a two-dimensional
+plane. It is simple to produce a path that corresponds to the outline of a given
+letter (using the \emph{charpath} operator), and the PostScript language defines
+several low-level routines that can be used to traverse this path and operate on
+it. This ability to produce the outline path for a character and then operate on
+it forms the basis for our system.
+
+PostScript maintains a stack on which numbers and other objects may be placed;
+arguments to functions are taken from the stack. In the following routines, a
+\emph{point} refers to two numbers on the PostScript stack, representing the $x$
+and $y$ coordinates of the point. A \emph{line} refers to two points (four
+numbers) on the stack. An \emph{angle} is a single number on the stack
+representing the number of degrees from the horizontal. A \emph{curve} is four
+points (8 numbers) on the stack, representing the start point of a Bezier curve,
+the two control points, and the endpoint. An \emph{array of points} is an array
+for which each element is a two-element array; the inner arrays represent
+points.
+
+\subsection{Low-Level Routines}
+
+These routines perform simple operations. They generally operate on single
+points or numbers.
+
+\begin{description}
+\item[withinRange] Given three numbers, a value $n$, a base $b$, and a range
+$r$, determines whether $n$ is between $b$ and $b+r$.
+
+\item[revArray] Given an array, reverses it.
+
+\item[loadArray] Given an array, places its contents on the stack and removes
+the array.
+
+\item[firstElt, lastElt] Given an array, returns its first or last element.
+
+\item[avgPoint, addPoint, subPoint, dotProduct] Given two points, computes their
+average, sum, difference, or dot product.
+
+\item[eqPoint] Given two points and a tolerance, calculates the points'
+approximate equality.
+
+\item[scalePoint] Given a point and a number, multiplies each of the coordinates
+of the point by the number.
+
+\item[magnitude] Given a point, determines its magnitude from $(0,0)$.
+
+\item[xcoor, ycoor] Given a point, returns one coordinate.
+
+\item[defPoint] Given a point and a name (or a name and a point), defines
+\emph{name} to return that point.
+
+\item[uniquePoints] Given an array of points, discards points that are too close
+to each other and returns a list of ``unique'' points.
+
+\item[sortByX, sortByY] Given an array of points, sorts that array by the
+points' $x$ or $y$ coordinates.
+
+\item[min, max] Given two numbers, returns the minimum or maximum.
+
+\item[seppairs] Given values $x_1, y_1, x_2, y_2,\ldots,x_n,y_n,n$, replaces
+them on the stack with $x_1,\ldots,x_n,y_1,\ldots,y_n$.
+
+\end{description}
+
+\subsection{Line and Curve Routines}
+
+These routines perform basic operations on lines and curves, the components of
+paths.
+
+\begin{description}
+\item[curvetoPoint] Requires a Bezier function and a number $t$ between 0 and 1.
+A Bezier curve can be parametrized as follows:
+\[
+(x,y) = (x_0,y_0)(1-t)^3 + 3(x_1,y_1)t(1-t)^2 + 3(x_2,y_2)t^2(1-t) +
+(x_3,y_3)t^3
+\]
+where $(x_0,y_0)$ and $(x_3,y_3)$ are the endpoints and $(x_1,y_1)$ and
+$(x_2,y_2)$ are the control points. This function calculates $(x,y)$.
+
+\item[lineAngle] Given a line, determine the angle between that line and the
+horizontal, in degrees.
+
+\item[curveStartAngle, curveEndAngle] Given a curve, determine the angle that
+the curve is traveling at the start or end of the curve.
+
+\item[intersect] Given two lines, returns the intersection point (if any) and
+whether or not they intersected.
+
+\item[linePtIntc] Given a line and a point, determines whether or not the point
+is close to the line. If so, then the point on the line closest to that point is
+returned.
+
+\item[curvePtIntc] Given a line and a curve, determines whether or not the point
+is close to the curve.
+
+\item[curvetoExtremes] Given a curve, finds the horizontal and vertical extrema
+of that curve.
+
+\item[curvetoIntc] Given a curve and a line, finds the intersections between
+them.
+
+\end{description}
+
+\subsection{Path Functions}
+
+\begin{description}
+\item[tracePath] A low-level function that allows for performing a function on
+each part of a path. It should be executed in an environment containing
+appropriate hooks for curves and lines. This function is generally never called;
+the other path functions rely on it though.
+
+\item[pathLineIntc] Given a line, find the points of intersection between it and
+the current path.
+
+\item[pathExtremes] Finds \emph{all} of the local extrema for the current path.
+Most of the points are not useful, but the global extrema can be identified
+using the \emph{sortByX} and \emph{sortByY} routines.
+
+\item[pathMidpoint, pathUR, pathLL] Finds the midpoint, upper right, or lower
+left of the bounding box of the current path.
+
+\item[vertSplitLine, horizSplitLine] Given a number between 0 and 1, produces a
+line that is horizontal or vertical and splits the current path's bounding box
+by that fraction.
+
+\item[vertLineThrough, horizLineThrough] Given a point, draws a horizontal or
+vertical line through that point.
+
+\item[letterPath] Given a string consisting of a letter, sets the current path
+to that letter.
+
+\item[pathAngle] Given a point on the path, returns the angle that the path is
+traveling at that point.
+
+\item[measureHeight, measureDepth] Measure the height or depth of the current
+path.
+
+\end{description}
+
+\subsection{Subpaths}
+
+Often it is useful to subset the current path and make inferences on that
+subset. The following routines allow for defining a subset of the path based on
+certain conditions and then using it for analysis.
+
+\begin{description}
+\item[traceSubpath] Requires a procedure that sets up the conditions for
+starting and ending the subpath. Executes that procedure, and then travels
+through the path, collecting those segments that fall within the subpath
+conditions. Returns a ``user path,'' a PostScript object that represents (and
+may be used as) a path.
+
+\item[subpathEndpoint] Returns the endpoint of a subpath.
+
+\item[useSubpath] Given a user path and a procedure, temporarily sets the
+current path to the user path and executes the procedure under that condition.
+
+\end{description}
+
+The following routines are useful inside the procedure to \emph{traceSubpath},
+as they define start and end conditions.
+
+\begin{description}
+\item[startWhenAngle] Requires a procedure that returns a boolean value. Begin
+the subpath when the angle of the path angle causes that procedure to return
+true. Since the path can start anywhere along the edge of the letterform, this
+condition is really only useful for creating a ``sub-subpath.''
+
+\item[endWhenAngle] Requires a procedure that returns a boolean value. End the
+subpath at some point immediately \emph{after} the path angle causes that
+procedure to return true.
+
+\item[endBeforeAngle] Similar to \emph{endWhenAngle}, but the subpath terminates
+immediately \emph{before} the procedure returns true.
+
+\item[startAtPoint] Given a point, start the subpath at that point. An attempt
+is made to truncate the subpath to start at that point exactly, but the current
+implementation does not attempt to divide Bezier curves into parts to do so.
+
+\item[endAtPoint] Given a point, end the subpath at that point.
+\end{description}
+
+\subsection{Drawing Routines}
+
+These functions draw on the PostScript page but have no use in terms of
+calculations.
+
+\begin{description}
+
+\item[drawSubpath] Given a subpath draw it with a thick line. The subpath is
+copied off of the stack, so it remains there after.
+
+\item[pointbox, uppointbox, rtpointbox, ltpointbox] Given a point, draws a
+triangle revealing that point. (The name ``point box'' refers to the fact that
+they were once drawn as squares around the point.)
+
+\item[drawLine] Given a line, draws it. The line is copied off of the stack.
+
+\item[stringOfText] Given a string and a number, outputs the string, the number,
+and the current parameter being measured to the console and to the PostScript
+page. This function is always the last one called in any parameter measurement,
+as it outputs the measured value.
+\end{description}
+
+Note that \emph{letterPath} in fact draws the path of the letter when it is
+called.
+
+\section{Examples of Measurement Routines}
+
+In order to understand how a parameter might be measured from a letter, it is
+worth considering in detail a few of the measurement routines. In this section
+we present routines of varying complexity.
+
+\subsection{A Trivial Measurement}
+
+The parameter \emph{x\_height} measures the height of the lowercase ``x.''
+
+\begin{quote}
+\begin{verbatim}
+(x_height) measureHeight stringOfText
+\end{verbatim}
+\end{quote}
+
+\subsection{A Simple Measurement}
+
+The parameter \emph{curve} measures the breadth of wide curve sections such as
+the sides of the letter ``o.''
+
+We first ``flatten'' the path, turning curved segments into many small line
+segments that accurately describe the curve.
+\begin{quote}
+\begin{verbatim}
+flattenpath
+\end{verbatim}
+\end{quote}
+We then find the extreme points of the path of the ``o'' and identify the
+minimum $x$-value point by sorting by $x$ coordinate and then taking the first
+element. We must execute \emph{loadArray} because arrays of points store points
+as two-element arrays, but points are otherwise represented as just two values
+on the stack.
+\begin{quote}
+\begin{verbatim}
+pathExtremes sortByX firstElt loadArray
+\end{verbatim}
+\end{quote}
+Now, we draw a horizontal line through that point and find its intersections
+with the outline of the ``o.'' We take the first two elements and name them.
+Note that the first element, in all likelihood, is the same as the previous
+point we found. Finally, we draw arrows to denote those points. Note that the
+\emph{getinterval} operator takes an array, a starting element, and a range, and
+returns the subarray corresponding to that offset and range.
+\begin{quote}
+\begin{verbatim}
+horizLineThrough pathLineIntc sortByX
+0 2 getinterval loadArray
+/oInside defPoint /oOutside defPoint
+oInside pointbox oOutside pointbox
+\end{verbatim}
+\end{quote}
+Finally, the parameter is calculated as the difference between the $x$
+coordinates.
+\begin{quote}
+\begin{verbatim}
+(Lowercase curve)
+oInside xcoor oOutside xcoor sub
+stringOfText
+\end{verbatim}
+\end{quote}
+
+\subsection{A Complicated Measurement}
+
+The \emph{slab} parameter represents the thickness of serifs. We measure the
+serif thickness on the lower right serif of a lowercase ``l.''
+
+We first identify some point at the bottom of the ``l'' and some point at the
+right of the ``l.'' We then trace the subpath between those two points.
+\begin{quote}
+\begin{verbatim}
+0.5 vertSplitLine pathLineIntc
+sortByY firstElt /lBottomPoint defPoint
+0.5 horizSplitLine pathLineIntc
+sortByX lastElt /lRightPoint defPoint
+lBottomPoint pointbox
+lRightPoint rtpointbox
+{
+    lBottomPoint startAtPoint
+    lRightPoint endAtPoint
+} traceSubpath
+\end{verbatim}
+\end{quote}
+We then trace the sub-subpath that starts when the angle is between
+45\textdegree\ and 135\textdegree\ and ends when the angle is between
+135\textdegree\ and 225\textdegree. This subpath will thus begin somewhere as
+the serif begins to rise and end somewhere when the serif edge becomes
+horizontal again. The endpoint of this subpath, then, will be approximately at
+the top corner of the serif. We then name and draw the highest point on this
+subpath, the ``tip'' of the serif.
+\begin{quote}
+\begin{verbatim}
+{ {
+    flattenpath
+    { 45 90 withinRange } startWhenAngle
+    { 135 90 withinRange } endBeforeAngle
+  } traceSubpath
+} useSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByY lastElt /lTopSlab defPoint
+lTopSlab uppointbox
+\end{verbatim}
+\end{quote}
+Since the serif may be very curved, the thickness of the tip may not be a good
+representation of how thick the serif should be. We choose a point about 4/5 of
+the way between the stem and the serif tip. We then draw a vertical line through
+that point and find the lowest two intersections (those with the smallest $y$
+coordinate).
+\begin{quote}
+\begin{verbatim}
+lTopSlab 0.8 scalePoint
+lRightPoint 0.2 scalePoint addPoint
+vertLineThrough pathLineIntc
+sortByY 0 2 getinterval loadArray
+/lSlabTop defPoint /lSlabBot defPoint
+lSlabTop uppointbox lSlabBot pointbox
+\end{verbatim}
+\end{quote}
+Finally, the \emph{slab} parameter is the difference in $y$ coordinate between
+those two points.
+\begin{quote}
+\begin{verbatim}
+(Serif thickness)
+lSlabTop ycoor
+lSlabBot ycoor sub
+stringOfText
+\end{verbatim}
+\end{quote}
+
+\section{Difficulties in Measurement}
+
+Other than the numerical instabilities, there have been several difficulties in
+the measurement techniques. In this section we discuss those difficulties and
+how they were dealt with or solved.
+
+\subsection{Multiple Possibilities for Measurement}
+
+For some letters, the choice of which parameter to measure is nontrivial, as
+there are often several slightly competing possibilities. The overarching
+example is that sometimes the parameters differ for uppercase and lowercase
+letters. In some cases, the Computer Modern parametrizations allow for this, by
+providing for two parameters, one for uppercase letters and one for lowercase
+letters (e.g., \emph{cap\_stem} and \emph{stem} for uppercase and lowercase stem
+breadth). In other cases, such as the thickness of hairlines, the uppercase and
+lowercase letters share the same parameter. To deal with these situations, we
+simply create two parameter sets, one for uppercase and one for lowercase
+letters; the uppercase set is used for generating uppercase Greek letters and
+the lowercase set for lowercase Greek letters and symbols.
+
+In other cases the problem is more difficult. For example, the thickness of
+horizontal bars in uppercase letters is represented by one parameter in Computer
+Modern, \emph{cap\_bar}, and it governs the thickness of bars in the letters
+``T,'' ``E,'' and ``H.'' It is equally simple to measure the parameter from any
+of them, so which should be used? Inspecting the actual use of the
+\emph{cap\_bar} parameter reveals that it is only used in the uppercase Pi
+character ($\Pi$) and other similar symbols, so the thickness of the capital
+``T'' bar seems most appropriate.
+
+As a second example, the \emph{hair} parameter governs the thickness of
+``hairline'' strokes that travel vertically. It turns out that this parameter in
+the Computer Modern programs is used in only two places in the lowercase Roman
+alphabet: first, it determines the ``tails'' of certain letters such as the
+lowercase ``t,'' and second, it governs the thickness of thin diagonal stems in
+the lowercase ``v,'' ``w,'' ``x,'' and ``y.'' In Computer Modern font those two
+thicknesses are identical, but in many other fonts they are substantially
+different. Again, the choice of which to use can be determined by looking at
+their usage in the Greek fonts: the \emph{hair} parameter determines the
+thickness of the thin join areas of the pi character ($\pi$) and the breadth of
+the vertical stroke through the phi character ($\phi$), so the thin stroke of
+the letter ``v'' seems to be a more accurate representation of the thickness of
+the relevant Greek characters.
+
+\subsection{Parameters Measured in Ways Different From Their Definitions}
+
+In some cases, a parameter may be defined in one way and measured with a
+completely unrelated algorithm. Consider the \emph{bracket} parameter. Knuth
+defines the parameter as follows:
+\begin{quote}
+\emph{Bracket} is the vertical distance from serif to stem tangent.
+\end{quote}
+This means that the appropriate way to measure the \emph{bracket} parameter is
+to inspect the curve until it becomes tangent to the horizontal (or vertical);
+the height of that tangency point is the bracket.
+
+\begin{figure}
+\centering
+\Huge
+\texttt{I}\quad I
+\caption{An uppercase ``I'' in Courier and Adobe Garamond. The Courier letter
+has no bracket, so the serif meets the stem at a right angle. The Garamond
+letter has a large bracket, so there is a wide curve joining the stem to the
+serif.}
+\end{figure}
+
+This form of measurement will yield poor results for two reasons. First, in some
+fonts, the angle may never go quite vertical or horizontal, and the exact point
+at which it \emph{does} become vertical may vary greatly from letter to letter,
+simply because of minor numerical differences. Second, the feature that
+\emph{bracket} represents is not actually the height of the tangency point but
+rather the ``darkness'' or amount of curvature between the serif and the stem. A
+font like Courier has no bracket at all, so serifs intersect stems at angles In
+contrast, Adobe Garamond has a high bracket, so there is a wide curve from the
+serif to the stem. The \emph{bracket} parameter should reflect the amount of
+curvature that is seen rather than strictly how high the tangency point occurs.
+
+Our bracket height measurement routine works as follows. First, the line
+parallel to the stem is intersected with a line parallel to the serif's edge,
+identifying the ``corner'' of the serif. Then a diagonal line is drawn extending
+outward from the corner until that line intersects with the letter. Based on the
+distance between the corner and the intersection point with the letter we can
+calculate a reasonable value for \emph{bracket} such that Computer Modern will
+draw a similar-looking curve.
+
+
+\subsection{Reasonable Parameters Yield Unreasonable Letterforms}
+
+In some cases, a parameter that produces high quality results for most
+characters produces very strange results for one or two unique characters. The
+most striking example of this is in the terminals of the uppercase Lambda
+($\Lambda$).
+
+The \emph{bracket} parameter, described above, produces very acceptable looking
+serifs for every uppercase Greek letter except for the uppercase Lambda
+($\Lambda$). In the case of Lambda, Computer Modern makes two assumptions:
+\begin{enumerate}
+\item The lower left stem is very thin, so the bracket needs to be increased
+considerably to ``thicken'' the lower left corner to give better visual balance.
+\item The \emph{bracket} parameter is very small, and because the stem meets the
+serif at a diagonal angle, the thickness of the curvature between the stem and
+the serif needs to be increased for the acute angle side, or else it will appear
+as if there is no bracket at all.
+\end{enumerate}
+These assumptions work well for Computer Modern because the thin strokes
+\emph{are} very thin and the bracket \emph{is} very low. In a font like Adobe
+Garamond, though, this assumption fails. The bracket ends up consuming about
+half of the height of the stem, and the serif looks more like a blob of
+misprinted ink than a serif.
+
+To correct for this, the program generating the Lambda character is rewritten.
+First, the bracket of the uppercase ``A'' is measured and used as the bracket
+parameter for the Lambda character, and a special ``darkness'' parameter is
+measured for the inside acute angle so that the inside of the capital ``A'' and
+the inside of the Lambda character have the same curvature.
+
+In general the Computer Modern programs produce very acceptable-looking Greek
+and symbol fonts. In some cases, though, the font programs make assumptions
+about the parameters that fail to hold; in those cases the characters must be
+considered on a case-by-case basis and rewritten appropriately.
+
+
+\section{Working Examples}
+
+The font generation system is currently able to produce math fonts that may be
+used in \TeX. The following pages provide examples of the system using the
+following fonts:
+\begin{itemize}
+\item Times New Roman
+\item Palatino
+\item New Century Schoolbook
+\item Adobe Garamond
+\item Courier
+\item Computer Modern
+\end{itemize}
+All of the samples were automatically generated with no hand modifications to
+the parameters.
+
+In general, the Greek letters appear fairly pleasing and compatible with the
+Roman. In a number of cases, the letters appear a bit thin; in the case of the
+$\beta$ and $\gamma$ characters this is especially troubling. However, this
+seems to result from the fact that the original designs were a bit too thin as
+well. (Note that, on the Courier sample, the letters may appear uniformly too
+thin. This is probably because the version of Courier that was measured, the one
+included with GhostScript, is different from the version of Courier built into
+Microsoft Windows.) The uppercase letters are very acceptable, especially after
+the hand-tuning of the programs.
+
+The math symbols are sometimes acceptable and sometimes not so. For example, the
+summation symbol ($\sum$) appears for certain fonts to lack the same contrast
+between thick and thin strokes that the corresponding Greek letter ($\Sigma$)
+displays. Looking at the program for the character reveals why this is so: the
+thickness of the lower left stem and the arms are based on the
+\emph{rule\_thickness} parameter (which determines the thickness of the bars in
+the $+$ and $=$ symbols), while it should really be based on the
+\emph{cap\_hair} parameter. There are two ways to repair this: first, constrain
+\emph{rule\_thickness} to be approximately \emph{cap\_hair}; second, rewrite all
+of the relevant \MF\ programs.
+
+The final concern is that the spacing is often egregiously wrong. The radicals
+fail to abut with the bar, as do the equal signs with the arrows to make long
+arrows, and many of the letters are too close together or too far apart. A good
+deal more work needs to be done in order to repair these spacing errors
+appropriately. This is especially obvious in the Courier-based font.
+
+The comparison of the Computer Modern samples deserves special attention. There
+is very little, in fact, that is obviously different between the two other than
+spacing errors. The only substantially observable difference to the author,
+viewing the documents enlarged at 1600\%, is that the tips of sharp cutoffs in
+the lowercase Greek letters is sharper in the generated fonts than the
+originals, and some hairlines are very slightly lighter in the generated fonts.
+These differences are not surprising, as the math italic fonts are in fact
+slightly darker than the text fonts (in Donald Knuth's words, ``because
+mathematics is important to mathematicians), and the italic fonts of Computer
+Modern have rounded edges while the upright fonts (from which the parameters are
+measured) have sharp edges. These seem to be more stylistic variations, though,
+and they do not greatly affect the compatibility of the generated math fonts
+with the text fonts.
+
+\section{Future Work}
+
+The first task that needs to be completed for this system to be immediately
+usable is to fix the spacing errors. Once those are fixed, there are several
+refinements to the typesetting to be pursued.
+
+First, the programs currently only work for very standard-looking Roman fonts
+with serifs. Sans-serif font support would obviously be of great use, and it
+should not be difficult to implement given that the Computer Modern programs
+can produce a sans-serif variant. Additionally, other less traditional fonts
+could be supported to some degree.
+
+The precise spacing between letters is another area of work. Spacing between
+characters in math formulae is somewhat different from spacing between
+characters in text, and an automated system to arrange the spacing would improve
+the quality of the mathematics typesetting.
+
+Third, a number of the Computer Modern programs could use some improvement, as
+mentioned above in the discussion of the summation signs. Systematically
+improving the character shapes would be a useful line of work in this project.
+
+Fourth, while \MF\ can generate many of these characters very reasonably, some
+of them, such as the uppercase Greek letters, can be generated best by
+performing modifications to the existing Roman letters. For example, a capital
+Lambda ($\Lambda$) could be formed by eliminating the crossbar from a capital
+``A,'' and a capital Theta ($\Theta$) can be formed by adding a small internal
+crossbar to an uppercase ``O.'' Fonts generated in this way should be the most
+compatible with the original Roman font.
+
+\end{document}

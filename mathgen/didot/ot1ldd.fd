@@ -1,0 +1,29 @@
+%Filename: ot1ldd.fd
+%Created by: tex fontinst
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{ot1ldd.fd}
+   [2004/04/29 Fontinst v1.801 font definitions for OT1/ldd.]
+
+\DeclareFontFamily{OT1}{ldd}{}
+
+\DeclareFontShape{OT1}{ldd}{m}{n}{
+   <-> lddr7t
+}{}
+
+\DeclareFontShape{OT1}{ldd}{m}{sc}{
+   <-> lddrc7t
+}{}
+
+\DeclareFontShape{OT1}{ldd}{m}{sl}{
+   <-> lddro7t
+}{}
+
+\DeclareFontShape{OT1}{ldd}{m}{it}{
+   <-> lddri7t
+}{}
+
+
+\endinput

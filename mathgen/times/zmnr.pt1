@@ -1,0 +1,598 @@
+%!FontType-1.0: zmnr-Medium 001.000
+%%CreationDate: Sun Jun 13 14:26:30 2004
+% Font converted to Type 1 by mf2pt1, written by Scott Pakin.
+11 dict begin
+/FontInfo 11 dict dup begin
+/version (001.000) readonly def
+/Notice (Font converted to Type 1 by mf2pt1, written by Scott Pakin.) readonly def
+/FullName (zmnr) readonly def
+/FamilyName (zmnr) readonly def
+/Weight (Medium) readonly def
+/ItalicAngle 0 def
+/isFixedPitch false def
+/UnderlinePosition -100 def
+/UnderlineThickness 50 def
+end readonly def
+/FontName /zmnr-Medium def
+/Encoding 256 array
+0 1 255 {1 index exch /.notdef put} for
+dup 0 /Gamma put
+dup 1 /Delta put
+dup 2 /Theta put
+dup 3 /Lambda put
+dup 4 /Xi put
+dup 5 /Pi put
+dup 6 /Sigma put
+dup 7 /Upsilon put
+dup 8 /Phi put
+dup 9 /Psi put
+dup 10 /Omega put
+dup 11 /ff put
+dup 12 /fi put
+dup 13 /fl put
+dup 14 /ffi put
+dup 15 /ffl put
+dup 16 /dotlessi put
+dup 17 /dotlessj put
+dup 18 /grave put
+dup 19 /acute put
+dup 20 /caron put
+dup 21 /breve put
+dup 22 /macron put
+dup 23 /ring put
+dup 24 /cedilla put
+dup 25 /germandbls put
+dup 26 /ae put
+dup 27 /oe put
+dup 28 /oslash put
+dup 29 /AE put
+dup 30 /OE put
+dup 31 /Oslash put
+dup 32 /suppress put
+dup 33 /exclam put
+dup 34 /quotedblright put
+dup 35 /numbersign put
+dup 36 /dollar put
+dup 37 /percent put
+dup 38 /ampersand put
+dup 39 /quoteright put
+dup 40 /parenleft put
+dup 41 /parenright put
+dup 42 /asterisk put
+dup 43 /plus put
+dup 44 /comma put
+dup 45 /hyphen put
+dup 46 /period put
+dup 47 /slash put
+dup 48 /zero put
+dup 49 /one put
+dup 50 /two put
+dup 51 /three put
+dup 52 /four put
+dup 53 /five put
+dup 54 /six put
+dup 55 /seven put
+dup 56 /eight put
+dup 57 /nine put
+dup 58 /colon put
+dup 59 /semicolon put
+dup 60 /exclamdown put
+dup 61 /equal put
+dup 62 /questiondown put
+dup 63 /question put
+dup 64 /at put
+dup 65 /A put
+dup 66 /B put
+dup 67 /C put
+dup 68 /D put
+dup 69 /E put
+dup 70 /F put
+dup 71 /G put
+dup 72 /H put
+dup 73 /I put
+dup 74 /J put
+dup 75 /K put
+dup 76 /L put
+dup 77 /M put
+dup 78 /N put
+dup 79 /O put
+dup 80 /P put
+dup 81 /Q put
+dup 82 /R put
+dup 83 /S put
+dup 84 /T put
+dup 85 /U put
+dup 86 /V put
+dup 87 /W put
+dup 88 /X put
+dup 89 /Y put
+dup 90 /Z put
+dup 91 /bracketleft put
+dup 92 /quotedblleft put
+dup 93 /bracketright put
+dup 94 /circumflex put
+dup 95 /dotaccent put
+dup 96 /quoteleft put
+dup 97 /a put
+dup 98 /b put
+dup 99 /c put
+dup 100 /d put
+dup 101 /e put
+dup 102 /f put
+dup 103 /g put
+dup 104 /h put
+dup 105 /i put
+dup 106 /j put
+dup 107 /k put
+dup 108 /l put
+dup 109 /m put
+dup 110 /n put
+dup 111 /o put
+dup 112 /p put
+dup 113 /q put
+dup 114 /r put
+dup 115 /s put
+dup 116 /t put
+dup 117 /u put
+dup 118 /v put
+dup 119 /w put
+dup 120 /x put
+dup 121 /y put
+dup 122 /z put
+dup 123 /endash put
+dup 124 /emdash put
+dup 125 /hungarumlaut put
+dup 126 /tilde put
+dup 127 /dieresis put
+readonly def
+/PaintType 0 def
+/FontType 1 def
+/FontMatrix [0.001 0 0 0.001 0 0] readonly def
+/UniqueID 4336790 def
+/FontBBox{0 -179 864 684}readonly def
+currentdict end
+currentfile eexec
+dup /Private 5 dict dup begin
+/RD{string currentfile exch readstring pop}executeonly def
+/ND{noaccess def}executeonly def
+/NP{noaccess put}executeonly def
+2 index /CharStrings 19 dict dup begin
+/Gamma {
+	0 634 hsbw
+	19 662 rmoveto
+	-20 vlineto
+	28 0 30 0 15 -20 rrcurveto
+	14 -21 0 -46 0 -36 rrcurveto
+	-376 vlineto
+	0 -36 0 -46 -14 -21 rrcurveto
+	-15 -20 -30 0 -28 0 rrcurveto
+	-20 vlineto
+	304 hlineto
+	20 vlineto
+	-35 0 -42 0 -20 20 rrcurveto
+	-19 21 0 45 0 37 rrcurveto
+	376 vlineto
+	0 30 0 40 8 18 rrcurveto
+	6 13 17 4 15 0 rrcurveto
+	96 hlineto
+	55 0 77 0 26 -23 rrcurveto
+	28 -24 8 -38 1 -38 rrcurveto
+	29 hlineto
+	-3 161 rlineto
+	closepath
+	endchar
+	} ND
+/Delta {
+	0 864 hsbw
+	43 hmoveto
+	776 hlineto
+	-377 674 rlineto
+	-22 hlineto
+	closepath
+	-23 -125 rmoveto
+	259 -463 rlineto
+	-518 hlineto
+	closepath
+	endchar
+	} ND
+/Theta {
+	0 807 hsbw
+	402 676 rmoveto
+	-92 0 -91 -31 -65 -66 rrcurveto
+	-65 -65 -32 -91 0 -92 rrcurveto
+	0 -92 32 -91 65 -65 rrcurveto
+	65 -66 91 -31 92 0 rrcurveto
+	92 0 91 31 65 66 rrcurveto
+	65 65 32 91 0 92 rrcurveto
+	0 92 -32 91 -65 65 rrcurveto
+	-65 66 -91 31 -92 0 rrcurveto
+	closepath
+	-27 vmoveto
+	67 0 62 -35 39 -54 rrcurveto
+	48 -66 15 -82 0 -81 rrcurveto
+	0 -81 -15 -82 -48 -66 rrcurveto
+	-39 -54 -62 -35 -67 0 rrcurveto
+	-67 0 -62 35 -39 54 rrcurveto
+	-48 66 -15 82 0 81 rrcurveto
+	0 81 15 82 48 66 rrcurveto
+	39 54 62 35 67 0 rrcurveto
+	closepath
+	-142 -275 rmoveto
+	33 vlineto
+	-29 hlineto
+	-152 vlineto
+	29 hlineto
+	33 vlineto
+	284 hlineto
+	-33 vlineto
+	29 hlineto
+	152 vlineto
+	-29 hlineto
+	-33 vlineto
+	closepath
+	endchar
+	} ND
+/Lambda {
+	0 692 hsbw
+	297 487 rmoveto
+	151 -430 rlineto
+	4 -11 -7 -11 -11 -5 rrcurveto
+	-20 -10 -22 0 -22 0 rrcurveto
+	-20 vlineto
+	259 hlineto
+	20 vlineto
+	-18 0 -23 0 -12 6 rrcurveto
+	-12 6 -5 13 -4 12 rrcurveto
+	-217 617 rlineto
+	-19 hlineto
+	-206 -588 rlineto
+	-6 -19 -10 -18 -16 -12 rrcurveto
+	-15 -12 -19 -5 -18 0 rrcurveto
+	-20 vlineto
+	196 hlineto
+	20 vlineto
+	-22 0 -24 2 -16 15 rrcurveto
+	-12 12 0 20 6 17 rrcurveto
+	closepath
+	endchar
+	} ND
+/Xi {
+	0 692 hsbw
+	478 580 rmoveto
+	44 0 76 0 3 -4 rrcurveto
+	10 -13 0 -20 0 -18 rrcurveto
+	29 hlineto
+	-1 137 rlineto
+	-589 hlineto
+	-1 -137 rlineto
+	29 hlineto
+	0 18 0 20 10 13 rrcurveto
+	3 4 76 0 44 0 rrcurveto
+	closepath
+	434 -580 rmoveto
+	1 144 rlineto
+	-29 hlineto
+	0 -20 0 -24 -10 -13 rrcurveto
+	-4 -5 -77 0 -45 0 rrcurveto
+	-273 hlineto
+	-45 0 -77 0 -4 5 rrcurveto
+	-10 13 0 24 0 20 rrcurveto
+	-29 hlineto
+	1 -144 rlineto
+	closepath
+	129 385 rmoveto
+	47 vlineto
+	-29 hlineto
+	-175 vlineto
+	29 hlineto
+	46 vlineto
+	343 hlineto
+	-46 vlineto
+	29 hlineto
+	175 vlineto
+	-29 hlineto
+	-47 vlineto
+	closepath
+	endchar
+	} ND
+/Pi {
+	0 749 hsbw
+	19 662 rmoveto
+	-20 vlineto
+	27 0 31 0 15 -20 rrcurveto
+	15 -21 0 -46 0 -36 rrcurveto
+	-376 vlineto
+	0 -36 0 -46 -15 -21 rrcurveto
+	-15 -20 -31 0 -27 0 rrcurveto
+	-20 vlineto
+	276 hlineto
+	20 vlineto
+	-27 0 -32 0 -14 20 rrcurveto
+	-15 21 0 46 0 36 rrcurveto
+	477 vlineto
+	302 hlineto
+	-477 vlineto
+	0 -36 0 -46 -15 -21 rrcurveto
+	-15 -20 -31 0 -27 0 rrcurveto
+	-20 vlineto
+	276 hlineto
+	20 vlineto
+	-27 0 -32 0 -14 20 rrcurveto
+	-15 21 0 46 0 36 rrcurveto
+	376 vlineto
+	0 36 0 46 15 21 rrcurveto
+	14 20 32 0 27 0 rrcurveto
+	20 vlineto
+	closepath
+	endchar
+	} ND
+/Sigma {
+	0 749 hsbw
+	390 624 rmoveto
+	75 0 113 0 31 -23 rrcurveto
+	32 -23 18 -37 1 -40 rrcurveto
+	29 hlineto
+	-3 161 rlineto
+	-629 hlineto
+	-38 vlineto
+	263 -336 rlineto
+	-263 -288 rlineto
+	629 hlineto
+	3 173 rlineto
+	-29 hlineto
+	-1 -40 -18 -37 -31 -24 rrcurveto
+	-31 -22 -112 0 -75 0 rrcurveto
+	-234 hlineto
+	257 281 rlineto
+	-230 293 rlineto
+	closepath
+	endchar
+	} ND
+/Upsilon {
+	0 807 hsbw
+	452 331 rmoveto
+	125 47 128 110 vhcurveto
+	47 0 50 -15 0 -40 rrcurveto
+	0 vlineto
+	41 hlineto
+	0 vlineto
+	79 -60 68 -78 vhcurveto
+	-112 0 -67 -95 -28 -118 rrcurveto
+	-28 118 -67 95 -112 0 rrcurveto
+	-78 0 -60 -68 0 -79 rrcurveto
+	0 vlineto
+	41 hlineto
+	0 vlineto
+	40 50 15 47 vhcurveto
+	110 0 47 -128 0 -125 rrcurveto
+	-199 vlineto
+	0 -33 0 -42 -20 -18 rrcurveto
+	-19 -19 -43 0 -34 0 rrcurveto
+	-20 vlineto
+	333 hlineto
+	20 vlineto
+	-35 0 -43 0 -19 19 rrcurveto
+	-20 18 0 42 0 33 rrcurveto
+	closepath
+	endchar
+	} ND
+/Phi {
+	0 749 hsbw
+	689 331 rmoveto
+	0 62 -34 57 -52 35 rrcurveto
+	-53 35 -63 16 -63 5 rrcurveto
+	0 31 3 33 16 17 rrcurveto
+	19 20 43 0 35 0 rrcurveto
+	20 vlineto
+	-333 hlineto
+	-20 vlineto
+	35 0 42 0 20 -20 rrcurveto
+	15 -17 3 -33 1 -31 rrcurveto
+	-64 -5 -62 -16 -53 -35 rrcurveto
+	-52 -35 -35 -57 0 -62 rrcurveto
+	0 -62 35 -57 52 -35 rrcurveto
+	53 -35 62 -16 64 -5 rrcurveto
+	-1 -31 -3 -33 -15 -17 rrcurveto
+	-20 -20 -42 0 -35 0 rrcurveto
+	-20 vlineto
+	333 hlineto
+	20 vlineto
+	-35 0 -43 0 -19 20 rrcurveto
+	-16 17 -3 33 0 31 rrcurveto
+	63 5 63 16 53 35 rrcurveto
+	52 35 34 57 0 62 rrcurveto
+	closepath
+	-366 -181 rmoveto
+	-37 7 -35 13 -29 26 rrcurveto
+	-37 34 -14 51 0 50 rrcurveto
+	0 50 14 51 37 34 rrcurveto
+	29 26 35 13 37 6 rrcurveto
+	closepath
+	100 hmoveto
+	38 -6 35 -13 28 -26 rrcurveto
+	37 -34 14 -51 0 -50 rrcurveto
+	0 -50 -14 -51 -37 -34 rrcurveto
+	-28 -26 -35 -13 -38 -7 rrcurveto
+	closepath
+	endchar
+	} ND
+/Psi {
+	0 807 hsbw
+	223 397 rmoveto
+	72 -4 81 -61 vhcurveto
+	-101 hlineto
+	-28 vlineto
+	52 0 13 -65 0 -60 rrcurveto
+	0 -76 17 -78 54 -54 rrcurveto
+	42 -42 57 -19 60 -6 rrcurveto
+	-1 -32 -3 -33 -15 -17 rrcurveto
+	-20 -20 -43 0 -34 0 rrcurveto
+	-20 vlineto
+	333 hlineto
+	20 vlineto
+	-35 0 -43 0 -19 20 rrcurveto
+	-16 17 -3 33 -1 32 rrcurveto
+	60 6 57 19 42 42 rrcurveto
+	54 54 17 78 0 76 rrcurveto
+	60 13 65 52 vhcurveto
+	28 vlineto
+	-101 hlineto
+	-61 0 -3 -81 0 -72 rrcurveto
+	0 -66 -7 -68 -39 -53 rrcurveto
+	-20 -29 -30 -19 -34 -9 rrcurveto
+	366 vlineto
+	0 37 0 45 20 21 rrcurveto
+	19 20 43 0 35 0 rrcurveto
+	20 vlineto
+	-333 hlineto
+	-20 vlineto
+	34 0 43 0 20 -20 rrcurveto
+	19 -21 0 -45 0 -37 rrcurveto
+	-366 vlineto
+	-34 9 -30 19 -20 29 rrcurveto
+	-39 53 -6 68 0 66 rrcurveto
+	closepath
+	endchar
+	} ND
+/Omega {
+	0 749 hsbw
+	697 hmoveto
+	4 131 rlineto
+	-29 hlineto
+	-1 -20 -1 -27 -8 -9 rrcurveto
+	-5 -6 -49 0 -29 0 rrcurveto
+	-65 hlineto
+	16 48 31 45 30 43 rrcurveto
+	50 71 48 78 0 87 rrcurveto
+	0 68 -32 63 -54 40 rrcurveto
+	-66 48 -82 16 -82 0 rrcurveto
+	-81 0 -83 -16 -65 -48 rrcurveto
+	-54 -40 -33 -63 0 -68 rrcurveto
+	0 -87 48 -78 50 -71 rrcurveto
+	30 -43 31 -45 17 -48 rrcurveto
+	-65 hlineto
+	-29 0 -49 0 -5 6 rrcurveto
+	-9 9 -1 27 0 20 rrcurveto
+	-29 hlineto
+	4 -131 rlineto
+	223 hlineto
+	0 82 -28 78 -27 77 rrcurveto
+	-23 66 -24 68 0 70 rrcurveto
+	0 56 15 56 39 39 rrcurveto
+	38 40 55 17 55 0 rrcurveto
+	56 0 55 -17 38 -40 rrcurveto
+	39 -39 14 -56 0 -56 rrcurveto
+	0 -70 -23 -68 -24 -66 rrcurveto
+	-27 -77 -27 -78 0 -82 rrcurveto
+	closepath
+	endchar
+	} ND
+/parenleft {
+	0 389 hsbw
+	167 253 rmoveto
+	0 161 42 163 121 105 rrcurveto
+	1 0 1 -1 vhcurveto
+	-24 hlineto
+	-1 0 0 0 hvcurveto
+	-139 -96 -68 -166 0 -169 rrcurveto
+	0 -169 68 -166 139 -96 rrcurveto
+	0 0 0 1 vhcurveto
+	24 hlineto
+	1 0 0 1 0 1 rrcurveto
+	-121 105 -42 163 0 161 rrcurveto
+	closepath
+	endchar
+	} ND
+/parenright {
+	0 389 hsbw
+	290 253 rmoveto
+	0 169 -69 166 -138 96 rrcurveto
+	0 -1 0 0 vhcurveto
+	-24 hlineto
+	-1 0 0 -1 0 -1 rrcurveto
+	121 -105 42 -163 0 -161 rrcurveto
+	0 -161 -42 -163 -121 -105 rrcurveto
+	-1 0 -1 1 vhcurveto
+	24 hlineto
+	0 1 0 0 vhcurveto
+	138 96 69 166 0 169 rrcurveto
+	closepath
+	endchar
+	} ND
+/bracketleft {
+	0 284 hsbw
+	169 -112 rmoveto
+	730 vlineto
+	90 hlineto
+	66 vlineto
+	-156 hlineto
+	-862 vlineto
+	156 hlineto
+	66 vlineto
+	closepath
+	endchar
+	} ND
+/bracketright {
+	0 284 hsbw
+	112 618 rmoveto
+	-730 vlineto
+	-92 hlineto
+	-66 vlineto
+	158 hlineto
+	862 vlineto
+	-158 hlineto
+	-66 vlineto
+	closepath
+	endchar
+	} ND
+/plus {
+	0 778 hsbw
+	55 286 rmoveto
+	-66 vlineto
+	300 hlineto
+	-300 vlineto
+	66 hlineto
+	300 vlineto
+	299 hlineto
+	66 vlineto
+	-299 hlineto
+	300 vlineto
+	-66 hlineto
+	-300 vlineto
+	closepath
+	endchar
+	} ND
+/slash {
+	0 501 hsbw
+	443 684 rmoveto
+	-71 hlineto
+	-317 -862 rlineto
+	71 hlineto
+	closepath
+	endchar
+	} ND
+/equal {
+	0 778 hsbw
+	55 389 rmoveto
+	-67 vlineto
+	665 hlineto
+	67 vlineto
+	closepath
+	-665 -205 rmoveto
+	-67 vlineto
+	665 hlineto
+	67 vlineto
+	closepath
+	endchar
+	} ND
+/.notdef {
+        0 864 hsbw
+        endchar
+        } ND
+end
+end
+readonly put
+noaccess put
+dup/FontName get exch definefont pop
+mark currentfile closefile
+cleartomark

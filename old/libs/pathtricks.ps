@@ -1,0 +1,241 @@
+%!PS-Adobe-2.0
+
+%
+% pathtricks.ps
+%
+% Methods for manipulating paths.
+%
+% All of the functions in this package assume that there is a current path. They
+% do not change the path at all.
+%
+
+% Requires: extremes.ps intcmgr.ps points.ps drawing.ps
+
+% General method for executing pathforall in a useful method such that
+% currentpoint works correctly. Expects methods linetoHook, movetoHook,
+% curvetoHook, and closepathHook to exist. If startingHook and/or endingHook are
+% defined, then they will be executed at the appropriate times.
+%
+/tracePath {
+    10 dict begin	% Save the starting X and Y; also makes hooks local
+    gsave
+    /startingHook where {
+	pop startingHook
+    } if
+    {		% moveto
+	2 copy mark 3 1 roll movetoHook cleartomark
+	2 copy /curY exch def /curX exch def
+	moveto
+    } {		% lineto
+	2 copy mark 3 1 roll linetoHook cleartomark
+	lineto
+    } {		% curveto
+	6 copy mark 7 1 roll curvetoHook cleartomark
+	curveto
+    } {		% closepath
+	mark curX curY linetoHook cleartomark
+	mark closepathHook cleartomark	% just in case
+	closepath
+    } pathforall
+    /endingHook where {
+	pop endingHook
+    } if
+    grestore
+    end
+} def
+
+%
+% INTERSECTIONS
+%
+
+% Dictionary defining hooks for line intersections. It is expected that the user
+% of this dictionary initialize the line for the intersection manager.
+5 dict begin
+    /movetoHook { pop pop } def
+    /linetoHook {
+	currentpoint intcLines
+    } def
+    /curvetoHook {
+	currentpoint 8 2 roll
+	intcCurve
+    } def
+    /closepathHook { } def
+currentdict
+end
+/PathIntcDict exch def
+
+% Given the points for a line, determine an intersection.
+/pathLineIntc {
+    resetIntc
+    PathIntcDict begin
+	setIntcLine
+	showIntcLine
+	tracePath
+    end
+    IntersectDict /pointList get
+    uniquePoints
+} def
+
+% EXTREME VALUES
+
+5 dict begin
+    /movetoHook { pop pop } def
+    /linetoHook {
+	currentpoint cmpPoint
+	cmpPoint
+    } def
+    /curvetoHook {
+	2 copy cmpPoint
+	currentpoint cmpPoint
+	currentpoint 8 2 roll
+	8 packedarray cvx /points exch def
+	points curvetoExtremes
+	{ points 9 -1 roll curvetoPoint cmpPoint } forall
+	{ points 9 -1 roll curvetoPoint cmpPoint } forall
+    } def
+    /closepathHook { } def
+currentdict
+end
+/PathExtrDict exch def
+
+% Determine the extremes.
+/pathExtremes {
+    resetExtremes
+    PathExtrDict begin
+	tracePath
+    end
+    ExtremesDict /pointList get
+} def
+
+
+% Direction of fill
+%
+% Given an array of points and a point offset, extracts those points that, when
+% the offset is applied to them, 
+% [ point array ] offx offy -- [ point array subset ]
+/offsetInFill {
+    1 dict begin
+	2 packedarray cvx /offset exch def
+	[ exch
+	{
+	    2 copy offset addPoint infill {
+		[ 3 1 roll ]
+	    } {
+		pop pop
+	    } ifelse
+	} forallPoint
+	]
+    end
+} def
+
+% Midpoint of the current path.
+/pathMidpoint {
+    pathbbox 2 seppairs add 2 div 3 1 roll add 2 div exch
+} def
+
+% Upper right coordinate of current path.
+/pathUR {
+    pathbbox 4 2 roll pop pop
+} def
+
+% Path lower left coordinate.
+/pathLL {
+    pathbbox pop pop
+} def
+
+% Vertical line that splits the bbox in half. Leaves the coordinates on the
+% stack.
+/vertSplitLine {
+    dup pathUR xcoor mul	% frac frac*llx
+    exch 1 exch sub		% frac*llx 1-frac
+    pathLL xcoor mul		% frac*llx (1-frac)*urx
+    add dup			% avgX avgX
+    pathLL ycoor 10 sub exch
+    pathUR ycoor 10 add
+} def
+/horizSplitLine {
+    dup pathUR ycoor mul	% frac frac*lly
+    exch 1 exch sub		% frac*lly 1-frac
+    pathLL ycoor mul		% frac*lly (1-frac)*ury
+    add				% avgY avgY
+    pathLL xcoor 10 sub exch
+    pathUR xcoor 10 add 1 index
+} def
+
+/vertLineThrough {
+    xcoor dup
+    pathLL ycoor 10 sub exch
+    pathUR ycoor 10 add
+} def
+/horizLineThrough {
+    ycoor
+    pathLL xcoor 10 sub exch
+    pathUR xcoor 10 add 1 index
+} def
+
+% Show a letter.
+/letterPath {
+    newpath 0 0 moveto true charpath
+    gsave stroke grestore
+} bind def
+
+
+
+%
+% ANGLE AT A POINT IN THE PATH
+%
+6 dict begin
+/movetoHook { pop pop } def
+/linetoHook {
+    /theAngle where {
+	pop pop pop
+    } {
+	currentpoint 4 2 roll
+	4 copy thePoint linePtIntc {
+	    pop pop lineAngle /theAngle exch def
+	} if
+    } ifelse
+} def
+/curvetoHook { } def	% Should never occur, since we flatten the path
+/closepathHook { } def
+/endingHook { /theAngle where dup { exch pop theAngle exch } if } def
+currentdict
+end
+/PathAngleDict exch def
+
+/pathAngle {
+    PathAngleDict begin
+    gsave
+	flattenpath
+	/thePoint defPoint
+	tracePath
+    grestore
+    end
+} def
+
+% Produces the coordinates for a perpendicular through a given point.
+/perpThroughPoint {
+    2 dict begin
+	/angle exch 90 add def
+	/point defPoint
+	angle dup cos -500 mul exch sin -500 mul point addPoint
+	angle dup cos 500 mul exch sin 500 mul point addPoint
+    end
+} def
+
+% Measure height/depth of the path.
+/measureHeight {
+    gsave
+	flattenpath pathUR ycoor
+	dup drawHorizLine
+    grestore
+} def
+/measureDepth {
+    gsave
+	flattenpath pathLL ycoor
+	dup drawHorizLine
+	neg
+    grestore
+} def
+
+

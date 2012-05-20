@@ -1,0 +1,21 @@
+%
+% E-bar.ps
+%
+flattenpath
+
+0.5 vertSplitLine pathLineIntc sortByY /EVertSplit exch def
+EVertSplit 2 2 getinterval loadArray
+/EBarTop defPoint /EBarBot defPoint
+
+0.2 horizSplitLine pathLineIntc sortByX 1 get
+{ startAtPoint EBarBot endAtPoint } traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath sortByY lastElt /EBarBot defPoint
+{ EBarTop startAtPoint { 170 lt } endWhenAngle } traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath sortByY firstElt /EBarTop defPoint
+EBarTop uppointbox EBarBot pointbox
+
+(Capital bar)
+EBarTop ycoor EBarBot ycoor sub
+stringOfText

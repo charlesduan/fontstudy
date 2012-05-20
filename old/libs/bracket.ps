@@ -1,0 +1,35 @@
+%!PS-Adobe-2.0
+%
+% bracket.ps
+%
+% Given the darkness parameter, a point on the stem, the edge of the serif, and
+% the corner where the stem and the edge should meet with no bracket, finds the
+% height of the bracket.
+%
+% Requires: points.ps pathtricks.ps drawing.ps
+%
+/findBracket {
+    4 dict begin
+	/corner defPoint	% Point where the serif and stem meet
+	/edge defPoint		% Point at top end of serif
+	/bracket defPoint	% Point where bracket should end
+	/fraction exch 1 exch div def	% Darkness parameter (usually 1/3)
+	10 {
+	    edge bracket drawLine avgPoint corner
+	    pathLineIntc firstElt loadArray % Better only have one element!
+	    corner subPoint fraction scalePoint corner addPoint
+	    % First line for the intersection, that goes through edge. This line
+	    % should intersect the stem line at the bracket point.
+	    edge subPoint 10 scalePoint edge addPoint edge
+	    % Second line for the intersection
+	    bracket corner subPoint 20 scalePoint corner addPoint corner
+	    intersect pop
+	    /bracket defPoint
+	} iterate
+	bracket pointbox
+	mark bracket edge drawLine avgPoint corner drawLine cleartomark
+	bracket
+    end
+} def
+
+

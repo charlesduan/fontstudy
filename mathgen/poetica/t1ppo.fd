@@ -1,0 +1,19 @@
+%Filename: t1ppo.fd
+%Created by: tex texput
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{t1ppo.fd}
+   [2004/04/24 Fontinst v1.801 font definitions for T1/ppo.]
+
+\DeclareFontFamily{T1}{ppo}{}
+
+\DeclareFontShape{T1}{ppo}{m}{it}{
+   <-> ppori8t
+}{}
+
+\DeclareFontShape{T1}{ppo}{m}{sl}{<->ssub * ppo/m/it}{}
+\DeclareFontShape{T1}{ppo}{m}{n}{<->ssub * ppo/m/it}{}
+
+\endinput

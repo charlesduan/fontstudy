@@ -1,0 +1,302 @@
+% Computer Modern Greek caps, analogous to the uppercase Roman letters.
+% Modified by Charles Duan for MathGen.
+
+% Character codes \0000 through \0012 are generated,
+% using plain \TeX's standard text font layout conventions.
+
+cmchar "Uppercase Greek Gamma";
+beginchar(oct"000",11u#-width_adj#,cap_height#,0);
+italcorr cap_height#*slant-beak_jut#-.25u#;
+adjust_fit(cap_serif_fit#,0);
+%h:=vround(h-stem_corr);
+penpos1(cap_stem,0); penpos2(cap_stem,0);
+x1l=x2l=hround max(2u,3u-.5cap_stem); y1=h; y2=0;
+penpos3(arm_slab,90); penpos4(hair,0);
+y3r=h; x3=x1; x4r=hround(w-.75u); y4=y3l-beak;
+x1'=x1r; y1'=y3l;
+fill serif_path(1,2,a,1/3,-F_jut,left)
+    --(dish_serif_path(2,1,c,1/3,F_jut,d,1/3,1.25cap_jut))--
+  if serifs and (bracket>arm_slab):
+   hide(z1'r=z1r+min(bracket,.5h)*down; z1'l=z1'+.5cap_jut*right)
+   z1'r{up}... 1/3[z1',.5[z1'r,z1'l] ]{z1'l-z1'r}...{right}z1'l--
+  else: z1'-- fi
+  arm_path(3,4,e,beak_darkness,beak_jut)--cycle;
+math_fit(0,ic#-2.5u#); penlabels(1,2,3,4); endchar;
+
+cmchar "Uppercase Greek Delta";
+beginchar(oct"001",15u#,cap_height#,0);
+adjust_fit(0,0);
+numeric left_stem,alpha;
+left_stem=cap_hair if hefty: -3stem_corr fi;
+x1l=w-x4r=.75u; y1=y4=0;
+x2-x1=x4-x3; x3r=x2r+apex_corr; y2=y3=h+apex_o+apex_oo;
+alpha=diag_ratio(2,left_stem,y2-y1,x4r-x1l-apex_corr);
+penpos1(alpha*left_stem,0); penpos2(alpha*left_stem,0);
+penpos3(alpha*cap_stem,0); penpos4(alpha*cap_stem,0);
+fill pen_end(z1l-z2l,z1l,tiny,z4r,z3r-z4r)
+    --pen_end(z3r-z4r,z3r,tiny,z2l,z1l-z2l)--cycle;  % triangle
+z0=whatever[z1r,z2r]=whatever[z3l,z4l];
+y5=y6=cap_vstem; z5=whatever[z1r,z2r]; z6=whatever[z3l,z4l];
+if y0<h-cap_notch_cut: y0:=h-cap_notch_cut;
+ unfill z0+.5right{down}...{z4-z3}z6--z5{z2-z1}
+  ...{up}z0+.5left--cycle; % counter
+else: unfill z0--z6--z5--cycle; fi  % counter
+penlabels(0,1,2,3,4,5,6); endchar;
+
+cmchar "Uppercase Greek Theta";
+beginchar(oct"002",14u#,cap_height#,0);
+italcorr .7cap_height#*slant-.5u#;
+adjust_fit(0,0);
+numeric light_curve; light_curve=hround(cap_curve-2stem_corr);
+penpos1(vair,90); penpos3(vround(vair+.5vair_corr),-90);
+penpos2(light_curve,180); penpos4(light_curve,0);
+interim superness:=O_superness;  % make |"O"|, not |"0"|
+if monospace: x2r=hround 1.5u;
+else: x2r=hround u; fi
+x4r=w-x2r; x1=x3=.5w; y1r=h+o; y2=y4=.5h-vair_corr; y3r=-o;
+make_paths1(rev.l) pulled_super_arc.e(1,2)(.5superpull)
+ & pulled_super_arc.e(2,3)(.5superpull)
+ & pulled_super_arc.e(3,4)(.5superpull)
+ & pulled_super_arc.e(4,1)(.5superpull);  % bowl
+fill rpath1 & cycle; unfill lpath1 & cycle;
+penpos5(cap_vstem,90); penpos6(cap_vstem,90);
+x5=w-x6=hround(x2l+u)+1; y5=y6=.5[y1l,y3l];
+if serifs: penpos7(hair,0); penpos8(hair,0); penpos9(hair,0); penpos10(hair,0);
+ x7l=x8l=x5; x9r=x10r=x6;
+ y7-y5r=y9-y6r=y5l-y8=y6l-y10=vround .05h;
+ penpos5'(cap_vstem,90); penpos6'(cap_vstem,90); y5'=y6'=y5; x5'=x7r; x6'=x9l;
+ fill rlthrough(5',pen_rlend7(up,crisp,down)--pen_lrend8(down,crisp,up))
+   --lrthrough(6',pen_lrend10(down,crisp,up)--pen_rlend9(up,crisp,down))--cycle;
+else: fill pen_rlend5(left,tiny,right)--pen_lrend6(right,tiny,left)--cycle;
+fi
+math_fit(-.3cap_height#*slant-.5u#,ic#-.5u#);
+penlabels(1,2,3,4,5,6,7,8,9,10); endchar;
+
+cmchar "Uppercase Greek Lambda";
+beginchar(oct"003",12u#,cap_height#,0);
+adjust_fit(cap_serif_fit#,cap_serif_fit#);
+numeric left_stem,outer_jut,alpha;
+left_stem=cap_hair if hefty: -3stem_corr fi;
+outer_jut=A_jut; x1l=w-x4r=l+letter_fit+outer_jut+.5u; y1=y4=0;
+x2-x1=x4-x3; y2=y3=h+apex_o+apex_oo;
+alpha=diag_ratio(2,left_stem,y2-y1,x4r-x1l-apex_corr);
+penpos1(alpha*left_stem,0); penpos2(alpha*left_stem,0);
+penpos3(alpha*cap_stem,0); penpos4(alpha*cap_stem,0);
+x3r=max(x2r+apex_corr,x2l);
+z0=whatever[z1r,z2r]=whatever[z3l,z4l];
+if serifs: numeric inner_jut; save bracket; bracket=A_outer_bracket;
+ if x1r+A_jut_in+.5u+1<=x4l-A_jut_in: inner_jut=A_jut_in;
+ else: x1r+inner_jut+.5u+1=x4l-inner_jut; fi         fi
+if y0<h-cap_notch_cut: y0:=h-cap_notch_cut;
+  fill z0+.5left{down}
+    ...{z4-z3}dish_serif_path(4,3,c,A_inner_dark,inner_jut,d,1/3,outer_jut)
+    --pen_end(z3r-z4r,z3r,tiny,z2l,z1l-z2l)
+    --dish_serif_path(1,2,a,1/2,outer_jut,b,A_inner_dark,inner_jut)dark{z2-z1}
+    ...{up}z0+.5right--cycle;
+else: fill z0--dish_serif_path(4,3,c,A_inner_dark,inner_jut,d,1/3,outer_jut)
+    --pen_end(z3r-z4r,z3r,tiny,z2l,z1l-z2l)
+    --dish_serif_path(1,2,a,1/2,outer_jut,b,A_inner_dark,inner_jut)dark--cycle;
+fi % left and right diagonals
+penlabels(0,1,2,3,4,5,6); endchar;
+
+cmchar "Uppercase Greek Xi";
+beginchar(oct"004",12u#,cap_height#,0);
+italcorr cap_height#*slant-.35u#;
+adjust_fit(0,0);
+numeric shaved_stem; shaved_stem=Vround .75[vair,cap_stem];
+if shaved_stem<crisp.breadth: shaved_stem:=crisp.breadth; fi
+penpos1(shaved_stem,90); penpos2(hair,0);
+y1r=h; x1=.5w; x2r=hround(w-.85u); y2=y1l-4/9beak-eps;
+penpos3(hair,180); x3=w-x2; y3=y2;
+fill arm_path(1,2,a,.4beak_darkness,.3beak_jut)
+    --arm_path(1,3,b,.4beak_darkness,-.3beak_jut)--cycle;  % upper stroke
+penpos4(shaved_stem,-90); penpos5(hair,0);
+y4r=0; x4=.5w; x5r=hround(w-.75u); y5=y4l+.5beak+eps;
+penpos6(hair,180); x6=w-x5; y6=y5;
+fill arm_path(4,5,c,.4beak_darkness,.3beak_jut)
+    --arm_path(4,6,d,.4beak_darkness,-.3beak_jut)--cycle; % lower stroke
+penpos7(shaved_stem,90); penpos8(shaved_stem,90);
+x7=w-x8=hround if serifs: 2.5 else: 2 fi\\ u;
+y7r=y8r=vround(.52h+.5shaved_stem);
+if serifs: numeric xjut;
+ if y2>y7r+.75cap_jut: xjut=.5cap_jut;
+ else: y2=y7r+1.5xjut; fi
+ penpos11(hair,0); penpos12(hair,0); y11=y12;
+ penpos13(hair,0); penpos14(hair,0); y13=y14;
+ x11l=x13l=w-x12r=w-x14r=hround 2.5u;
+ y11-y13=shaved_stem+2xjut; .5[y11,y13]=y7;
+ penpos7'(shaved_stem,90); penpos8'(shaved_stem,90);
+ y7'=y8'=y7; x7'=x11r; x8'=x12l;
+ fill rlthrough(7',pen_rlend11(up,crisp,down)--pen_lrend13(down,crisp,up))
+  --lrthrough(8',pen_lrend14(down,crisp,up)--pen_rlend12(up,crisp,down))--cycle;
+else: fill pen_rlend7(left,tiny,right)--pen_lrend8(right,tiny,left)--cycle; fi
+math_fit(0,.5ic#); penlabels(1,2,3,4,5,6,7,8,11,12,13,14); endchar;
+
+cmchar "Uppercase Greek Pi";
+beginchar(oct"005",13u#+width_adj#,cap_height#,0);
+italcorr cap_height#*slant-cap_serif_fit#+H_jut#-2.5u#+min(.5cap_stem#,u#);
+% cap_serif_fit# will make the sidebearings smaller for sans serif, but because
+% we add in these auxiliary serifs, that shouldn't happen.
+adjust_fit(if serifs: cap_serif_fit#,cap_serif_fit# else: 0,0 fi);
+if not serifs:
+  save slab,H_jut,bracket;
+  slab=arm_slab; H_jut=hround 1/7w; bracket=0;
+fi
+%h:=vround(h-stem_corr);
+penpos1(cap_stem,0); penpos2(cap_stem,0);
+penpos3(cap_stem,0); penpos4(cap_stem,0);
+x1l=x2l=hround max(2u,3u-.5cap_stem); x3=x4=w-x1;
+y1=y3=h; y2=y4=0;
+penpos5(cap_bar,90); penpos6(cap_bar,90);
+x5=x1r; x6=x3l; y5r=y6r=h;
+if serifs: numeric inner_jut;
+ if x1r+H_jut+.5u+1<=x3l-H_jut: inner_jut=H_jut;
+ else: x1r+inner_jut+.5u+1=x3l-inner_jut; fi
+else: numeric inner_jut; inner_jut=0; fi
+fill serif_path_(1,2,a,1/3,-H_jut)
+ --dish_serif_path(2,1,c,1/3,H_jut,d,1/3,inner_jut)
+ --z5l--z6l--dish_serif_path(4,3,g,1/3,inner_jut,h,1/3,H_jut)
+ --serif_path_(3,4,f,1/3,H_jut)--cycle;
+math_fit(0,.5ic#); penlabels(1,2,3,4,5,6); endchar;
+
+cmchar "Uppercase Greek Sigma";
+beginchar(oct"006",13u#,cap_height#,0);
+italcorr cap_height#*slant-beak_jut#-.5u#;
+adjust_fit(0,0);
+numeric bot_arm_thickness;
+bot_arm_thickness=Vround .25[arm_slab,cap_vstem];
+x1l=hround u; x1l=x2l=x4l;
+y1=h; y2=h-arm_slab-eps; y4=0; x3l-x1l=4/11(w-2u); y3=.5h;
+numeric alpha[]; alpha1=((x3l-x1l)++(y2-y3))/(y2-y3);
+penpos1(alpha1*cap_stem,0); penpos2(alpha1*cap_stem,0);
+penpos3(alpha1*cap_stem,0);
+alpha2=diag_ratio(1,cap_hair,y3-y4,x3r-x4l);
+penpos4(alpha2*cap_hair,0);
+z0=whatever[z2l,z3l]=z4l+whatever*(z3r-z4r);
+penpos5(arm_slab,90); penpos6(hair,0);
+y5r=h; x5=x1; x6r=hround(w-u); y6=y5l-beak-eps;
+penpos7(bot_arm_thickness,-90); penpos8(hair,0);
+y7r=0; z7l=whatever[z4,z3]; x8=x6; y8=y7l+beak+eps;
+y4'=y7l; z4'=whatever[z4r,z3r];
+fill arm_path(5,6,a,beak_darkness,beak_jut)
+    --pen_end(left,z1l,tiny,z2l,z0-z2l)--z0--pen_angle(z4l-z0,z4l,tiny,right)
+    --arm_path(7,8,b,beak_darkness,beak_jut)--z4'
+    --pen_angle(z3r-z4',z3r,tiny,z2r-z3r)--z2r--cycle;
+math_fit(0,.5ic#); penlabels(0,1,2,3,4,5,6,7,8); endchar;
+
+cmchar "Uppercase Greek Upsilon";
+beginchar(oct"007",14u#,cap_height#,0);
+italcorr .8cap_height#*slant-.5u#;
+adjust_fit(0,0); path p[];
+numeric half_stem, vert_curve;
+half_stem=hround max(0.4[cap_hair,cap_stem], 0.5cap_stem);
+vert_curve=Vround 0.75[vair,cap_curve];
+penpos1(cap_stem,0); penpos2(cap_stem,0);
+x1l=x2l=hround(.5w-.5cap_stem); y1=.5h; y2=0;
+penpos3(half_stem,0); penpos4(vert_curve,90); penpos5(cap_hair,180);
+z3l=z1l; x5r=hround u; y5=.8h-.5fine; x4=.61803[x3l,x5l]; y4r=h+o;
+penpos5'(cap_hair,180); x5'=x5; y5'=h;
+p1=z3r{up}...z4r{left}...{down}diag_end(5'r,5r,1,1,5l,5'l){up}
+ ...{right}z4l...{down}z3l;  % left arc
+penpos6(half_stem,0); penpos7(vert_curve,-90); penpos8(cap_hair,-180);
+z6r=z1r; x8=w-x5; y8=y5; x7=w-x4; y7=y4;
+penpos8'(cap_hair,-180); x8'=x8; y8'=h;
+p2=z6r{up}...z7r{right}...{down}diag_end(8'r,8r,1,1,8l,8'l){up}
+ ...{left}z7l...{down}z6l;  % right arc
+fill combine(p2,p1)
+    --dish_serif_path(2,1,a,1/3,1.25cap_jut,b,1/3,1.25cap_jut)--cycle;
+math_fit(-.8cap_height#*slant-.5u#,ic#-2.5u#);
+penlabels(1,2,3,4,5,6,7,8); endchar;
+
+cmchar "Uppercase Greek Phi";
+beginchar(oct"010",13u#,cap_height#,0);
+italcorr .5cap_height#*slant-.5u#;
+adjust_fit(0,0); path p[];
+numeric shaved_stem,light_curve;
+shaved_stem=cap_stem-hround 2stem_corr;
+light_curve=cap_curve-hround stem_corr;
+penpos1(shaved_stem,0); penpos2(shaved_stem,0);
+x1l=x2l=hround(.5w-.5shaved_stem); y1=h; y2=0;
+p1=dish_serif_path(1,2,a,1/3,1.25cap_jut,b,1/3,1.25cap_jut); % Upper serif
+p2=dish_serif_path(2,1,c,1/3,1.25cap_jut,d,1/3,1.25cap_jut); % Lower serif
+split_path1(p1); split_path2(p2);
+p3=rpath2--p1--lpath2; % Upper serif with extras
+p4=rpath1--p2--lpath1; % Lower serif with extras
+penpos3(vair,90); penpos5(vair,-90);
+penpos4(light_curve,180); penpos6(light_curve,0);
+x4r=hround u; x6r=w-x4r; x3=x5=.5w;
+y3r=vround(.85h if serifs:-slab fi); y4=y6=.5[y3,y5];
+y5r=vround(.15h if serifs:+slab fi);
+make_paths3(rev.l) pulled_arc.e(3,4); make_paths4(rev.l) pulled_arc.e(4,5);
+make_paths5(rev.l) pulled_arc.e(5,6); make_paths6(rev.l) pulled_arc.e(6,3);
+fill aux_path(rpath6 & rpath3, p3) & aux_path(rpath4 & rpath5, p4) & cycle;
+pair v.t, v.b;
+v.t=p1 intersectiontimes lpath3; v.b=p2 intersectiontimes lpath4;
+unfill
+ if xpart v.b>=0: combine(p2,lpath4) else: trunc_start(lpath4,z1l--z2l) fi
+ & if xpart v.t>=0: combine(lpath3,p1) else: trunc_end(lpath3,z1l--z2l) fi
+ --cycle;
+v.t:=p1 intersectiontimes lpath6; v.b:=p2 intersectiontimes lpath5;
+unfill
+if xpart v.t>=0: combine(p1,lpath6) else: trunc_start(lpath6,z1r--z2r) fi
+ & if xpart v.b>0: combine(lpath5,p2) else: trunc_end(lpath5,z1r--z2r) fi
+ --cycle;
+math_fit(-.5cap_height#*slant-.5u#,ic#); penlabels(1,2,3,4,5,6); endchar;
+
+cmchar "Uppercase Greek Psi";
+beginchar(oct"011",14u#,cap_height#,0);
+italcorr .8cap_height#*slant-.5u#;
+adjust_fit(0,0); path p[];
+numeric shaved_stem;
+shaved_stem=cap_stem-hround 2stem_corr;
+penpos1(shaved_stem,0); penpos2(shaved_stem,0);
+x1l=x2l=hround(.5w-.5shaved_stem); y1=h; y2=0;
+p1=dish_serif_path(1,2,a,1/3,1.25cap_jut,b,1/3,1.25cap_jut); % Upper serif
+p2=dish_serif_path(2,1,c,1/3,1.25cap_jut,d,1/3,1.25cap_jut); % Lower serif
+split_path1(p1); split_path2(p2);
+p3=rpath2--p1--lpath2; % Upper serif with extras
+p4=rpath1--p2--lpath1; % Lower serif with extras
+penpos3(shaved_stem,-180); penpos4(shaved_stem,-180);
+penpos5(vair,-90); x5=x1; y5r=vround(.15h if serifs:+slab fi);
+penpos6(shaved_stem,0); penpos7(shaved_stem,0);
+x3r=hround u; x7=w-x3; x4r=hround(3u-.5shaved_stem); x6=w-x4;
+penpos3'(vair,90); penpos7'(vair,90); z3'r=z3r; z7'r=z7r;
+y3=y7; y4=y6=.6h; y3=hround(y3+.84h if serifs:-slab fi-y3');
+interim superness:=more_super;
+p5=z4l{up}...{left}z3l--pen_end(left,z3r,tiny,z3'l,right){right}...{down}z4r;
+p6=z6r{up}...{right}pen_end(right,z7'l,tiny,z7r,left)--z7l{left}...{down}z6l;
+make_paths1(rev.l) super_arc.e(4,5) & super_arc.e(5,6);
+fill p5 & aux_path(rpath1,p4) & p6 & aux_path(lpath1,p3) & cycle;
+math_fit(-.8cap_height#*slant-.5u#,.4cap_height#*slant-1.25u#);
+penlabels(1,2,3,4,5,6,7); endchar;
+
+cmchar "Uppercase Greek Omega";
+beginchar(oct"012",13u#,cap_height#,0);
+italcorr .75cap_height#*slant-.5u#;
+adjust_fit(0,0);
+penpos1(vair,90); penpos2(cap_curve,180);
+penpos3(vair,180); penpos4(cap_curve,0); penpos5(vair,0);
+x1=.5w; y1r=h+o; x2r=hround u; y2=y4=2/3h; x4=w-x2;
+x3l=hround(1/3(w+.5u)+.5hair); y3=y5=0; x5=w-x3;
+path p; p=z3{up}...{up}z2;
+numeric theta; theta=angle(direction .5 of p);
+penpos3'(.5[vair,cap_curve],theta+90); penpos5'(.5[vair,cap_curve],90-theta);
+z3'=point .5 of p; x5'=w-x3'; y5'=y3';
+make_paths1(rev.r) z3e{up}...z3'e...{up}z2e
+ & pulled_super_arc.e(2,1)(.5superpull);
+make_paths2(rev.r) pulled_super_arc.e(1,4)(.5superpull)
+ & z4e{down}...z5'e...{down}z5e;  % bowl
+numeric arm_thickness; 
+arm_thickness=Vround(if hefty:slab+2stem_corr else:.75[slab,cap_vstem] fi);
+penpos6(arm_thickness,-90); penpos7(fudged.hair,-180);
+y6r=0; x6=x3; x7r=hround .8u; y7=y6l+.5beak+eps;
+penpos8(arm_thickness,-90); penpos9(fudged.hair,0);
+y8=y6; y9=y7; x8+x6=x9+x7=w;
+path p; p=(0,arm_thickness)--(w,arm_thickness);
+fill arm_path(8,9,b,.5beak_darkness,max(0,1.2beak_jut))
+    --trunc_both(rpath2,rpath1,p)
+    --arm_path(6,7,a,.5beak_darkness,min(0,-1.2beak_jut))
+    --lpath1 & lpath2--cycle;
+math_fit(0,.5ic#); penlabels(1,2,3,4,5,6,7,8,9); endchar;
+
+

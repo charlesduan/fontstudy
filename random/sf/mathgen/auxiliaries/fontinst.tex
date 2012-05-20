@@ -1,0 +1,39 @@
+\input fontinst.sty
+
+\installfonts
+\ifr  \installfamily{OT1}{\mathfont}{}				\fi
+\ifmi \installfamily{OML}{\mathfont}{\skewchar\font=127}	\fi
+\ifsy \installfamily{OMS}{\mathfont}{\skewchar\font=48}		\fi
+\ifex \installfamily{OMX}{\mathfont}{}				\fi
+
+\ifr
+\installfont{\mathfont\rorb 7t\optical}%
+    {\mathfont r\optical,\romanfont,dotlessj,latin}%
+    {ot1}{OT1}{\mathfont}{\weightletter}{n}{}
+\fi
+
+\ifmi
+\ifwidths
+\installfont{\mathfont\rorb 7m\optical}%
+    {\mathfont mi\optical,\italicfont,dotlessj,widths}%
+    {OML}{OML}{\mathfont}{\weightletter}{it}{}
+\else
+\installfont{\mathfont\rorb 7m\optical}%
+    {\mathfont mi\optical,\italicfont,dotlessj}%
+    {OML}{OML}{\mathfont}{\weightletter}{it}{}
+\fi
+\fi
+
+\ifsy
+\installrawfont{\mathfont sy\optical}{\mathfont sy\optical}%
+    {OMS}{OMS}{\mathfont}{\weightletter}{n}{}
+\fi
+
+\ifex
+\installrawfont{\mathfont ex\optical}{\mathfont ex\optical}%
+    {OMX}{OMX}{\mathfont}{\weightletter}{n}{}
+\fi
+
+\endinstallfonts
+
+\bye

@@ -1,0 +1,40 @@
+\sectionname{Scaling Large Characters}
+
+Mathematics typesetting requires characters such as parentheses and summation
+signs in sizes much larger than the normal text. Such large characters should
+appear thicker than their normal-sized counterparts. How should the relative
+thicknesses of such characters be determined?
+
+The original Computer Modern programs increased the size of large characters by
+adding ad-hoc dimensions that just happened to be the right sizes. A \emph{dw}
+parameter is used as a small width increment in many of these characters. That
+parameter is defined as the difference in width between the font's \emph{curve}
+parameter (the thickness of the sides of o) and \emph{stem} parameter (thickness
+of l). This relation is completely arbitrary, and with any font other than
+Computer Modern it produces very strangely-sized large characters.\looseness=-1
+
+Instead, MathGen provides new ``zoom'' parameters. The idea behind these
+parameters is that the thickness of large characters should be proportional to
+their size, but not directly proportional. A character that is twice the height
+of another should be thicker but not twice as thick. The zoom parameters specify
+a fraction of the size increase that should contribute to the increased
+thickness. Say, for example, that one character has height $\alpha$ and another
+has height $\beta$; let the zoom parameter be $\zeta$. Furthermore, assume that
+some feature of the character at size $\alpha$ has width $\omega_\alpha$. Then
+that feature for the character of size $\beta$ will have width:
+\[
+\omega_\beta = \omega_\alpha \cdot
+\left( 1 + \zeta\left(\frac{\beta}{\alpha} - 1\right)\right)
+\]
+If $\zeta=0$, then the thicknesses of characters will be constant regardless of
+size; if $\zeta=1$, then character thickness will scale linearly with size.
+
+Two zoom parameters are provided. The first controls the increased thickness of
+delimiters (parentheses, brackets, braces, etc.); this is set by default at
+0.25. The second controls the increased thickness of display operators
+(summation, integral, etc.); this is set at 0.55. Because these values cannot be
+measured out of just the roman font (for which all characters are about the same
+size), they must be specified by the user, although the default values seem to
+work well in most cases. Note that the text-size operators (summation, integral)
+are not zoomed at all, as they should appear compatible with the rest of the
+text.

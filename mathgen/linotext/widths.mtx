@@ -1,0 +1,79 @@
+%
+% linotext/widths.mtx
+%
+% Metrics files for measured letter widths for mathematics typesetting. Idea
+% based on MathKit.
+%
+\relax
+
+\metrics
+
+\needsfontinstversion{1.315}
+
+\setcommand\setglyphwidths#1#2#3#4#5{
+    \ifisglyph{#1}\then
+	\resetglyph{#1}
+	    \movert{#2}
+	    \glyph{#1}{1000}
+	    \movert{#4}
+	    \resetitalic{\sub{#3}{#4}}
+	\endresetglyph
+	\setkern{#1}{tie}{#5}
+    \fi
+}
+
+\setglyphwidths{A}{13}{-12}{-12}{-12}
+\setglyphwidths{B}{12}{-14}{-14}{-11}
+\setglyphwidths{C}{11}{-10}{-10}{17}
+\setglyphwidths{D}{18}{-23}{-23}{59}
+\setglyphwidths{E}{13}{-4}{-46}{6}
+\setglyphwidths{F}{16}{0}{-112}{11}
+\setglyphwidths{G}{32}{19}{-9}{1}
+\setglyphwidths{H}{42}{3}{-8}{-10}
+\setglyphwidths{I}{26}{-27}{-42}{46}
+\setglyphwidths{J}{20}{-20}{-20}{-9}
+\setglyphwidths{K}{7}{-3}{-4}{-62}
+\setglyphwidths{L}{11}{0}{-1}{-43}
+\setglyphwidths{M}{31}{-5}{-5}{155}
+\setglyphwidths{N}{21}{-4}{-86}{-3}
+\setglyphwidths{O}{11}{11}{-58}{32}
+\setglyphwidths{P}{8}{0}{-30}{-10}
+\setglyphwidths{Q}{9}{10}{-58}{29}
+\setglyphwidths{R}{20}{-5}{-5}{-20}
+\setglyphwidths{S}{47}{-5}{-43}{-7}
+\setglyphwidths{T}{7}{-13}{-15}{-15}
+\setglyphwidths{U}{29}{-11}{-11}{-6}
+\setglyphwidths{V}{2}{-3}{-33}{5}
+\setglyphwidths{W}{24}{0}{-33}{3}
+\setglyphwidths{X}{4}{-4}{-4}{10}
+\setglyphwidths{Y}{-3}{-4}{-9}{-9}
+\setglyphwidths{Z}{-14}{-23}{-23}{2}
+\setglyphwidths{a}{-3}{-11}{-11}{4}
+\setglyphwidths{b}{5}{5}{-16}{-115}
+\setglyphwidths{c}{3}{0}{-6}{0}
+\setglyphwidths{d}{11}{2}{-16}{-123}
+\setglyphwidths{dotlessi}{-6}{-13}{-13}{16}
+\setglyphwidths{dotlessj}{-10}{-13}{-13}{17}
+\setglyphwidths{e}{10}{-3}{-10}{-2}
+\setglyphwidths{f}{-30}{4}{-28}{47}
+\setglyphwidths{g}{4}{21}{21}{-3}
+\setglyphwidths{h}{9}{-1}{-18}{-113}
+\setglyphwidths{i}{-6}{-13}{-13}{-5}
+\setglyphwidths{j}{-10}{-7}{-18}{-5}
+\setglyphwidths{k}{-9}{-4}{-4}{-101}
+\setglyphwidths{l}{-13}{-12}{-12}{0}
+\setglyphwidths{m}{6}{10}{10}{6}
+\setglyphwidths{n}{-3}{-7}{-7}{17}
+\setglyphwidths{o}{2}{1}{-16}{0}
+\setglyphwidths{p}{7}{3}{-6}{-11}
+\setglyphwidths{q}{10}{-1}{-21}{7}
+\setglyphwidths{r}{-14}{-12}{-78}{0}
+\setglyphwidths{s}{-12}{-4}{-4}{30}
+\setglyphwidths{t}{-7}{-2}{-4}{-9}
+\setglyphwidths{u}{-7}{-10}{-10}{16}
+\setglyphwidths{v}{18}{-7}{-16}{-67}
+\setglyphwidths{w}{0}{-10}{-30}{-172}
+\setglyphwidths{x}{-6}{-21}{-22}{25}
+\setglyphwidths{y}{6}{-2}{-15}{-9}
+\setglyphwidths{z}{-1}{-9}{-10}{0}
+\endmetrics

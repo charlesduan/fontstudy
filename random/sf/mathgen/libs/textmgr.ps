@@ -1,0 +1,55 @@
+%!PS-Adobe-2.0
+
+%
+% textmgr.ps
+%
+
+% Require: functions.ps
+
+<<
+    /TextFont /Helvetica findfont 30 scalefont def
+    /TextXPos 0 def
+    /TextTopYPos 900 def
+    /TextYPos 900 def
+    /TextLineSkip 40 def
+>>
+/TextDict exch def
+
+/resetText {
+    TextDict begin
+	/TextYPos TextTopYPos def
+    end
+} def
+
+/setTextPos {
+    TextDict begin
+	dup /TextTopYPos exch def
+	/TextYPos exch def
+	/TextXPos exch def
+    end
+} def
+
+%
+% font-dict baselineskip --
+/setTextFont {
+    TextDict begin
+	/TextLineSkip exch def
+	/TextFont exch def
+    end
+} def
+
+%
+% (string) number --
+/stringOfText {
+    gsave TextDict begin
+	TextFont setfont
+	newpath TextXPos TextYPos moveto
+	20 string cvs
+	CurrentFile ( = ) append exch append ( # ) append exch append
+	TextToConsole { dup = } if
+	show
+	/TextYPos TextYPos TextLineSkip sub def
+    end grestore
+} def
+
+/TextToConsole false def

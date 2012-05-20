@@ -1,0 +1,26 @@
+%Filename: ot1phw.fd
+%Created by: tex texput
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{ot1phw.fd}
+   [2004/04/21 Fontinst v1.801 font definitions for OT1/phw.]
+
+\DeclareFontFamily{OT1}{phw}{}
+
+\DeclareFontShape{OT1}{phw}{m}{n}{
+   <-> phwr7t
+}{}
+
+\DeclareFontShape{OT1}{phw}{m}{sc}{
+   <-> phwrc7t
+}{}
+
+\DeclareFontShape{OT1}{phw}{m}{sl}{
+   <-> phwro7t
+}{}
+
+\DeclareFontShape{OT1}{phw}{m}{it}{<->ssub * phw/m/sl}{}
+
+\endinput

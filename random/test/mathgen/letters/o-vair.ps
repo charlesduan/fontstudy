@@ -1,0 +1,28 @@
+%
+% o-vair-alt.ps
+%
+pathLL /oBot exch def /oLeft exch def
+pathUR /oTop exch def /oRight exch def
+/pathMidHt oBot oTop add 2 div def
+
+/oVair 1000 def
+
+oLeft oRight oLeft sub 20 div oRight {
+    0 vertLineThrough pathLineIntc sortByY dup length 0 gt {
+	lastElt /curPoint defPoint
+	curPoint curPoint pathAngle pop perpThroughPoint
+	pathLineIntc dup length 2 ge {
+	    sortByY revArray 1 get /curInside defPoint
+	    curPoint uppointbox curInside pointbox
+	    curPoint curInside subPoint magnitude oVair lt {
+		/oVair curPoint curInside subPoint magnitude def
+	    } if
+	} {
+	    pop
+	} ifelse
+    } {
+	pop
+    } ifelse
+} for
+
+(Lowercase vair \(alt\)) oVair stringOfText

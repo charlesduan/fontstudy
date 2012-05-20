@@ -1,0 +1,18 @@
+%Filename: omlpad.fd
+%Created by: tex pad-fontinst
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{omlpad.fd}
+   [2004/03/27 Fontinst v1.801 font definitions for OML/pad.]
+
+\DeclareFontFamily{OML}{pad}{\skewchar \font =127}
+
+\DeclareFontShape{OML}{pad}{m}{it}{
+   <-> padr7m
+}{}
+
+\DeclareFontShape{OML}{pad}{m}{sl}{<->ssub * pad/m/it}{}
+
+\endinput

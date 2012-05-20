@@ -1,0 +1,162 @@
+%!PS-Adobe-2.0
+
+%
+% bezier.ps
+%
+
+% Requires: bzfunc.ps bzintc.ps
+
+% Puts everything in place for drawing the curve (so (0,0) is in the right place
+% and everything scales nicely). The first two coordinates are the PostScript
+% width and length of the plotting area.
+% xsize ysize xmin xmax ymin ymax --
+/begincurve {
+    20 dict begin
+    gsave
+    % Grab the parameters
+    /ymax exch def /ymin exch def /xmax exch def /xmin exch def
+    /xrange xmax xmin sub def /yrange ymax ymin sub def
+    % How much to enlarge the graph
+    /enlarge { 1.2 mul } def
+    /xmargin xrange enlarge xrange sub 2 div def
+    /ymargin yrange enlarge yrange sub 2 div def
+    % Figure out the scaling required to fit. Take the smaller of the two, and
+    % set that to the scaling factor (so we get a square).
+    yrange enlarge div exch xrange enlarge div min
+    /ScaleDimen exch def
+    /unscale { ScaleDimen div } def
+    ScaleDimen dup scale
+    currentlinewidth ScaleDimen div setlinewidth
+    4 dict begin
+	/xmin xmin xmargin sub def
+	/ymin ymin ymargin sub def
+	/xmax xmax xmargin add def
+	/ymax ymax ymargin add def
+	xmin neg 
+	ymin neg translate
+	% Draw a box
+	newpath
+	xmin ymin moveto
+	xmax ymin lineto
+	xmax ymax lineto 
+	xmin ymax lineto
+	closepath stroke
+    end
+    % Make a box around a point. Nice utility function.
+    /pointboxsize 5 unscale def
+    /pointbox {
+	pointboxsize 2 div dup rmoveto
+	0 pointboxsize neg rlineto
+	pointboxsize neg 0 rlineto
+	0 pointboxsize rlineto
+	closepath stroke
+    } def
+} def
+/endcurve {
+    grestore
+    end
+} def
+
+% The control points
+/p2 { -1 1 } def
+/p3 { 1 0 } def
+/p4 { 0.5 0.5 } def
+
+/Helvetica findfont 0.1 scalefont setfont
+
+% Give me all the pairs in order
+/allpairs { 0 0 p2 p3 p4 } def
+
+% Maximum and minimum of x and y values p[1-4]
+allpairs 4 seppairs
+max max max /ymax exch def
+max max max /xmax exch def
+
+allpairs 4 seppairs
+min min min /ymin exch def
+min min min /xmin exch def
+
+/bezier {
+    0 0 p2 p3 p4 9 -1 roll curvetoPoint
+} def
+
+/findExtremes {
+    0 0 p2 p3 p4 curvetoExtremes
+} def
+
+
+gsave
+1 inch 5 inch translate
+6.5 inch 5 inch xmin xmax ymin ymax begincurve
+    true { newpath 0 0 moveto p2 p3 p4 curveto stroke } if
+
+    % Show control points
+    1 0 0 setrgbcolor
+    0 0 moveto pointbox
+    p2 moveto pointbox
+    p3 moveto pointbox
+    p4 moveto pointbox
+    0 0 moveto p2 lineto stroke
+    p4 moveto p3 lineto stroke
+
+    % Try to draw the curve
+%    1 1 0 setrgbcolor
+%    0 0 moveto
+%    0 0.05 1.025 {
+%	bezier moveto pointbox
+%    } for
+
+    % Find extremes
+    0 1 0 setrgbcolor
+    findExtremes
+    % For the y extremes, plot a point
+    { 
+	bezier moveto pointbox
+    } forall
+    0 0 1 setrgbcolor
+    {
+	bezier moveto pointbox
+    } forall
+
+    0 0 0 setrgbcolor
+    /p5 { -0.384 0.4 } def
+    /p6 { .584 0.4 } def
+    p5 moveto p6 lineto stroke
+    0 0 p2 p3 p4 p5 p6 curvetoIntc -1 1 { pop moveto pointbox } for
+endcurve
+grestore
+
+gsave
+1 inch 1 inch translate
+4 inch 3 inch 0 1 xmin xmax begincurve
+    0 0 bezier pop moveto
+    0 0.05 1.025 {
+	dup bezier pop lineto
+    } for
+    stroke
+    findExtremes pop
+    {
+	dup bezier pop
+	moveto pointbox
+    } forall
+endcurve
+grestore
+
+4.25 inch 1 inch translate
+4 inch 3 inch 0 1 ymin ymax begincurve
+    0 0 bezier exch pop moveto
+    0 0.05 1.025 {
+	dup bezier exch pop lineto
+    } for
+    stroke
+    findExtremes exch pop {
+	dup bezier exch pop moveto pointbox
+    } forall
+endcurve
+grestore
+
+showpage
+
+
+
+

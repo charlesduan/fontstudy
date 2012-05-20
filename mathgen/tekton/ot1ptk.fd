@@ -1,0 +1,26 @@
+%Filename: ot1ptk.fd
+%Created by: tex texput
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{ot1ptk.fd}
+   [2004/04/25 Fontinst v1.801 font definitions for OT1/ptk.]
+
+\DeclareFontFamily{OT1}{ptk}{}
+
+\DeclareFontShape{OT1}{ptk}{m}{n}{
+   <-> ptkr7t
+}{}
+
+\DeclareFontShape{OT1}{ptk}{m}{sc}{
+   <-> ptkrc7t
+}{}
+
+\DeclareFontShape{OT1}{ptk}{m}{sl}{
+   <-> ptkro7t
+}{}
+
+\DeclareFontShape{OT1}{ptk}{m}{it}{<->ssub * ptk/m/sl}{}
+
+\endinput

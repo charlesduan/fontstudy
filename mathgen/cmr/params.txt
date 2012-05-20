@@ -1,0 +1,84 @@
+GNU Ghostscript 6.52 (2001-10-20)
+Copyright (C) 2001 artofcode LLC, Benicia, CA.  All rights reserved.
+This software comes with NO WARRANTY: see the file COPYING for details.
+Loading NimbusRomNo9L-Regu font from /usr/share/fonts/default/Type1/n021003l.pfb... 2417736 1049441 1622424 328620 0 done.
+Loading NimbusSanL-Regu font from /usr/share/fonts/default/Type1/n019003l.pfb... 2755936 1354322 1642520 336084 0 done.
+,-comma_depth = 193.053 # Comma depth
+.-dot_size = 105.96 # Dot size: 
+7-fig_height = 676.025 # fig_height
+=-math_axis = 249.987 # math_axis
+=-rule_thickness = 39.96 # Rule thickness
+A-A_inner_dark-serif = 0.591826 # Darkness of inner bracket
+A-A_jut-serif = 88.8207 # Jut of A
+A-A_jut_in-serif = 96.1237 # Inner jut of A
+A-A_outer_bracket-serif = 64.1782 # Outer bracket of A, adjusted for dark
+A-apex_corr = 0.219635 # Apex correction
+A-apex_o = 22.0455 # Apex overshoot (A)
+A-cap_hair = 31.1029 # Uppercase hair
+A-u = 57.08 # Unit based on A
+C-superness = 0.706898 # Superness, C bottom left
+C-superpull = 0.113865 # Superpull
+E-arm_slab = 30.96 # Arm thickness
+E-beak_darkness-serif = 0.366227 # Beak darkness
+E-beak_jut-serif = 27.9999 # Beak jut
+E-beak_withbar-serif = 224.948 # Beak height
+E-cap_bar = 30.96 # Capital bar
+E-hair-serif = 25.3569 # Hair by beak thickness
+F-F_jut-serif = 103.027 # Leftward jut of F
+H-H_jut-serif = 103.027 # H outer jut
+H-cap_bar = 30.96 # H bar
+H-cap_serif_space = 136.027 # Sidebearing distance
+I-bracket-serif = 70.3004 # Lowercase bracket (alt)
+I-cap_height = 682.998 # cap_height
+I-cap_jut-serif = 102.793 # Uppercase jut
+I-cap_stem = 89.04 # cap_stem
+I-crisp-serif = 1.25249e-05 # Crisp
+I-dish-serif = 3.0267 # Dish
+I-slab-serif = 29.6855 # Serif thickness
+O-O_superness = 0.70705 # Superness, O bottom left
+O-O_superness = 0.706643 # Superness, O top left
+O-O_superness = 0.707392 # Superness, O bottom right
+O-O_superness = 0.707006 # Superness, O bottom right
+O-cap_curve-alt = 103.183 # Lowercase curve (alt)
+O-cap_curve = 103.193 # Lowercase curve
+O-o = 21.9465 # Top capital overshoot
+P-cap_curve = 102.96 # Curve
+S-cap_ess = 97.4562 # Uppercase ess
+T-cap_bar = 30.9601 # T bar
+V-cap_hair = 30.8203 # Uppercase hair
+V-cap_stem = 86.7057 # Uppercase stem (thinned)
+V-tiny = 39.3988 # Curvature of v apex
+Y-cap_hair = 30.3765 # Uppercase hair
+[-body_height = 750.027 # Body height
+b-u = 55.328 # Unit based on b
+d-stem = 68.9875 # Lowercase stem
+i-slant-ital = 0.25007 # Italic angle
+k-bar_height = 223.999 # bar_height
+l-asc_height = 693.998 # asc_height
+l-bracket-serif = 67.4839 # Lowercase bracket (alt)
+l-crisp-serif = 7.47912e-05 # Crisp
+l-dish-serif = 3.00001 # Dish
+l-serif_drop-ital = 14.8377 # Serif drop
+l-slab-serif = 30.5295 # Serif thickness
+l-stem = 65.9999 # Lowercase stem
+m-monowidth = 0 # Monospace
+n-jut-serif = 77.9868 # Lowercase jut
+n-thin_join = 19.8453 # Thin join
+o-curve-alt = 83.0267 # Lowercase curve (alt)
+o-curve = 83.0264 # Lowercase curve
+o-o = 21.9466 # Bottom lowercase overshoot
+o-superness = 0.706854 # Superness, O bottom left
+o-superness = 0.705781 # Superness, O top left
+o-superness = 0.708013 # Superness, O bottom right
+o-superness = 0.705243 # Superness, O bottom right
+o-u = 59.072 # Unit based on o
+o-vair = 21.9618 # Lowercase vair (alt)
+o-vair_corr = 3.00177 # Lowercase vair_corr
+q-desc_depth = 194.013 # desc_depth
+r-flare = 91.8996 # Flare of tip
+s-ess = 74.771 # Lowercase ess
+t-bar = 30.96 # Bar thickness
+v-hair = 25.646 # Lowercase hair
+v-stem = 66.77 # Lowercase stem (thinned)
+v-tiny = 31.2033 # Curvature of v apex
+x-x_height = 430.999 # x_height

@@ -1,0 +1,459 @@
+#!/usr/bin/perl
+
+#
+# makefonts.pl
+#
+# Generates the fonts.
+#
+
+use fontparams qw(:all);
+
+$MFTRACE = "mftrace --potrace";
+
+$MAKEPARAMS = "./makeparams.pl";
+
+
+# Open the map file here.
+open MAP, "> $MF_PREFIX.map" or die "Open $MF_PREFIX.map: $!\n";
+
+#
+# Generate the roman metafont file.
+#
+
+print STDERR "Generating roman font...\n";
+&makefont($MF_PREFIX."r", $roman_mf, "-u", "romangreek");
+print STDERR "Done.\n";
+
+#
+# Generate the math italic metafont file.
+#
+
+print STDERR "Generating math italic font...";
+&makefont($MF_PREFIX."mi", $mathit_mf, "-l", "mathital");
+print STDERR "Done.\n";
+
+
+#
+# Generate the math symbol metafont file.
+#
+
+print STDERR "Generating math symbol font...";
+&makefont($MF_PREFIX."sy", $mathsy_mf, "-l", "texmsym");
+print STDERR "Done.\n";
+
+#
+# Generate the math symbol metafont file.
+#
+
+print STDERR "Generating math extension font...";
+&makefont($MF_PREFIX."ex", $mathex_mf, "-l", "texmext");
+print STDERR "Done.\n";
+
+close MAP;
+
+
+# The METAFONT programs for generating each of the fonts. The BEGIN block just
+# lets us stick this at the end so no one has to read them.
+BEGIN {
+$roman_mf = <<EOF;
+slant := 0; % No slant for uppercase Greek characters
+if ligs>1: font_coding_scheme:="TeX text";
+ spanish_shriek=oct"074"; spanish_query=oct"076";
+else: font_coding_scheme:=if ligs=0: "TeX typewriter text"
+  else: "TeX text without f-ligatures" fi;
+ spanish_shriek=oct"016"; spanish_query=oct"017"; fi
+
+mode_setup; font_setup;
+
+define_pixels(A_jut, A_jut_in, A_outer_bracket);
+
+% Rather than doing an input on greeku.mf, we put it here, because it's slightly
+% different.
+
+% Computer Modern Greek caps, analogous to the uppercase Roman letters.
+
+% Character codes \\0000 through \\0012 are generated,
+% using plain \\TeX's standard text font layout conventions.
+
+cmchar "Uppercase Greek Gamma";
+beginchar(oct"000",11u#-width_adj#,cap_height#,0);
+italcorr cap_height#*slant-beak_jut#-.25u#;
+adjust_fit(cap_serif_fit#,0);
+h:=vround(h-stem_corr);
+pickup tiny.nib; pos1(cap_stem,0); pos2(cap_stem,0);
+lft x1l=lft x2l=hround max(2u,3u-.5cap_stem); top y1=h; bot y2=0;
+filldraw stroke z1e--z2e; % stem
+pickup crisp.nib; pos3(slab,90); pos4(hair,0);
+top y3r=h; x3=x1; rt x4r=hround(w-.75u); y4=good.y(y3l-beak)-eps;
+arm(3,4,e,beak_darkness,beak_jut);  % arm and beak
+if serifs: nodish_serif(1,2,a,1/3,cap_jut,b,1/3,.5cap_jut);  % upper serif
+ dish_serif(2,1,c,1/3,cap_jut,d,1/3,1.25cap_jut); fi  % lower serif
+math_fit(0,ic#-2.5u#); penlabels(1,2,3,4); endchar;
+
+cmchar "Uppercase Greek Delta";
+beginchar(oct"001",15u#,cap_height#,0);
+adjust_fit(0,0);
+numeric left_stem,alpha;
+left_stem=cap_hair if hefty: -3stem_corr fi;
+x1l=w-x4r=.75u; y1=y4=0;
+x2-x1=x4-x3; x3r=x2r+apex_corr; y2=y3=h+apex_o+apex_oo;
+alpha=diag_ratio(2,left_stem,y2-y1,x4r-x1l-apex_corr);
+penpos1(alpha*left_stem,0); penpos2(alpha*left_stem,0);
+penpos3(alpha*cap_stem,0); penpos4(alpha*cap_stem,0);
+fill diag_end(2l,1l,1,1,4r,3r)--diag_end(4r,3r,1,1,2l,1l)--cycle;  % triangle
+z0=whatever[z1r,z2r]=whatever[z3l,z4l];
+y5=y6=cap_vstem; z5=whatever[z1r,z2r]; z6=whatever[z3l,z4l];
+if y0<h-cap_notch_cut: y0:=h-cap_notch_cut;
+ unfill z0+.5right{down}...{z4-z3}z6--z5{z2-z1}
+  ...{up}z0+.5left--cycle; % counter
+else: unfill z0--z5--z6--cycle; fi  % counter
+penlabels(0,1,2,3,4,5,6); endchar;
+
+cmchar "Uppercase Greek Theta";
+beginchar(oct"002",14u#,cap_height#,0);
+italcorr .7cap_height#*slant-.5u#;
+adjust_fit(0,0);
+numeric light_curve; light_curve=hround(cap_curve-2stem_corr);
+penpos1(vair,90); penpos3(vround(vair+.5vair_corr),-90);
+penpos2(light_curve,180); penpos4(light_curve,0);
+if monospace: x2r=hround 1.5u;
+ interim superness:=sqrt superness;  % make |"O"|, not |"0"|
+else: x2r=hround u; fi
+x4r=w-x2r; x1=x3=.5w; y1r=h+o; y2=y4=.5h-vair_corr; y3r=-o;
+penstroke pulled_super_arc.e(1,2)(.5superpull)
+ & pulled_super_arc.e(2,3)(.5superpull)
+ & pulled_super_arc.e(3,4)(.5superpull)
+ & pulled_super_arc.e(4,1)(.5superpull) & cycle;  % bowl
+pickup crisp.nib; pos5(cap_vstem,90); pos6(cap_vstem,90);
+lft x5=w-rt x6=hround(x2l+u)+1; y5=y6=.5[y1l,y3l];
+filldraw stroke z5e--z6e;  % bar
+if serifs: pos7(hair,0); pos8(hair,0); pos9(hair,0); pos10(hair,0);
+ x7l=x8l=x5; x9r=x10r=x6;
+ y7-y5r=y9-y6r=y5l-y8=y6l-y10=vround .05h;
+ filldraw stroke z7e--z8e;  % left serif
+ filldraw stroke z9e--z10e; fi  % right serif
+math_fit(-.3cap_height#*slant-.5u#,ic#-.5u#);
+penlabels(1,2,3,4,5,6,7,8,9,10); endchar;
+
+cmchar "Uppercase Greek Lambda";
+beginchar(oct"003",12u#,cap_height#,0);
+adjust_fit(cap_serif_fit#,cap_serif_fit#);
+numeric left_stem,outer_jut,alpha;
+left_stem=cap_hair if hefty: -3stem_corr fi;
+% HERE ARE MY CHANGES
+save cap_jut, bracket; numeric cap_jut,bracket;
+cap_jut := A_jut; bracket := A_outer_bracket;
+outer_jut=.7cap_jut; x1l=w-x4r=l+letter_fit+outer_jut+.5u; y1=y4=0;
+x2-x1=x4-x3; x3r=x2r+apex_corr; y2=y3=h+apex_o+apex_oo;
+alpha=diag_ratio(2,left_stem,y2-y1,x4r-x1l-apex_corr);
+penpos1(alpha*left_stem,0); penpos2(alpha*left_stem,0);
+penpos3(alpha*cap_stem,0); penpos4(alpha*cap_stem,0);
+z0=whatever[z1r,z2r]=whatever[z3l,z4l];
+if y0<h-cap_notch_cut: y0:=h-cap_notch_cut;
+  fill z0+.5right{down}...{z4-z3}diag_end(3l,4l,1,1,4r,3r)
+    --diag_end(4r,3r,1,1,2l,1l)--diag_end(2l,1l,1,1,1r,2r){z2-z1}
+    ...{up}z0+.5left--cycle; % left and right diagonals
+else: fill z0--diag_end(0,4l,1,1,4r,3r)--diag_end(4r,3r,1,1,2l,1l)
+    --diag_end(2l,1l,1,1,1r,0)--cycle; fi % left and right diagonals
+if serifs: numeric inner_jut; pickup tiny.nib;
+ prime_points_inside(1,2); prime_points_inside(4,3);
+% if rt x1'r+cap_jut+.5u+1<=lft x4'l-cap_jut: inner_jut=cap_jut;
+% else: rt x1'r+inner_jut+.5u+1=lft x4'l-inner_jut; fi
+ inner_jut := A_jut_in;
+%  dish_serif(1',2,a,1/2,outer_jut,b,.6,inner_jut)(dark);  % left serif
+ dish_serif(1',2,a,1/2,outer_jut,b,A_inner_dark,inner_jut)(dark);  % left serif
+%  dish_serif(4',3,c,1/2,inner_jut,d,1/3,outer_jut); fi  % right serif
+ dish_serif(4',3,c,A_inner_dark,inner_jut,d,1/3,outer_jut); fi  % right serif
+penlabels(0,1,2,3,4,5,6); endchar;
+
+cmchar "Uppercase Greek Xi";
+beginchar(oct"004",12u#,cap_height#,0);
+italcorr cap_height#*slant-.35u#;
+adjust_fit(0,0);
+h:=vround(h-2stem_corr);
+numeric shaved_stem; shaved_stem=hround .9[vair,.85cap_stem];
+if shaved_stem<crisp.breadth: shaved_stem:=crisp.breadth; fi
+pickup crisp.nib; pos1(shaved_stem,90); pos2(hair,0);
+top y1r=h; x1=.5w; rt x2r=hround(w-.85u); y2=good.y(y1l-4/9beak)-eps;
+arm(1,2,a,.4beak_darkness,.3beak_jut);  % upper right arm and beak
+pos3(hair,180); x3=w-x2; y3=y2;
+arm(1,3,b,.4beak_darkness,-.3beak_jut);  % upper left arm and beak
+pos4(shaved_stem,-90); pos5(hair,0);
+bot y4r=0; x4=.5w; rt x5r=hround(w-.75u); y5=good.y(y4l+.5beak)+eps;
+arm(4,5,c,.4beak_darkness,.3beak_jut);  % lower right arm and beak
+pos6(hair,180); x6=w-x5; y6=y5;
+arm(4,6,d,.4beak_darkness,-.3beak_jut);  % lower left arm and beak
+pos7(shaved_stem,90); pos8(shaved_stem,90);
+lft x7=w-rt x8=hround if serifs: 2.5 else: 2 fi\\ u;
+top y7r=top y8r=vround(.52h+.5shaved_stem);
+filldraw stroke z7e--z8e;  % middle bar
+if serifs: numeric xjut;
+ if bot y2>top y7r+.75cap_jut: xjut=.5cap_jut;
+ else: bot y2=top y7r+1.5xjut; fi
+ pos11(hair,0); pos12(hair,0); y11=y12;
+ pos13(hair,0); pos14(hair,0); y13=y14;
+ lft x11l=lft x13l=w-rt x12r=w-rt x14r=hround 2.5u;
+ top y11-bot y13=shaved_stem+2xjut; .5[y11,y13]=y7;
+ filldraw stroke z11e--z13e; filldraw stroke z12e--z14e; fi  % middle serifs
+math_fit(0,.5ic#); penlabels(1,2,3,4,5,6,7,8,11,12,13,14); endchar;
+
+cmchar "Uppercase Greek Pi";
+beginchar(oct"005",13u#+width_adj#,cap_height#,0);
+italcorr cap_height#*slant-cap_serif_fit#+cap_jut#-2.5u#+min(.5cap_stem#,u#);
+adjust_fit(cap_serif_fit#,cap_serif_fit#); pickup tiny.nib;
+h:=vround(h-stem_corr);
+pos1(cap_stem,0); pos2(cap_stem,0); pos3(cap_stem,0); pos4(cap_stem,0);
+lft x1l=lft x2l=hround max(2u,3u-.5cap_stem); x3=x4=w-x1;
+top y1=top y3=h; bot y2=bot y4=0;
+filldraw stroke z1e--z2e; % left stem
+filldraw stroke z3e--z4e; % right stem
+penpos5(cap_bar,90); penpos6(cap_bar,90);
+x5=x1; x6=x3; y5r=y6r=h;
+fill stroke z5e--z6e;  % bar
+if serifs: numeric inner_jut;
+ if rt x1r+cap_jut+.5u+1<=lft x3l-cap_jut: inner_jut=cap_jut;
+ else: rt x1r+inner_jut+.5u+1=lft x3l-inner_jut; fi
+ nodish_serif(1,2,a,1/3,cap_jut,b,1/3,eps);  % upper left serif
+ dish_serif(2,1,c,1/3,cap_jut,d,1/3,inner_jut); % lower left serif
+ nodish_serif(3,4,e,1/3,eps,f,1/3,cap_jut);  % upper right serif
+ dish_serif(4,3,g,1/3,inner_jut,h,1/3,cap_jut); fi  % lower right serif
+math_fit(0,.5ic#); penlabels(1,2,3,4,5,6); endchar;
+
+cmchar "Uppercase Greek Sigma";
+beginchar(oct"006",13u#,cap_height#,0);
+italcorr cap_height#*slant-beak_jut#-.5u#;
+adjust_fit(0,0);
+numeric bot_arm_thickness;
+bot_arm_thickness=Vround .25[slab,cap_vstem];
+pickup tiny.nib; lft x1l=hround u; x1l=x2l=x4l;
+top y1=h; bot y2=h-slab-eps; bot y4=0; x3l-x1l=4/11(w-2u); y3=.5h;
+numeric alpha[]; alpha1=((x3l-x1l)++(y2-y3))/(y2-y3);
+penpos1(alpha1*(cap_stem-tiny),0); penpos2(alpha1*(cap_stem-tiny),0);
+penpos3(alpha1*(cap_stem-tiny),0);
+alpha2=diag_ratio(1,cap_hair-tiny,y3-y4,x3r-x4l);
+penpos4(alpha2*(cap_hair-tiny),0);
+z0=whatever[z2l,z3l]=z4l+whatever*(z3r-z4r);
+filldraw z1l--z2l--z0--z4l--z4r--z3r--z2r--z1r--cycle;  % diagonals
+pickup crisp.nib; pos5(slab,90); pos6(hair,0);
+top y5r=h; x5=x1; rt x6r=hround(w-u); y6=good.y(y5l-beak)-eps;
+arm(5,6,a,beak_darkness,beak_jut);  % upper arm and beak
+pos7(bot_arm_thickness,-90); pos8(hair,0);
+bot y7r=0; z7l=whatever[z4,z3]; x7r:=x4; x8=x6; y8=good.y(y7l+beak)+eps;
+arm(7,8,b,beak_darkness,beak_jut);  % lower arm and beak
+math_fit(0,.5ic#); penlabels(0,1,2,3,4,5,6,7,8); endchar;
+
+cmchar "Uppercase Greek Upsilon";
+beginchar(oct"007",14u#,cap_height#,0);
+italcorr .8cap_height#*slant-.5u#;
+adjust_fit(0,0);
+pickup tiny.nib; pos1(cap_stem,0); pos2(cap_stem,0);
+lft x1l=lft x2l=hround(.5w-.5cap_stem); y1=.5h; bot y2=0;
+filldraw stroke z1e--z2e; % stem
+penpos3(.6cap_stem,0); penpos4(.75cap_curve,90); penpos5(cap_hair,180);
+z3l=lft z1l; x5r=hround u; y5=bot .8h; x4=.61803[x3l,x5l]; y4r=h+o;
+penpos5'(cap_hair,180); x5'=x5; y5'=h;
+fill z3r{up}...z4r{left}...{down}diag_end(5'r,5r,1,1,5l,5'l){up}
+ ...{right}z4l...{down}z3l--cycle;  % left arc
+penpos6(.6cap_stem,0); penpos7(.75cap_curve,-90); penpos8(cap_hair,-180);
+z6r=rt z1r; x8=w-x5; y8=y5; x7=w-x4; y7=y4;
+penpos8'(cap_hair,-180); x8'=x8; y8'=h;
+fill z6r{up}...z7r{right}...{down}diag_end(8'r,8r,1,1,8l,8'l){up}
+ ...{left}z7l...{down}z6l--cycle;  % right arc
+if serifs: dish_serif(2,1,a,1/3,1.25cap_jut,b,1/3,1.25cap_jut); fi  % serif
+math_fit(-.8cap_height#*slant-.5u#,ic#-2.5u#);
+penlabels(1,2,3,4,5,6,7,8); endchar;
+
+cmchar "Uppercase Greek Phi";
+beginchar(oct"010",13u#,cap_height#,0);
+italcorr .5cap_height#*slant-.5u#;
+adjust_fit(0,0);
+numeric shaved_stem,light_curve;
+shaved_stem=cap_stem-hround 2stem_corr;
+light_curve=cap_curve-hround stem_corr;
+pickup tiny.nib; pos1(shaved_stem,0); pos2(shaved_stem,0);
+lft x1l=lft x2l=hround(.5w-.5shaved_stem); top y1=h; bot y2=0;
+filldraw stroke z1e--z2e; % stem
+penpos3(vair,90); penpos5(vair,-90);
+penpos4(light_curve,180); penpos6(light_curve,0);
+x4r=hround u; x6r=w-x4r; x3=x5=.5w;
+y3r=vround(.85h if serifs:-slab fi); y4=y6=.5[y3,y5];
+y5r=vround(.15h if serifs:+slab fi);
+penstroke pulled_arc.e(3,4) & pulled_arc.e(4,5)
+ & pulled_arc.e(5,6) & pulled_arc.e(6,3) & cycle;  % bowl
+if serifs: dish_serif(1,2,a,1/3,1.25cap_jut,b,1/3,1.25cap_jut);  % upper serif
+ dish_serif(2,1,c,1/3,1.25cap_jut,d,1/3,1.25cap_jut); fi  % lower serif
+math_fit(-.5cap_height#*slant-.5u#,ic#); penlabels(1,2,3,4,5,6); endchar;
+
+cmchar "Uppercase Greek Psi";
+beginchar(oct"011",14u#,cap_height#,0);
+italcorr .8cap_height#*slant-.5u#;
+adjust_fit(0,0);
+numeric shaved_stem;
+shaved_stem=cap_stem-hround 2stem_corr;
+pickup tiny.nib; pos1(shaved_stem,0); pos2(shaved_stem,0);
+lft x1l=lft x2l=hround(.5w-.5shaved_stem); top y1=h; bot y2=0;
+filldraw stroke z1e--z2e; % stem
+pos3(shaved_stem,-180); pos4(shaved_stem,-180);
+pos5(vair,-90); x5=x1; bot y5r=vround(.15h if serifs:+slab fi);
+pos6(shaved_stem,0); pos7(shaved_stem,0);
+lft x3r=hround u; x7=w-x3; lft x4r=hround(3u-.5shaved_stem); x6=w-x4;
+pos3'(vair,90); pos7'(vair,90); z3'r=z3r; z7'r=z7r;
+y3=y7; y4=y6=.6h; y3=good.y(y3+.84h if serifs:-slab fi-y3');
+interim superness:=more_super;
+filldraw z3'l{right}...z4r{down} & super_arc.r(4,5)
+ & super_arc.r(5,6) & z6r{up}...z7'l{right}
+ --z7r---z7l...z6l{down} & super_arc.l(6,5)
+ & super_arc.l(5,4) & z4l{up}...z3l---z3r--cycle;  % stroke
+if serifs: dish_serif(1,2,a,1/3,1.25cap_jut,b,1/3,1.25cap_jut);  % upper serif
+ dish_serif(2,1,c,1/3,1.25cap_jut,d,1/3,1.25cap_jut); fi  % lower serif
+math_fit(-.8cap_height#*slant-.5u#,.4cap_height#*slant-1.25u#);
+penlabels(1,2,3,4,5,6,7); endchar;
+
+cmchar "Uppercase Greek Omega";
+beginchar(oct"012",13u#,cap_height#,0);
+italcorr .75cap_height#*slant-.5u#;
+adjust_fit(0,0);
+pickup tiny.nib; pos1(vair,90); pos2(cap_curve,180);
+pos3(vair,180); pos4(cap_curve,0); pos5(vair,0);
+x1=.5w; top y1r=h+o; lft x2r=hround u; y2=y4=2/3h; x4=w-x2;
+rt x3l=hround(1/3(w+.5u)+.5hair); bot y3=bot y5=0; x5=w-x3;
+filldraw stroke z3e{up}...{up}z2e
+ & pulled_super_arc.e(2,1)(.5superpull)
+ & pulled_super_arc.e(1,4)(.5superpull)
+ & z4e{down}...{down}z5e;  % bowl
+numeric arm_thickness; path p; p=z3{up}...{up}z2;
+arm_thickness=Vround(if hefty:slab+2stem_corr else:.75[slab,cap_vstem] fi);
+pickup crisp.nib; pos6(arm_thickness,-90); pos7(fudged.hair,-180);
+bot y6r=0; x6=x3; lft x7r=hround .8u; y7=good.y(y6l+.5beak)+eps;
+(x,y)=p intersectionpoint((0,y6l)--(w,y6l)); x6l:=x;
+arm(6,7,a,.5beak_darkness,-1.2beak_jut);  % left arm and beak
+pos8(arm_thickness,-90); pos9(fudged.hair,0);
+y8=y6; y9=y7; x8+x6=x9+x7=w; x8l:=w-x6l;
+arm(8,9,b,.5beak_darkness,1.2beak_jut);  % right arm and beak
+math_fit(0,.5ic#); penlabels(1,2,3,4,5,6,7,8,9); endchar;
+bye.
+
+EOF
+
+$mathit_mf = <<EOF;
+font_coding_scheme:="TeX math italic";
+mode_setup; font_setup;
+input greeku;  % upper case greek letters
+input greekl;  % lower case Greek letters
+input italms;  % special symbols for math italic
+font_slant slant;  font_x_height x_height#;
+font_quad 18u#+4letter_fit#;
+
+slant:=mono_charic#:=0;  % the remaining characters will not be slanted
+currenttransform:=identity yscaled aspect_ratio scaled granularity;
+
+input romms;  % roman math specials
+skewchar=oct"177"; skew#=.5u#;
+bye.
+
+EOF
+
+$mathsy_mf = <<EOF;
+% the following font parameters are explained in {\\sl The \\TeX book}, Appendix G
+subs:=7/10;  % subscripts to 10pt will normally be in 7pt type
+rth#:=.4pt#;  % assume that rules will come from cmex10
+fontdimen 8:  % parameters \$\\sigma_8$ through \$\sigma_{22}$ will now be listed
+ math_axis#+3.51rth#+54/36pt#+subs*desc_depth#,      % num1
+ math_axis#+1.51rth#+30/36pt#,          % num2
+ math_axis#+1.51rth#+48/36pt#,          % num3
+ -(math_axis#-3.51rth#-subs*fig_height#-124/36pt#),    % denom1
+ -(math_axis#-1.51rth#-subs*fig_height#-30/36pt#),    % denom2
+ 8.99pt#-subs*asc_height#,          % sup1
+ 8.49pt#-subs*asc_height#,          % sup2
+ 104/36pt#,              % sup3
+ 54/36pt#,              % sub1
+ -(8.49pt#-2subs*asc_height#-3.1rth#),        % sub2
+ subs*asc_height#-36/36pt#,          % sup\\_drop
+ 18/36pt#,              % sub\\_drop
+ 23.9pt#,              % delim1
+ 10.1pt#,              % delim2
+ math_axis#;              % axis\\_height
+
+font_coding_scheme:="TeX math symbols";
+mode_setup; font_setup;
+
+autorounding:=hair;
+input calu;  % upper case calligraphic alphabet
+autorounding:=0;
+
+font_slant slant; font_x_height x_height#;
+font_quad 18u# if not monospace:+4letter_fit# fi;
+
+slant:=mono_charic#:=0;  % the remaining characters will not be slanted
+currenttransform:=identity yscaled aspect_ratio scaled granularity;
+input symbol;  % the symbols
+
+if not monospace:
+ skewchar=oct"060"; skew#=.5u#;
+ ligtable "I": "T": "V": skewchar kern skew#;
+ ligtable "K": skewchar kern 2skew#;
+ ligtable "D": "N": "P": "R": "U": "W": "Y": skewchar kern 3skew#;
+ ligtable "E": "F": "G": "H": "O": "Q": skewchar kern 4skew#;
+ ligtable "B": "C": "L": "M": "S": "X": "Z": skewchar kern 5skew#;
+ ligtable "J": skewchar kern 6skew#;
+ ligtable "A": skewchar kern 7skew#;
+fi;
+bye.
+
+EOF
+
+
+$mathex_mf = <<EOF;
+fontdimen 8:  % parameters \$\\xi_8\$ through \$\\xi_{13}\$ will now be listed
+ rule_thickness#,  % default\\_rule\\_thickness
+ 40/36pt#,    % big\\_op\\_spacing1
+ 60/36pt#,    % big\\_op\\_spacing2
+ 72/36pt#,    % big\\_op\\_spacing3
+ 216/36pt#,    % big\\_op\\_spacing4
+ 36/36pt#;    % big\\_op\\_spacing5
+
+font_coding_scheme:="TeX math extension";
+mode_setup; font_setup;
+
+input bigdel;  % large delimiters
+input bigop;  % large operators
+input bigacc;  % large accents
+
+font_x_height x_height#;
+font_quad 18u#+4letter_fit#;
+% (The calling file should give the other math extension font parameters.)
+bye.
+
+EOF
+
+}
+
+sub makefont {
+    my ($fontname, $mfprog, $makeparopts, $encoding) = @_;
+    open MF, "> $fontname.mf" or die "open $fontname.mf: $!\n";
+
+    print MF "if unknown cmbase: input cmbase; fi\n";
+    print MF "font_identifier := \"$fontname\";\n";
+
+    open PARAMS, "$MAKEPARAMS $makeparopts |";
+    print MF while <PARAMS>;
+    close PARAMS;
+
+    print MF $mfprog;
+    close MF;
+    system "$MFTRACE --encoding=$encoding.enc $fontname.mf";
+
+    if (-f "$fontname.pfa") {
+	open PFA, "$fontname.pfa";
+	while (<PFA>) {
+	    if (/\/FontName\s+\/(\S+)\s+def\b/) {
+		print MAP "$fontname $1 <$fontname.pfa\n";
+		last;
+	    }
+	}
+	close PFA;
+    } else {
+	print STDERR "Warning: no PFA file generated, or could not open it.\n";
+    }
+}
+

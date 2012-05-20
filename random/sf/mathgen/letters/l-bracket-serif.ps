@@ -1,0 +1,27 @@
+%
+% l-bracket-alt.ps
+%
+0.5 vertSplitLine pathLineIntc sortByY firstElt /lBottomPoint defPoint
+0.5 horizSplitLine pathLineIntc sortByX lastElt /lRightPoint defPoint
+lBottomPoint pointbox
+lRightPoint rtpointbox
+
+{ lBottomPoint startAtPoint lRightPoint endAtPoint } traceSubpath
+{ pathExtremes } useSubpath sortByX lastElt /lRightJut defPoint
+lRightJut rtpointbox
+
+lRightPoint 0.2 scalePoint lRightJut 0.8 scalePoint addPoint
+vertLineThrough pathLineIntc sortByY 1 get /lSlabTop defPoint
+lSlabTop uppointbox
+
+lRightJut xcoor lSlabTop ycoor /lSlabCorner defPoint
+
+lRightPoint xcoor lSlabCorner ycoor /lCorner defPoint
+
+lSlabCorner uppointbox
+lCorner pointbox
+
+1 3 div lRightPoint lSlabCorner lCorner findBracket
+/lBracketPoint defPoint
+
+(Lowercase bracket \(alt\)) lBracketPoint ycoor stringOfText

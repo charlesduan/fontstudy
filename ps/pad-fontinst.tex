@@ -1,0 +1,25 @@
+\input fontinst.sty
+
+\def\zf{pad}
+\def\f{pad}
+\def\b{r}                  % Weight letter for name, either m or b
+\def\weightletter{m}       % Weight letter, either m or b
+
+\installfonts
+\installfamily{OT1}{\zf}{}
+\installfamily{OML}{\zf}{\skewchar\font=127}
+\installfamily{OMS}{\zf}{}
+\installfamily{OMX}{\zf}{}
+
+\installfont{\zf\b k7t}%
+	{padr8r,dotlessj,\zf r,latin}%
+	{ot1}{OT1}{\zf}{\weightletter}{n}{}
+\installfont{\zf\b k7m}%
+    {\zf mi,padri8r,dotlessj,mathit}%
+    {OML}{OML}{\zf}{\weightletter}{it}{}
+\installrawfont{\zf y7y}{\f sy}{OMS}{OMS}{\zf}{\weightletter}{n}{}
+\installrawfont{\zf y7y}{\f ex}{OMX}{OMX}{\zf}{\weightletter}{n}{}
+
+\endinstallfonts
+
+\bye

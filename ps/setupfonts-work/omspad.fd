@@ -1,0 +1,17 @@
+%Filename: omspad.fd
+%Created by: tex pad-fontinst
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{omspad.fd}
+   [2004/03/27 Fontinst v1.801 font definitions for OMS/pad.]
+
+\DeclareFontFamily{OMS}{pad}{}
+
+\DeclareFontShape{OMS}{pad}{m}{n}{
+   <-> padr7y
+}{}
+
+
+\endinput

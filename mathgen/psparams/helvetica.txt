@@ -1,0 +1,10 @@
+output_prefix: zmn
+output_dir: helvetica
+#font_file: none required
+optical_size:
+roman_name: Helvetica
+italic_name: Helvetica-Oblique
+roman_tfm: phvr8t
+italic_tfm: phvro8t
+sans_serif: yes
+square_ends: yes

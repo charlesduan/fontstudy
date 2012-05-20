@@ -1,0 +1,86 @@
+GNU Ghostscript 6.52 (2001-10-20)
+Copyright (C) 2001 artofcode LLC, Benicia, CA.  All rights reserved.
+This software comes with NO WARRANTY: see the file COPYING for details.
+Loading NimbusRomNo9L-Regu font from /usr/share/fonts/default/Type1/n021003l.pfb... 2417736 1049441 1622424 328620 0 done.
+Loading NimbusSanL-Regu font from /usr/share/fonts/default/Type1/n019003l.pfb... 2755936 1354322 1642520 336084 0 done.
+Loading Utopia-Regular font from /usr/share/fonts/default/ghostscript/putr.pfa... 2927804 1422719 1722904 399580 0 done.
+,-comma_depth = 141.0 # Comma depth
+.-dot_size = 126.0 # Dot size: 
+7-fig_height = 667.947 # fig_height
+=-math_axis = 249.987 # math_axis
+=-rule_thickness = 57.96 # Rule thickness
+A-A_inner_dark-serif = 0.412804 # Darkness of inner bracket
+A-A_jut-serif = 70.0999 # Jut of A
+A-A_jut_in-serif = 92.8836 # Inner jut of A
+A-A_outer_bracket-serif = 47.5829 # Outer bracket of A, adjusted for dark
+A-apex_corr = 29.1075 # Apex correction
+A-apex_o = 0.0 # Apex overshoot (A)
+A-cap_hair = 42.4363 # Uppercase hair
+A-u = 56.58 # Unit based on A
+C-superness = 0.751032 # Superness, C bottom left
+C-superpull = 0.0864677 # Superpull
+E-arm_slab = 35.04 # Arm thickness
+E-beak_darkness-serif = 0.403468 # Beak darkness
+E-beak_jut-serif = 0.0 # Beak jut
+E-beak_withbar-serif = 164.068 # Beak height
+E-cap_bar = 38.04 # Capital bar
+E-hair-serif = 33.9392 # Hair by beak thickness
+F-F_jut-serif = 89.9868 # Leftward jut of F
+H-H_jut-serif = 89.9867 # H outer jut
+H-cap_bar = 38.04 # H bar
+H-cap_serif_space = 124.987 # Sidebearing distance
+I-bracket-serif = 98.5896 # Lowercase bracket (alt)
+I-cap_height = 692.067 # cap_height
+I-cap_jut-serif = 85.7263 # Uppercase jut
+I-cap_stem = 99.0 # cap_stem
+I-crisp-serif = 2.13149e-06 # Crisp
+I-dish-serif = 0 # Dish
+I-slab-serif = 30.2657 # Serif thickness
+O-O_superness = 0.738209 # Superness, O bottom left
+O-O_superness = 0.738234 # Superness, O top left
+O-O_superness = 0.738192 # Superness, O bottom right
+O-O_superness = 0.73822 # Superness, O bottom right
+O-cap_curve-alt = 112.274 # Lowercase curve (alt)
+O-cap_curve = 112.206 # Lowercase curve
+O-o = 14.8782 # Top capital overshoot
+P-cap_curve = 108.088 # Curve
+S-cap_ess = 102.541 # Uppercase ess
+T-cap_bar = 35.04 # T bar
+V-cap_hair = 45.2476 # Uppercase hair
+V-cap_stem = 93.8488 # Uppercase stem (thinned)
+V-tiny = 0.000365132 # Curvature of v apex
+Y-cap_hair = 43.8112 # Uppercase hair
+[-body_height = 742.998 # Body height
+b-u = 61.2 # Unit based on b
+d-stem = 93.9598 # Lowercase stem
+Loading Utopia-Italic font from /usr/share/fonts/default/ghostscript/putri.pfa... 2967996 1465587 2084632 461006 0 done.
+i-slant-ital = 0.230868 # Italic angle
+k-bar_height = 260.967 # bar_height
+l-asc_height = 741.998 # asc_height
+l-bracket-serif = 87.2497 # Lowercase bracket (alt)
+l-crisp-serif = 9.89301e-08 # Crisp
+l-dish-serif = 0 # Dish
+l-serif_drop-ital = 23.9999 # Serif drop
+l-slab-serif = 30.0806 # Serif thickness
+l-stem = 93.96 # Lowercase stem
+m-monowidth = 0 # Monospace
+n-jut-serif = 74.9867 # Lowercase jut
+n-thin_join = 37.9757 # Thin join
+o-curve-alt = 104.213 # Lowercase curve (alt)
+o-curve = 104.197 # Lowercase curve
+o-o = 23.9467 # Bottom lowercase overshoot
+o-superness = 0.743781 # Superness, O bottom left
+o-superness = 0.743783 # Superness, O top left
+o-superness = 0.744788 # Superness, O bottom right
+o-superness = 0.74483 # Superness, O bottom right
+o-u = 63.872 # Unit based on o
+o-vair = 35.0413 # Lowercase vair (alt)
+o-vair_corr = 0 # Lowercase vair_corr
+q-desc_depth = 230.013 # desc_depth
+r-flare = 106.287 # Flare of tip
+s-ess = 92.1577 # Lowercase ess
+t-bar = 39.9601 # Bar thickness
+v-hair = 41.3568 # Lowercase hair
+v-stem = 85.9244 # Lowercase stem (thinned)
+v-tiny = 0.000443393 # Curvature of v apex
+x-x_height = 489.987 # x_height

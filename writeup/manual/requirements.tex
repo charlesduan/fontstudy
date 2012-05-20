@@ -1,0 +1,35 @@
+\sectionname{Required Programs}
+
+Several external programs are required to run the MathGen program.
+
+\paragraph{Perl.} The main scripts of the program are written in Perl.
+
+\paragraph{\TeX\ and \MF.} Naturally, the fonts are produced using \MF, and they are intended for use with \TeX. Additionally, the Computer Modern font sources are necessary. Any common installation of Te\TeX\ should suffice.
+
+\paragraph{GhostScript.} The measurement routines are all written in
+PostScript, so a PostScript interpreter is required to perform them.
+GhostScript is a free interpreter; alternatively, one could use Acrobat
+Distiller, or even a PostScript printer, to acquire the measurements (although
+the current setup of the system makes GhostScript the simplest option).
+
+\paragraph{Mftrace.} With the prevalence of electronic document distribution
+today, it is more mandatory than optional that the output of MathGen be
+compatible with electronic document systems such as the Adobe Portable Document
+Format. Bitmap fonts, such as those produced by \MF, are highly unsatisfactory
+for \ac{pdf} documents. Programs such as \TeX trace, mftrace, and MetaFog can
+convert \MF output to vectorized Type~1 fonts; mftrace is, in the author's
+opinion, the simplest free option available. Mftrace requires a program that
+can trace bitmaps into vector graphics; the program \emph{potrace} is
+recommended for producing the best output. Note that mftrace requires the Python
+interpreter; one useful improvement would be to port mftrace to Perl for
+language consistency.
+
+\paragraph{Fontinst.} This program, which comes as part of any standard \TeX\
+distribution, sets up the fonts for \LaTeX.
+
+\paragraph{Type~1 fonts.} The fonts must be in Type~1, rather than TrueType or
+OpenType, format. For other formats there are converters to Type~1 format (e.g.,
+FontForge, ttf2pt1). Type~1 fonts may come in an \ac{ASCII} text format or a
+binary format, usually named \ac{pfa} or \ac{pfb} depending on which. MathGen
+requires the file to be in \ac{ASCII} format; there are common and simple
+converters available (GhostScript includes one).

@@ -1,0 +1,15 @@
+%
+% V-hair.ps
+%
+0.5 horizSplitLine pathLineIntc
+sortByX 3 get loadArray
+2 copy pathAngle {
+    perpThroughPoint
+	resetIntc
+    pathLineIntc sortByX revArray
+    0 2 getinterval { 2 copy pointbox } forallPoint
+    subPoint magnitude
+    (Uppercase hair) exch stringOfText
+} {
+    pop pop
+} ifelse

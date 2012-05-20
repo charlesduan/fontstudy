@@ -1,0 +1,80 @@
+%!PS-Adobe-2.0
+
+%
+% bzintc.ps
+%
+% Intersection between a Bezier curve and a line.
+%
+% IMPLEMENTATION NOTE: while we could solve this problem systematically--the
+% cubic equation is solvable--the solution is over 2 pages long and takes about
+% a minute to derive for Mathematica. Instead, we derive it by picking out
+% segments from the Bezier curve and finding intersections via interpolation.
+%
+
+% Requires: bzfunc.ps intersect.ps
+
+
+% Takes curveto arguments (4 points) and two points defining a line segment for
+% intersection.
+/curvetoIntc {
+    10 dict begin
+	% Collect up the first four args, the line segment point
+	4 packedarray cvx /LineSegment exch def
+	% Collect up the next 8 args, the curve definition points
+	8 packedarray cvx /CurvePoints exch def
+	% Counter for how many intersections we've found. The tryCurveIntc
+	% function will leave the points on the stack.
+	/NumPoints 0 def
+	/ThisDict currentdict def
+	/AddPoint {
+	    ThisDict dup /NumPoints get 1 add /NumPoints exch put
+	} bind def
+	/RecursiveDepth 0 def
+	0 0.05 1 tryCurveIntc
+	NumPoints
+    end
+} def
+
+% Helper function for rcurvetoIntc. Assumes /LineSegment and /CurvePoints to
+% exist in some dictionary. Takes for-like arguments (init, delta, final) on the
+% stack, iterates over them, and searches for intersection points.
+% init delta final -- points
+/tryCurveIntc {
+    4 dict begin
+	/RecursiveDepth RecursiveDepth 1 add def
+	exch dup /Delta exch def exch
+	3 copy exch 2 div add exch	% i d f f+d/2 i
+	dup /LastT exch def		% Save i to lastT
+	CurvePoints 9 -1 roll curvetoPoint
+	2 packedarray cvx /LastPoint exch def % Using initial, get Bezier point
+	exch pop	% Kill original final; use augmented one
+	{	% Begin for loop
+	    dup						% t t
+	    CurvePoints 9 -1 roll curvetoPoint		% t x y
+	    2 copy LastPoint LineSegment intersect {	% t x y x-intc y-intc
+		% If we found an intersection
+		2 copy LastPoint 0.1 eqPoint RecursiveDepth 1000 gt or {
+		    % If the point happens to be close enough to LastPoint, then
+		    % we'll consider it good.
+		    AddPoint
+		    5 2 roll
+		} {
+		    % If they're too far apart, then we're in trouble. Using
+		    % LastT and T, we'll recursively call this function.
+		    pop pop			% t x y
+		    3 -1 roll dup 4 2 roll	% t t x y
+		    % Save off t, x, y, so whatever recursive tryCurveIntc does,
+		    % we can replace our old values at the top of the stack.
+		    3 packedarray cvx /Save exch def
+		    LastT exch 2 copy 		% LastT t LastT t
+		    exch sub 5 div		% LastT t (t-LastT)/5
+		    exch
+		    tryCurveIntc
+		    Save
+		} ifelse
+	    } if					% t x y
+	    2 packedarray cvx /LastPoint exch def
+	    /LastT exch def
+	} for
+    end
+} def

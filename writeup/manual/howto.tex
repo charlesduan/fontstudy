@@ -1,0 +1,109 @@
+\sectionname{How to Make a Font}
+
+Assuming that all of the required programs are installed properly and in the
+visible path, the generation of the math fonts proceeds simply as follows.
+
+\paragraph{Install the text fonts.} Using fontinst, set up the desired font as a
+text font. There are substantial references and manuals on doing this. Upon
+doing this, \emph{take note of the names of these files:}
+\begin{itemize}
+\item The name of the \ac{TFM} file for the Roman (normal text) font
+\item The name of the \ac{TFM} file for the Italic font
+\item The name of the \ac{PFA/PFB} files for the Roman and Italic fonts
+\end{itemize}
+For example, the file names for Times New Roman would be \emph{ptmr8t} (roman
+text font), \emph{ptmri8t} (italic text font), and no \ac{PFA/PFB} fonts, since
+Times is built into standard printers.
+
+\paragraph{Decompress the MathGen files.} Then enter the top-level directory
+named \emph{mathgen}.
+
+\paragraph{Bring over the necessary font files.} While in the \emph{mathgen}
+directory, the \ac{TFM} files must be visible. To test this, type:
+\begin{center}
+kpsewhich [\ac{tfm} file]
+\end{center}
+If this prints out a "file not found" or other such error, then you may wish to
+make sure that you have located the proper file and that it is installed
+properly.
+
+The \ac{PFA} files for the fonts must also be present in the \emph{mathgen}
+directory or otherwise available.
+
+\paragraph{Set up the \emph{fontparams.txt} file.} This file contains
+information on the fonts to analyze and generate. It is a simple key-value file,
+with keys separated from values by colons. The following keys are needed:
+\begin{description}
+\item[font\_file] The name of the \ac{pfa} file. If there are two or more files
+necessary, this key may be entered as many times as necessary (but with only one
+font per line). The file name must end in ``.pfa,''; otherwise MathGen will not
+believe that it is a \ac{PFA} file.
+\item[optical\_size] An optional suffix for the generated fonts. Usually this
+should be left blank or not present; it is useful for distinguishing optical
+variants of the font.
+\item[output\_prefix] A short (3-letter) name for the math fonts. Usually they
+should start with a ``z'' to distinguish the math fonts as ``user-defined.''
+\item[roman\_name] The PostScript name for the roman variant of the font. This
+can be found by reading the \ac{pfa} file. There should be a line like:
+\begin{center}/FontName /[the name] def\end{center}
+That name (without the leading slash) should be entered.
+\item[italic\_name] The PostScript name for the italic variant. If, for some
+reason, you want upright math characters, you can make this the same as the
+\emph{roman\_name} value.
+\item[roman\_tfm] The \ac{tfm} file for the roman variant of the font.
+\item[italic\_tfm] The \ac{tfm} file for the italic variant of the font.
+\item[sans\_serif] Is the font sans serif? Serifs are the small protrusions at
+the terminal ends of letters such as ``A,'' ``I,'' and ''l.'' If serifs are
+present on the font, enter ``yes''; otherwise enter ``no.'' Note that
+\emph{slight} flares at the ends of letters do not count as serifs. (One way of
+determining whether a font is sans serif is entering the value ``no''; if the
+measurement routines generate errors, then change it to ``yes.'')
+\item[square\_ends] Should the terminals of letters be squared or rounded off?
+This affects the way that several of the characters look; it may be worthwhile
+trying both ``yes'' and ``no.'' In general, sans serif fonts should have square
+ends, and serif fonts should not.
+\item[set\_param] Allows you to force a parameter to a certain value (which
+should be in the units of the PostScript file, \emph{not} of the resulting \MF\
+parameters). In general, this should not be used. One special case of this
+directive is to set the \emph{no\_flare} parameter to 1; this will force the
+\emph{flare} parameter to be equal to the stem width. Because the flares at the
+ends of letters is an odd characteristic of fonts, it is very difficult to
+measure reasonable values for the \emph{flare} parameter.
+\end{description}
+Comments may be included in the file, preceded by a hash mark (\#). Several
+examples of valid fontparams.txt files are included.
+
+\paragraph{Generate the PostScript file for measurements.} Running the script
+\emph{./joinlibs.pl} will combine the specified font files, the font names, and
+the PostScript routines in the \emph{letters} and \emph{libs} directories into a
+single PostScript file \emph{output.ps}. This file may then be viewed with
+GhostScript and even printed to a PostScript printer or distilled to PDF for
+viewing.
+
+\paragraph{Acquire the raw parameter measurements.} Running the script
+\emph{./rawparams.pl} will run GhostScript on the \emph{output.ps} file and
+extract the parameter values to a file \emph{out.txt}. If some of the
+measurements appear wrong, that file may be modified.
+
+It is possible that errors will come up in executing the routines. There are
+several possible causes:
+\begin{itemize}
+\item The font is a sans serif font, but it was denoted in \emph{fontparams.txt}
+as a serif font.
+\item The font is irregular and has violated an assumption of the measurement
+routines. MathGen is not designed for unusual display fonts; in such cases
+automated parameter measurement may be impossible, so they must be done by hand.
+\item There is a bug in the measurement routines. Rounding errors can cause
+plenty of problems; in these cases you could try debugging the PostScript
+libraries yourself or you can e-mail the font files to the author of the
+program.
+\end{itemize}
+In any case, MathGen has been tested extensively on many different fonts, so it
+is unlikely that errors should show up.
+
+\paragraph{Make the new fonts.} The script \emph{makefonts.pl} will take the
+parameter measurements and generate the fonts. This program will produce a great
+deal of output, but as long as it terminates without errors, everything should
+be ready.
+
+

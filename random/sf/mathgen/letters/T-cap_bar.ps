@@ -1,0 +1,19 @@
+%
+% T-bar.ps
+%
+0.2 horizSplitLine pathLineIntc sortByX 0 2 getinterval loadArray
+/TStemRight defPoint /TStemLeft defPoint
+TStemRight pointbox TStemLeft pointbox
+
+{
+    TStemRight startAtPoint
+    { dup 0 eq exch 270 gt or } endWhenAngle
+} traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath sortByY lastElt /TRightBarBot defPoint
+TRightBarBot pointbox
+
+TRightBarBot vertLineThrough pathLineIntc sortByY lastElt /TRightBarTop defPoint
+TRightBarTop uppointbox
+
+(T bar) TRightBarTop ycoor TRightBarBot ycoor sub stringOfText

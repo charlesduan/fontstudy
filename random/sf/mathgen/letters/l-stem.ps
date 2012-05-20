@@ -1,0 +1,8 @@
+%
+% l-stem.ps
+%
+0.5 horizSplitLine pathLineIntc sortByX
+{ 2 copy pointbox } forallPoint
+/lStemRight defPoint /lStemLeft defPoint
+lStemRight lStemLeft subPoint magnitude
+(Lowercase stem) exch stringOfText

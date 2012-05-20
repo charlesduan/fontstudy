@@ -1,0 +1,54 @@
+%
+% r-flare.ps
+%
+% Flare of tip of lowercase "r".
+%
+
+% The old algorithm wasn't robust enough.
+%flattenpath
+%0.3 horizSplitLine pathLineIntc sortByX lastElt /rStemRight defPoint
+%rStemRight pointbox
+%{ rStemRight startAtPoint { 270 gt } endWhenAngle } traceSubpath
+%subpathEndpoint /rInnerCurveTop defPoint
+%{ rInnerCurveTop startAtPoint { 90 lt } endWhenAngle } traceSubpath
+%drawSubpath
+%{ pathExtremes } useSubpath sortByY firstElt /rFlareBot defPoint
+%rFlareBot pointbox
+%rFlareBot vertLineThrough pathLineIntc sortByY lastElt /rFlareTop defPoint
+%rFlareTop uppointbox
+%
+%(Flare of tip)
+%rFlareTop ycoor rFlareBot ycoor sub
+%stringOfText
+
+0.3 horizSplitLine pathLineIntc sortByX 1 get /rStemRight defPoint
+rStemRight xcoor 20 add /rArcLeft exch def
+
+pathExtremes sortByY lastElt /rTopPoint defPoint
+
+{ rStemRight startAtPoint rTopPoint endAtPoint } traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath sortByX lastElt xcoor 5 sub /rArcRight exch def
+
+/rFlareBBox { rArcLeft pathLL ycoor rArcRight pathUR ycoor } def
+
+mark
+rArcLeft
+rArcRight rArcLeft sub 20 div
+/rFlare 0 def
+rArcRight {
+    0 vertLineThrough pathLineIntc sortByY lastElt /rTopPt defPoint
+    rFlareBBox rTopPt rTopPt pathAngle pop 90 add boundedLine
+    pathLineIntc sortByY revArray
+    dup length 2 ge {
+	0 2 getinterval loadArray /pt1 defPoint /pt2 defPoint
+	    pt1 pointbox pt2 pointbox
+	pt1 pt2 subPoint magnitude
+	dup rFlare gt {
+	    /rFlare exch def
+	} if
+    } if
+} for
+cleartomark
+
+(Flare of tip) rFlare stringOfText

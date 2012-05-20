@@ -1,0 +1,10 @@
+output_prefix: zmn
+output_dir: palatino
+#font_file: none required
+optical_size:
+roman_name: Palatino-Roman
+italic_name: Palatino-Italic
+roman_tfm: pplr8t
+italic_tfm: pplri8t
+sans_serif: no
+square_ends: yes

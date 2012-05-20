@@ -1,0 +1,29 @@
+%!PS
+%%BoundingBox: 55 -20 335 684 
+%%Creator: MetaPost
+%%CreationDate: 2004.06.13:1454
+%%Pages: 1
+%%EndProlog
+%%Page: 1 1
+% MF2PT1: bbox 0 0 392 684
+% MF2PT1: font_size 10
+% MF2PT1: font_slant 0
+% MF2PT1: font_identifier zmnmi
+% MF2PT1: font_coding_scheme TeX math italic
+% MF2PT1: font_fixed_pitch 0
+newpath 55.71292 -19.94632 moveto
+90.10931 -19.94632 lineto
+217.74689 67.33769 334.27763 184.93416 334.27763 337.52077 curveto
+334.27763 417.98062 282.82762 491.27188 207.29158 491.27188 curveto
+162.64862 491.27188 119.01065 477.55545 90.10931 452.44728 curveto
+90.10931 683.99846 lineto
+55.71292 683.99846 lineto
+ closepath fill
+ 1 setgray
+newpath 90.10928 379.96985 moveto
+90.10928 423.04938 135.38275 448.67613 182.69897 448.67613 curveto
+228.76787 448.67613 240.72594 391.06395 240.72594 337.52077 curveto
+240.72594 215.20207 171.65485 110.4285 90.10931 17.79878 curveto
+ closepath fill
+showpage
+%%EOF

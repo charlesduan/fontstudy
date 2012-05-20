@@ -1,0 +1,10 @@
+%
+% l-serifjut.ps
+%
+0.5 horizSplitLine pathLineIntc sortByX firstElt
+/lStemLeft defPoint
+
+pathExtremes sortByX firstElt /lJutLeft defPoint
+
+lStemLeft xcoor lJutLeft xcoor sub
+(Lowercase jut) exch stringOfText

@@ -1,0 +1,12 @@
+%
+% m-u.ps
+%
+% Unit is 1/15 width of "m".
+%
+gsave
+newpath 0 0 moveto 0 300 lineto stroke
+(m) stringwidth pop /mWidth exch def
+mWidth 0 moveto 0 300 rlineto stroke
+grestore
+(Unit based on m) mWidth 15 div stringOfText
+

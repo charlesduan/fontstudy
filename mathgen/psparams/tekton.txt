@@ -1,0 +1,12 @@
+output_prefix: zmn
+output_dir: tekton
+font_file: Tekton.pfb
+font_file: TektonOb.pfb
+optical_size:
+roman_name: Tekton
+italic_name: Tekton-Oblique
+roman_tfm: ptkr8t
+italic_tfm: ptkro8t
+sans_serif: yes
+square_ends: no
+set_param: no_flare=1

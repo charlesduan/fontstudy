@@ -1,0 +1,132 @@
+%!PS-Adobe-2.0
+
+%
+% angles.ps
+%
+% Fun tricks for curve segments and angles.
+%
+
+% Requires: functions.ps points.ps
+
+% Given two points, finds the angle in degrees from the horizontal of the line
+% defined ending at the first point.
+% x1 y1 x2 y2 -- angle of vector from (x1,y1) to (x2, y2)
+/lineAngle {
+    4 2 roll subPoint exch atan
+} bind def
+
+% Given a curveto (8 arguments), get the starting angle. This will be the
+% direction the curve starts out traveling.
+/curveStartAngle {
+    pop pop pop pop
+    lineAngle
+} def
+
+% Given a curveto (8 arguments), get the ending angle. This will be the
+% direction the curve would continue to travel in if it didn't stop.
+/curveEndAngle {
+    lineAngle 5 1 roll
+    pop pop pop pop
+} def
+
+% Takes two points p and q and an angle theta. Pretend that an angle was drawn
+% with a circular pen of radius r. If the pen had zero radius, then the path
+% would have angled at p with an angle of theta. But because the radius is
+% greater than zero, the "angle" occurs at point q. This function will return
+% the diameter 2*r.
+%            /
+%           /*
+%          / |
+%         /  `.   ..*|
+%        /    q.-^   | r
+%       /       \.   |
+%      /theta     ^*.|
+%     p----------------
+%
+/penDiameter {
+    2 div sin 5 1 roll subPoint magnitude	% sin(theta/2) l
+    1 index mul exch				% l*sin sin
+    1 exch sub div				% l*sin / (1-sin) = r
+    2 mul
+} def
+
+%
+% Given a box, defined by lower left and upper right points, and a point and an
+% angle, draw the line that fits in the bounding box, goes through that point,
+% and travels at that angle.
+%
+% +------------------+
+% | \                |
+% |  \               |
+% |   \ theta        |
+% |    p-------      |
+% |     \            |
+% |      \           |
+% |       \          |
+% +------------------+
+%
+/boundedLine {
+    6 dict begin
+	{ dup 0 ge { exit } if 180 add } loop
+	{ dup 180 lt { exit } if 180 sub } loop
+	/Theta exch def
+	/Point defPoint
+	% If the angle is over 90 degrees, swap left and right for convenience
+	2 seppairs 2 copy max /BoxTop exch def min /BoxBot exch def
+	2 copy max /BoxRt exch def min /BoxLft exch def
+	% First, the upper intersection point.
+	% Degenerate cases: point is on top of box and angle is horizontal
+	Point ycoor BoxTop eq
+	% Point is on side of box and angle is vertical
+	90 Theta eq Point xcoor BoxRt eq Point xcoor BoxLft eq or and
+	or {
+	    Point
+	} {
+	    Point BoxRt BoxTop lineAngle Theta ge {
+		BoxRt Point xcoor sub % horizontal distance
+		dup Theta sin mul Theta cos div % vertical distance
+		Point addPoint
+	    } {
+		Point BoxLft BoxTop lineAngle Theta ge {
+		    BoxTop Point ycoor sub
+		    dup Theta cos mul Theta sin div
+		    exch Point addPoint
+		} {
+		    BoxLft Point xcoor sub % horizontal distance
+		    dup Theta sin mul Theta cos div % vertical distance
+		    Point addPoint
+		} ifelse
+	    } ifelse
+	} ifelse
+	% Lower point.
+	% Degenerate cases: point is on top of box and angle is horizontal
+	Point ycoor BoxBot eq
+	% Point is on side of box and angle is vertical
+	90 Theta eq Point xcoor BoxLft eq Point xcoor BoxRt eq or and
+	or {
+	    Point
+	} {
+	    /Theta Theta 180 add def
+	    Point BoxLft BoxBot lineAngle Theta ge {
+		BoxLft Point xcoor sub % horizontal distance
+		dup Theta sin mul Theta cos div % vertical distance
+		Point addPoint
+	    } {
+		Point BoxRt BoxBot lineAngle Theta ge {
+		    BoxBot Point ycoor sub
+		    dup Theta cos mul Theta sin div
+		    exch Point addPoint
+		} {
+		    BoxRt Point xcoor sub % horizontal distance
+		    dup Theta sin mul Theta cos div % vertical distance
+		    Point addPoint
+		} ifelse
+	    } ifelse
+	} ifelse
+    end
+} def
+
+% Line bounded by the current path's bounding box. Takes a point and an angle.
+/bboxLine {
+    pathbbox 5 5 addPoint 4 2 roll 5 5 subPoint 4 2 roll 7 4 roll boundedLine
+} def

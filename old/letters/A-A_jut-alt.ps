@@ -1,0 +1,22 @@
+%
+% A-A_jut.ps
+%
+pathExtremes sortByX lastElt /ASerif defPoint
+ASerif pointbox
+
+0.7 horizSplitLine pathLineIntc sortByX lastElt /ATop defPoint
+ATop pointbox
+0.3 horizSplitLine pathLineIntc sortByX lastElt /ABot defPoint
+ABot pointbox
+
+% Line parallel to edge of A
+ABot ATop subPoint 4 scalePoint ATop addPoint ATop
+drawLine
+
+ASerif horizLineThrough drawLine
+
+intersect pop /ANoSerif defPoint
+ANoSerif pointbox
+
+ANoSerif ASerif subPoint magnitude 0.7 div
+(Jut of A, scaled by 1/0.7) exch stringOfText

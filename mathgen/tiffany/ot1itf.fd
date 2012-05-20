@@ -1,0 +1,29 @@
+%Filename: ot1itf.fd
+%Created by: tex texput
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{ot1itf.fd}
+   [2004/04/20 Fontinst v1.801 font definitions for OT1/itf.]
+
+\DeclareFontFamily{OT1}{itf}{}
+
+\DeclareFontShape{OT1}{itf}{m}{n}{
+   <-> itfr7t
+}{}
+
+\DeclareFontShape{OT1}{itf}{m}{sc}{
+   <-> itfrc7t
+}{}
+
+\DeclareFontShape{OT1}{itf}{m}{sl}{
+   <-> itfro7t
+}{}
+
+\DeclareFontShape{OT1}{itf}{m}{it}{
+   <-> itfri7t
+}{}
+
+
+\endinput

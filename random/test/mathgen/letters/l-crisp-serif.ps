@@ -1,0 +1,27 @@
+%
+% l-crisp.ps
+%
+pathExtremes sortByY firstElt /lLowestPoint defPoint
+
+0.5 vertSplitLine pathLineIntc sortByY firstElt /lBottomPoint defPoint
+0.5 horizSplitLine pathLineIntc sortByX lastElt /lRightPoint defPoint
+
+{
+    lBottomPoint startAtPoint
+    lRightPoint endAtPoint
+} traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByX lastElt /lRightSlab defPoint
+lRightSlab rtpointbox
+
+lRightSlab vertLineThrough drawLine
+lLowestPoint horizLineThrough drawLine
+intersect pop /lCrispOuter defPoint
+lCrispOuter 45 perpThroughPoint pathLineIntc sortByY firstElt
+/lCrispPoint defPoint
+
+% The distance between lCrispOuter and lCrispPoint = crisp * (sqrt(2) - 1).
+lCrispOuter lCrispPoint subPoint magnitude
+2 sqrt 1 sub div 2 mul 0 max
+(Crisp) exch stringOfText

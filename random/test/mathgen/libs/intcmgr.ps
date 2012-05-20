@@ -1,0 +1,72 @@
+%!PS-Adobe-2.0
+
+%
+% intcmgr.ps
+%
+% Manages intersections between a line and various curves.
+%
+
+% Requires: intersect.ps bzintc.ps functions.ps
+
+10 dict begin
+
+    % Place where points will be stored.
+    /pointList [ ] def
+
+    /addPoint {
+	[ 3 1 roll ] [ exch pointList aload pop ] /pointList exch def
+    } def
+
+    % Line to check for intersections.
+    %/intcLine { 0 0 0 0 } def
+
+currentdict
+end
+/IntersectDict exch def
+
+% Resets the intersection manager.
+/resetIntc {
+    IntersectDict begin
+	/pointList [ ] def
+    end
+} def
+
+% Sets the line to test against other points.
+/setIntcLine {
+    IntersectDict begin
+	4 packedarray cvx /intcLine exch def
+    end
+} def
+
+% Basically performs "intersect", but saves the result value.
+/intcLines {
+    IntersectDict begin
+	intcLine intersect {
+	    addPoint
+	} if
+    end
+} def
+
+% Performs curvetoIntc, calculates the actual intersection point, and saves the
+% result.
+/intcCurve {
+    IntersectDict begin
+	intcLine curvetoIntc -1 1 {
+	    pop addPoint
+	} for
+    end
+} def
+
+% Iterates over the points collected.
+/intcForall {
+    IntersectDict /pointList get exch forallPoint
+} def
+
+% Shows the intersection line (without messing up the path)
+/showIntcLine {
+    IntersectDict begin
+    gsave
+	newpath intcLine moveto lineto stroke
+    grestore
+    end
+} def

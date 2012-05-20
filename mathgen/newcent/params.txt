@@ -1,0 +1,86 @@
+GNU Ghostscript 6.52 (2001-10-20)
+Copyright (C) 2001 artofcode LLC, Benicia, CA.  All rights reserved.
+This software comes with NO WARRANTY: see the file COPYING for details.
+Loading NimbusRomNo9L-Regu font from /usr/share/fonts/default/Type1/n021003l.pfb... 2417736 1049441 1622424 328620 0 done.
+Loading NimbusSanL-Regu font from /usr/share/fonts/default/Type1/n019003l.pfb... 2755936 1354322 1642520 336084 0 done.
+Loading CenturySchL-Roma font from /usr/share/fonts/default/Type1/c059013l.pfb... 3030376 1528590 1722904 399410 0 done.
+,-comma_depth = 183.0 # Comma depth
+.-dot_size = 125.0 # Dot size: 
+7-fig_height = 703.998 # fig_height
+=-math_axis = 252.987 # math_axis
+=-rule_thickness = 80.04 # Rule thickness
+A-A_inner_dark-serif = 0.52785 # Darkness of inner bracket
+A-A_jut-serif = 53.6447 # Jut of A
+A-A_jut_in-serif = 129.088 # Inner jut of A
+A-A_outer_bracket-serif = 80.7946 # Outer bracket of A, adjusted for dark
+A-apex_corr = -15.8929 # Apex correction
+A-apex_o = 9.25212 # Apex overshoot (A)
+A-cap_hair = 53.9203 # Uppercase hair
+A-u = 61.5832 # Unit based on A
+C-superness = 0.718537 # Superness, C bottom left
+C-superpull = 0.132163 # Superpull
+E-arm_slab = 47.0401 # Arm thickness
+E-beak_darkness-serif = 0.462873 # Beak darkness
+E-beak_jut-serif = 14.0001 # Beak jut
+E-beak_withbar-serif = 256.068 # Beak height
+E-cap_bar = 47.0399 # Capital bar
+E-hair-serif = 48.8876 # Hair by beak thickness
+F-F_jut-serif = 107.987 # Leftward jut of F
+H-H_jut-serif = 107.987 # H outer jut
+H-cap_bar = 54.0001 # H bar
+H-cap_serif_space = 136.987 # Sidebearing distance
+I-bracket-serif = 83.4834 # Lowercase bracket (alt)
+I-cap_height = 722.067 # cap_height
+I-cap_jut-serif = 103.821 # Uppercase jut
+I-cap_stem = 111.96 # cap_stem
+I-crisp-serif = 9.89301e-08 # Crisp
+I-dish-serif = 0 # Dish
+I-slab-serif = 47.041 # Serif thickness
+O-O_superness = 0.712794 # Superness, O bottom left
+O-O_superness = 0.715383 # Superness, O top left
+O-O_superness = 0.713538 # Superness, O bottom right
+O-O_superness = 0.71161 # Superness, O bottom right
+O-cap_curve-alt = 132.0 # Lowercase curve (alt)
+O-cap_curve = 132.0 # Lowercase curve
+O-o = 14.8782 # Top capital overshoot
+P-cap_curve = 123.023 # Curve
+S-cap_ess = 119.286 # Uppercase ess
+T-cap_bar = 47.04 # T bar
+V-cap_hair = 53.8068 # Uppercase hair
+V-cap_stem = 111.598 # Uppercase stem (thinned)
+V-tiny = 1.83435e-05 # Curvature of v apex
+Y-cap_hair = 52.3848 # Uppercase hair
+[-body_height = 737.998 # Body height
+b-u = 57.872 # Unit based on b
+d-stem = 94.9516 # Lowercase stem
+Loading CenturySchL-Ital font from /usr/share/fonts/default/Type1/c059033l.pfb... 3187712 1626723 1823384 401855 0 done.
+i-slant-ital = 0.267949 # Italic angle
+k-bar_height = 239.999 # bar_height
+l-asc_height = 736.998 # asc_height
+l-bracket-serif = 85.9998 # Lowercase bracket (alt)
+l-crisp-serif = 1.11521e-06 # Crisp
+l-dish-serif = 0 # Dish
+l-serif_drop-ital = 14.9999 # Serif drop
+l-slab-serif = 36.0591 # Serif thickness
+l-stem = 93.96 # Lowercase stem
+m-monowidth = 0 # Monospace
+n-jut-serif = 79.0268 # Lowercase jut
+n-thin_join = 36.2224 # Thin join
+o-curve-alt = 105.0 # Lowercase curve (alt)
+o-curve = 104.999 # Lowercase curve
+o-o = 29.9466 # Bottom lowercase overshoot
+o-superness = 0.70817 # Superness, O bottom left
+o-superness = 0.710366 # Superness, O top left
+o-superness = 0.708481 # Superness, O bottom right
+o-superness = 0.706972 # Superness, O bottom right
+o-u = 57.6 # Unit based on o
+o-vair = 42.9626 # Lowercase vair (alt)
+o-vair_corr = 0.00244141 # Lowercase vair_corr
+q-desc_depth = 202.053 # desc_depth
+r-flare = 144.709 # Flare of tip
+s-ess = 97.2768 # Lowercase ess
+t-bar = 42.9602 # Bar thickness
+v-hair = 46.3436 # Lowercase hair
+v-stem = 90.8879 # Lowercase stem (thinned)
+v-tiny = 0.000500857 # Curvature of v apex
+x-x_height = 465.987 # x_height

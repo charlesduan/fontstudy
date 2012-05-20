@@ -1,0 +1,285 @@
+%!PS-Adobe-2.0
+
+%
+% subpath.ps
+%
+% Produces subpaths based on starting and ending conditions.
+%
+
+% Requires: angles.ps pointintc.ps
+
+
+% Makes a subpath, as a user path.
+/traceSubpath {
+    20 dict begin	% Save the starting X and Y; also makes hooks local
+    /moveto { /moveto cvx } def
+    /lineto { /lineto cvx } def
+    /curveto { /curveto cvx } def
+    /closepath { /closepath cvx } def
+    % Execute the initialization hook, which should be at the top of the stack.
+    exec
+    [
+    pathbbox 100 100 addPoint 4 2 roll 100 100 subPoint 4 2 roll /setbbox cvx
+    % Each partial path segment in the path must be traced independently. Guess
+    % that there are at most 100 segments in any path.
+    1 1 100 {
+	/segmentToTrace exch def
+	/inSubpath false def
+	1 1 2 {
+	    /currentSegment 1 def
+	    pop	% Get rid of the for argument
+	    /ignoreCycle segmentToTrace currentSegment ne def
+
+	    {		% moveto
+		% You should never encounter a moveto in a subpath; it's bad
+		% karma. TODO We have to figure out how to deal with multiple
+		% subpaths within a path. The way we should do this: break the
+		% path up into individual parts, and then run all this stuff on
+		% each part.
+		ignoreCycle {
+		    pop pop
+		} {
+		    /nowPt defPoint
+		    /startPt nowPt defPoint
+		} ifelse
+
+	    } {		% lineto
+		2 copy /newPt defPoint
+		% If the new point equals the old point exactly, then ignore
+		% this entire thing.
+		newPt nowPt equalPoint ignoreCycle or {
+		    pop pop
+		} {
+		    2 packedarray cvx /linetoArgs exch def
+		    inSubpath {			% We're in the subpath.
+			/defaultEndSubpath { linetoArgs lineto } def
+			lineTestEnd {
+			    /inSubpath false def
+			    exit
+			} {
+			    linetoArgs lineto
+			} ifelse
+		    } {				% We're not in the subpath.
+			/defaultStartSubpath {
+			    nowPt moveto linetoArgs lineto
+			} def
+			lineTestStart {
+			    /inSubpath true def
+			} if
+		    } ifelse
+		    /nowPt newPt defPoint
+		} ifelse
+
+	    } {		% curveto
+		2 copy /newPt defPoint
+		newPt nowPt equalPoint ignoreCycle or {
+		    pop pop pop pop pop pop
+		} {
+		    6 packedarray cvx /curvetoArgs exch def
+		    inSubpath {			% We're in the subpath.
+			/defaultEndSubpath { curvetoArgs curveto } def
+			curveTestEnd {
+			    /inSubpath false def
+			    exit
+			} {
+			    curvetoArgs curveto
+			} ifelse
+		    } {				% We're not in the subpath.
+			/defaultStartSubpath {
+			    nowPt moveto curvetoArgs curveto
+			} def
+			curveTestStart {
+			    /inSubpath true def
+			} if
+		    } ifelse
+		    /nowPt newPt defPoint
+		} ifelse
+
+	    } {		% closepath
+		/newPt startPt defPoint
+		/linetoArgs startPt defPoint
+		newPt nowPt equalPoint ignoreCycle or not {
+		    inSubpath {
+			/defaultEndSubpath { linetoArgs lineto } def
+			lineTestEnd {
+			    /inSubpath false def
+			    exit
+			} {
+			    linetoArgs lineto
+			} ifelse
+		    } {				% We're not in the subpath.
+			/defaultStartSubpath {
+			    nowPt moveto linetoArgs lineto
+			} def
+			lineTestStart {
+			    /inSubpath true def
+			} if
+		    } ifelse
+		    /nowPt newPt defPoint
+		} if
+		/currentSegment currentSegment 1 add def
+		/ignoreCycle currentSegment segmentToTrace ne def
+	    } pathforall
+
+	    %inSubpath not { exit } if
+	} for
+	% If the last segment is greater than or equal to the segment we just
+	% traced plus one, then the next cycle will be useless so it and all
+	% following ones should be canceled.
+	currentSegment segmentToTrace 1 add lt { exit } if
+    } for
+
+    % Remove the last moveto
+    dup /moveto eq {
+	pop pop pop
+    } if
+    ] cvx
+    end
+} def
+
+/drawSubpath {
+    gsave
+	currentlinewidth 3 mul setlinewidth
+	dup ustroke
+    grestore
+} def
+
+/useSubpath {
+    gsave
+	exch newpath uappend
+	exec
+    grestore
+} def
+
+/subpathEndpoint {
+    gsave
+	newpath uappend currentpoint
+    grestore
+} def
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Some start and end condition functions
+%
+
+% Start when the angle meets some condition.
+% {cond} --
+/startWhenAngle {
+    /StartTestCond exch def
+    /lineTestStart {
+	nowPt linetoArgs lineAngle StartTestCond {
+	    defaultStartSubpath
+	    true
+	} {
+	    false
+	} ifelse
+    } def
+    /curveTestStart {
+	nowPt curvetoArgs curveStartAngle StartTestCond {
+	    defaultStartSubpath
+	    true
+	} {
+	    false
+	} ifelse
+    } def
+} def
+
+/endWhenAngle {
+    /EndTestCond exch def
+    /lineTestEnd {
+	nowPt linetoArgs lineAngle EndTestCond {
+	    defaultEndSubpath
+	    true
+	} {
+	    false
+	} ifelse
+    } def
+    /curveTestEnd {
+	nowPt curvetoArgs curveEndAngle EndTestCond {
+	    defaultEndSubpath
+	    true
+	} {
+	    false
+	} ifelse
+    } def
+} def
+
+/endBeforeAngle {
+    /EndTestCond exch def
+    /lineTestEnd {
+	nowPt linetoArgs lineAngle EndTestCond {
+	    true
+	} {
+	    false
+	} ifelse
+    } def
+    /curveTestEnd {
+	nowPt curvetoArgs curveEndAngle EndTestCond {
+	    true
+	} {
+	    false
+	} ifelse
+    } def
+} def
+
+/endBeforeStartAngle {
+    /EndTestCond exch def
+    /lineTestEnd {
+	nowPt linetoArgs lineAngle EndTestCond {
+	    true
+	} {
+	    false
+	} ifelse
+    } def
+    /curveTestEnd {
+	nowPt curvetoArgs curveStartAngle EndTestCond {
+	    true
+	} {
+	    false
+	} ifelse
+    } def
+} def
+
+/startAtPoint {
+    /StartPoint defPoint
+    /lineTestStart {
+	nowPt linetoArgs StartPoint linePtIntc {
+	    moveto linetoArgs lineto
+	    true
+	} {
+	    false
+	} ifelse
+    } def
+    /curveTestStart {
+	nowPt curvetoArgs StartPoint curvePtIntc {
+	    pop pop
+	    defaultStartSubpath
+	    true
+	} {
+	    false
+	} ifelse
+    } def
+} def
+
+/endAtPoint {
+    /EndPoint defPoint
+    /lineTestEnd {
+	nowPt linetoArgs EndPoint linePtIntc {
+	    lineto
+	    true
+	} {
+	    false
+	} ifelse
+    } def
+    /curveTestEnd {
+	nowPt curvetoArgs EndPoint curvePtIntc {
+	    pop pop
+	    defaultEndSubpath
+	    true
+	} {
+	    false
+	} ifelse
+    } def
+} def
+

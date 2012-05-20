@@ -1,0 +1,25 @@
+%Filename: 8ritf.fd
+%Created by: tex texput
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{8ritf.fd}
+   [2004/04/20 Fontinst v1.801 font definitions for 8r/itf.]
+
+\DeclareFontFamily{8r}{itf}{}
+
+\DeclareFontShape{8r}{itf}{m}{n}{
+   <-> itfr8r
+}{}
+
+\DeclareFontShape{8r}{itf}{m}{sl}{
+   <-> itfro8r
+}{}
+
+\DeclareFontShape{8r}{itf}{m}{it}{
+   <-> itfri8r
+}{}
+
+
+\endinput

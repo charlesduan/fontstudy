@@ -1,0 +1,11 @@
+output_prefix: zmn
+output_dir: cmr
+font_file: cmr10.pfb
+font_file: cmti10.pfb
+optical_size:
+roman_name: CMR10
+italic_name: CMTI10
+roman_tfm: cmr10
+italic_tfm: cmti10
+sans_serif: no
+square_ends: no

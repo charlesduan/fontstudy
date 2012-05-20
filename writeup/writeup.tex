@@ -1,0 +1,170 @@
+\documentclass[twocolumn]{article}
+\usepackage{mathzmn}
+\usepackage{myarticle,switcheml,mflogo,pstricks,graphicx}
+
+\title{MathGen: Automatic Generation of Mathematical Symbol Fonts}
+\author{Charles Duan \\ \switchemail{cduan@fas.harvard.edu}}
+
+\def\inputsect#1{\let\sectionname#1\input}
+
+\linepenalty=100
+
+\begin{document}
+
+\maketitle
+
+\inputsect\section introduction
+\inputsect\section prevwork
+
+\inputsect\section measure/intro
+\inputsect\subsection measure/libreqs
+\inputsect\subsection measure/libfunc
+\inputsect\subsection measure/letters
+\inputsect\subsection measure/assume
+
+\inputsect\section changes/changes
+\inputsect\subsection changes/cmbugs
+\inputsect\subsection changes/designs
+\inputsect\subsection changes/loops
+\inputsect\subsection changes/squareends
+\inputsect\subsection changes/params
+\inputsect\subsection changes/bigzoom
+
+\inputsect\section widths/intro
+\inputsect\subsection widths/widths
+\inputsect\subsection widths/accents
+
+
+\inputsect\section params/intro
+\inputsect\subsection params/cmr
+\inputsect\subsection params/times
+
+\inputsect\section status
+
+\twocolumn[\part*{Samples of Generated Fonts}]
+\setcounter{section}{0}
+
+\inputsect\section analysis/cmr
+
+\inputsect\section analysis/stdfonts
+\inputsect\subsection analysis/bookman
+\inputsect\subsection analysis/courier
+\inputsect\subsection analysis/didot
+\inputsect\subsection analysis/garamond
+\inputsect\subsection analysis/newcent
+\inputsect\subsection analysis/times
+\inputsect\subsection analysis/utopia
+
+\inputsect\section analysis/sansfonts
+\inputsect\subsection analysis/avantg
+\inputsect\subsection analysis/futura
+\inputsect\subsection analysis/helvetica
+\inputsect\subsection analysis/optima
+\inputsect\subsection analysis/hardwood
+
+\inputsect\section analysis/semistdfonts
+\inputsect\subsection analysis/palatino
+\inputsect\subsection analysis/tekton
+\inputsect\subsection analysis/tiffany
+
+\inputsect\section analysis/displayfonts
+\inputsect\subsection analysis/linotext
+\inputsect\subsection analysis/khaki
+
+\section{Explanation of the Font Samples}
+
+For each font, three samples are provided. First, a mixture of the font's text
+and generated math characters is given along with several sample equations that
+only use the generated characters. Below them is a sample of the font
+interspersed with the Computer Modern math symbols. Note that the variables in
+that sample are also in Computer Modern. The intent of the second sample is to
+reveal the aesthetically displeasing appearance of mixed font use.
+
+Note that, in the case of Palatino, the Euler fonts are used in the second
+sample rather than Computer Modern. This gives a sense of how the generated math
+fonts compare to a math font drawn to specifically match the given font.
+
+Finally, a sample of the system's success at character width and accent
+placement is given. This sample contains three parts. In the first part, each
+character is surrounded by two vertical rules representing the minimal edges of
+the character. The second part demonstrates the placement of superscripts and
+subscripts on characters, and the third shows the placement of accents.
+
+It is noteworthy that the accent and width measurement routines are not executed
+on the generated math fonts. In particular, the accent positionings are
+hard-coded in the font programs. As a result, it is often the case that accents
+are more properly placed over the italic variable characters than over the Greek
+letters.
+
+\begin{thebibliography}{9}
+\bibitem{mathkit} Hoenig, Alan. \emph{MathKit}: Alternatives to Computer Modern
+mathematics. In \emph{TUGboat}, Vol.\ 20, No.\ 3 (1999).
+\bibitem{cte} Knuth, Donald E\@. \emph{Computers \& Typesetting}. Vol.\ E.
+Reading, MA: Addison Wesley, 1992.
+\bibitem{mfbook} Knuth, Donald E\@. \emph{The METAFONTbook}. Reading, MA:
+Addison Wesley, 1992.
+\end{thebibliography}
+
+\iffalse
+\onecolumn
+
+\def\fontname#1{\newpage\noindent\centerline{\Large\bfseries#1}\par\vskip\baselineskip}
+
+\setkeys{Gin}{clip=true,trim=1in 2in 1in 1in}
+
+\fontname{Computer Modern} \noindent\includegraphics*{../results/cmr-font}\par
+\fontname{Computer Modern} \noindent\includegraphics*{../results/cmr-pos}\par
+
+\fontname{Bookman} \noindent\includegraphics*{../results/bookman-font}\par
+\fontname{Bookman} \noindent\includegraphics*{../results/bookman-pos}\par
+
+\fontname{Courier} \noindent\includegraphics*{../results/courier-font}\par
+\fontname{Courier} \noindent\includegraphics*{../results/courier-pos}\par
+
+\fontname{Didot} \noindent\includegraphics*{../results/didot-font}\par
+\fontname{Didot} \noindent\includegraphics*{../results/didot-pos}\par
+
+\fontname{Adobe Garamond}\noindent\includegraphics*{../results/garamond-font}\par
+\fontname{Adobe Garamond} \noindent\includegraphics*{../results/garamond-pos}\par
+
+\fontname{New Century Schoolbook}
+\noindent\includegraphics*{../results/newcent-font}\par
+\fontname{New Century Schoolbook}
+\noindent\includegraphics*{../results/newcent-pos}\par
+
+\fontname{Times Roman} \noindent\includegraphics*{../results/times-font}\par
+\fontname{Times Roman} \noindent\includegraphics*{../results/times-pos}\par
+
+\fontname{Utopia} \noindent\includegraphics*{../results/utopia-font}\par
+\fontname{Utopia} \noindent\includegraphics*{../results/utopia-pos}\par
+
+\fontname{Avant Garde} \noindent\includegraphics*{../results/avantg-font}\par
+\fontname{Avant Garde} \noindent\includegraphics*{../results/avantg-pos}\par
+
+\fontname{Futura} \noindent\includegraphics*{../results/futura-font}\par
+\fontname{Futura} \noindent\includegraphics*{../results/futura-pos}\par
+
+\fontname{Helvetica} \noindent\includegraphics*{../results/helvetica-font}\par
+\fontname{Helvetica} \noindent\includegraphics*{../results/helvetica-pos}\par
+
+\fontname{Hardwood} \noindent\includegraphics*{../results/hardwood-font}\par
+\fontname{Hardwood} \noindent\includegraphics*{../results/hardwood-pos}\par
+
+\fontname{Palatino} \noindent\includegraphics*{../results/palatino-font}\par
+\fontname{Palatino} \noindent\includegraphics*{../results/palatino-pos}\par
+
+\fontname{Tekton} \noindent\includegraphics*{../results/tekton-font}\par
+\fontname{Tekton} \noindent\includegraphics*{../results/tekton-pos}\par
+
+\fontname{Tiffany} \noindent\includegraphics*{../results/tiffany-font}\par
+\fontname{Tiffany} \noindent\includegraphics*{../results/tiffany-pos}\par
+
+\fontname{Linotext} \noindent\includegraphics*{../results/linotext-font}\par
+\fontname{Linotext} \noindent\includegraphics*{../results/linotext-pos}\par
+
+\fontname{Khaki} \noindent\includegraphics*{../results/khaki-font}\par
+\fontname{Khaki} \noindent\includegraphics*{../results/khaki-pos}\par
+
+\fi
+
+\end{document}

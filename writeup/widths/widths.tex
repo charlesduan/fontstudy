@@ -1,0 +1,59 @@
+\sectionname{Character Widths and Math Fitting}
+
+Characters in math mode require three parameters for proper fitting: the
+position of the left edge of the character, the position of the right edge of
+the character, and the position of the lower right edge where subscripts will be
+placed. These positionings are known as ``sidebearings.''
+
+These measurements could be carried out na\"\i vely by simply measuring the
+extremities of characters and placing the sidebearings at those extremities.
+This often does not result in good values. A character whose extremities are
+very thin serifs, for example, should have its edges defined exactly at those
+serif points. However, a character such as an ``o'' or an upright, sans serif
+``\textsf{l},'' should have some extra space at the sides, or else adjacent
+characters will appear too close.
+
+Our algorithm for the measurement of sidebearings is as follows. First, the
+absolute extremities of a character are measured. For the subscript positioning,
+only the lower portion of the character is considered. The sidebearings are
+required to be at least outside these absolute extremities.
+
+Second, a field of $n$ horizontal lines is drawn across the character, and
+the leftmost intersection of each line with the character is recorded. Those
+intersections are sorted by x-coordinate, producing a list of sorted
+x-coordinates $(x_1, x_2, x_3,\ldots)$. Some small unit of width $w$ and an
+iteration maximum $N$ is chosen. The sidebearing is then constrained by the
+following rule, where $s$ is the position of the left sidebearing:
+\[
+w-x_i \ge wi,\quad 1 \le i \le N
+\]
+The right sidebearing and subscript positions are positioned using an analogous
+calculation.
+
+If many points on the edge of the character are near the extreme left edge of
+the character, then the sidebearing will be pushed further and further away from
+the character. But if the extreme edge of the character is a thin serif, then
+most of the points will already be far away from the sidebearing position, and
+the sidebearing will end up right next to the serif.
+
+This algorithm contains three parameters, $n$, $w$, and $N$. A higher value of
+$n$ means greater accuracy in measurement but a longer computation time (since
+more points on the character are tested). A higher value of $w$ means that the
+sidebearing will tend to be pushed further away from the character. And the
+value of $N$ can be used to enforce a ``maximum distance'' of the sidebearing
+from the character, as the sidebearing will be no further than $wN$ from the
+edge of the character.
+
+This algorithm demonstrates the versatility of the simple functions provided by
+the character measurement library. An even more complex scheme, also supported
+by the library, would be to divide the character's edge into small segments and
+find the extreme points on each segment, rather than simply looking at sampled
+points on the edge of the character. This should provide an even more accurate
+positioning.
+
+Although it has not been implemented, a variation of this algorithm could be
+used for determining kerning pairs between letters (the amount of horizontal
+space to be added or removed between two characters for optimal fitting).
+Although the results would not be perfect, it would give a good first impression
+of kerning values between characters without requiring weeks of manual tuning.
+

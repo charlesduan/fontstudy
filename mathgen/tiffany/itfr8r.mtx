@@ -1,0 +1,637 @@
+%Filename: itfr8r.mtx
+%Created by: tex texput
+%Created using: \mtxtomtx{itfr8a}{itfr8r}
+
+%This file is used by the fontinst package.
+
+%THIS FILE CAN BE DELETED.
+
+\relax
+\metrics
+
+\needsfontinstversion{1.801}
+
+\setint{italicslant}{0}
+\setint{maxheight}{974}
+\setint{maxdepth_neg}{-288}
+\setint{underlinethickness}{50}
+\setint{capheight}{715}
+\setint{xheight}{449}
+\setint{ascender}{744}
+\setint{descender_neg}{-223}
+\setrawglyph{space}{itfr8r}{10pt}{32}{302}{0}{0}{0}
+\setrawglyph{exclam}{itfr8r}{10pt}{33}{284}{733}{18}{0}
+\setrawglyph{quotedbl}{itfr8r}{10pt}{34}{460}{733}{-443}{0}
+\setrawglyph{numbersign}{itfr8r}{10pt}{35}{604}{733}{0}{0}
+\setrawglyph{dollar}{itfr8r}{10pt}{36}{604}{835}{108}{0}
+\setrawglyph{percent}{itfr8r}{10pt}{37}{738}{715}{8}{0}
+\setrawglyph{ampersand}{itfr8r}{10pt}{38}{850}{733}{18}{0}
+\setrawglyph{quoteright}{itfr8r}{10pt}{39}{302}{733}{-440}{0}
+\setrawglyph{parenleft}{itfr8r}{10pt}{40}{391}{733}{111}{0}
+\setrawglyph{parenright}{itfr8r}{10pt}{41}{391}{733}{111}{0}
+\setrawglyph{asterisk}{itfr8r}{10pt}{42}{604}{733}{-356}{0}
+\setrawglyph{plus}{itfr8r}{10pt}{43}{630}{612}{0}{0}
+\setrawglyph{comma}{itfr8r}{10pt}{44}{302}{113}{180}{0}
+\setrawglyph{hyphen}{itfr8r}{10pt}{45}{338}{293}{-201}{0}
+\setrawglyph{period}{itfr8r}{10pt}{46}{302}{113}{18}{0}
+\setrawglyph{slash}{itfr8r}{10pt}{47}{498}{744}{111}{0}
+\setrawglyph{zero}{itfr8r}{10pt}{48}{604}{733}{18}{0}
+\setrawglyph{one}{itfr8r}{10pt}{49}{604}{733}{0}{0}
+\setrawglyph{two}{itfr8r}{10pt}{50}{604}{733}{18}{0}
+\setrawglyph{three}{itfr8r}{10pt}{51}{604}{733}{18}{0}
+\setrawglyph{four}{itfr8r}{10pt}{52}{604}{777}{0}{0}
+\setrawglyph{five}{itfr8r}{10pt}{53}{604}{761}{18}{0}
+\setrawglyph{six}{itfr8r}{10pt}{54}{604}{733}{18}{0}
+\setrawglyph{seven}{itfr8r}{10pt}{55}{604}{755}{1}{0}
+\setrawglyph{eight}{itfr8r}{10pt}{56}{604}{733}{18}{0}
+\setrawglyph{nine}{itfr8r}{10pt}{57}{604}{733}{18}{0}
+\setrawglyph{colon}{itfr8r}{10pt}{58}{302}{400}{18}{0}
+\setrawglyph{semicolon}{itfr8r}{10pt}{59}{302}{393}{180}{0}
+\setrawglyph{less}{itfr8r}{10pt}{60}{630}{628}{12}{0}
+\setrawglyph{equal}{itfr8r}{10pt}{61}{630}{436}{-180}{0}
+\setrawglyph{greater}{itfr8r}{10pt}{62}{630}{628}{12}{0}
+\setrawglyph{question}{itfr8r}{10pt}{63}{604}{733}{18}{0}
+\setrawglyph{at}{itfr8r}{10pt}{64}{820}{733}{18}{0}
+\setrawglyph{A}{itfr8r}{10pt}{65}{712}{749}{0}{0}
+\setrawglyph{B}{itfr8r}{10pt}{66}{729}{715}{0}{0}
+\setrawglyph{C}{itfr8r}{10pt}{67}{729}{768}{18}{0}
+\setrawglyph{D}{itfr8r}{10pt}{68}{836}{715}{0}{0}
+\setrawglyph{E}{itfr8r}{10pt}{69}{712}{766}{78}{0}
+\setrawglyph{F}{itfr8r}{10pt}{70}{605}{768}{0}{0}
+\setrawglyph{G}{itfr8r}{10pt}{71}{837}{771}{18}{0}
+\setrawglyph{H}{itfr8r}{10pt}{72}{890}{715}{0}{0}
+\setrawglyph{I}{itfr8r}{10pt}{73}{444}{715}{0}{0}
+\setrawglyph{J}{itfr8r}{10pt}{74}{605}{715}{18}{0}
+\setrawglyph{K}{itfr8r}{10pt}{75}{782}{715}{0}{0}
+\setrawglyph{L}{itfr8r}{10pt}{76}{659}{715}{75}{0}
+\setrawglyph{M}{itfr8r}{10pt}{77}{944}{715}{0}{0}
+\setrawglyph{N}{itfr8r}{10pt}{78}{765}{715}{18}{0}
+\setrawglyph{O}{itfr8r}{10pt}{79}{782}{733}{18}{0}
+\setrawglyph{P}{itfr8r}{10pt}{80}{659}{715}{0}{0}
+\setrawglyph{Q}{itfr8r}{10pt}{81}{782}{733}{262}{0}
+\setrawglyph{R}{itfr8r}{10pt}{82}{782}{715}{0}{0}
+\setrawglyph{S}{itfr8r}{10pt}{83}{659}{774}{59}{0}
+\setrawglyph{T}{itfr8r}{10pt}{84}{659}{766}{0}{0}
+\setrawglyph{U}{itfr8r}{10pt}{85}{782}{715}{18}{0}
+\setrawglyph{V}{itfr8r}{10pt}{86}{676}{715}{26}{0}
+\setrawglyph{W}{itfr8r}{10pt}{87}{944}{715}{26}{0}
+\setrawglyph{X}{itfr8r}{10pt}{88}{782}{715}{0}{0}
+\setrawglyph{Y}{itfr8r}{10pt}{89}{676}{715}{0}{0}
+\setrawglyph{Z}{itfr8r}{10pt}{90}{659}{768}{75}{0}
+\setrawglyph{bracketleft}{itfr8r}{10pt}{91}{391}{733}{111}{0}
+\setrawglyph{backslash}{itfr8r}{10pt}{92}{315}{744}{111}{0}
+\setrawglyph{bracketright}{itfr8r}{10pt}{93}{391}{733}{111}{0}
+\setrawglyph{asciicircum}{itfr8r}{10pt}{94}{630}{715}{-224}{0}
+\setrawglyph{underscore}{itfr8r}{10pt}{95}{500}{-75}{125}{0}
+\setrawglyph{quoteleft}{itfr8r}{10pt}{96}{302}{733}{-440}{0}
+\setrawglyph{a}{itfr8r}{10pt}{97}{551}{467}{18}{0}
+\setrawglyph{b}{itfr8r}{10pt}{98}{605}{744}{18}{0}
+\setrawglyph{c}{itfr8r}{10pt}{99}{498}{467}{18}{0}
+\setrawglyph{d}{itfr8r}{10pt}{100}{659}{744}{18}{0}
+\setrawglyph{e}{itfr8r}{10pt}{101}{551}{467}{18}{0}
+\setrawglyph{f}{itfr8r}{10pt}{102}{338}{744}{0}{0}
+\setrawglyph{g}{itfr8r}{10pt}{103}{551}{520}{262}{0}
+\setrawglyph{h}{itfr8r}{10pt}{104}{676}{744}{0}{0}
+\setrawglyph{i}{itfr8r}{10pt}{105}{338}{640}{0}{0}
+\setrawglyph{j}{itfr8r}{10pt}{106}{266}{640}{242}{0}
+\setrawglyph{k}{itfr8r}{10pt}{107}{622}{744}{0}{0}
+\setrawglyph{l}{itfr8r}{10pt}{108}{338}{744}{0}{0}
+\setrawglyph{m}{itfr8r}{10pt}{109}{944}{467}{0}{0}
+\setrawglyph{n}{itfr8r}{10pt}{110}{605}{467}{0}{0}
+\setrawglyph{o}{itfr8r}{10pt}{111}{551}{467}{18}{0}
+\setrawglyph{p}{itfr8r}{10pt}{112}{605}{467}{223}{0}
+\setrawglyph{q}{itfr8r}{10pt}{113}{605}{467}{223}{0}
+\setrawglyph{r}{itfr8r}{10pt}{114}{444}{467}{0}{0}
+\setrawglyph{s}{itfr8r}{10pt}{115}{498}{490}{38}{0}
+\setrawglyph{t}{itfr8r}{10pt}{116}{391}{664}{18}{0}
+\setrawglyph{u}{itfr8r}{10pt}{117}{605}{467}{18}{0}
+\setrawglyph{v}{itfr8r}{10pt}{118}{498}{449}{26}{0}
+\setrawglyph{w}{itfr8r}{10pt}{119}{765}{449}{26}{0}
+\setrawglyph{x}{itfr8r}{10pt}{120}{534}{449}{0}{0}
+\setrawglyph{y}{itfr8r}{10pt}{121}{498}{449}{231}{0}
+\setrawglyph{z}{itfr8r}{10pt}{122}{516}{480}{46}{0}
+\setrawglyph{braceleft}{itfr8r}{10pt}{123}{339}{733}{111}{0}
+\setrawglyph{bar}{itfr8r}{10pt}{124}{315}{750}{250}{0}
+\setrawglyph{braceright}{itfr8r}{10pt}{125}{339}{733}{111}{0}
+\setrawglyph{asciitilde}{itfr8r}{10pt}{126}{630}{404}{-204}{0}
+\setrawglyph{exclamdown}{itfr8r}{10pt}{161}{284}{456}{288}{0}
+\setrawglyph{cent}{itfr8r}{10pt}{162}{604}{723}{18}{0}
+\setrawglyph{sterling}{itfr8r}{10pt}{163}{604}{761}{18}{0}
+\setrawglyph{fraction}{itfr8r}{10pt}{4}{196}{733}{0}{0}
+\setrawglyph{yen}{itfr8r}{10pt}{165}{604}{715}{0}{0}
+\setrawglyph{florin}{itfr8r}{10pt}{131}{604}{733}{147}{0}
+\setrawglyph{section}{itfr8r}{10pt}{167}{604}{733}{232}{0}
+\setrawglyph{currency}{itfr8r}{10pt}{164}{604}{664}{-63}{0}
+\setrawglyph{quotesingle}{itfr8r}{10pt}{31}{266}{733}{-443}{0}
+\setrawglyph{quotedblleft}{itfr8r}{10pt}{147}{551}{733}{-440}{0}
+\setrawglyph{guillemotleft}{itfr8r}{10pt}{171}{338}{386}{-94}{0}
+\setrawglyph{guilsinglleft}{itfr8r}{10pt}{139}{204}{386}{-94}{0}
+\setrawglyph{guilsinglright}{itfr8r}{10pt}{155}{204}{400}{-108}{0}
+\setrawglyph{fi}{itfr8r}{10pt}{2}{676}{744}{0}{0}
+\setrawglyph{fl}{itfr8r}{10pt}{3}{659}{744}{0}{0}
+\setrawglyph{endash}{itfr8r}{10pt}{150}{500}{293}{-201}{0}
+\setrawglyph{dagger}{itfr8r}{10pt}{134}{604}{733}{223}{0}
+\setrawglyph{daggerdbl}{itfr8r}{10pt}{135}{604}{733}{232}{0}
+\setrawglyph{periodcentered}{itfr8r}{10pt}{183}{302}{371}{-240}{0}
+\setrawglyph{paragraph}{itfr8r}{10pt}{182}{604}{715}{223}{0}
+\setrawglyph{bullet}{itfr8r}{10pt}{149}{557}{550}{-184}{0}
+\setrawglyph{quotesinglbase}{itfr8r}{10pt}{130}{302}{113}{180}{0}
+\setrawglyph{quotedblbase}{itfr8r}{10pt}{132}{551}{113}{180}{0}
+\setrawglyph{quotedblright}{itfr8r}{10pt}{148}{551}{733}{-440}{0}
+\setrawglyph{guillemotright}{itfr8r}{10pt}{187}{338}{400}{-108}{0}
+\setrawglyph{ellipsis}{itfr8r}{10pt}{133}{1000}{113}{18}{0}
+\setrawglyph{perthousand}{itfr8r}{10pt}{137}{1068}{715}{8}{0}
+\setrawglyph{questiondown}{itfr8r}{10pt}{191}{604}{456}{288}{0}
+\setrawglyph{grave}{itfr8r}{10pt}{30}{380}{683}{-508}{0}
+\setrawglyph{acute}{itfr8r}{10pt}{180}{380}{683}{-508}{0}
+\setrawglyph{circumflex}{itfr8r}{10pt}{136}{538}{707}{-504}{0}
+\setrawglyph{tilde}{itfr8r}{10pt}{152}{439}{662}{-543}{0}
+\setrawglyph{macron}{itfr8r}{10pt}{175}{437}{680}{-598}{0}
+\setrawglyph{breve}{itfr8r}{10pt}{11}{428}{663}{-542}{0}
+\setrawglyph{dotaccent}{itfr8r}{10pt}{1}{275}{679}{-548}{0}
+\setrawglyph{dieresis}{itfr8r}{10pt}{168}{496}{700}{-569}{0}
+\setrawglyph{ring}{itfr8r}{10pt}{9}{301}{708}{-549}{0}
+\setrawglyph{cedilla}{itfr8r}{10pt}{184}{316}{0}{177}{0}
+\setrawglyph{hungarumlaut}{itfr8r}{10pt}{5}{487}{737}{-511}{0}
+\setrawglyph{ogonek}{itfr8r}{10pt}{8}{551}{0}{138}{0}
+\setrawglyph{caron}{itfr8r}{10pt}{16}{498}{708}{-505}{0}
+\setrawglyph{emdash}{itfr8r}{10pt}{151}{1000}{293}{-201}{0}
+\setrawglyph{AE}{itfr8r}{10pt}{198}{1095}{767}{75}{0}
+\setrawglyph{ordfeminine}{itfr8r}{10pt}{170}{604}{733}{-396}{0}
+\setrawglyph{Lslash}{itfr8r}{10pt}{6}{659}{715}{75}{0}
+\setrawglyph{Oslash}{itfr8r}{10pt}{216}{782}{772}{63}{0}
+\setrawglyph{OE}{itfr8r}{10pt}{140}{1204}{767}{75}{0}
+\setrawglyph{ordmasculine}{itfr8r}{10pt}{186}{604}{733}{-396}{0}
+\setrawglyph{ae}{itfr8r}{10pt}{230}{885}{467}{18}{0}
+\setrawglyph{dotlessi}{itfr8r}{10pt}{17}{338}{467}{0}{0}
+\setrawglyph{lslash}{itfr8r}{10pt}{7}{338}{744}{0}{0}
+\setrawglyph{oslash}{itfr8r}{10pt}{248}{551}{557}{86}{0}
+\setrawglyph{oe}{itfr8r}{10pt}{156}{923}{467}{18}{0}
+\setrawglyph{germandbls}{itfr8r}{10pt}{223}{712}{723}{18}{0}
+\setrawglyph{ecircumflex}{itfr8r}{10pt}{234}{551}{707}{18}{0}
+\setrawglyph{edieresis}{itfr8r}{10pt}{235}{551}{670}{18}{0}
+\setrawglyph{aacute}{itfr8r}{10pt}{225}{551}{683}{18}{0}
+\setrawglyph{registered}{itfr8r}{10pt}{174}{896}{733}{18}{0}
+\setrawglyph{icircumflex}{itfr8r}{10pt}{238}{338}{707}{0}{0}
+\setrawglyph{udieresis}{itfr8r}{10pt}{252}{605}{670}{18}{0}
+\setrawglyph{ograve}{itfr8r}{10pt}{242}{551}{683}{18}{0}
+\setrawglyph{uacute}{itfr8r}{10pt}{250}{605}{683}{18}{0}
+\setrawglyph{ucircumflex}{itfr8r}{10pt}{251}{605}{707}{18}{0}
+\setrawglyph{Aacute}{itfr8r}{10pt}{193}{712}{949}{0}{0}
+\setrawglyph{igrave}{itfr8r}{10pt}{236}{338}{683}{0}{0}
+\setrawglyph{Icircumflex}{itfr8r}{10pt}{206}{444}{973}{0}{0}
+\setrawglyph{ccedilla}{itfr8r}{10pt}{231}{498}{467}{177}{0}
+\setrawglyph{adieresis}{itfr8r}{10pt}{228}{551}{670}{18}{0}
+\setrawglyph{Ecircumflex}{itfr8r}{10pt}{202}{712}{973}{78}{0}
+\setrawglyph{scaron}{itfr8r}{10pt}{154}{498}{708}{38}{0}
+\setrawglyph{thorn}{itfr8r}{10pt}{254}{605}{744}{223}{0}
+\setrawglyph{trademark}{itfr8r}{10pt}{153}{961}{715}{-319}{0}
+\setrawglyph{egrave}{itfr8r}{10pt}{232}{551}{683}{18}{0}
+\setrawglyph{threesuperior}{itfr8r}{10pt}{179}{362}{733}{-282}{0}
+\setrawglyph{zcaron}{itfr8r}{10pt}{15}{516}{708}{46}{0}
+\setrawglyph{atilde}{itfr8r}{10pt}{227}{551}{662}{18}{0}
+\setrawglyph{aring}{itfr8r}{10pt}{229}{551}{708}{18}{0}
+\setrawglyph{ocircumflex}{itfr8r}{10pt}{244}{551}{707}{18}{0}
+\setrawglyph{Edieresis}{itfr8r}{10pt}{203}{712}{936}{78}{0}
+\setrawglyph{threequarters}{itfr8r}{10pt}{190}{906}{733}{0}{0}
+\setrawglyph{ydieresis}{itfr8r}{10pt}{255}{498}{670}{231}{0}
+\setrawglyph{yacute}{itfr8r}{10pt}{253}{498}{683}{231}{0}
+\setrawglyph{iacute}{itfr8r}{10pt}{237}{338}{683}{0}{0}
+\setrawglyph{Acircumflex}{itfr8r}{10pt}{194}{712}{973}{0}{0}
+\setrawglyph{Uacute}{itfr8r}{10pt}{218}{782}{949}{18}{0}
+\setrawglyph{eacute}{itfr8r}{10pt}{233}{551}{683}{18}{0}
+\setrawglyph{Ograve}{itfr8r}{10pt}{210}{782}{949}{18}{0}
+\setrawglyph{agrave}{itfr8r}{10pt}{224}{551}{683}{18}{0}
+\setrawglyph{Udieresis}{itfr8r}{10pt}{220}{782}{936}{18}{0}
+\setrawglyph{acircumflex}{itfr8r}{10pt}{226}{551}{707}{18}{0}
+\setrawglyph{Igrave}{itfr8r}{10pt}{204}{444}{949}{0}{0}
+\setrawglyph{twosuperior}{itfr8r}{10pt}{178}{362}{733}{-282}{0}
+\setrawglyph{Ugrave}{itfr8r}{10pt}{217}{782}{949}{18}{0}
+\setrawglyph{onequarter}{itfr8r}{10pt}{188}{906}{733}{0}{0}
+\setrawglyph{Ucircumflex}{itfr8r}{10pt}{219}{782}{973}{18}{0}
+\setrawglyph{Scaron}{itfr8r}{10pt}{138}{659}{974}{59}{0}
+\setrawglyph{Idieresis}{itfr8r}{10pt}{207}{444}{936}{0}{0}
+\setrawglyph{idieresis}{itfr8r}{10pt}{239}{338}{670}{0}{0}
+\setrawglyph{Egrave}{itfr8r}{10pt}{200}{712}{949}{78}{0}
+\setrawglyph{Oacute}{itfr8r}{10pt}{211}{782}{949}{18}{0}
+\setrawglyph{divide}{itfr8r}{10pt}{247}{630}{612}{-4}{0}
+\setrawglyph{Atilde}{itfr8r}{10pt}{195}{712}{928}{0}{0}
+\setrawglyph{Aring}{itfr8r}{10pt}{197}{712}{944}{0}{0}
+\setrawglyph{Odieresis}{itfr8r}{10pt}{214}{782}{936}{18}{0}
+\setrawglyph{Adieresis}{itfr8r}{10pt}{196}{712}{936}{0}{0}
+\setrawglyph{Ntilde}{itfr8r}{10pt}{209}{765}{928}{18}{0}
+\setrawglyph{Zcaron}{itfr8r}{10pt}{14}{659}{974}{75}{0}
+\setrawglyph{Thorn}{itfr8r}{10pt}{222}{659}{715}{0}{0}
+\setrawglyph{Iacute}{itfr8r}{10pt}{205}{444}{949}{0}{0}
+\setrawglyph{plusminus}{itfr8r}{10pt}{177}{630}{612}{0}{0}
+\setrawglyph{multiply}{itfr8r}{10pt}{215}{630}{583}{-32}{0}
+\setrawglyph{Eacute}{itfr8r}{10pt}{201}{712}{949}{78}{0}
+\setrawglyph{Ydieresis}{itfr8r}{10pt}{159}{676}{966}{0}{0}
+\setrawglyph{onesuperior}{itfr8r}{10pt}{185}{362}{733}{-293}{0}
+\setrawglyph{ugrave}{itfr8r}{10pt}{249}{605}{683}{18}{0}
+\setrawglyph{logicalnot}{itfr8r}{10pt}{172}{630}{444}{-134}{0}
+\setrawglyph{ntilde}{itfr8r}{10pt}{241}{605}{662}{0}{0}
+\setrawglyph{Otilde}{itfr8r}{10pt}{213}{782}{928}{18}{0}
+\setrawglyph{otilde}{itfr8r}{10pt}{245}{551}{662}{18}{0}
+\setrawglyph{Ccedilla}{itfr8r}{10pt}{199}{729}{768}{177}{0}
+\setrawglyph{Agrave}{itfr8r}{10pt}{192}{712}{949}{0}{0}
+\setrawglyph{onehalf}{itfr8r}{10pt}{189}{906}{733}{18}{0}
+\setrawglyph{Eth}{itfr8r}{10pt}{208}{836}{715}{0}{0}
+\setrawglyph{degree}{itfr8r}{10pt}{176}{484}{733}{-489}{0}
+\setrawglyph{Yacute}{itfr8r}{10pt}{221}{676}{949}{0}{0}
+\setrawglyph{Ocircumflex}{itfr8r}{10pt}{212}{782}{973}{18}{0}
+\setrawglyph{oacute}{itfr8r}{10pt}{243}{551}{683}{18}{0}
+\setrawglyph{mu}{itfr8r}{10pt}{181}{605}{467}{221}{0}
+\setrawglyph{minus}{itfr8r}{10pt}{12}{630}{344}{-272}{0}
+\setrawglyph{eth}{itfr8r}{10pt}{240}{551}{744}{18}{0}
+\setrawglyph{odieresis}{itfr8r}{10pt}{246}{551}{670}{18}{0}
+\setrawglyph{copyright}{itfr8r}{10pt}{169}{896}{733}{18}{0}
+\setrawglyph{brokenbar}{itfr8r}{10pt}{166}{315}{675}{175}{0}
+\setkern{A}{T}{-6}
+\setkern{A}{V}{-76}
+\setkern{A}{W}{-65}
+\setkern{A}{Y}{-36}
+\setkern{A}{quoteright}{-170}
+\setkern{A}{v}{-63}
+\setkern{A}{w}{-63}
+\setkern{A}{y}{-63}
+\setkern{F}{A}{-24}
+\setkern{F}{comma}{-114}
+\setkern{F}{period}{-99}
+\setkern{L}{T}{-32}
+\setkern{L}{V}{-42}
+\setkern{L}{W}{-36}
+\setkern{L}{Y}{-30}
+\setkern{L}{quoteright}{-112}
+\setkern{P}{A}{-32}
+\setkern{P}{comma}{-190}
+\setkern{P}{period}{-206}
+\setkern{R}{T}{51}
+\setkern{R}{V}{12}
+\setkern{R}{W}{-19}
+\setkern{R}{Y}{8}
+\setkern{R}{y}{4}
+\setkern{T}{A}{-5}
+\setkern{T}{a}{-60}
+\setkern{T}{c}{-70}
+\setkern{T}{colon}{-24}
+\setkern{T}{comma}{-90}
+\setkern{T}{e}{-70}
+\setkern{T}{hyphen}{-70}
+\setkern{T}{i}{-10}
+\setkern{T}{o}{-70}
+\setkern{T}{period}{-125}
+\setkern{T}{r}{-65}
+\setkern{T}{s}{-24}
+\setkern{T}{semicolon}{-24}
+\setkern{T}{u}{-43}
+\setkern{T}{w}{-76}
+\setkern{T}{y}{-85}
+\setkern{V}{A}{-94}
+\setkern{V}{a}{-72}
+\setkern{V}{colon}{-64}
+\setkern{V}{comma}{-131}
+\setkern{V}{e}{-72}
+\setkern{V}{hyphen}{-55}
+\setkern{V}{i}{-17}
+\setkern{V}{o}{-72}
+\setkern{V}{period}{-146}
+\setkern{V}{r}{-51}
+\setkern{V}{semicolon}{-52}
+\setkern{V}{u}{-23}
+\setkern{V}{y}{-33}
+\setkern{W}{A}{-76}
+\setkern{W}{a}{-68}
+\setkern{W}{colon}{-91}
+\setkern{W}{comma}{-131}
+\setkern{W}{e}{-68}
+\setkern{W}{hyphen}{-99}
+\setkern{W}{i}{-18}
+\setkern{W}{o}{-68}
+\setkern{W}{period}{-146}
+\setkern{W}{r}{-31}
+\setkern{W}{semicolon}{-89}
+\setkern{W}{u}{-24}
+\setkern{W}{y}{-39}
+\setkern{Y}{A}{-48}
+\setkern{Y}{a}{-90}
+\setkern{Y}{colon}{-99}
+\setkern{Y}{comma}{-119}
+\setkern{Y}{e}{-100}
+\setkern{Y}{hyphen}{-121}
+\setkern{Y}{i}{-18}
+\setkern{Y}{o}{-100}
+\setkern{Y}{p}{-64}
+\setkern{Y}{period}{-130}
+\setkern{Y}{q}{-100}
+\setkern{Y}{semicolon}{-67}
+\setkern{Y}{u}{-64}
+\setkern{Y}{v}{-59}
+\setkern{f}{f}{24}
+\setkern{f}{quoteright}{100}
+\setkern{quoteleft}{quoteleft}{-40}
+\setkern{quoteright}{quoteright}{-40}
+\setkern{quoteright}{s}{-80}
+\setkern{quoteright}{t}{-12}
+\setkern{r}{c}{8}
+\setkern{r}{comma}{-85}
+\setkern{r}{d}{8}
+\setkern{r}{e}{-3}
+\setkern{r}{f}{18}
+\setkern{r}{g}{10}
+\setkern{r}{o}{8}
+\setkern{r}{period}{-80}
+\setkern{r}{q}{8}
+\setkern{r}{u}{8}
+\setkern{r}{v}{24}
+\setkern{r}{w}{24}
+\setkern{r}{x}{24}
+\setkern{r}{y}{24}
+\setkern{v}{comma}{-93}
+\setkern{v}{period}{-117}
+\setkern{w}{comma}{-107}
+\setkern{w}{period}{-113}
+\setkern{y}{comma}{-73}
+\setkern{y}{period}{-89}
+\setglyph{Aacute}
+   \glyphpcc{A}{0}{0}
+   \glyphpcc{acute}{166}{266}
+   \samesize{Aacute-not}
+\endsetglyph
+\setglyph{Acircumflex}
+   \glyphpcc{A}{0}{0}
+   \glyphpcc{circumflex}{87}{266}
+   \samesize{Acircumflex-not}
+\endsetglyph
+\setglyph{Adieresis}
+   \glyphpcc{A}{0}{0}
+   \glyphpcc{dieresis}{108}{236}
+   \samesize{Adieresis-not}
+\endsetglyph
+\setglyph{Agrave}
+   \glyphpcc{A}{0}{0}
+   \glyphpcc{grave}{166}{266}
+   \samesize{Agrave-not}
+\endsetglyph
+\setglyph{Aring}
+   \glyphpcc{A}{0}{0}
+   \glyphpcc{ring}{206}{236}
+   \samesize{Aring-not}
+\endsetglyph
+\setglyph{Atilde}
+   \glyphpcc{A}{0}{0}
+   \glyphpcc{tilde}{137}{266}
+   \samesize{Atilde-not}
+\endsetglyph
+\setglyph{Eacute}
+   \glyphpcc{E}{0}{0}
+   \glyphpcc{acute}{196}{266}
+   \samesize{Eacute-not}
+\endsetglyph
+\setglyph{Ecircumflex}
+   \glyphpcc{E}{0}{0}
+   \glyphpcc{circumflex}{87}{266}
+   \samesize{Ecircumflex-not}
+\endsetglyph
+\setglyph{Edieresis}
+   \glyphpcc{E}{0}{0}
+   \glyphpcc{dieresis}{108}{236}
+   \samesize{Edieresis-not}
+\endsetglyph
+\setglyph{Egrave}
+   \glyphpcc{E}{0}{0}
+   \glyphpcc{grave}{166}{266}
+   \samesize{Egrave-not}
+\endsetglyph
+\setglyph{Iacute}
+   \glyphpcc{I}{0}{0}
+   \glyphpcc{acute}{32}{266}
+   \samesize{Iacute-not}
+\endsetglyph
+\setglyph{Icircumflex}
+   \glyphpcc{I}{0}{0}
+   \glyphpcc{circumflex}{-47}{266}
+   \samesize{Icircumflex-not}
+\endsetglyph
+\setglyph{Idieresis}
+   \glyphpcc{I}{0}{0}
+   \glyphpcc{dieresis}{-26}{236}
+   \samesize{Idieresis-not}
+\endsetglyph
+\setglyph{Igrave}
+   \glyphpcc{I}{0}{0}
+   \glyphpcc{grave}{32}{266}
+   \samesize{Igrave-not}
+\endsetglyph
+\setglyph{Ntilde}
+   \glyphpcc{N}{0}{0}
+   \glyphpcc{tilde}{163}{266}
+   \samesize{Ntilde-not}
+\endsetglyph
+\setglyph{Oacute}
+   \glyphpcc{O}{0}{0}
+   \glyphpcc{acute}{201}{266}
+   \samesize{Oacute-not}
+\endsetglyph
+\setglyph{Ocircumflex}
+   \glyphpcc{O}{0}{0}
+   \glyphpcc{circumflex}{122}{266}
+   \samesize{Ocircumflex-not}
+\endsetglyph
+\setglyph{Odieresis}
+   \glyphpcc{O}{0}{0}
+   \glyphpcc{dieresis}{143}{236}
+   \samesize{Odieresis-not}
+\endsetglyph
+\setglyph{Ograve}
+   \glyphpcc{O}{0}{0}
+   \glyphpcc{grave}{201}{266}
+   \samesize{Ograve-not}
+\endsetglyph
+\setglyph{Otilde}
+   \glyphpcc{O}{0}{0}
+   \glyphpcc{tilde}{172}{266}
+   \samesize{Otilde-not}
+\endsetglyph
+\setglyph{Scaron}
+   \glyphpcc{S}{0}{0}
+   \glyphpcc{caron}{81}{266}
+   \samesize{Scaron-not}
+\endsetglyph
+\setglyph{Uacute}
+   \glyphpcc{U}{0}{0}
+   \glyphpcc{acute}{251}{266}
+   \samesize{Uacute-not}
+\endsetglyph
+\setglyph{Ucircumflex}
+   \glyphpcc{U}{0}{0}
+   \glyphpcc{circumflex}{122}{266}
+   \samesize{Ucircumflex-not}
+\endsetglyph
+\setglyph{Udieresis}
+   \glyphpcc{U}{0}{0}
+   \glyphpcc{dieresis}{143}{236}
+   \samesize{Udieresis-not}
+\endsetglyph
+\setglyph{Ugrave}
+   \glyphpcc{U}{0}{0}
+   \glyphpcc{grave}{201}{266}
+   \samesize{Ugrave-not}
+\endsetglyph
+\setglyph{Yacute}
+   \glyphpcc{Y}{0}{0}
+   \glyphpcc{acute}{198}{266}
+   \samesize{Yacute-not}
+\endsetglyph
+\setglyph{Ydieresis}
+   \glyphpcc{Y}{0}{0}
+   \glyphpcc{dieresis}{90}{266}
+   \samesize{Ydieresis-not}
+\endsetglyph
+\setglyph{Zcaron}
+   \glyphpcc{Z}{0}{0}
+   \glyphpcc{caron}{81}{266}
+   \samesize{Zcaron-not}
+\endsetglyph
+\setglyph{aacute}
+   \glyphpcc{a}{0}{0}
+   \glyphpcc{acute}{116}{0}
+   \samesize{aacute-not}
+\endsetglyph
+\setglyph{acircumflex}
+   \glyphpcc{a}{0}{0}
+   \glyphpcc{circumflex}{7}{0}
+   \samesize{acircumflex-not}
+\endsetglyph
+\setglyph{adieresis}
+   \glyphpcc{a}{0}{0}
+   \glyphpcc{dieresis}{28}{-30}
+   \samesize{adieresis-not}
+\endsetglyph
+\setglyph{agrave}
+   \glyphpcc{a}{0}{0}
+   \glyphpcc{grave}{86}{0}
+   \samesize{agrave-not}
+\endsetglyph
+\setglyph{aring}
+   \glyphpcc{a}{0}{0}
+   \glyphpcc{ring}{125}{0}
+   \samesize{aring-not}
+\endsetglyph
+\setglyph{atilde}
+   \glyphpcc{a}{0}{0}
+   \glyphpcc{tilde}{38}{0}
+   \samesize{atilde-not}
+\endsetglyph
+\setglyph{eacute}
+   \glyphpcc{e}{0}{0}
+   \glyphpcc{acute}{136}{0}
+   \samesize{eacute-not}
+\endsetglyph
+\setglyph{ecircumflex}
+   \glyphpcc{e}{0}{0}
+   \glyphpcc{circumflex}{7}{0}
+   \samesize{ecircumflex-not}
+\endsetglyph
+\setglyph{edieresis}
+   \glyphpcc{e}{0}{0}
+   \glyphpcc{dieresis}{28}{-30}
+   \samesize{edieresis-not}
+\endsetglyph
+\setglyph{egrave}
+   \glyphpcc{e}{0}{0}
+   \glyphpcc{grave}{86}{0}
+   \samesize{egrave-not}
+\endsetglyph
+\setglyph{iacute}
+   \glyphpcc{dotlessi}{0}{0}
+   \glyphpcc{acute}{-21}{0}
+   \samesize{iacute-not}
+\endsetglyph
+\setglyph{icircumflex}
+   \glyphpcc{dotlessi}{0}{0}
+   \glyphpcc{circumflex}{-100}{0}
+   \samesize{icircumflex-not}
+\endsetglyph
+\setglyph{idieresis}
+   \glyphpcc{dotlessi}{0}{0}
+   \glyphpcc{dieresis}{-79}{-30}
+   \samesize{idieresis-not}
+\endsetglyph
+\setglyph{igrave}
+   \glyphpcc{dotlessi}{0}{0}
+   \glyphpcc{grave}{-21}{0}
+   \samesize{igrave-not}
+\endsetglyph
+\setglyph{ntilde}
+   \glyphpcc{n}{0}{0}
+   \glyphpcc{tilde}{83}{0}
+   \samesize{ntilde-not}
+\endsetglyph
+\setglyph{oacute}
+   \glyphpcc{o}{0}{0}
+   \glyphpcc{acute}{86}{0}
+   \samesize{oacute-not}
+\endsetglyph
+\setglyph{ocircumflex}
+   \glyphpcc{o}{0}{0}
+   \glyphpcc{circumflex}{7}{0}
+   \samesize{ocircumflex-not}
+\endsetglyph
+\setglyph{odieresis}
+   \glyphpcc{o}{0}{0}
+   \glyphpcc{dieresis}{28}{-30}
+   \samesize{odieresis-not}
+\endsetglyph
+\setglyph{ograve}
+   \glyphpcc{o}{0}{0}
+   \glyphpcc{grave}{86}{0}
+   \samesize{ograve-not}
+\endsetglyph
+\setglyph{otilde}
+   \glyphpcc{o}{0}{0}
+   \glyphpcc{tilde}{56}{0}
+   \samesize{otilde-not}
+\endsetglyph
+\setglyph{scaron}
+   \glyphpcc{s}{0}{0}
+   \glyphpcc{caron}{0}{0}
+   \samesize{scaron-not}
+\endsetglyph
+\setglyph{uacute}
+   \glyphpcc{u}{0}{0}
+   \glyphpcc{acute}{113}{0}
+   \samesize{uacute-not}
+\endsetglyph
+\setglyph{ucircumflex}
+   \glyphpcc{u}{0}{0}
+   \glyphpcc{circumflex}{34}{0}
+   \samesize{ucircumflex-not}
+\endsetglyph
+\setglyph{udieresis}
+   \glyphpcc{u}{0}{0}
+   \glyphpcc{dieresis}{55}{-30}
+   \samesize{udieresis-not}
+\endsetglyph
+\setglyph{ugrave}
+   \glyphpcc{u}{0}{0}
+   \glyphpcc{grave}{113}{0}
+   \samesize{ugrave-not}
+\endsetglyph
+\setglyph{yacute}
+   \glyphpcc{y}{0}{0}
+   \glyphpcc{acute}{109}{0}
+   \samesize{yacute-not}
+\endsetglyph
+\setglyph{ydieresis}
+   \glyphpcc{y}{0}{0}
+   \glyphpcc{dieresis}{1}{-30}
+   \samesize{ydieresis-not}
+\endsetglyph
+\setglyph{zcaron}
+   \glyphpcc{z}{0}{0}
+   \glyphpcc{caron}{9}{0}
+   \samesize{zcaron-not}
+\endsetglyph
+
+\endmetrics

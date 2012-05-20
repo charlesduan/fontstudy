@@ -1,0 +1,22 @@
+%Filename: 8rllx.fd
+%Created by: tex fontinst
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{8rllx.fd}
+   [2004/05/01 Fontinst v1.801 font definitions for 8r/llx.]
+
+\DeclareFontFamily{8r}{llx}{}
+
+\DeclareFontShape{8r}{llx}{m}{n}{
+   <-> llxr8r
+}{}
+
+\DeclareFontShape{8r}{llx}{m}{sl}{
+   <-> llxro8r
+}{}
+
+\DeclareFontShape{8r}{llx}{m}{it}{<->ssub * llx/m/sl}{}
+
+\endinput

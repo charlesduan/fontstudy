@@ -1,0 +1,14 @@
+%
+% I-cap_jut.ps
+%
+0.5 horizSplitLine pathLineIntc sortByX
+{ 2 copy pointbox } forallPoint
+/IStemRight defPoint /IStemLeft defPoint
+
+{ IStemLeft startAtPoint IStemRight endAtPoint } traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByX lastElt loadArray
+2 copy rtpointbox
+xcoor IStemRight xcoor sub
+(Uppercase jut) exch stringOfText

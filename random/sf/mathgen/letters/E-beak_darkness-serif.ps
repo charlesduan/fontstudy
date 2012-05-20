@@ -1,0 +1,60 @@
+%
+% E-beakdark.ps
+%
+flattenpath
+
+0.5 vertSplitLine pathLineIntc sortByY revArray /EVertSplit exch def
+
+EVertSplit 0 2 getinterval loadArray
+/ETopBot defPoint /ETopTop defPoint
+
+{ ETopBot startAtPoint ETopTop endAtPoint } traceSubpath
+{ pathExtremes } useSubpath sortByY firstElt /EBeakBot defPoint
+EBeakBot pointbox
+
+0.75 horizSplitLine pathLineIntc sortByX 0 2 getinterval
+dup 1 get /EStemRight defPoint
+{ } forallPoint addPoint 2 div exch 2 div exch /EStemMid defPoint
+EStemMid pointbox
+EStemMid vertLineThrough drawLine
+ETopBot horizLineThrough drawLine
+intersect pop % Must be true
+/EStemTop defPoint
+EStemTop pointbox
+
+EStemTop 0.2 scalePoint EBeakBot 0.8 scalePoint addPoint
+horizLineThrough pathLineIntc sortByX revArray 1 get /EBeakOne defPoint
+EBeakOne ltpointbox
+
+% Find the beak jut angle, which we will duplicate inside the beak
+{ ETopBot startAtPoint ETopTop endAtPoint } traceSubpath
+{ {
+    { 75 90 withinRange } startWhenAngle
+    { 165 90 withinRange } endBeforeAngle
+  } traceSubpath
+} useSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByY dup firstElt /EBeakBot defPoint lastElt /EBeakTop defPoint
+EBeakBot pointbox EBeakTop uppointbox
+EBeakTop EBeakBot subPoint /EBeakDiff defPoint
+
+
+EBeakDiff 2 scalePoint EBeakOne addPoint
+EBeakDiff -1 scalePoint EBeakOne addPoint
+4 copy
+drawLine
+EStemTop horizLineThrough intersect pop /EBeakCorner defPoint
+EBeakBot horizLineThrough intersect pop /EBeakTip defPoint
+EBeakCorner uppointbox EBeakTip pointbox
+
+EBeakCorner EStemTop avgPoint /EArmMid defPoint EArmMid pointbox
+
+EArmMid EBeakTip drawLine avgPoint /ETriangle defPoint ETriangle pointbox
+ETriangle EBeakCorner drawLine pathLineIntc dup length 0 gt {
+    sortByY lastElt /EBeakPoint defPoint EBeakPoint pointbox
+    EBeakPoint EBeakCorner subPoint magnitude
+    ETriangle EBeakCorner subPoint magnitude div
+} { 0 } ifelse
+
+(Beak darkness) exch stringOfText

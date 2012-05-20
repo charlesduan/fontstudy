@@ -1,0 +1,22 @@
+%Filename: ts1llx.fd
+%Created by: tex fontinst
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{ts1llx.fd}
+   [2004/05/01 Fontinst v1.801 font definitions for TS1/llx.]
+
+\DeclareFontFamily{TS1}{llx}{}
+
+\DeclareFontShape{TS1}{llx}{m}{n}{
+   <-> llxr8c
+}{}
+
+\DeclareFontShape{TS1}{llx}{m}{sl}{
+   <-> llxro8c
+}{}
+
+\DeclareFontShape{TS1}{llx}{m}{it}{<->ssub * llx/m/sl}{}
+
+\endinput

@@ -1,0 +1,28 @@
+\sectionname{Computer Modern}
+
+As discussed before, it is instructive to compare generated math fonts based on
+Computer Modern against the original Computer Modern fonts. In most respects,
+the generated fonts are indistinguishable from the originals. The two obvious
+distinctions, the thicker stems of the $\beta$ and $\gamma$ characters, are
+stylistic changes made in response to surveys observing that the stems of those
+two characters in the original font were too thin. Additionally, the large
+display operators (summation, product) are somewhat lighter than in the original
+fonts. This is a matter of taste for the user; the operators' darkness could be
+increased by simply raising the appropriate zoom factor.
+
+Under \emph{extremely} careful inspection on high-resolution output, there is
+one other difference. Small corners, such as the small hooks on the terminals of
+letters like $\eta$, $\iota$, and $\upsilon$ are sharper in the generated fonts
+than in the originals. This is due to the fact that, in Computer Modern, the
+corners of letters, in particular the corners of serifs, are sharp in the roman
+font but rounded in the italic. Since the ``corner roundness'' parameters are
+measured from the roman font rather than the italic, the generated math fonts
+have sharp corners as well. Note that this sharpness only affects very thin
+strokes, so it is barely noticeable at normal sizes.
+
+One possible way to correct this would be to measure corner diameter from the
+italic font instead. However, italic fonts tend to have a less-defined
+structure: the style of hooks, serifs, and other features differ a great deal
+between italic fonts. As a result, it is difficult to make assumptions about the
+shapes of characters for italic fonts, and so it is hard to find consistent ways
+of measuring fine parameters such as corner diameter.

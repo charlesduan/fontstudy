@@ -1,0 +1,87 @@
+GNU Ghostscript 6.52 (2001-10-20)
+Copyright (C) 2001 artofcode LLC, Benicia, CA.  All rights reserved.
+This software comes with NO WARRANTY: see the file COPYING for details.
+Loading NimbusRomNo9L-Regu font from /usr/share/fonts/default/Type1/n021003l.pfb... 2417736 1049441 1622424 328620 0 done.
+Loading NimbusSanL-Regu font from /usr/share/fonts/default/Type1/n019003l.pfb... 2755936 1354322 1642520 336084 0 done.
+Loading NimbusMonL-Regu font from /usr/share/fonts/default/Type1/n022003l.pfb... 3044948 1527826 1722904 399410 0 done.
+,-comma_depth = 145.0 # Comma depth
+.-dot_size = 148.0 # Dot size: 
+7-fig_height = 604.025 # fig_height
+=-math_axis = 282.507 # math_axis
+=-rule_thickness = 41.04 # Rule thickness
+A-A_inner_dark-serif = 0.818358 # Darkness of inner bracket
+A-A_jut-serif = 50.5317 # Jut of A
+A-A_jut_in-serif = 103.224 # Inner jut of A
+A-A_outer_bracket-serif = 33.4281 # Outer bracket of A, adjusted for dark
+A-apex_corr = 28.2626 # Apex correction
+A-apex_o = 0.0 # Apex overshoot (A)
+A-cap_hair = 37.9669 # Uppercase hair
+A-u = 48.4999 # Unit based on A
+C-superness = 0.696565 # Superness, C bottom left
+C-superpull-alt = 0.0351192 # Superpull
+C-superpull = 0.0143027 # Superpull
+E-arm_slab = 41.0399 # Arm thickness
+E-beak_darkness-serif = 0.0116754 # Beak darkness
+E-beak_jut-serif = -1.31686 # Beak jut
+E-beak_withbar-serif = 166.08 # Beak height
+E-cap_bar = 40.9874 # Capital bar
+E-hair-serif = 40.9394 # Hair by beak thickness
+F-F_jut-serif = 81.0268 # Leftward jut of F
+H-H_jut-serif = 72.9468 # H outer jut
+H-cap_bar = 41.04 # H bar
+H-cap_serif_space = 125.947 # Sidebearing distance
+I-bracket-serif = 56.7573 # Lowercase bracket (alt)
+I-cap_height = 563.067 # cap_height
+I-cap_jut-serif = 159.059 # Uppercase jut
+I-cap_stem = 41.04 # cap_stem
+I-crisp-serif = 41.8812 # Crisp
+I-dish-serif = 9.76771e-06 # Dish
+I-slab-serif = 41.04 # Serif thickness
+O-O_superness = 0.709191 # Superness, O bottom left
+O-O_superness = 0.709165 # Superness, O top left
+O-O_superness = 0.706507 # Superness, O bottom right
+O-O_superness = 0.712443 # Superness, O bottom right
+O-cap_curve-alt = 42.7809 # Lowercase curve (alt)
+O-cap_curve = 42.8488 # Lowercase curve
+O-o = 12.8786 # Top capital overshoot
+P-cap_curve = 41.0399 # Curve
+S-cap_ess = 38.7042 # Uppercase ess
+T-cap_bar = 41.0399 # T bar
+V-cap_hair = 38.2392 # Uppercase hair
+V-cap_stem = 40.8983 # Uppercase stem (thinned)
+V-tiny = 2.85407e-05 # Curvature of v apex
+Y-cap_hair = 38.4315 # Uppercase hair
+[-body_height = 605.025 # Body height
+b-u = 58.4 # Unit based on b
+d-stem = 41.055 # Lowercase stem
+Loading NimbusMonL-ReguObli font from /usr/share/fonts/default/Type1/n022023l.pfb... 3182188 1621155 1823384 401855 0 done.
+i-slant-ital = 0.212557 # Italic angle
+k-bar_height = 223.999 # bar_height
+l-asc_height = 604.025 # asc_height
+l-bracket-serif = 41.0667 # Lowercase bracket (alt)
+l-crisp-serif = 41.8812 # Crisp
+l-dish-serif = 9.76771e-06 # Dish
+l-serif_drop-ital = 6.5069 # Serif drop
+l-slab-serif = 41.04 # Serif thickness
+l-stem = 41.04 # Lowercase stem
+m-monowidth = 600.0 # Monospace
+n-jut-serif = 72.9468 # Lowercase jut
+n-thin_join = 33.737 # Thin join
+o-curve-alt = 41.2164 # Lowercase curve (alt)
+o-curve = 41.2418 # Lowercase curve
+o-o = 31.9466 # Bottom lowercase overshoot
+o-superness = 0.709085 # Superness, O bottom left
+o-superness = 0.707837 # Superness, O top left
+o-superness = 0.707094 # Superness, O bottom right
+o-superness = 0.710616 # Superness, O bottom right
+o-u = 60.816 # Unit based on o
+o-vair = 40.9481 # Lowercase vair (alt)
+o-vair_corr = 0.0952797 # Lowercase vair_corr
+q-desc_depth = 185.973 # desc_depth
+r-flare = 42.619 # Flare of tip
+s-ess = 39.5265 # Lowercase ess
+t-bar = 41.04 # Bar thickness
+v-hair = 38.9717 # Lowercase hair
+v-stem = 41.2238 # Lowercase stem (thinned)
+v-tiny = 2.22929e-05 # Curvature of v apex
+x-x_height = 417.027 # x_height

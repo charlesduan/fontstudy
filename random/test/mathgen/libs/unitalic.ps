@@ -1,0 +1,12 @@
+%!PS-Adobe-2.0
+
+%
+% Takes a font dictionary, makes a new font dictionary that is unitalicized, and
+% produces the new font.
+%
+
+/unitalic {
+    dup /FontInfo get /ItalicAngle get
+    dup sin exch cos div % Angle had better not be 90
+    [ 1 0 4 -1 roll 1 0 0 ] makefont
+} def

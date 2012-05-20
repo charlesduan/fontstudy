@@ -1,0 +1,41 @@
+%
+% v-tiny.ps
+%
+0.06 horizSplitLine pathLineIntc sortByX dup
+firstElt /vLStrokeOne defPoint lastElt /vRStrokeOne defPoint
+0.03 horizSplitLine pathLineIntc sortByX dup
+firstElt /vLStrokeTwo defPoint lastElt /vRStrokeTwo defPoint
+
+vLStrokeTwo vLStrokeOne subPoint 1000 scalePoint vLStrokeTwo addPoint
+vLStrokeOne drawLine
+vRStrokeTwo vRStrokeOne subPoint 1000 scalePoint vRStrokeTwo addPoint
+vRStrokeOne drawLine
+intersect pop % Assert true
+/vStrokeCorner defPoint
+vStrokeCorner pointbox
+
+% What is the angle of each of the lines? Then we can draw the angle bisector.
+/vLAngle vLStrokeTwo vLStrokeOne lineAngle def
+/vRAngle vRStrokeTwo vRStrokeOne lineAngle def
+
+% This calculates the angle of the angle bisector line
+vLAngle vRAngle sub 2 div vRAngle add
+
+% Make a line of this angle through the V's corner
+dup cos exch sin 1000 scalePoint vStrokeCorner addPoint
+vStrokeCorner
+
+pathLineIntc sortByY firstElt /vCorner defPoint
+vCorner uppointbox
+
+% vCorner - vStrokeCorner = l. (vLAngle - vRAngle) / 2 = theta.
+% We want to find the radius. We use the relation:
+% sin theta = r / (r + l)
+% which reduces to
+% r = l sin theta / (1 - sin theta)
+% If the denominator is zero, then the V has parallel strokes, which is silly.
+vLAngle vRAngle sub 2 div sin dup % n n
+vCorner vStrokeCorner subPoint magnitude mul exch % Numerator
+1 exch sub % Denominator
+div
+(Curvature of apex) exch stringOfText

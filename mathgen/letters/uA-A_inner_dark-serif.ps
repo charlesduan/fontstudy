@@ -1,0 +1,62 @@
+%
+% A-A_inner_dark.ps
+%
+flattenpath
+
+0.3 horizSplitLine pathLineIntc sortByX 0 2 getinterval loadArray
+/AInTop defPoint /ATop defPoint
+0.2 horizSplitLine pathLineIntc sortByX 0 2 getinterval loadArray
+/AInBot defPoint /ABot defPoint
+
+% Find the end of the serif
+{ ATop startAtPoint { 135 75 withinRange } endWhenAngle } traceSubpath
+subpathEndpoint
+{ startAtPoint { 225 gt } endBeforeAngle } traceSubpath
+subpathEndpoint /ASerifEdge defPoint
+
+% Line parallel to edge of A
+ABot ATop subPoint 4 scalePoint ATop addPoint ATop
+drawLine
+
+ASerifEdge horizLineThrough drawLine
+
+intersect pop /ACorner defPoint
+ACorner pointbox
+
+0.5 ABot ASerifEdge ACorner findBracket /ABracket defPoint
+
+ABracket horizLineThrough pathLineIntc sortByX 1 get /AInnerBracket defPoint
+AInnerBracket pointbox
+
+{ ABot startAtPoint AInBot endAtPoint } traceSubpath
+{ {
+    { 45 90 withinRange } startWhenAngle 
+    { 135 90 withinRange } endBeforeAngle
+  } traceSubpath
+} useSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByX lastElt /AOutSlab defPoint
+
+AInBot AInTop subPoint 5 scalePoint AInBot addPoint AInTop drawLine
+AOutSlab horizLineThrough drawLine
+intersect pop /AInCorner defPoint
+AInCorner pointbox
+AInCorner 0.2 scalePoint AOutSlab 0.8 scalePoint addPoint
+vertLineThrough pathLineIntc sortByY 1 get /AInSlabTop defPoint
+
+AOutSlab xcoor AInSlabTop ycoor /AInSlabCorner defPoint
+AInSlabCorner uppointbox
+
+AInnerBracket AInSlabCorner drawLine avgPoint /AInTriangle defPoint
+AInTriangle pointbox
+AInTriangle AInCorner pathLineIntc dup length 1 eq {
+    loadArray /ADarkness defPoint
+} {     
+    pop /ADarkness AInCorner defPoint
+} ifelse
+
+ADarkness AInCorner subPoint magnitude
+AInTriangle AInCorner subPoint magnitude
+div
+(Darkness of inner bracket) exch stringOfText

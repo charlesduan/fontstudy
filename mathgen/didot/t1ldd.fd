@@ -1,0 +1,29 @@
+%Filename: t1ldd.fd
+%Created by: tex fontinst
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{t1ldd.fd}
+   [2004/04/29 Fontinst v1.801 font definitions for T1/ldd.]
+
+\DeclareFontFamily{T1}{ldd}{}
+
+\DeclareFontShape{T1}{ldd}{m}{n}{
+   <-> lddr8t
+}{}
+
+\DeclareFontShape{T1}{ldd}{m}{sc}{
+   <-> lddrc8t
+}{}
+
+\DeclareFontShape{T1}{ldd}{m}{sl}{
+   <-> lddro8t
+}{}
+
+\DeclareFontShape{T1}{ldd}{m}{it}{
+   <-> lddri8t
+}{}
+
+
+\endinput

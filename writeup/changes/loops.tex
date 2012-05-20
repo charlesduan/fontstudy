@@ -1,0 +1,59 @@
+\sectionname{Loops in Characters}\label{s:loops}
+
+One of the larger changes to the font programs was the modification to small
+loops in characters. Loops appear in the $\beta$, $\zeta$, and $\xi$ characters;
+vertical loops occur in the $\gamma$ and $\omega$ characters.
+
+\begin{figure}
+\centering
+\newgray{grey}{0.5}
+\psset{linecolor=grey,linewidth=0.5}
+\begin{tabular}{c}
+\begin{pspicture}(0,0)(2,2)
+\psecurve(0.25,12)(0.25,2)(1,0.5)(1.75,1)(1,1.5)(0.25,0)(0.25,-10)
+\end{pspicture} \\
+Open, round \\ loop
+\end{tabular}
+\begin{tabular}{c}
+\begin{pspicture}(0,0)(2,2)
+\psecurve(0.25,12)(0.25,2)(1,0.80)(1.75,1)(1,1.20)(0.25,0)(0.25,-10)
+\end{pspicture} \\
+Closed, round \\ loop
+\end{tabular}
+\begin{tabular}{c}
+\begin{pspicture}(0,0)(2,2)
+\psbezier(0.25,2)(0.5,1)(1,1)(2,1)
+\psbezier(0.25,0)(0.5,1)(1,1)(2,1)
+\end{pspicture} \\
+Square loop \\ \hbox{}
+\end{tabular}
+\caption{Three different styles of loops used in the Computer Modern Greek
+fonts. The square loop will be chosen if the \emph{square\_ends} parameter is
+chosen. Otherwise, if the thickness of the loop strokes is less than the desired
+loop width, an open, round loop will be made. If the strokes would be too thick,
+a closed loop will be made.}
+\end{figure}
+
+In Computer Modern, the hairline stroke width is small enough that an entire
+loop can be drawn, leaving some empty space in the middle of the loop. In other
+fonts such as Helvetica this is not the case. Because the edges of the loop
+cannot overlap (otherwise the stroke filling routine would cause an error), the
+Computer Modern programs originally just thinned the stroke width until the
+strokes of the loop no longer overlapped. This was unsatisfactory for monowidth
+fonts like Helvetica; the unexpected truncation of the strokes caused those
+letters with loops to look undesirably thin.
+
+To solve this problem, an entirely new loop drawing routine was installed. If
+the edges of the loop did not collide, then a loop was drawn as normal.
+Otherwise, the loop was treated as just an ellipse to be filled in, and the
+incoming strokes that would have made up the loop retained their widths and just
+terminated within the filled ellipse.
+
+Additionally, modifications were made for fonts with square ends rather than
+round ones. In that case, loops were always closed so that the edges collided,
+and a rectangle was drawn rather than an ellipse. This made the ``loops'' appear
+stylistically much more consistent with other characters in the typeface.
+
+As examples, the Helvetica and Palatino fonts use loops with square ends. The
+Didot and Tiffany fonts have round, open loops, and New Century Schoolbook
+demonstrates round, closed loops.

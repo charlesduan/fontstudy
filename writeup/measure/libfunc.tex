@@ -1,0 +1,41 @@
+\sectionname{Functions Provided by the Library}
+
+The library provides functions for determining several properties of a given
+character outline. The more important functions are described below.
+
+\paragraph{Intersections} It is often useful to identify the intersection of a
+character's outline with a straight line. A routine is provided to find all the
+intersections between a line segment and the character, and the user of the
+function may then pick the relevant intersection by sorting the list of
+identified points.
+
+\paragraph{Extremes} It is also useful to identify extreme points on the curve
+(highest, lowest, furthest left or right). A general routine returns all local
+extrema on the curve; the user can identify the proper one by sorting through
+the list.
+
+\paragraph{Subpaths} Often it is desirable to perform an operation on only a
+small portion of the character outline rather than the entire outline. The
+subpath operation allows the user to select a portion of the outline and then
+perform operations on it alone. The subpath may be defined by a starting and
+ending point; the user can also specify a subpath to end when the direction in
+which the path is traveling meets a certain condition (e.g., the subpath should
+stop before it starts traveling straight upward).
+
+\paragraph{Point Operations} A general set of ``convenience functions'' are
+provided for adding, subtracting, scaling, averaging, and otherwise manipulating
+two-dimensional coordinates.
+
+\paragraph{Line Operations} Functions are also given that allow the user to draw
+various lines by specification, such as lines traveling through a point with a
+given angle. Such operations are useful for constructing lines to be fed into
+the path intersection routine above.
+
+\paragraph{Iteration} Although this is not specific to the library (the
+PostScript language provides iteration constructs), iteration is useful for
+performing, say, several measurements and then taking the minimum value found.
+
+The above operations are, in fact, sufficient to perform reasonably accurate
+measurements of all the parameters for the Computer Modern programs; they also
+allow us to perform other measurements such as character spacing and accent
+placement, discussed later.

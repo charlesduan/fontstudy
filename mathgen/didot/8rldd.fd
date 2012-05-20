@@ -1,0 +1,25 @@
+%Filename: 8rldd.fd
+%Created by: tex fontinst
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{8rldd.fd}
+   [2004/04/29 Fontinst v1.801 font definitions for 8r/ldd.]
+
+\DeclareFontFamily{8r}{ldd}{}
+
+\DeclareFontShape{8r}{ldd}{m}{n}{
+   <-> lddr8r
+}{}
+
+\DeclareFontShape{8r}{ldd}{m}{sl}{
+   <-> lddro8r
+}{}
+
+\DeclareFontShape{8r}{ldd}{m}{it}{
+   <-> lddri8r
+}{}
+
+
+\endinput

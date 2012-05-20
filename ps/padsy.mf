@@ -1,0 +1,115 @@
+if unknown cmbase: input cmbase; fi
+font_identifier := "padsy";
+font_size 10 pt#;
+                   u# :=     51.456/100 pt#;
+           width_adj# :=      0.000/100 pt#;
+           serif_fit# :=      0.000/100 pt#;
+       cap_serif_fit# :=     12.106/100 pt#;
+          letter_fit# :=      0.000/100 pt#;
+         body_height# :=    772.186/100 pt#;
+          asc_height# :=    714.987/100 pt#;
+          cap_height# :=    663.025/100 pt#;
+          fig_height# :=    628.998/100 pt#;
+            x_height# :=    396.999/100 pt#;
+           math_axis# :=    205.467/100 pt#;
+          bar_height# :=    214.047/100 pt#;
+         comma_depth# :=    121.000/100 pt#;
+          desc_depth# :=    257.973/100 pt#;
+               crisp# :=     20.416/100 pt#;
+                tiny# :=     14.111/100 pt#;
+                fine# :=     26.481/100 pt#;
+           thin_join# :=     26.821/100 pt#;
+                hair# :=     33.526/100 pt#;
+                stem# :=     74.040/100 pt#;
+               curve# :=     86.393/100 pt#;
+                 ess# :=     75.917/100 pt#;
+               flare# :=     85.960/100 pt#;
+            dot_size# :=    111.960/100 pt#;
+            cap_hair# :=     36.257/100 pt#;
+            cap_stem# :=     80.826/100 pt#;
+           cap_curve# :=    100.949/100 pt#;
+             cap_ess# :=     92.024/100 pt#;
+      rule_thickness# :=     48.960/100 pt#;
+                dish# :=      3.027/100 pt#;
+             bracket# :=    107.094/100 pt#;
+                 jut# :=     66.288/100 pt#;
+             cap_jut# :=     89.675/100 pt#;
+            beak_jut# :=     16.000/100 pt#;
+                beak# :=    112.769/100 pt#;
+                vair# :=     30.597/100 pt#;
+           notch_cut# :=   1000.000/100 pt#;
+                 bar# :=     42.000/100 pt#;
+                slab# :=     25.847/100 pt#;
+             cap_bar# :=     30.960/100 pt#;
+            cap_band# :=     30.960/100 pt#;
+       cap_notch_cut# :=   1000.000/100 pt#;
+          serif_drop# :=     42.674/100 pt#;
+           stem_corr# :=      0.000/100 pt#;
+           vair_corr# :=      0.507/100 pt#;
+           apex_corr# :=      0.000/100 pt#;
+                   o# :=     27.947/100 pt#;
+              apex_o# :=      8.667/100 pt#;
+               A_jut# :=    107.924/100 pt#;
+            A_jut_in# :=    109.881/100 pt#;
+     A_outer_bracket# :=     39.977/100 pt#;
+        A_inner_dark  :=    0.45948;
+               slant  :=    0.33459;
+               fudge  :=          1;
+         math_spread  :=          0;
+           superness  :=    0.70711;
+           superpull  :=    0.16667;
+       beak_darkness  :=    0.44027;
+                ligs  :=          2;
+         square_dots  :=      false;
+               hefty  :=      false;
+              serifs  :=       true;
+           monospace  :=      false;
+           variant_g  :=       true;
+        low_asterisk  :=      false;
+        math_fitting  :=       true;
+% the following font parameters are explained in {\sl The \TeX book}, Appendix G
+subs:=7/10;  % subscripts to 10pt will normally be in 7pt type
+rth#:=.4pt#;  % assume that rules will come from cmex10
+fontdimen 8:  % parameters $\sigma_8 $sigma_{22} now be listed
+ math_axis#+3.51rth#+54/36pt#+subs*desc_depth#,      % num1
+ math_axis#+1.51rth#+30/36pt#,          % num2
+ math_axis#+1.51rth#+48/36pt#,          % num3
+ -(math_axis#-3.51rth#-subs*fig_height#-124/36pt#),    % denom1
+ -(math_axis#-1.51rth#-subs*fig_height#-30/36pt#),    % denom2
+ 8.99pt#-subs*asc_height#,          % sup1
+ 8.49pt#-subs*asc_height#,          % sup2
+ 104/36pt#,              % sup3
+ 54/36pt#,              % sub1
+ -(8.49pt#-2subs*asc_height#-3.1rth#),        % sub2
+ subs*asc_height#-36/36pt#,          % sup\_drop
+ 18/36pt#,              % sub\_drop
+ 23.9pt#,              % delim1
+ 10.1pt#,              % delim2
+ math_axis#;              % axis\_height
+
+font_coding_scheme:="TeX math symbols";
+mode_setup; font_setup;
+
+autorounding:=hair;
+input calu;  % upper case calligraphic alphabet
+autorounding:=0;
+
+font_slant slant; font_x_height x_height#;
+font_quad 18u# if not monospace:+4letter_fit# fi;
+
+slant:=mono_charic#:=0;  % the remaining characters will not be slanted
+currenttransform:=identity yscaled aspect_ratio scaled granularity;
+input symbol;  % the symbols
+
+if not monospace:
+ skewchar=oct"060"; skew#=.5u#;
+ ligtable "I": "T": "V": skewchar kern skew#;
+ ligtable "K": skewchar kern 2skew#;
+ ligtable "D": "N": "P": "R": "U": "W": "Y": skewchar kern 3skew#;
+ ligtable "E": "F": "G": "H": "O": "Q": skewchar kern 4skew#;
+ ligtable "B": "C": "L": "M": "S": "X": "Z": skewchar kern 5skew#;
+ ligtable "J": skewchar kern 6skew#;
+ ligtable "A": skewchar kern 7skew#;
+fi;
+bye.
+

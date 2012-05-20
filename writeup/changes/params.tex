@@ -1,0 +1,70 @@
+\sectionname{New Parameters Added}\label{s:params}
+
+The Computer Modern fonts were built out of sixty-two parameters defining
+various dimensions and qualities of the letters. Naturally, even the most
+standard-looking text fonts do not conform with the constraints of these
+parameters, so in developing compatible math fonts it was necessary to add in
+new parameters.
+
+\paragraph{Arm Thickness} The thickness of the central bar in the $\Pi$
+character and the arms in the $\Sigma$ and $\Gamma$ characters were originally
+equivalent to the thickness of serifs. This produced undesirably thin lines in
+fonts like Times Roman, where the serifs are very thin but the arms are
+substantially thicker. The thickness of the $\Pi$ bar was made equal to the
+thickness of the ``T'' crossbar, and the arms were made the same thickness as
+the upper arm in the letter ``F.''
+
+\paragraph{Diagonal Serif Bracket} The \emph{bracket} parameter defines the
+amount of curvature between serifs and stems. This parameter is usually measured
+for a thick, vertical stem. When a serif is attached to a thin or diagonal stem,
+such as in the letters A or $\Lambda$, the amount of curvature must be adjusted.
+However, the adjustment is not parametrized, so for certain fonts the resulting
+curvature can appear fairly ridiculous.
+
+Luckily, the only serifs that show this problem are in the $\Lambda$ character,
+so a separate \emph{bracket} parameter is measured based on the serifs of the
+letter A. This provides a very accurate measurement, and the serifs are much
+more compatible.
+
+\begin{figure}
+\centering
+\newgray{grey}{0.5}
+\psset{linewidth=0.5,linecolor=grey}
+\begin{tabular}{c}
+\begin{pspicture}(0,0)(3,4)
+\psset{curvature=0.8 0.1 0}
+\psccurve(1.5,0.25)(2.75,2)(1.5,3.75)(0.25,2)
+\end{pspicture} \\
+Low \emph{superness}
+\end{tabular}
+\begin{tabular}{c}
+\begin{pspicture}(0,0)(3,4)
+\psset{curvature=1.5 -1 0}
+\psccurve(1.5,0.25)(2.75,2)(1.5,3.75)(0.25,2)
+\end{pspicture} \\
+High \emph{superness}
+\end{tabular}
+\caption{The \emph{superness} parameter. Low values will result in
+diamond-shaped bowls; high values will create square-shaped bowls. The value
+ranges from 0 to 1; a perfectly circular bowl is created with a \emph{superness}
+values of $\sqrt{2}$.}
+\label{f:superness}
+\end{figure}
+
+\paragraph{Superness of O} The \emph{superness} parameter determines how round
+or square circular arcs will appear, as explained in Figure~\ref{f:superness}.
+For the letter ``O,'' the superness value is often different from the rest of
+the font, primarily because the letter is so round that it requires special
+treatment. As a result, the superness of the O is measured separately from the
+general superness value for the font, and that special value is used only for
+the $\Theta$ character.
+
+\paragraph{Capital Serif Jut} The amount by which serifs extend from the main
+stem of uppercase Greek letters is encapsulated in Computer Modern by a single
+parameter, the \emph{cap\_jut}. In most fonts, the serif jut varies depending on
+the character's shape. As a result, for the uppercase Greek letters, four
+different serif jut values are measured and applied to different characters. For
+the $\Gamma$ character's bottom serif, the length is determined by the bottom
+serif of the uppercase F. For the $\Lambda$ character the serif jut is
+determined by the capital A. For $\Pi$ it is determined by H, and the others
+($\Upsilon$, $\Phi$, $\Psi$) are determined by I.

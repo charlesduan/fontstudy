@@ -1,0 +1,16 @@
+This is MetaPost, Version 0.641 (Web2C 7.3.1) (INIMP)  17 MAR 2004 10:30
+**\input mf2pt1; dump
+(mf2pt1.mp (/usr/share/texmf/metapost/base/mfplain.mp
+Preloading the plain base, version 0.62: preliminaries,
+ basic constants and mathematical macros,
+ macros for converting units,
+ macros and tables for various modes of operation,
+ macros for drawing and filling,
+ macros for proof labels and rules,
+ macros for character and font administration,
+and a few last-minute items.) (roex.mf))
+Beginning to dump on file mf2pt1.mem
+ (mem=mf2pt1 2004.3.17)
+at most 1940 strings of total length 28542
+16254 memory locations dumped; current usage is 2745&13448
+809 symbolic tokens

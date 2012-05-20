@@ -1,0 +1,24 @@
+%
+% t-hair.ps
+%
+flattenpath
+
+pathExtremes sortByY firstElt
+vertLineThrough pathLineIntc sortByY 0 2 getinterval loadArray
+/PointB defPoint /PointA defPoint
+{
+    PointA startAtPoint
+    { 90 90 withinRange } endBeforeAngle
+} traceSubpath
+drawSubpath
+subpathEndpoint ycoor 0.6 mul 0 exch
+horizLineThrough pathLineIntc sortByX lastElt
+/cHairOuter defPoint
+cHairOuter cHairOuter pathAngle pop perpThroughPoint
+pathLineIntc sortByX revArray 1 get
+/cHairInner defPoint
+cHairOuter pointbox cHairInner pointbox
+
+cHairOuter cHairInner subPoint magnitude
+
+(Lowercase hair) exch stringOfText

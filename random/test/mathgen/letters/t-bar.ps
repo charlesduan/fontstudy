@@ -1,0 +1,14 @@
+%
+% t-bar.ps
+%
+0.5 horizSplitLine pathLineIntc sortByX 1 get loadArray
+20 0 addPoint vertLineThrough pathLineIntc sortByY revArray
+0 2 getinterval loadArray
+/tBarBot defPoint /tBarTop defPoint
+tBarBot pointbox tBarTop uppointbox
+
+(Bar thickness)
+tBarTop ycoor tBarBot ycoor sub
+stringOfText
+
+

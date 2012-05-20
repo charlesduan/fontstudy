@@ -1,0 +1,45 @@
+\baselineskip=35pt
+
+\font\test padmi at 30pt
+\font\orig cmmi10 at 30pt
+\rightskip=0pt plus 1fil \parfillskip=0pt
+\test
+\newcount\testcount \testcount=0
+
+\loop\char\testcount\kern 2pt{\orig\char\testcount}
+\ifnum\testcount<255\advance\testcount1\repeat
+
+\font\pad pncri8t at 30pt
+\pad
+{\test\char'017\/}e {\test\char'026\/}u {\test\char'016\/}d
+{\test\char'032\/}p
+{\test\char'021\/}n
+
+\font\pad pncr8t at 30pt
+\pad
+\par
+{\test\char'017\/}e {\test\char'026\/}u {\test\char'016\/}d
+{\test\char'032\/}p
+{\test\char'021\/}n
+
+
+\font\test padr at 30pt
+\font\orig cmr10 at 30pt
+\rightskip=0pt plus 1fil \parfillskip=0pt
+\test
+\newcount\testcount \testcount=0
+
+\loop\char\testcount\hskip 2pt{\orig\char\testcount}\hskip 2pt
+\ifnum\testcount<10\advance\testcount1\repeat
+
+\font\pad pncr8t at 30pt
+\pad
+{\test\char1\/}A{\test\char3\/}
+\quad
+Fv{\test\char0\/}E L
+\quad
+O{\test\char2\/}
+\quad
+Y{\test\char7\/}
+
+\bye

@@ -1,0 +1,26 @@
+%Filename: ot1llx.fd
+%Created by: tex fontinst
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{ot1llx.fd}
+   [2004/05/01 Fontinst v1.801 font definitions for OT1/llx.]
+
+\DeclareFontFamily{OT1}{llx}{}
+
+\DeclareFontShape{OT1}{llx}{m}{n}{
+   <-> llxr7t
+}{}
+
+\DeclareFontShape{OT1}{llx}{m}{sc}{
+   <-> llxrc7t
+}{}
+
+\DeclareFontShape{OT1}{llx}{m}{sl}{
+   <-> llxro7t
+}{}
+
+\DeclareFontShape{OT1}{llx}{m}{it}{<->ssub * llx/m/sl}{}
+
+\endinput

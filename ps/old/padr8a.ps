@@ -1,0 +1,891 @@
+%!PS-Adobe-2.0
+
+%%EndComments
+%%BeginProlog
+%%BeginResource: pathtricks
+
+(all.ps) run
+
+(padr8a.pfa) run
+(padri8a.pfa) run
+(cmr10.pfa) run
+%%EndResource
+%%EndProlog
+
+%%BeginSetup
+/AGaramond-Regular findfont 1000 scalefont unitalic setfont
+/doTranslation {
+    50 200 translate
+    0.6 0.6 scale
+} def
+
+/resetPage {
+    doTranslation
+    resetExtremes
+    resetIntc
+    resetText
+} def
+
+
+% Measure height of path
+/measureHeight {
+    gsave
+	flattenpath pathUR ycoor
+	dup drawHorizLine
+    grestore
+} def
+/measureDepth {
+    gsave
+	flattenpath pathLL ycoor
+	dup drawHorizLine
+	neg
+    grestore
+} def
+
+gsave
+    nulldevice
+    0 0 moveto (x) true charpath flattenpath
+    pathbbox /XHeight exch def pop pop pop
+grestore
+
+
+%%EndSetup
+
+%%Page: 1 1
+resetPage
+
+([]) letterPath
+
+
+(body_height is: )
+measureHeight
+stringOfText
+
+(body_depth is: )
+measureDepth
+stringOfText
+
+showpage
+
+%%Page: 2 2
+resetPage
+
+(ql) letterPath
+
+(asc_height is: )
+measureHeight
+stringOfText
+
+(desc_depth is: )
+measureDepth
+stringOfText
+
+showpage
+
+%%Page: 3 3
+
+resetPage
+
+(I) letterPath
+
+(cap_height is: )
+measureHeight
+stringOfText
+
+0.5 horizSplitLine pathLineIntc
+{ 2 copy pointbox } forallPoint
+subPoint magnitude
+(cap_stem is: ) exch stringOfText
+
+showpage
+
+%%Page: 4 4
+
+resetPage
+
+(7) letterPath
+
+(fig_height is: )
+measureHeight
+stringOfText
+
+showpage
+
+%%Page: 5 5
+
+resetPage
+
+(x) letterPath
+
+(x_height is: )
+measureHeight
+stringOfText
+
+(x-height is supposed to be: )
+XHeight
+stringOfText
+
+showpage
+
+%%Page: 6 6
+
+resetPage
+
+(,) letterPath
+
+(comma_depth is: )
+measureDepth
+stringOfText
+
+showpage
+
+%%Page: 7 7
+
+resetPage
+
+(=) letterPath
+
+(math_axis is: )
+measureHeight
+measureDepth neg
+add 2 div dup 0 exch pointbox
+stringOfText
+
+showpage
+
+%%Page: 8 8
+
+resetPage
+
+% bar_height
+%
+% This is tricky, since the bar of the "e" is an especially bad indicator! We
+% will use the join of the "k" instead.
+%
+% Algorithm: find the stem of the "k". Find two points on the stem halfway
+% through the letter, and draw the path between them that contains 
+(k) letterPath
+flattenpath
+
+% This line should be well below the junction point.
+0.1 horizSplitLine pathLineIntc sortByX
+1 get /kInnerLowerBar defPoint
+{ kInnerLowerBar startAtPoint { 270 gt } endWhenAngle } traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath sortByY lastElt /kJoinBot defPoint
+kJoinBot pointbox
+
+0 XHeight 0.9 mul horizLineThrough pathLineIntc sortByX
+2 get /kInnerUpperStroke defPoint
+{
+    kInnerUpperStroke startAtPoint
+    { 45 90 withinRange } endWhenAngle
+} traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath sortByY firstElt /kJoinTop defPoint
+kJoinTop uppointbox
+
+(bar_height: )
+kJoinTop ycoor kJoinBot ycoor add 2 div
+stringOfText
+
+
+% TODO Finish this
+showpage
+
+%%Page: 9 9
+
+resetPage
+
+(I) letterPath
+measureHeight
+measureDepth
+(O) letterPath
+measureHeight
+measureDepth
+
+subPoint exch neg
+(Top capital overshoot: ) exch stringOfText
+(Bottom capital overshoot: ) exch stringOfText
+
+
+showpage
+
+%%Page: 10 10
+resetPage
+
+(x) letterPath
+measureHeight
+measureDepth
+(o) letterPath
+measureHeight
+measureDepth
+
+subPoint exch neg
+(Top lowercase overshoot: ) exch stringOfText
+(Bottom lowercase overshoot: ) exch stringOfText
+
+showpage
+
+%%Page: 11 11
+resetPage
+
+(V) letterPath
+
+0.5 horizSplitLine pathLineIntc
+sortByX 0 get loadArray
+2 copy pathAngle {
+    perpThroughPoint
+	resetIntc
+    pathLineIntc sortByX
+    0 2 getinterval { 2 copy pointbox } forallPoint
+    subPoint magnitude
+    (Uppercase stem (thinned): ) exch stringOfText
+} {
+    pop pop
+} ifelse
+
+0.5 horizSplitLine pathLineIntc
+sortByX 3 get loadArray
+2 copy pathAngle {
+    perpThroughPoint
+	resetIntc
+    pathLineIntc sortByX revArray
+    0 2 getinterval { 2 copy pointbox } forallPoint
+    subPoint magnitude
+    (Uppercase hair: ) exch stringOfText
+} {
+    pop pop
+} ifelse
+
+0 drawHorizLine
+
+(Capital apex overshoot: )
+measureDepth neg
+stringOfText
+
+showpage
+
+%%Page: 12 12
+resetPage
+
+(v) letterPath
+
+0.5 horizSplitLine pathLineIntc
+sortByX 0 get loadArray
+2 copy pathAngle {
+    perpThroughPoint
+	resetIntc
+    pathLineIntc sortByX
+    0 2 getinterval { 2 copy pointbox } forallPoint
+    subPoint magnitude
+    (Lowercase stem (thinned): ) exch stringOfText
+} {
+    pop pop
+} ifelse
+
+0.5 horizSplitLine pathLineIntc
+sortByX 3 get loadArray
+2 copy pathAngle {
+    perpThroughPoint
+	resetIntc
+    pathLineIntc sortByX revArray
+    0 2 getinterval { 2 copy pointbox } forallPoint
+    subPoint magnitude
+    (Lowercase hair: ) exch stringOfText
+} {
+    pop pop
+} ifelse
+
+0 drawHorizLine
+
+(Lowercase apex overshoot: )
+measureDepth neg
+stringOfText
+
+showpage
+
+%%Page: 13 13
+resetPage
+(n) letterPath
+flattenpath
+
+0.5 horizSplitLine pathLineIntc sortByX lastElt /nOuterRight defPoint
+nOuterRight pointbox
+{ nOuterRight startAtPoint { 180 gt } endWhenAngle } traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath sortByY lastElt /nArchTop defPoint
+nArchTop uppointbox
+nArchTop vertLineThrough pathLineIntc sortByY revArray 1 get /nArchIn defPoint
+nArchIn pointbox
+
+(Lowercase vair: ) nArchTop ycoor nArchIn ycoor sub stringOfText
+
+0.5 horizSplitLine pathLineIntc sortByX 1 get /nInnerLeft defPoint
+{ nInnerLeft startAtPoint { 270 gt } endWhenAngle } traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath sortByY lastElt /nArchIn2 defPoint
+nArchIn2 pointbox
+(Lowercase vair: ) nArchTop ycoor nArchIn2 ycoor sub stringOfText
+
+350 0 translate
+
+(o) letterPath
+
+pathExtremes /oExtremes exch def
+
+oExtremes sortByY lastElt loadArray
+
+vertLineThrough pathLineIntc sortByY revArray
+0 2 getinterval loadArray /oTopBot defPoint /oTopTop defPoint
+oTopBot pointbox oTopTop uppointbox
+
+oTopTop ycoor oTopBot ycoor sub
+(Lowercase vair \(adj\): ) exch stringOfText
+
+oExtremes sortByY firstElt loadArray
+vertLineThrough pathLineIntc sortByY
+0 2 getinterval loadArray /oBotTop defPoint /oBotBot defPoint
+oBotBot pointbox oBotTop uppointbox
+
+oBotTop ycoor oBotBot ycoor sub
+(Lowercase vair: ) exch stringOfText
+
+
+oExtremes sortByX dup
+firstElt loadArray
+horizLineThrough pathLineIntc sortByX
+0 2 getinterval
+{ 2 copy pointbox } forallPoint
+subPoint magnitude
+(Lowercase curve: ) exch stringOfText
+
+lastElt loadArray
+horizLineThrough pathLineIntc sortByX
+2 2 getinterval
+{ 2 copy uppointbox } forallPoint
+subPoint magnitude
+(Lowercase curve \(alt\): ) exch stringOfText
+
+showpage
+
+%%Page: 14 14
+
+resetPage
+(c) letterPath
+flattenpath
+
+0.5 vertSplitLine pathLineIntc sortByY 0 2 getinterval loadArray
+/PointB defPoint /PointA defPoint
+{
+    PointA startAtPoint
+    { 90 90 withinRange } endBeforeAngle
+} traceSubpath
+drawSubpath
+subpathEndpoint 0 10 subPoint horizLineThrough pathLineIntc sortByX lastElt
+/cHairOuter defPoint
+cHairOuter cHairOuter pathAngle pop perpThroughPoint
+pathLineIntc sortByX revArray 1 get
+/cHairInner defPoint
+cHairOuter pointbox cHairInner pointbox
+
+cHairOuter cHairInner subPoint magnitude
+
+(Lowercase hair: ) exch stringOfText
+
+400 0 translate
+
+(l) letterPath
+flattenpath
+
+0.5 horizSplitLine pathLineIntc sortByX
+{ 2 copy pointbox } forallPoint
+/lStemRight defPoint /lStemLeft defPoint
+lStemRight lStemLeft subPoint magnitude
+(Lowercase stem: ) exch stringOfText
+
+{ lStemLeft startAtPoint lStemRight endAtPoint } traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByX lastElt loadArray
+2 copy rtpointbox
+xcoor lStemRight xcoor sub
+(Lowercase jut: ) exch stringOfText
+
+{ lStemRight startAtPoint lStemLeft endAtPoint } traceSubpath
+{ {
+    { 135 90 withinRange } startWhenAngle
+    { 225 90 withinRange } endBeforeAngle
+} traceSubpath } useSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByY dup firstElt /lTopSerifBot defPoint
+lastElt /lTopSerifTop defPoint
+lTopSerifBot pointbox
+lTopSerifTop uppointbox
+
+(Serif drop: )
+lTopSerifTop ycoor lTopSerifBot ycoor sub 0 max
+stringOfText
+
+
+showpage
+
+%%Page: 15 15
+
+resetPage
+
+(l) letterPath
+
+0.5 vertSplitLine pathLineIntc sortByY firstElt /lBottomPoint defPoint
+0.5 horizSplitLine pathLineIntc sortByX lastElt /lRightPoint defPoint
+lBottomPoint pointbox
+lRightPoint rtpointbox
+
+{ lBottomPoint startAtPoint lRightPoint endAtPoint } traceSubpath
+{ {
+    flattenpath
+    { 45 90 withinRange } startWhenAngle 
+    { 135 90 withinRange } endBeforeAngle
+  } traceSubpath
+} useSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByY dup firstElt /lBotSlab defPoint
+lastElt /lTopSlab defPoint
+lBotSlab pointbox
+lTopSlab uppointbox
+
+(Serif thickness: )
+lTopSlab ycoor
+lBotSlab ycoor sub
+stringOfText
+
+(Dish: )
+lBottomPoint ycoor
+lBotSlab ycoor sub
+0 max
+stringOfText
+
+{
+    lTopSlab startAtPoint
+    { 80 20 withinRange } endBeforeStartAngle
+} traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath sortByY lastElt /lBracketTop defPoint
+lBracketTop rtpointbox
+lBracketTop ycoor lTopSlab ycoor sub 0 max
+(Bracket: ) exch stringOfText
+
+
+400 0 translate
+
+(I) letterPath
+
+0.5 vertSplitLine pathLineIntc sortByY firstElt /lBottomPoint defPoint
+0.5 horizSplitLine pathLineIntc sortByX lastElt /lRightPoint defPoint
+lBottomPoint pointbox
+lRightPoint rtpointbox
+
+{ lBottomPoint startAtPoint lRightPoint endAtPoint } traceSubpath
+{ {
+    flattenpath
+    { 45 90 withinRange } startWhenAngle 
+    { 135 90 withinRange } endBeforeAngle
+  } traceSubpath
+} useSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByY dup firstElt /lBotSlab defPoint
+lastElt /lTopSlab defPoint
+lBotSlab pointbox
+lTopSlab uppointbox
+
+(Serif thickness: )
+lTopSlab ycoor
+lBotSlab ycoor sub
+stringOfText
+
+(Dish: )
+lBottomPoint ycoor
+lBotSlab ycoor sub
+0 max
+stringOfText
+
+{
+    lTopSlab startAtPoint
+    { 80 20 withinRange } endBeforeStartAngle
+} traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath sortByY lastElt /lBracketTop defPoint
+lBracketTop rtpointbox
+lBracketTop ycoor lTopSlab ycoor sub 0 max
+(Bracket: ) exch stringOfText
+
+showpage
+
+%%Page: 16 16
+resetPage
+
+(r) letterPath
+flattenpath
+0.3 horizSplitLine pathLineIntc sortByX lastElt /rStemRight defPoint
+{ rStemRight startAtPoint { 270 gt } endWhenAngle } traceSubpath
+subpathEndpoint /rInnerCurveTop defPoint
+{ rInnerCurveTop startAtPoint { 90 lt } endWhenAngle } traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath sortByY firstElt /rFlareBot defPoint
+rFlareBot pointbox
+rFlareBot vertLineThrough pathLineIntc sortByY lastElt /rFlareTop defPoint
+rFlareTop uppointbox
+
+(Flare of tip: )
+rFlareTop ycoor rFlareBot ycoor sub
+stringOfText
+
+showpage
+
+%%Page: 17 17
+resetPage
+(o) letterPath
+
+pathExtremes sortByY lastElt loadArray
+
+vertLineThrough pathLineIntc sortByY
+2 2 getinterval
+{ 2 copy pointbox } forallPoint
+subPoint magnitude /oTopVair exch def
+
+pathExtremes sortByY firstElt loadArray
+vertLineThrough pathLineIntc sortByY
+0 2 getinterval
+{ 2 copy pointbox } forallPoint
+subPoint magnitude /oBotVair exch def
+
+(vair_corr based on lowercase o: )
+oBotVair oTopVair sub 0 max
+stringOfText
+
+(O) letterPath
+
+pathExtremes sortByY lastElt loadArray
+
+vertLineThrough pathLineIntc sortByY
+2 2 getinterval
+{ 2 copy pointbox } forallPoint
+subPoint magnitude /OTopVair exch def
+
+pathExtremes sortByY firstElt loadArray
+vertLineThrough pathLineIntc sortByY
+0 2 getinterval
+{ 2 copy pointbox } forallPoint
+subPoint magnitude /OBotVair exch def
+
+(vair_corr based on uppercase O: )
+OTopVair oTopVair sub 0 max
+stringOfText
+
+(Alternate vair_corr based on uppercase O: )
+OBotVair OTopVair sub 0 max 2 mul
+stringOfText
+
+showpage
+
+%%Page: 18 18
+
+resetPage
+
+(t) letterPath
+
+0.5 horizSplitLine pathLineIntc sortByX lastElt loadArray
+20 0 addPoint vertLineThrough pathLineIntc sortByY
+dup dup length 2 sub get /tBarBot defPoint lastElt /tBarTop defPoint
+tBarBot pointbox tBarTop uppointbox
+
+(Bar thickness: )
+tBarTop ycoor tBarBot ycoor sub
+stringOfText
+
+400 0 translate
+
+(e) letterPath
+
+0.5 vertSplitLine pathLineIntc sortByY 2 2 getinterval loadArray
+/eBarTop defPoint /eBarBot defPoint
+eBarBot pointbox eBarTop uppointbox
+
+(Bar thickness: )
+eBarTop ycoor eBarBot ycoor sub
+stringOfText
+
+showpage
+
+%%Page: 19 19
+resetPage
+
+(T) letterPath
+
+0.2 horizSplitLine pathLineIntc sortByX loadArray
+/TStemRight defPoint /TStemLeft defPoint
+TStemRight pointbox TStemLeft pointbox
+
+{
+    TStemRight startAtPoint
+    { dup 0 eq exch 270 gt or } endWhenAngle
+} traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath sortByY lastElt /TRightBarBot defPoint
+TRightBarBot pointbox
+
+TRightBarBot vertLineThrough pathLineIntc sortByY lastElt /TRightBarTop defPoint
+TRightBarTop uppointbox
+
+(T bar: ) TRightBarTop ycoor TRightBarBot ycoor sub stringOfText
+
+(H) letterPath
+
+0.5 vertSplitLine pathLineIntc sortByY loadArray
+/HBarTop defPoint /HBarBot defPoint
+HBarTop uppointbox HBarBot pointbox
+
+(H bar: ) HBarTop ycoor HBarBot ycoor sub stringOfText
+
+showpage
+
+%%Page: 20 20
+resetPage
+
+(E) letterPath
+flattenpath
+
+
+0.5 vertSplitLine pathLineIntc sortByY /EVertSplit exch def
+EVertSplit 2 2 getinterval loadArray
+/EBarTop defPoint /EBarBot defPoint
+
+0.2 horizSplitLine pathLineIntc sortByX 1 get
+{ startAtPoint EBarBot endAtPoint } traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath sortByY lastElt /EBarBot defPoint
+{ EBarTop startAtPoint { 170 lt } endWhenAngle } traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath sortByY firstElt /EBarTop defPoint
+EBarTop uppointbox EBarBot pointbox
+
+(Capital bar: )
+EBarTop ycoor EBarBot ycoor sub
+stringOfText
+
+EVertSplit 4 2 getinterval loadArray
+/ETopTop defPoint /ETopBot defPoint
+{ ETopBot startAtPoint ETopTop endAtPoint } traceSubpath
+{ {
+    { 75 90 withinRange } startWhenAngle
+    { 165 90 withinRange } endBeforeAngle
+  } traceSubpath
+} useSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByY dup firstElt /EBeakBot defPoint lastElt /EBeakTop defPoint
+EBeakBot pointbox EBeakTop uppointbox
+
+(Beak jut: )
+EBeakBot xcoor EBeakTop xcoor sub
+stringOfText
+
+(Beak height: )
+EVertSplit 4 get dup loadArray pointbox ycoor EBeakBot ycoor sub
+stringOfText
+
+showpage
+
+%%Page: 21 21
+
+resetPage
+
+(E) letterPath
+flattenpath
+
+0.5 vertSplitLine pathLineIntc sortByY /EVertSplit exch def
+
+EVertSplit 4 2 getinterval loadArray
+/ETopTop defPoint /ETopBot defPoint
+{ ETopBot startAtPoint ETopTop endAtPoint } traceSubpath
+{ {
+    { 45 90 withinRange } startWhenAngle
+    { 165 90 withinRange } endBeforeAngle
+  } traceSubpath
+} useSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByY dup firstElt /EBeakBot defPoint lastElt /EBeakTop defPoint
+EBeakBot pointbox EBeakTop uppointbox
+
+0.75 horizSplitLine pathLineIntc sortByX 0 2 getinterval
+dup 1 get /EStemRight defPoint
+{ } forallPoint addPoint 2 div exch 2 div exch /EStemMid defPoint
+EStemMid pointbox
+EStemMid vertLineThrough drawLine
+ETopBot horizLineThrough drawLine
+intersect pop % Must be true
+/EStemTop defPoint
+EStemTop pointbox
+
+{ EStemRight startAtPoint { 180 135 withinRange } endBeforeAngle } traceSubpath
+subpathEndpoint /EBeakInside defPoint
+
+{
+    EBeakInside startAtPoint
+    { dup 45 lt exch 345 gt or } endBeforeAngle
+} traceSubpath
+drawSubpath
+subpathEndpoint /EBeakLBot defPoint
+EBeakLBot pointbox
+
+EBeakLBot EBeakBot subPoint EBeakTop addPoint EBeakLBot drawLine
+EStemTop horizLineThrough intersect pop /EBeakTriangle defPoint
+EBeakTriangle pointbox
+
+EBeakTriangle EStemTop avgPoint /EArmTriangle defPoint
+EArmTriangle pointbox
+
+EArmTriangle EBeakLBot drawLine avgPoint 2 copy pointbox EBeakTriangle drawLine
+4 copy subPoint magnitude /BeakDarknessDenom exch def
+pathLineIntc loadArray loadArray 2 copy pointbox
+EBeakTriangle subPoint magnitude /BeakDarknessNum exch def
+
+(Beak darkness: )
+BeakDarknessNum BeakDarknessDenom div
+stringOfText
+
+showpage
+
+%%Page: 22 22
+
+resetPage
+
+(O) letterPath
+
+pathExtremes sortByX dup lastElt /ORight defPoint firstElt /OLeft defPoint
+ORight uppointbox OLeft pointbox
+
+ORight horizLineThrough pathLineIntc sortByX revArray 1 get /ORightIn defPoint
+ORightIn uppointbox
+
+(Curve: ) ORight xcoor ORightIn xcoor sub stringOfText
+
+OLeft horizLineThrough pathLineIntc sortByX 1 get /OLeftIn defPoint
+OLeftIn pointbox
+
+(Curve \(alt\): ) OLeftIn xcoor OLeft xcoor sub stringOfText
+
+(P) letterPath
+
+pathExtremes sortByX lastElt /PRight defPoint
+PRight pointbox
+PRight horizLineThrough pathLineIntc sortByX revArray 1 get /PRightIn defPoint
+PRightIn pointbox
+
+(Curve (from P): ) PRight xcoor PRightIn xcoor sub stringOfText
+
+showpage
+
+%%Page: 23 23
+resetPage
+
+(d) letterPath
+
+0 XHeight 2 div horizLineThrough pathLineIntc sortByX revArray 0 2 getinterval
+loadArray /dStemLeft defPoint /dStemRight defPoint 
+dStemRight pointbox dStemLeft pointbox
+
+(Lowercase stem: ) dStemRight xcoor dStemLeft xcoor sub stringOfText
+
+0 XHeight 1.1 mul horizLineThrough pathLineIntc sortByX revArray 0 2 getinterval
+loadArray /dStemLeft defPoint /dStemRight defPoint 
+dStemRight pointbox dStemLeft pointbox
+
+(Lowercase small stem: )
+dStemRight xcoor dStemLeft xcoor sub
+stringOfText
+
+400 0 translate
+
+showpage
+
+%%Page: 24 24
+resetPage
+
+%
+% Letter widths. Ignore the letterpath since that's just for stroking.
+
+newpath 0 0 moveto 0 300 lineto stroke
+
+(l) dup dup letterPath stringwidth moveto 0 300 rlineto stroke
+stringwidth pop 5 div (Unit based on l: ) exch stringOfText
+
+(n) dup dup letterPath stringwidth moveto 0 300 rlineto stroke
+stringwidth pop 10 div (Unit based on n: ) exch stringOfText
+
+(m) dup dup letterPath stringwidth moveto 0 300 rlineto stroke
+stringwidth pop 15 div (Unit based on m: ) exch stringOfText
+
+showpage
+
+%%Page: 25 25
+resetPage
+
+(A) letterPath
+
+0.7 horizSplitLine pathLineIntc sortByX firstElt /ALeftOuter defPoint
+ALeftOuter ALeftOuter pathAngle pop perpThroughPoint
+pathLineIntc sortByX 1 get /ALeftInner defPoint
+ALeftOuter pointbox ALeftInner pointbox
+
+ALeftOuter ALeftInner subPoint magnitude
+(Uppercase hair: ) exch stringOfText
+
+(Y) letterPath
+
+0.7 horizSplitLine pathLineIntc sortByX lastElt /YLeftOuter defPoint
+YLeftOuter YLeftOuter pathAngle pop perpThroughPoint
+pathLineIntc sortByX revArray 1 get /YLeftInner defPoint
+YLeftOuter pointbox YLeftInner pointbox
+
+YLeftOuter YLeftInner subPoint magnitude
+(Uppercase hair: ) exch stringOfText
+
+showpage
+
+%%Page: 26 26
+resetPage
+(l) letterPath
+
+pathExtremes sortByY firstElt /lLowestPoint defPoint
+
+0.5 vertSplitLine pathLineIntc sortByY firstElt /lBottomPoint defPoint
+0.5 horizSplitLine pathLineIntc sortByX lastElt /lRightPoint defPoint
+
+{
+    lBottomPoint startAtPoint
+    lRightPoint endAtPoint
+} traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByX lastElt /lRightSlab defPoint
+lRightSlab rtpointbox
+
+lRightSlab vertLineThrough drawLine
+lLowestPoint horizLineThrough drawLine
+intersect pop /lCrispOuter defPoint
+lCrispOuter 45 perpThroughPoint pathLineIntc sortByY firstElt
+/lCrispPoint defPoint
+
+% The distance between lCrispOuter and lCrispPoint = crisp * (sqrt(2) - 1).
+lCrispOuter lCrispPoint subPoint magnitude
+2 sqrt 1 sub div 0 max
+(Crisp: ) exch stringOfText
+
+
+showpage
+%%EOF

@@ -1,0 +1,9 @@
+%
+% P-curve.ps
+%
+pathExtremes sortByX lastElt /PRight defPoint
+PRight pointbox
+PRight horizLineThrough pathLineIntc sortByX revArray 1 get /PRightIn defPoint
+PRightIn pointbox
+
+(Curve) PRight xcoor PRightIn xcoor sub stringOfText

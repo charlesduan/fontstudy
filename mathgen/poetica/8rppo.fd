@@ -1,0 +1,18 @@
+%Filename: 8rppo.fd
+%Created by: tex texput
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{8rppo.fd}
+   [2004/04/24 Fontinst v1.801 font definitions for 8r/ppo.]
+
+\DeclareFontFamily{8r}{ppo}{}
+
+\DeclareFontShape{8r}{ppo}{m}{it}{
+   <-> ppori8r
+}{}
+
+\DeclareFontShape{8r}{ppo}{m}{sl}{<->ssub * ppo/m/it}{}
+
+\endinput

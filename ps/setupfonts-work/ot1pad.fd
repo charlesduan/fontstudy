@@ -1,0 +1,17 @@
+%Filename: ot1pad.fd
+%Created by: tex pad-fontinst
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{ot1pad.fd}
+   [2004/03/27 Fontinst v1.801 font definitions for OT1/pad.]
+
+\DeclareFontFamily{OT1}{pad}{}
+
+\DeclareFontShape{OT1}{pad}{m}{n}{
+   <-> padr7t
+}{}
+
+
+\endinput

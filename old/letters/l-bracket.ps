@@ -1,0 +1,30 @@
+%
+% l-bracket-alt.ps
+%
+0.5 vertSplitLine pathLineIntc sortByY firstElt /lBottomPoint defPoint
+0.5 horizSplitLine pathLineIntc sortByX lastElt /lRightPoint defPoint
+lBottomPoint pointbox
+lRightPoint rtpointbox
+
+{ lBottomPoint startAtPoint lRightPoint endAtPoint } traceSubpath
+{ {
+    flattenpath
+    { 45 90 withinRange } startWhenAngle 
+    { 135 90 withinRange } endBeforeAngle
+  } traceSubpath
+} useSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByY lastElt /lTopSlab defPoint
+lTopSlab uppointbox
+
+lRightPoint vertLineThrough drawLine lTopSlab horizLineThrough drawLine
+intersect pop /lSerifCorner defPoint
+
+lTopSlab lSerifCorner subPoint exch lSerifCorner addPoint
+/lBracketPoint defPoint
+
+1 3 div lBracketPoint lTopSlab lSerifCorner findBracket
+/lBracketPoint defPoint
+
+(Lowercase bracket \(alt\)) lBracketPoint ycoor stringOfText

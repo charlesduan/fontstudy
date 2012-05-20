@@ -1,0 +1,29 @@
+%Filename: t1itf.fd
+%Created by: tex texput
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{t1itf.fd}
+   [2004/04/20 Fontinst v1.801 font definitions for T1/itf.]
+
+\DeclareFontFamily{T1}{itf}{}
+
+\DeclareFontShape{T1}{itf}{m}{n}{
+   <-> itfr8t
+}{}
+
+\DeclareFontShape{T1}{itf}{m}{sc}{
+   <-> itfrc8t
+}{}
+
+\DeclareFontShape{T1}{itf}{m}{sl}{
+   <-> itfro8t
+}{}
+
+\DeclareFontShape{T1}{itf}{m}{it}{
+   <-> itfri8t
+}{}
+
+
+\endinput

@@ -1,0 +1,87 @@
+\sectionname{Assumptions about Text Fonts}
+
+Because MathGen attempts to distill the overall shape of a font into the
+sixty-two parameters defined by the Computer Modern programs, we must make
+several assumptions about the nature of letter shapes. These assumptions fall
+into two categories: assumptions that when violated, will break the program or
+otherwise cause erroneous measurements, and assumptions that, when violated,
+will allow the program to run successfully but will produce strange-looking or
+incompatible fonts.
+
+In general, the more ``standard'' a font looks, the more successful MathGen will
+be, where ``standard'' is defined as Computer Modern. So long as the overall
+shapes of the letters are much like those of Computer Modern---serifs in the
+right places, thick strokes and thin strokes of uniform widths and in the same
+relative locations, character height uniformity, and so on---the measurements
+will be accurate and the resulting fonts will look correct.
+
+The following are the major assumptions about the font; namely, those that must
+be true for MathGen to successfully run.
+
+\paragraph{Serifs} Naturally, fonts may have serifs, but the serifs must occur
+in the same places as they do in Computer Modern. The serifs may have a wide
+variety of shapes, but they must not be too large (e.g., if the serifs at the
+ends of the crossbar of a T should be less than 50\% of the character's height).
+Additionally, serifs \emph{must} be present on certain letters such as I and l
+(otherwise, the font is sans serif, and it should be denoted as so when running
+MathGen). Finally, mere flares at the ends of strokes (e.g., in Optima) are not
+considered serifs. Serifs must constitute a rapid change in stroke direction or
+width.
+
+\paragraph{Strokes} Letters should have no additional strokes beyond those that
+appear in the letters of Computer Modern. In particular, large swashes, loops,
+or unexpected splotches of ink (placed intentionally by the font designer, of
+course) will disrupt the measurements. For example, the letter I is assumed to
+have a single vertical stroke, and the letter O is assumed to consist of a
+single, closed, circular stroke. Fonts such as Linotext (see the samples at
+back) fail to meet this assumption.
+
+\paragraph{Stroke Uniformity} Strokes are assumed to have relatively uniform
+width and direction. For example, some display fonts, intending to imitate the
+appearance of old typewriters, place ``pockmarks'' or small holes in the
+otherwise straight stems of letters. These unexpected distortions will cause
+MathGen to not properly interpret the overall shape of characters.
+
+\paragraph{Straightness} Strokes that are normally straight should be as
+straight as possible. In particular, the capital I should be perfectly vertical,
+and the sides of the letters A and V should not be curved.
+
+\linespace
+
+The following assumptions must hold for the output to look acceptable.
+
+\paragraph{Inter-Character Uniformity} The thickness of upright stems, curved
+strokes, and thin hairlines should be uniform for different characters of the
+font. Additionally, if two regions have the same thickness in the Computer
+Modern font, then in general, those two regions should have the same thickness
+in the text font being measured.
+
+\paragraph{Italic and Roman Similarity} The italic and roman fonts should be as
+similar as possible in terms of stroke widths, character heights and widths, and
+overall appearance. Since the parameters are measured out of the roman font, the
+resulting math characters will be as compatible as possible with the roman text;
+if the italic is not compatible with the roman, then the italic will not be
+compatible with the math fonts either.
+
+\paragraph{Stroke Width Uniformity} MathGen does not (yet) provide for simple,
+straight strokes of non-uniform width. For fonts where strokes tend to flare at
+the ends (e.g., Optima), MathGen will be unable to capture this change in stroke
+thickness.
+
+\paragraph{Standard Serifs} The Computer Modern programs provide for two types
+of serifs: horizontal serifs, which attach to vertical stems, and vertical beak
+serifs, such as those at the ends of the arms of E, F, and L. Six parameters
+define the horizontal serifs (ten in MathGen) and five define the beak serifs.
+Serif designs that do not fall within the space of these parameters cannot be
+perfectly duplicated by MathGen. For example, in Palatino, the beak serifs jut
+inward toward the letter and are slightly curved. MathGen can capture the inward
+jut but not the curvature of the serif.
+
+\linespace
+
+Although these assumptions may seem austere, practically all standard text fonts
+will follow these rules; the exceptions are generally unusual display fonts in
+which one would not often typeset mathematics. Additionally, MathGen has been
+designed to be as robust as possible, correcting egregious dimensional errors
+and handling unusual character shapes as gracefully, if not accurately, as
+possible.

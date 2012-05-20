@@ -1,0 +1,20 @@
+%!PS
+%%BoundingBox: 82 191 691 272 
+%%Creator: MetaPost
+%%CreationDate: 2004.06.12:1743
+%%Pages: 1
+%%EndProlog
+%%Page: 1 1
+% MF2PT1: bbox 0 -100 775 564
+% MF2PT1: font_size 10
+% MF2PT1: font_slant 0.21255
+% MF2PT1: font_identifier zmnsy
+% MF2PT1: font_coding_scheme TeX math symbols
+% MF2PT1: font_fixed_pitch 0
+newpath 82.80772 191.11122 moveto
+690.0644 191.11122 lineto
+690.0644 271.12831 lineto
+82.80772 271.12831 lineto
+ closepath fill
+showpage
+%%EOF

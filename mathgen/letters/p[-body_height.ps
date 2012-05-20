@@ -1,0 +1,14 @@
+%
+% (-body_height.ps
+%
+% ) to match it...
+measureHeight /parenHeight exch def
+(d) letterPath measureHeight /ascHeight exch def
+
+parenHeight ascHeight le {
+    ascHeight 1 add
+} {
+    parenHeight
+} ifelse
+
+(Body height) exch stringOfText

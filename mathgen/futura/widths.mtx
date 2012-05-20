@@ -1,0 +1,79 @@
+%
+% futura/widths.mtx
+%
+% Metrics files for measured letter widths for mathematics typesetting. Idea
+% based on MathKit.
+%
+\relax
+
+\metrics
+
+\needsfontinstversion{1.315}
+
+\setcommand\setglyphwidths#1#2#3#4#5{
+    \ifisglyph{#1}\then
+	\resetglyph{#1}
+	    \movert{#2}
+	    \glyph{#1}{1000}
+	    \movert{#4}
+	    \resetitalic{\sub{#3}{#4}}
+	\endresetglyph
+	\setkern{#1}{tie}{#5}
+    \fi
+}
+
+\setglyphwidths{A}{5}{9}{9}{127}
+\setglyphwidths{B}{-44}{30}{14}{42}
+\setglyphwidths{C}{-41}{63}{-1}{61}
+\setglyphwidths{D}{-44}{71}{-18}{7}
+\setglyphwidths{E}{-44}{72}{-23}{66}
+\setglyphwidths{F}{-44}{80}{-170}{66}
+\setglyphwidths{G}{-40}{53}{-8}{54}
+\setglyphwidths{H}{-48}{71}{-5}{60}
+\setglyphwidths{I}{-46}{74}{-2}{60}
+\setglyphwidths{J}{81}{72}{-4}{161}
+\setglyphwidths{K}{-44}{114}{6}{32}
+\setglyphwidths{L}{-44}{25}{25}{15}
+\setglyphwidths{M}{-10}{30}{30}{107}
+\setglyphwidths{N}{-52}{68}{-7}{65}
+\setglyphwidths{O}{-46}{74}{-17}{62}
+\setglyphwidths{P}{-44}{100}{-150}{46}
+\setglyphwidths{Q}{-46}{74}{-16}{62}
+\setglyphwidths{R}{-44}{50}{-19}{49}
+\setglyphwidths{S}{-53}{44}{5}{62}
+\setglyphwidths{T}{-97}{129}{-119}{5}
+\setglyphwidths{U}{-64}{76}{-26}{50}
+\setglyphwidths{V}{-109}{125}{-125}{3}
+\setglyphwidths{W}{-111}{119}{-131}{11}
+\setglyphwidths{X}{-2}{99}{1}{69}
+\setglyphwidths{Y}{-116}{124}{-126}{0}
+\setglyphwidths{Z}{-3}{110}{12}{60}
+\setglyphwidths{a}{-26}{33}{1}{37}
+\setglyphwidths{b}{-42}{48}{14}{-91}
+\setglyphwidths{c}{-22}{42}{13}{38}
+\setglyphwidths{d}{-26}{89}{1}{250}
+\setglyphwidths{dotlessi}{-59}{12}{-16}{39}
+\setglyphwidths{dotlessj}{-17}{12}{-16}{59}
+\setglyphwidths{e}{-22}{44}{15}{46}
+\setglyphwidths{f}{-47}{159}{-36}{80}
+\setglyphwidths{g}{-5}{25}{-6}{68}
+\setglyphwidths{h}{-44}{19}{-1}{-49}
+\setglyphwidths{i}{-59}{45}{-16}{60}
+\setglyphwidths{j}{-17}{42}{-18}{81}
+\setglyphwidths{k}{-40}{46}{9}{-35}
+\setglyphwidths{l}{-42}{86}{2}{67}
+\setglyphwidths{m}{-48}{19}{-1}{23}
+\setglyphwidths{n}{-44}{19}{-1}{25}
+\setglyphwidths{o}{-28}{47}{15}{39}
+\setglyphwidths{p}{2}{47}{14}{41}
+\setglyphwidths{q}{-25}{33}{1}{60}
+\setglyphwidths{r}{-40}{79}{-108}{49}
+\setglyphwidths{s}{-43}{32}{32}{43}
+\setglyphwidths{t}{-43}{91}{-5}{34}
+\setglyphwidths{u}{-52}{35}{-6}{31}
+\setglyphwidths{v}{-64}{85}{-61}{0}
+\setglyphwidths{w}{-66}{83}{-64}{6}
+\setglyphwidths{x}{10}{62}{10}{52}
+\setglyphwidths{y}{-9}{88}{-61}{27}
+\setglyphwidths{z}{1}{77}{10}{37}
+\endmetrics

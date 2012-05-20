@@ -1,0 +1,91 @@
+\relax 
+\citation{mfbook}
+\citation{cte}
+\citation{mathkit}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Previous Work}{1}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Automated Measurement of Text Fonts}{2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Requirements for the Library}{2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Functions Provided by the Library}{2}}
+\@writefile{toc}{\contentsline {paragraph}{Intersections}{2}}
+\@writefile{toc}{\contentsline {paragraph}{Extremes}{2}}
+\@writefile{toc}{\contentsline {paragraph}{Subpaths}{2}}
+\@writefile{toc}{\contentsline {paragraph}{Point Operations}{3}}
+\@writefile{toc}{\contentsline {paragraph}{Line Operations}{3}}
+\@writefile{toc}{\contentsline {paragraph}{Iteration}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Parameter Measurements}{3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Measurement of the stem width from the lowercase letter l. The line $\overline {\alpha \beta }$ is drawn halfway up the height of the letter, and intersections $\gamma $ and $\delta $ are found. The stem width is the length $\gamma \delta $.}}{3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Measurement of \emph  {cap\_jut} from an uppercase I. The line $\overline {\alpha \beta }$ is drawn halfway through the letter, and point $\gamma $ is found. Point $\delta $ is located as the point on the extreme right of the letter. The jut, then, is calculated as $y_\delta -y_\gamma $.}}{3}}
+\citation{cte}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Measurement of the \emph  {beak\_darkness} parameter. The solid line represents the outline of the beak serif; the dotted lines are constructed.}}{4}}
+\newlabel{f:beak}{{3}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Assumptions about Text Fonts}{4}}
+\@writefile{toc}{\contentsline {paragraph}{Serifs}{4}}
+\@writefile{toc}{\contentsline {paragraph}{Strokes}{4}}
+\@writefile{toc}{\contentsline {paragraph}{Stroke Uniformity}{4}}
+\@writefile{toc}{\contentsline {paragraph}{Straightness}{4}}
+\@writefile{toc}{\contentsline {paragraph}{Inter-Character Uniformity}{5}}
+\@writefile{toc}{\contentsline {paragraph}{Italic and Roman Similarity}{5}}
+\@writefile{toc}{\contentsline {paragraph}{Stroke Width Uniformity}{5}}
+\@writefile{toc}{\contentsline {paragraph}{Standard Serifs}{5}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Changes to the Computer Modern Programs}{5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Example of the general bug found in Computer Modern. The bottom edge of the gray stroke (point $r$) should line up with the dotted line. Instead, the programs specify the center of that stroke (point $c$) to align there.}}{5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Bugs in the Computer Modern Fonts}{5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Example of the bug with the $\nu $ character in Computer Modern. The error is with the small notch in the lower left corner of the character. Note that, because the diagonal stroke is curved but $\overline {ec}$ is straight, there is no satisfactory location of $c$.}}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Changes to Character Designs}{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Construction of the $\delta $ character. Points 1, 2, 3, and 5 are fixed, and the $y$-coordinate of 4 is fixed. The $x$-coordinate of 4 is chosen such that $\phi +\theta =90^\circ $, so that the line from 3 to 4 is tangent to the circular arc between 4 and 5. The light gray line represents the outline of the character.}}{6}}
+\newlabel{f:delta}{{6}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Loops in Characters}{7}}
+\newlabel{s:loops}{{4.3}{7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Three different styles of loops used in the Computer Modern Greek fonts. The square loop will be chosen if the \emph  {square\_ends} parameter is chosen. Otherwise, if the thickness of the loop strokes is less than the desired loop width, an open, round loop will be made. If the strokes would be too thick, a closed loop will be made.}}{7}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Square Stroke Ends}{7}}
+\newlabel{s:squareends}{{5}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}New Parameters Added}{8}}
+\newlabel{s:params}{{5.1}{8}}
+\@writefile{toc}{\contentsline {paragraph}{Arm Thickness}{8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces The \emph  {superness} parameter. Low values will result in diamond-shaped bowls; high values will create square-shaped bowls. The value ranges from 0 to 1; a perfectly circular bowl is created with a \emph  {superness} values of $\sqrt  {2}$.}}{8}}
+\newlabel{f:superness}{{8}{8}}
+\@writefile{toc}{\contentsline {paragraph}{Diagonal Serif Bracket}{8}}
+\@writefile{toc}{\contentsline {paragraph}{Superness of O}{8}}
+\@writefile{toc}{\contentsline {paragraph}{Capital Serif Jut}{8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Scaling Large Characters}{9}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Character Width \& Accent Placement}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Character Widths and Math Fitting}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Placement of Accents}{10}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Numerical Analysis}{10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Computer Modern}{10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Histogram of the relative errors of the measured parameters of the Computer Modern font, calculated by the percent difference between the original value and the measured one.}}{11}}
+\newlabel{f:cmr}{{9}{11}}
+\citation{mathkit}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Times Roman}{12}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Current Status of the System}{12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Percent error of measured parameters relative to Alan Hoenig's parameter set, as provided in MathKit.}}{13}}
+\newlabel{f:times}{{10}{13}}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Computer Modern}{14}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Traditional Text Fonts}{14}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Bookman}{14}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Courier}{14}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Didot}{14}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Unusual qualities of each of the standard text fonts tested.}}{15}}
+\newlabel{t:textfonts}{{1}{15}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Adobe Garamond}{15}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}New Century Schoolbook}{15}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.6}Times Roman}{15}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.7}Utopia}{16}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Sans Serif Fonts}{16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Avant Garde}{16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Futura}{16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Helvetica}{16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Optima}{17}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Hardwood}{17}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Semi-Standard Fonts}{17}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Palatino}{17}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Tekton}{18}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Tiffany}{18}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Display Fonts}{18}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Linotext}{18}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Khaki}{18}}
+\bibcite{mathkit}{1}
+\bibcite{cte}{2}
+\bibcite{mfbook}{3}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Explanation of the Font Samples}{19}}

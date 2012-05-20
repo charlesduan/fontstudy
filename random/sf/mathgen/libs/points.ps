@@ -1,0 +1,135 @@
+%!PS-Adobe-2.0
+
+%
+% points.ps
+%
+% Utility functions for points.
+%
+
+% Requires: functions.ps
+
+% Given a pair of points, determines the average of them.
+% x1 y1 x2 y2 -- x1+x2/2 y1+y2/2
+/avgPoint {
+    3 -1 roll add 2 div 3 1 roll add 2 div exch
+} bind def
+
+% Given a pair of points and a tolerance, determine whether the second point is
+% within the tolerance range of the first point. Tolerance should be >= 0.
+% x1 y1 x2 y2 tol -- bool
+/eqPoint {
+    dup 6 2 roll	% tol tol x1 y1 x2 y2
+    3 -1 roll		% tol tol x1 x2 y2 y1
+    sub	abs		% tol tol x1 x2 |y2-y1|
+    3 1 roll		% tol tol dy x1 x2
+    sub abs		% tol tol dy dx
+    3 1 roll		% tol dx tol dy
+    ge			% tol dx bool
+    3 1 roll ge and
+} bind def
+
+% Given two points, tests them for exact equality.
+/equalPoint {
+    3 -1 roll eq 3 1 roll eq and
+} bind def
+
+% Scales a point by a constant.
+% x1 y1 scale -- x y
+/scalePoint {
+    dup 3 1 roll mul 3 1 roll mul exch
+} bind def
+
+% Add two points.
+% x1 y1 x2 y2 -- x y
+/addPoint {
+    3 -1 roll add 3 1 roll add exch
+} bind def
+
+% Subtract two points.
+/subPoint {
+    3 -1 roll exch sub 3 1 roll sub exch
+} bind def
+
+% Performs a dot product on 2d points.
+/dotProduct {
+    3 -1 roll mul 3 1 roll mul add
+} bind def
+
+/magnitude {
+    dup mul exch dup mul add sqrt
+} bind def
+
+% Iterates over a list of points. The point list is a list of 2-element lists.
+/ForallPointDict 1 dict def
+
+/forallPoint {
+    % We must make a global definition here, because without it we need to store
+    % the procedure on a local dictionary (which violates the nature of forall)
+    % or leave the procedure on the stack (which violates the nature of forall).
+    ForallPointDict exch /fp exch put
+    {
+        aload pop ForallPointDict /fp get exec
+    } forall
+} def
+
+% Given a pair of coordinates, get one of them. These are really stupid
+% functions, but they make the code easier to read.
+/xcoor { dup type /arraytype eq { 0 get } { pop } ifelse } bind def
+/ycoor { dup type /arraytype eq { 1 get } { exch pop } ifelse } bind def
+
+% Sorts an array of points by x or y coordinate, ascending.
+/sortByX {
+    { xcoor exch xcoor exch lt } bubblesort
+} def
+
+/sortByY {
+    { ycoor exch ycoor exch lt } bubblesort
+} def
+
+% Given a user path and a list of points, gives the points that are in the fill
+% region of the user path (by inufill).
+% [ [points] ] { upath } -- [ [points subset] ]
+/pointsInRegion {
+    1 dict begin
+	cvlit /ThePath exch def
+	[ exch {
+	    2 copy ThePath inufill {
+		[ 3 1 roll ]
+	    } {
+		pop pop
+	    } ifelse
+	} forallPoint
+	]
+    end
+} def
+
+% Defines a point.
+/defPoint {
+    dup type /nametype eq {
+	1 index type /arraytype eq { exch aload pop } { 3 1 roll } ifelse
+    } if
+    2 packedarray cvx def
+} def
+
+% If two points are too close for comfort, discard one of them.
+% [ [ point list ] ] -- [ [ subset ] ]
+/uniquePoints {
+    5 dict begin
+    /theArray exch def
+    /newArray [ ] def
+    0 1 theArray length 1 sub {
+	theArray exch get loadArray /curPoint defPoint
+	/noMatches true def
+	0 1 newArray length 1 sub {
+	    newArray exch get loadArray curPoint 3 eqPoint {
+		/noMatches false def
+		exit
+	    } if
+	} for
+	noMatches {
+	    /newArray [ newArray aload pop [ curPoint ] ] def
+	} if
+    } for
+    newArray
+    end
+} def

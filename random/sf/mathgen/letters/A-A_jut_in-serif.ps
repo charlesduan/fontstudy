@@ -1,0 +1,35 @@
+%
+% A-A_jut.ps
+%
+0.2 horizSplitLine pathLineIntc sortByX 0 2 getinterval loadArray
+/AIn defPoint /AOut defPoint
+
+{ AOut startAtPoint AIn endAtPoint } traceSubpath
+{ {
+    flattenpath
+    { 45 90 withinRange } startWhenAngle 
+    { 135 90 withinRange } endBeforeAngle
+  } traceSubpath
+} useSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByY lastElt /ASerif defPoint
+ASerif pointbox
+
+
+0.3 horizSplitLine pathLineIntc sortByX 1 get /ATop defPoint
+ATop pointbox
+0.2 horizSplitLine pathLineIntc sortByX 1 get /ABot defPoint
+ABot pointbox
+
+% Line parallel to edge of A
+ABot ATop subPoint 4 scalePoint ATop addPoint ATop
+drawLine
+
+ASerif horizLineThrough drawLine
+
+intersect pop /ANoSerif defPoint
+ANoSerif pointbox
+
+ANoSerif ASerif subPoint magnitude
+(Inner jut of A) exch stringOfText

@@ -1,0 +1,22 @@
+%Filename: 8rpkh.fd
+%Created by: tex fontinst
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{8rpkh.fd}
+   [2004/05/02 Fontinst v1.801 font definitions for 8r/pkh.]
+
+\DeclareFontFamily{8r}{pkh}{}
+
+\DeclareFontShape{8r}{pkh}{m}{n}{
+   <-> pkhr8r
+}{}
+
+\DeclareFontShape{8r}{pkh}{m}{sl}{
+   <-> pkhro8r
+}{}
+
+\DeclareFontShape{8r}{pkh}{m}{it}{<->ssub * pkh/m/sl}{}
+
+\endinput

@@ -1,0 +1,23 @@
+%!PS
+%%BoundingBox: 52 -67 699 573 
+%%Creator: MetaPost
+%%CreationDate: 2004.06.13:1454
+%%Pages: 1
+%%EndProlog
+%%Page: 1 1
+% MF2PT1: bbox 0 -61 784 568
+% MF2PT1: font_size 10
+% MF2PT1: font_slant 0
+% MF2PT1: font_identifier zmnmi
+% MF2PT1: font_coding_scheme TeX math italic
+% MF2PT1: font_fixed_pitch 0
+newpath 698.2055 499.62799 moveto
+698.2055 572.58618 lineto
+52.54434 275.07527 lineto
+52.54431 230.90038 lineto
+698.2055 -66.61057 lineto
+698.2055 6.34763 lineto
+162.94449 252.98781 lineto
+ closepath fill
+showpage
+%%EOF

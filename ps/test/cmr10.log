@@ -1,0 +1,31 @@
+This is METAFONT, Version 2.7182 (Web2C 7.3.1) (base=mf 2002.9.6)  19 MAR 2004 09:41
+**\mode=ljfour; input cmr10
+(cmr10.mf (/usr/share/texmf/fonts/source/public/cm/cmbase.mf)
+(/usr/share/texmf/fonts/source/public/cm/roman.mf
+(/usr/share/texmf/fonts/source/public/cm/romanu.mf [65] [66] [67] [68] [69]
+[70] [71] [72] [73] [74] [75] [76] [77] [78] [79] [80] [81] [82] [83] [84]
+[85] [86] [87] [88] [89] [90])
+(/usr/share/texmf/fonts/source/public/cm/romanl.mf [97] [98] [99] [100]
+[101] [102] [103] [104] [105] [106] [107] [108] [109] [110] [111] [112]
+[113] [114] [115] [116] [117] [118] [119] [120] [121] [122]) (greeku.mf
+>> -0.41666
+>> 50
+>> 50.73582
+>> 6.11113 [0]
+>> 68
+>> 69.18521
+>> 8.33336 [1] [2] [3] [4] [5] [6] [7] [8] [9] [10])
+(/usr/share/texmf/fonts/source/public/cm/romand.mf [48] [49] [50] [51] [52]
+[53] [54] [55] [56] [57]) (/usr/share/texmf/fonts/source/public/cm/romanp.mf
+[36] [38] [63] [62]) (/usr/share/texmf/fonts/source/public/cm/romspl.mf
+[16] [17] [25] [26] [27] [28])
+(/usr/share/texmf/fonts/source/public/cm/romspu.mf [29] [30] [31])
+(/usr/share/texmf/fonts/source/public/cm/punct.mf [33] [60] [35] [37] [39]
+[40] [41] [42] [43] [44] [46] [47] [58] [59] [61] [64] [91] [93] [96])
+(/usr/share/texmf/fonts/source/public/cm/accent.mf [18] [19] [20] [21] [22]
+[23] [24] [32] [94] [95] [125] [126] [127])
+(/usr/share/texmf/fonts/source/public/cm/romlig.mf [11] [12] [13] [14] [15])
+(/usr/share/texmf/fonts/source/public/cm/comlig.mf [34] [45] [92] [123]
+[124]) ) )
+Font metrics written on cmr10.tfm.
+Output written on cmr10.600gf (128 characters, 24244 bytes).

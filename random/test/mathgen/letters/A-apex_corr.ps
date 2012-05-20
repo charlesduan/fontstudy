@@ -1,0 +1,41 @@
+%
+% A-hair.ps
+%
+
+% Get the hair width (for use later). Note: this isn't the _real_ hair width; it
+% is the hair width determined by a straight cross-section of the left stem.
+0.7 horizSplitLine pathLineIntc sortByX dup firstElt /ALeftOuter defPoint
+1 get /ALeftInner defPoint
+ALeftOuter pointbox ALeftInner pointbox
+ALeftOuter ALeftInner subPoint magnitude /AHair exch def
+
+% Find points that define the outer triangle of the letter
+0.7 horizSplitLine pathLineIntc sortByX lastElt /ARightOuter defPoint
+0.8 horizSplitLine pathLineIntc sortByX dup
+firstElt /ALeftLower defPoint lastElt /ARightLower defPoint
+
+ARightOuter pointbox ALeftLower pointbox ARightLower pointbox
+
+% Extend the outer triangle lines upward
+ALeftLower ALeftOuter subPoint 5 scalePoint ALeftOuter addPoint
+/ALeftUpper defPoint
+ARightLower ARightOuter subPoint 5 scalePoint ARightOuter addPoint
+/ARightUpper defPoint
+
+% Find the top point of the A
+pathExtremes sortByY lastElt /ATop defPoint
+
+mark ATop horizLineThrough drawLine cleartomark
+
+% Intersect each of the diagonal triangle lines with the top line
+ALeftUpper ALeftLower drawLine ATop horizLineThrough intersect pop
+/LeftIntersection defPoint
+ARightUpper ARightLower drawLine ATop horizLineThrough intersect pop
+/RightIntersection defPoint
+
+% The apex correction is the distance between the intersection points minus the
+% hair width
+RightIntersection xcoor LeftIntersection xcoor sub AHair sub
+
+(Apex correction) exch stringOfText
+

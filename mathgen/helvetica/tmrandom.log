@@ -1,0 +1,259 @@
+This is TeX, Version 3.14159 (Web2C 7.4.5) (format=latex 2004.2.16)  1 JUN 2004 17:12
+**tmrandom
+(./tmrandom.tex
+LaTeX2e <2001/06/01>
+Babel <v3.7h> and hyphenation patterns for american, french, german, ngerman, b
+asque, italian, portuges, russian, spanish, nohyphenation, loaded.
+(/usr/share/texmf/tex/latex/base/article.cls
+Document Class: article 2001/04/21 v1.4e Standard LaTeX document class
+(/usr/share/texmf/tex/latex/base/size12.clo
+File: size12.clo 2001/04/21 v1.4e Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+) (./mathzmn.sty
+Package: mathzmn 
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/zmn/m/n on input line 3.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/zmn/m/it on input line 4.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/zmn/m/n on input line 5.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/zmn/m/n on input line 6.
+LaTeX Font Info:    Overwriting math alphabet `\mathcal' in version `normal'
+(Font)                  OMS/zmn/m/n --> OMS/zmn/m/n on input line 9.
+) (./tmrandom.aux)
+\openout1 = `tmrandom.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 8.
+
+(/usr/share/texmf/tex/latex/psnfss/ot1phv.fd
+File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
+)
+LaTeX Font Info:    Try loading font information for OT1+zmn on input line 10.
+ (./ot1zmn.fd
+File: ot1zmn.fd 2004/05/23 Fontinst v1.801 font definitions for OT1/zmn.
+)
+LaTeX Font Info:    Try loading font information for OML+zmn on input line 10.
+ (./omlzmn.fd
+File: omlzmn.fd 2004/06/01 Fontinst v1.801 font definitions for OML/zmn.
+)
+LaTeX Font Info:    Try loading font information for OMS+zmn on input line 10.
+
+(./omszmn.fd
+File: omszmn.fd 2004/05/23 Fontinst v1.801 font definitions for OMS/zmn.
+)
+LaTeX Font Info:    Try loading font information for OMX+zmn on input line 10.
+ (./omxzmn.fd
+File: omxzmn.fd 2004/05/23 Fontinst v1.801 font definitions for OMX/zmn.
+) [1
+
+]
+\testcount=\count87
+
+Overfull \hbox (7.92328pt too wide) detected at line 53
+\OT1/phv/m/n/12 1: \myfont ^^A 
+ []
+
+
+Overfull \hbox (2.21141pt too wide) detected at line 53
+\OT1/phv/m/n/12 2: \myfont ^^B 
+ []
+
+
+Overfull \hbox (0.59482pt too wide) detected at line 53
+\OT1/phv/m/n/12 4: \myfont ^^D 
+ []
+
+
+Overfull \hbox (4.08429pt too wide) detected at line 53
+\OT1/phv/m/n/12 6: \myfont ^^F 
+ []
+
+
+Overfull \hbox (9.59401pt too wide) detected at line 53
+\OT1/phv/m/n/12 10: \myfont 
+ 
+ []
+
+
+Overfull \hbox (2.94528pt too wide) detected at line 53
+\OT1/phv/m/n/12 11: \myfont ^^K 
+ []
+
+
+Overfull \hbox (2.45633pt too wide) detected at line 53
+\OT1/phv/m/n/12 31: \myfont ^^_ 
+ []
+
+
+Overfull \hbox (3.79381pt too wide) detected at line 53
+\OT1/phv/m/n/12 32: \myfont   
+ []
+
+
+Overfull \hbox (0.28568pt too wide) detected at line 53
+\OT1/phv/m/n/12 33: \myfont ! 
+ []
+
+
+Overfull \hbox (1.1707pt too wide) detected at line 53
+\OT1/phv/m/n/12 35: \myfont # 
+ []
+
+
+Overfull \hbox (15.86348pt too wide) detected at line 53
+\OT1/phv/m/n/12 36: \myfont $ 
+ []
+
+
+Overfull \hbox (2.17928pt too wide) detected at line 53
+\OT1/phv/m/n/12 39: \myfont ' 
+ []
+
+
+Overfull \hbox (25.9122pt too wide) detected at line 53
+\OT1/phv/m/n/12 40: \myfont ( 
+ []
+
+
+Overfull \hbox (25.9122pt too wide) detected at line 53
+\OT1/phv/m/n/12 41: \myfont ) 
+ []
+
+
+Overfull \hbox (25.9122pt too wide) detected at line 53
+\OT1/phv/m/n/12 42: \myfont * 
+ []
+
+
+Overfull \hbox (25.9122pt too wide) detected at line 53
+\OT1/phv/m/n/12 43: \myfont + 
+ []
+
+Missing character: There is no 0 in font zmnmi!
+Missing character: There is no 1 in font zmnmi!
+Missing character: There is no 2 in font zmnmi!
+Missing character: There is no 3 in font zmnmi!
+Missing character: There is no 4 in font zmnmi!
+Missing character: There is no 5 in font zmnmi!
+Missing character: There is no 6 in font zmnmi!
+Missing character: There is no 7 in font zmnmi!
+Missing character: There is no 8 in font zmnmi!
+Missing character: There is no 9 in font zmnmi!
+Missing character: There is no : in font zmnmi!
+Missing character: There is no ; in font zmnmi!
+
+Overfull \hbox (10.82288pt too wide) detected at line 53
+\OT1/phv/m/n/12 60: \myfont < 
+ []
+
+
+Overfull \hbox (10.82288pt too wide) detected at line 53
+\OT1/phv/m/n/12 62: \myfont > 
+ []
+
+Missing character: There is no A in font zmnmi!
+Missing character: There is no B in font zmnmi!
+Missing character: There is no C in font zmnmi!
+Missing character: There is no D in font zmnmi!
+Missing character: There is no E in font zmnmi!
+Missing character: There is no F in font zmnmi!
+Missing character: There is no G in font zmnmi!
+Missing character: There is no H in font zmnmi!
+Missing character: There is no I in font zmnmi!
+Missing character: There is no J in font zmnmi!
+Missing character: There is no K in font zmnmi!
+Missing character: There is no L in font zmnmi!
+Missing character: There is no M in font zmnmi!
+Missing character: There is no N in font zmnmi!
+Missing character: There is no O in font zmnmi!
+Missing character: There is no P in font zmnmi!
+Missing character: There is no Q in font zmnmi!
+Missing character: There is no R in font zmnmi!
+Missing character: There is no S in font zmnmi!
+Missing character: There is no T in font zmnmi!
+Missing character: There is no U in font zmnmi!
+Missing character: There is no V in font zmnmi!
+Missing character: There is no W in font zmnmi!
+Missing character: There is no X in font zmnmi!
+Missing character: There is no Y in font zmnmi!
+Missing character: There is no Z in font zmnmi!
+
+Overfull \hbox (25.9122pt too wide) detected at line 53
+\OT1/phv/m/n/12 94: \myfont ^ 
+ []
+
+
+Overfull \hbox (25.9122pt too wide) detected at line 53
+\OT1/phv/m/n/12 95: \myfont _ 
+ []
+
+Missing character: There is no a in font zmnmi!
+Missing character: There is no b in font zmnmi!
+Missing character: There is no c in font zmnmi!
+Missing character: There is no d in font zmnmi!
+Missing character: There is no e in font zmnmi!
+Missing character: There is no f in font zmnmi!
+Missing character: There is no g in font zmnmi!
+Missing character: There is no h in font zmnmi!
+Missing character: There is no i in font zmnmi!
+Missing character: There is no j in font zmnmi!
+Missing character: There is no k in font zmnmi!
+Missing character: There is no l in font zmnmi!
+Missing character: There is no m in font zmnmi!
+Missing character: There is no n in font zmnmi!
+Missing character: There is no o in font zmnmi!
+Missing character: There is no p in font zmnmi!
+Missing character: There is no q in font zmnmi!
+Missing character: There is no r in font zmnmi!
+Missing character: There is no s in font zmnmi!
+Missing character: There is no t in font zmnmi!
+Missing character: There is no u in font zmnmi!
+Missing character: There is no v in font zmnmi!
+Missing character: There is no w in font zmnmi!
+Missing character: There is no x in font zmnmi!
+Missing character: There is no y in font zmnmi!
+Missing character: There is no z in font zmnmi!
+Missing character: There is no { in font zmnmi!
+Missing character: There is no | in font zmnmi!
+
+Overfull \hbox (7.71777pt too wide) detected at line 53
+\OT1/phv/m/n/12 125: \myfont } 
+ []
+
+[2
+
+] [3] (./tmrandom.aux) ) 
+Here is how much of TeX's memory you used:
+ 326 strings out of 95796
+ 3574 string characters out of 1191756
+ 49892 words of memory out of 1000001
+ 3323 multiletter control sequences out of 10000+50000
+ 17047 words of font info for 43 fonts, out of 500000 for 1000
+ 26 hyphenation exceptions out of 1000
+ 22i,7n,27p,140b,243s stack positions out of 3000i,1500n,5000p,200000b,15000s
+
+Output written on tmrandom.dvi (3 pages, 4636 bytes).

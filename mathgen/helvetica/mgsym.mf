@@ -1,0 +1,552 @@
+% This file generates the following characters when their codes are known:
+% |minus|, |plus_minus|, |o_plus|, |o_times|,
+% |cup|, |cap|, |meet|, |join|,
+% |down_arrow|, |up_arrow|,
+% |left_arrow|, |right_arrow|, |double_arrow|,
+% |subset|, |superset|, |elt|,
+% |for_all|, |there_exists|, |false_that|,
+% |less|, |greater|, |underbar|,
+% |neq|, |leq|, |geq|, |eqv|,
+% |backslash|, |vertical|,
+% |cdot|, |diamond|,
+% |left_brace|, |right_brace|,
+% |straight_quotes|, |infty|, |integral|.
+
+iff known minus: cmchar "Minus sign";
+beginarithchar(minus);
+rulepos1(90); rulepos2(90);
+x1=w-x2=hround 1.5u; y1=y2=math_axis;
+fill stroke z1e--z2e;  % bar
+labels(1,2); endchar;
+
+iff known plus_minus: cmchar "Plus-or-minus sign";
+beginarithchar(plus_minus);
+rulepos1(0); rulepos2(0); rulepos3(90); rulepos4(90);
+rulepos5(90); rulepos6(90); rulepos7(90); rulepos8(90);
+numeric shiftup; shiftup=vround 1.5u;
+x1=x2=.5w; x3=x5=hround u; x4=x6=w-x3; x7=x1l; x8=x1r;
+.5[y1,y5]=y3=y4=y7=y8=math_axis+shiftup; y1=h+shiftup; y5=y6; y2=y6r;
+fill reverse(lrend(1)--rlthrough(8, rlend(4))--rlthrough(2, rlend(6)--lrend(5))
+    --lrthrough(7, lrend(3))--cycle);
+labels(1,2,3,4,5,6,7,8); endchar;
+
+def do_quadrant(expr quarter, firstpath, secondpath, center) =
+ save s_, q_; pair s_; pair q_;
+ s_=quarter intersectiontimes firstpath;
+ q_=quarter intersectiontimes secondpath;
+ unfill reverse(center
+    --point ypart s_ of firstpath
+    ..controls postcontrol xpart s_ of quarter
+	   and precontrol xpart q_ of quarter
+    ..point ypart q_ of secondpath
+    --cycle)
+enddef;
+
+iff known o_plus: cmchar "Circle-plus operator";
+beginarithchar(o_plus);
+draw_solid_circle(w-2u,2*(h-math_axis),(.5w,math_axis),light_rule_thickness);
+penpos1'(light_rule_thickness, 90); penpos2'(light_rule_thickness, 0);
+penpos3'(light_rule_thickness, 90); penpos4'(light_rule_thickness, 0);
+z1'=z1r; z2'=z2r; z3'=z3r; z4'=z4r;
+do_quadrant(z1l{up}..{left}z2l, z1'r--z3'r, z2'r--z4'r, (x2'r, y1'r));
+do_quadrant(z2l{left}..{down}z3l, z2'l--z4'l, z1'r--z3'r, (x2'l, y1'r));
+do_quadrant(z3l{down}..{right}z4l, z1'l--z3'l, z2'l--z4'l, (x2'l, y1'l));
+do_quadrant(z4l{right}..{up}z1l, z2'r--z4'r, z1'l--z3'l, (x2'r, y1'l));
+labels(1,2,3,4,5,6,7,8); endchar;
+
+iff known o_times: cmchar "Circle-times operator";
+beginarithchar(o_times);
+draw_solid_circle(w-2u,2*(h-math_axis),(.5w,math_axis),light_rule_thickness);
+penpos5(light_rule_thickness, -45); penpos6(light_rule_thickness, -135);
+penpos7(light_rule_thickness, 135); penpos8(light_rule_thickness, 45);
+x5=x8=x1r; x6=x7=x3r; y5=y6=y2r; y7=y8=y4r;
+angled_pos(7, z5-z7, 9, z8-z6, 8);
+angled_pos(5, z7-z5, 10, z8-z6, 8);
+unfill reverse(trunc_cycle(z1l{up}..z2l{left}..{down}z3l, z5l--z9r--z6l));
+unfill reverse(trunc_cycle(z2l{left}..z3l{down}..{right}z4l, z6r--z10l--z7r));
+unfill reverse(trunc_cycle(z3l{down}..z4l{right}..{up}z1l, z7l--z9l--z8l));
+unfill reverse(trunc_cycle(z4l{right}..z1l{up}..{left}z2l, z8r--z10r--z5r));
+labels(1,2,3,4,5,6,7,8); endchar;
+
+iff known cup: cmchar "Set union sign";
+beginchar(cup,12u#,.8asc_height#,0);
+italcorr .8asc_height#*slant-.5u#;
+adjust_fit(0,0);
+rulepos1(-180); rulepos2(-180); rulepos3(-90); rulepos4(0); rulepos5(0);
+x1r=x2r=w-x4r=hround u; x5=x4; x3=0.5[x1,x5];
+y1=y5=h; y3r=hround -o; y2=y4=2/3[y1,y3];
+make_paths1(rev.l) z1e--z2e{down}...z3e{right}...z4e{up}--z5e;
+fill rpath1--lpath1--cycle;
+labels(1,2,3,4,5); endchar;
+
+iff known cap: cmchar "Set intersection sign";
+beginchar(cap,12u#,.8asc_height#,0);
+italcorr .8asc_height#*slant-.5u#;
+adjust_fit(0,0);
+rulepos1(180); rulepos2(180); rulepos3(90); rulepos4(0); rulepos5(0);
+x1r=x2r=w-x4r=hround u; x5=x4; x3=0.5[x1,x5];
+y1=y5=0; y3r=hround h+o; y2=y4=2/3[y1,y3];
+make_paths1(rev.r) z1e--z2e{up}...z3e{right}...z4e{down}--z5e;
+fill rpath1--lpath1--cycle;
+labels(1,2,3,4,5); endchar;
+
+iff known meet: cmchar "Lattice infimum (logical and) sign";
+beginchar(meet,12u#,.8asc_height#,0);
+italcorr .8asc_height#*slant-.5u#;
+adjust_fit(0,0);
+x1r=hround u-eps; x3=w-x3; x5r=w-x1r;
+y3=h+o; y1=y5=0;
+numeric alpha; alpha=diag_ratio(1,.5rule_thickness,y3-y1,x3-x1r);
+penpos1(rule_thickness*alpha,-180);
+penpos3(rule_thickness*alpha,-180);
+penpos5(rule_thickness*alpha,0);
+fill angled_stroke(1, 3, 5);
+labels(1,3,5); endchar;
+
+iff known join: cmchar "Lattice supremum (logical or) sign";
+beginchar(join,12u#,.8asc_height#,0);
+italcorr .8asc_height#*slant-.5u#;
+adjust_fit(0,0);
+x1r=hround u-eps; x3=w-x3; x5r=w-x1r;
+y1=y5=h; y3=-o;
+numeric alpha; alpha=diag_ratio(1,.5rule_thickness,y3-y1,x3-x1r);
+penpos1(rule_thickness*alpha,-180);
+penpos3(rule_thickness*alpha,-180);
+penpos5(rule_thickness*alpha,0);
+fill angled_stroke(1, 3, 5);
+labels(1,3,5); endchar;
+
+iff known down_arrow: cmchar "Downward arrow";
+beginchar(down_arrow,9u#,asc_height#,asc_depth#);
+adjust_fit(0,0);
+penpos1(rule_thickness,0); penpos2(rule_thickness,0);
+penpos3(rule_thickness,-90); penpos4(rule_thickness,-90);
+x1l=hround(.5w-.5rule_thickness); y1=h;
+x0=x1=x2; y0=-d; x0-x3=x4-x0=if monospace:3u else:4u fi+eps;
+y3=y4=y0+if monospace:.24 else:.36 fi asc_height+eps;
+penpos5(rule_thickness,angle(z4-z0)); z5l=z0;
+penpos6(rule_thickness,angle(z3-z0)); z6l=z0;
+z9=.2[.5[z3,z4],z0];
+path p; p=z4l{z9-z4}..z6r;
+numeric t; t = xpart(p intersectiontimes (z3l{z9-z3}..z5r));
+z0r=z0; z0l=point t of p;
+y2=-d; fill aux_left(z4e{z9-z4}..{curl 1}z0e..{z3-z9}z3e)(z2e--z1e);
+penlabels(0,1,2,3,4,5,6,9); endchar;
+
+iff known up_arrow: cmchar "Upward arrow";
+beginchar(up_arrow,9u#,asc_height#,asc_depth#);
+italcorr .76asc_height#*slant+.5crisp#-u#;
+adjust_fit(0,0);
+penpos1(rule_thickness,0); penpos2(rule_thickness,0);
+penpos3(rule_thickness,90); penpos4(rule_thickness,90);
+x1l=hround(.5w-.5rule_thickness); y1=-d;
+x0=x1=x2; y0=h; x0-x3=x4-x0=if monospace:3u else:4u fi+eps;
+y3=y4=y0-if monospace:.24 else:.36 fi asc_height-eps;
+penpos5(rule_thickness,angle(z4-z0)); z5l=z0;
+penpos6(rule_thickness,angle(z3-z0)); z6l=z0;
+z9=.2[.5[z3,z4],z0];
+path p; p=z4l{z9-z4}..z6r;
+numeric t; t = xpart(p intersectiontimes (z3l{z9-z3}..z5r));
+z0r=z0; z0l=point t of p;
+y2=h; fill reverse(aux_left(z4e{z9-z4}..{curl 1}z0e..{z3-z9}z3e)(z2e--z1e));
+penlabels(0,1,2,3,4,5,6,9); endchar;
+
+iff known left_arrow: cmchar "Leftward arrow";
+compute_spread(.45x_height#,.55x_height#);
+beginchar(left_arrow,18u#,v_center(spread#+rule_thickness#));
+adjust_fit(0,0); % pickup crisp.nib; % Now, arrows are always sharp
+penpos1(rule_thickness,90); penpos2(rule_thickness,90);
+penpos3(rule_thickness,180); penpos4(rule_thickness,180);
+y0=y1=y2=math_axis; x1=hround(w-u); x0=hround u;
+y3-y0=y0-y4=if monospace:.24 else:.36 fi asc_height+eps;
+x3=x4=x0+if monospace:3u else:4u fi+eps;
+penpos5(rule_thickness,angle(z4-z0)); z5l=z0;
+penpos6(rule_thickness,angle(z3-z0)); z6l=z0;
+z9=.2[.5[z3,z4],z0];
+path p; p=z4l{z9-z4}..z6r;
+numeric t; t = xpart(p intersectiontimes (z3l{z9-z3}..z5r));
+z0r=z0; z0l=point t of p;
+x2=0; fill reverse(aux_left(z3e{z9-z3}..{curl 1}z0e..{z4-z9}z4e)(z2e--z1e));
+penlabels(0,1,2,3,4,5,6,9); endchar;
+
+iff known right_arrow: cmchar "Rightward arrow";
+compute_spread(.45x_height#,.55x_height#);
+beginchar(right_arrow,18u#,v_center(spread#+rule_thickness#));
+adjust_fit(0,0);
+penpos1(rule_thickness,90); penpos2(rule_thickness,90);
+penpos3(rule_thickness,0); penpos4(rule_thickness,0);
+y0=y1=y2=math_axis; x1=hround u; x0=hround(w-u);
+y3-y0=y0-y4=if monospace:.24 else:.36 fi asc_height+eps;
+x3=x4=x0-if monospace:3u else:4u fi-eps;
+penpos5(rule_thickness,angle(z4-z0)); z5l=z0;
+penpos6(rule_thickness,angle(z3-z0)); z6l=z0;
+z9=.2[.5[z3,z4],z0];
+z0r=z0; z0l=(z4l{z9-z4}..z6r) intersectionpoint (z3l{z9-z3}..z5r);
+x2=w; fill aux_left(z3e{z9-z3}..{curl 1}z0e..{z4-z9}z4e)(z2e--z1e);
+penlabels(0,1,2,3,4,5,6,9); endchar;
+
+iff known double_arrow: cmchar "Left-and-right arrow";
+compute_spread(.45x_height#,.55x_height#);
+beginchar(double_arrow,18u#,
+ v_center(if monospace:.6asc_height#+fi spread#+rule_thickness#));
+adjust_fit(0,0);
+path p[]; pair t[];
+rulepos1(90); rulepos2(90); rulepos12(90);
+rulepos3(0); rulepos4(0);
+y0=y1=y2=math_axis if monospace:+vround.3asc_height fi; x0=x2=hround u;
+if monospace: x1=hround(w-u) else: x1=.5w fi;
+y3-y0=y0-y4=if monospace:.24 else:.36 fi asc_height+eps;
+x3=x4=x0+if monospace:3u else:4u fi+eps;
+rulepos5(angle(z4-z0)); z5l=z0;
+rulepos6(angle(z3-z0)); z6l=z0;
+z9=.2[.5[z3,z4],z0];
+rulepos11(90); rulepos13(0); rulepos14(0);
+y10=y11=y12=math_axis if monospace:-vround.3asc_height fi;
+x10=x12=hround(w-u);
+if monospace: x11=hround u else: x11=.5w fi;
+y13-y10=y10-y14=if monospace:.24 else:.36 fi asc_height+eps;
+x13=x14=x10-if monospace:3u else:4u fi-eps;
+rulepos15(angle(z14-z10)); z15l=z10;
+rulepos16(angle(z13-z10)); z16l=z10;
+z19=.2[.5[z13,z14],z10];
+% Set up paths
+p1=z2r--z1r; p2=z2l--z1l;
+p11=z12r--z11r; p12=z12l--z11l;
+p3=z5r..{z3-z9}z3r; p4=z4r{z9-z4}..z6r;
+p13=z13l{z19-z13}..z15r; p14=z16r..{z14-z19}z14l;
+fill trunc_start(p3,p1)--z3l{z9-z3}..z0{curl 1}..{z4-z9}z4l--trunc_end(p4,p2)--
+if monospace: lrend(1)--cycle; fill rlend(11)-- fi
+trunc_start(p14,p12)--z14r{z19-z14}..{curl 1}z10..{z13-z19}z13r
+ --trunc_end(p13,p11)--cycle;
+penlabels(0,1,2,3,4,5,6,9,10,11,12,13,14,15,16,19); endchar;
+
+iff known subset: cmchar "Proper subset sign";
+compute_spread(5/4x_height#,3/2x_height#);
+beginchar(subset,14u#,v_center(spread#+rule_thickness#));
+italcorr h#*slant-u#;
+adjust_fit(0,0);
+rulepos1(90); rulepos4(90); rulepos2(180); rulepos5(270); rulepos3(270);
+x2r=hround 1.5u-eps; x1=x3=w-x2r;
+y1-y3=spread; y2=.5[y1,y3]=math_axis;
+x4=x5=.5w; y4=y1; y5=y3;
+make_paths1(rev.l) z1e--z4e{left}...z2e{down}...{right}z5e--z3e;
+fill lpath1--rpath1--cycle;
+labels(1,2,3,4,5); endchar;
+
+iff known superset: cmchar "Proper superset sign";
+compute_spread(5/4x_height#,3/2x_height#);
+beginchar(superset,14u#,v_center(spread#+rule_thickness#));
+italcorr h#*slant-u#;
+adjust_fit(0,0);
+rulepos1(90); rulepos4(90); rulepos2(0); rulepos5(-90); rulepos3(-90);
+x1=x3=w-x2r=hround 1.5u-eps;
+y1-y3=spread; y2=.5[y1,y3]=math_axis;
+x4=x5=.5w; y4=y1; y5=y3;
+fill stroke z1e--z4e{right}...z2e{down}...{left}z5e--z3e;
+labels(1,2,3,4,5); endchar;
+
+iff known elt: cmchar "Element sign";
+compute_spread(5/4x_height#,3/2x_height#);
+beginchar(elt,12u#,v_center(spread#+rule_thickness#));
+italcorr h#*slant-u#;
+adjust_fit(0,0);
+rulepos1(90); rulepos4(90); rulepos2(180); rulepos5(270); rulepos3(270);
+rulepos6(90); rulepos2'(90);
+x2r=hround 1.5u-eps; x1=x3=x6=w-x2r;
+y1-y3=spread; y2=y6=.5[y1,y3]=math_axis;
+x4=x5=.5w; y4=y1; y5=y3;
+y2'=y6; x2'=x2r;
+fill reverse(aux_left(z1e--z4e{left}...z2e{down}...{right}z5e--z3e)(z2'e--z6e));
+labels(1,2,3,4,5,6); endchar;
+
+iff known for_all: cmchar "Universal quantifier";
+beginchar(for_all,10u#,asc_height#,0);
+italcorr asc_height#*slant;
+adjust_fit(0,0);
+x2=.5w; x1r=0; x3r=w-x1r;
+y1=y3=h; y2=-o;
+numeric alpha; alpha=diag_ratio(1, .5rule_thickness, y1-y2, x2-x1r);
+penpos1(alpha*rule_thickness,-180);
+penpos2(alpha*rule_thickness,-180);
+penpos3(alpha*rule_thickness,0);
+y4r=y5r=hround(x_height-.5rule_thickness); y4r-y4l=y5r-y5l=rule_thickness;
+z4r=whatever[z1l,z2l]; z4l=whatever[z1l,z2l];
+z5r=whatever[z3l,z2r]; z5l=whatever[z3l,z2r];
+z6=whatever[z1l,z2l]=whatever[z3l,z2r];
+fill lrend(1)--rlend(2)--rlend(3)--z5r--z4r--cycle;
+unfill z4l--z5l--z6--cycle;
+labels(1,2,3,4,5); endchar;
+
+iff known there_exists: cmchar "Existential quantifier";
+beginchar(there_exists,10u#,asc_height#,0);
+italcorr asc_height#*slant;
+adjust_fit(0,0);
+penpos1(rule_thickness, 90);
+penpos4(rule_thickness, 270);
+penpos5(rule_thickness, 90); penpos6(rule_thickness, 90);
+penpos7(rule_thickness, 0);
+x1=x4=x6-.25u=hround u-eps; x7r=w-x1; x5=x7l;
+y1r=h; y4r=0; y5=y6=y7=0.5[y1,y4];
+angled_pos(1, right, 2, down, 7);
+angled_pos(7, down, 3, left, 4);
+fill reverse(lrend(1)--z2r--z3r--rlend(4)--z3l
+	--lrthrough(5, lrend(6))--z2l--cycle);
+%fill straight.r(1, 2, 3, 4)--straight.l(4, 3, 5, 6)--z6r--z5r--z2l--z1l--cycle;
+labels(1,2,3,4,5,6); endchar;
+
+iff known false_that: cmchar "Logical not sign";
+beginchar(false_that,12u#,x_height#,0);
+italcorr x_height#*slant-.5u#;
+adjust_fit(0,0);
+rulepos1(90); rulepos3(0);
+x1=hround u-eps; x3r=w-x1;
+y1r=hround 0.5rule_thickness+.5[bar_height,h]; y1-y3=hround 1.2(h-bar_height);
+angled_pos(1, right, 2, down, 3);
+fill stroke z1e--z2e--z3e;
+labels(1,2,3); endchar;
+
+iff known less: cmchar "Less than sign";
+compute_spread(5/4x_height#,3/2x_height#);
+beginchar(less,14u#,v_center(spread#+rule_thickness#));
+italcorr h#*slant-u#;
+adjust_fit(0,0);
+x2=hround 1.5u-eps; x1=x3=w-x2;
+y1-y3=spread; y2=.5[y1,y3]=math_axis;
+penpos1(diag_width((z1-z2) rotated 90, rule_thickness), 90);
+penpos2(diag_width((z1-z2) rotated 90, rule_thickness), 90);
+penpos3(diag_width((z3-z2) rotated 270, rule_thickness), 270);
+fill angled_stroke(1, 2, 3);
+labels(1,2,3); endchar;
+
+iff known greater: cmchar "Greater than sign";
+compute_spread(5/4x_height#,3/2x_height#);
+beginchar(greater,14u#,v_center(spread#+rule_thickness#));
+italcorr math_axis#*slant-u#;
+adjust_fit(0,0);
+x2=hround(w-1.5u)+eps; x1=x3=w-x2;
+y1-y3=spread; y2=.5[y1,y3]=math_axis;
+penpos1(diag_width((z1-z2) rotated 90, rule_thickness), 90);
+penpos2(diag_width((z1-z2) rotated 90, rule_thickness), 90);
+penpos3(diag_width((z3-z2) rotated 270, rule_thickness), 270);
+fill angled_stroke(1, 2, 3);
+labels(1,2,3); endchar;
+
+iff known underbar: cmchar "Underbar suitable for < and >";
+compute_spread((5/8+.45)*x_height#,(3/4+.55)*x_height#);
+beginchar(underbar,14u#,0,spread#-math_axis#+.5rule_thickness#);
+adjust_fit(0,0);
+rulepos1(90); rulepos2(90);
+x1=hround 1.5u-eps; x2=w-x1; y1l=y2l=-d;
+fill stroke z1e--z2e;  % bar
+labels(1,2); endchar;
+
+iff known neq: cmchar "Unequals sign";
+compute_spread(.45x_height#,.55x_height#);
+beginchar(neq,14u#,v_center(4spread#+rule_thickness#));
+italcorr h#*slant-.5u#;
+adjust_fit(0,0);
+rulepos1(90); rulepos2(90); rulepos3(90); rulepos4(90);
+x1=x3=hround u; x2=x4=w-x1;
+y1=y2; y3=y4; y1-y3=spread; .5[y1,y3]=math_axis;
+x6l=hround 3.5u; x5r=w-x6l; y5=h; y6=-d;
+numeric theta; theta=diag_ratio(1,rule_thickness,y5-y6,x5r-x6l);
+penpos5(theta*rule_thickness,0); penpos6(theta*rule_thickness,0);
+fill aux_stroke(aux_stroke(x5l--x6l,x1e--x2e), x3e--x4e)
+    --aux_stroke(aux_stroke(x6r--x5r,x2e--x1e), x4e--x3e)--cycle;
+labels(1,2,3,4,5,6); endchar;
+
+iff known leq: cmchar "Less than or equal to sign";
+compute_spread(.45x_height#,.55x_height#);
+spread#':=spread#; spread':=spread; % the spread of `$=$'
+compute_spread(5/4x_height#,3/2x_height#);
+beginchar(leq,14u#,v_center(spread#'+spread#+rule_thickness#));
+italcorr h#*slant-u#;
+adjust_fit(0,0);
+x2=hround 1.5u-eps; x1=x3=w-x2;
+y1-y3=spread; y2=.5[y1,y3]; y1=h-.5rule_thickness;
+penpos1(diag_width((z1-z2) rotated 90, rule_thickness), 90);
+penpos2(diag_width((z1-z2) rotated 90, rule_thickness), 90);
+penpos3(diag_width((z3-z2) rotated 270, rule_thickness), 270);
+fill angled_stroke(1, 2, 3);
+x8=x1; x9=x2; y8=y9; y3-y9=spread';
+rulepos8(90); rulepos9(90); fill lrend(8)--rlend(9)--cycle;
+labels(1,2,3,8,9); endchar;
+
+iff known geq: cmchar "Greater than or equal to sign";
+compute_spread(.45x_height#,.55x_height#);
+spread#':=spread#; spread':=spread; % the spread of `$=$'
+compute_spread(5/4x_height#,3/2x_height#);
+beginchar(geq,14u#,v_center(spread#'+spread#+rule_thickness#));
+italcorr h#*slant-u#;
+adjust_fit(0,0);
+x1=hround 1.5u-eps; x2=w-x1; x3=x1;
+y1-y3=spread; y2=.5[y1,y3]; y1=h-.5rule_thickness;
+penpos1(diag_width((z1-z2) rotated 90, rule_thickness), 90);
+penpos2(diag_width((z1-z2) rotated 90, rule_thickness), 90);
+penpos3(diag_width((z3-z2) rotated 270, rule_thickness), 270);
+fill angled_stroke(1, 2, 3);
+x8=x1; x9=x2; y8=y9; y3-y9=spread';
+rulepos8(90); rulepos9(90); fill stroke z8e--z9e;
+labels(1,2,3,8,9); endchar;
+
+iff known eqv: cmchar "Equivalence or congruence sign";
+compute_spread(.45x_height#,.55x_height#);
+beginchar(eqv,14u#,v_center(2spread#+rule_thickness#));
+italcorr h#*slant-.5u#;
+adjust_fit(0,0);
+x1=x3=x5=hround u-eps; x2=x4=x6=w-x1;
+y1=y2; y3=y4=math_axis; y5=y6; y1-y3=y3-y5=spread;
+rulepos1(90); rulepos2(90); rulepos3(90);
+rulepos4(90); rulepos5(90); rulepos6(90);
+fill stroke z1e--z2e;  % upper bar
+fill stroke z3e--z4e;  % middle bar
+fill stroke z5e--z6e;  % lower bar
+labels(1,2,3,4,5,6); endchar;
+
+iff known backslash: cmchar "Reverse slash (backslash)";
+beginchar(backslash,9u#,body_height#,paren_depth#);
+adjust_fit(0,0);
+x1l=hround u; y1=h;
+x2r=hround(w-u); y2=-d;
+numeric alpha; alpha=diag_ratio(1, rule_thickness, y1-y2, x2r-x1l);
+penpos1(alpha*rule_thickness, 0);
+penpos2(alpha*rule_thickness, 0);
+fill stroke z1e--z2e;  % diagonal
+labels(1,2); endchar;
+
+iff known vertical: cmchar "Vertical line";
+beginchar(vertical,5u#,body_height#,paren_depth#);
+italcorr body_height#*slant+.5rule_thickness#-2u#;
+adjust_fit(0,0);
+rulepos1(0); rulepos2(0);
+x1l=x2l=.5w-.5rule_thickness; y1=h; y2=-d;
+fill stroke z1e--z2e;  % stem
+labels(1,2); endchar;
+
+iff known cdot: cmchar "Period raised to axis height";
+beginchar(cdot,5u#,v_center(7u#));
+adjust_fit(0,0);
+numeric dot_diam#; dot_diam#=if monospace: 5/4 fi\\ dot_size#;
+define_whole_blacker_pixels(dot_diam);
+penpos1(dot_diam,0); penpos2(dot_diam,90);
+lft x1l=hround(.5w-.5dot_diam); y1+.5dot_diam=vround(math_axis+.5dot_diam);
+z1=z2; fulldot(1,2);  % dot
+penlabels(1,2); endchar;
+
+iff known diamond: cmchar "Diamond operator";
+beginchar(diamond,9u#,v_center(7u#));
+italcorr math_axis#*slant;
+adjust_fit(0,0);
+numeric a; a=(3.5u-.5rule_thickness)*sqrt(3.14159/2);
+penpos2(rule_thickness*sqrt 2, -180); penpos4(rule_thickness*sqrt 2, -90);
+penpos6(rule_thickness*sqrt 2, 0); penpos8(rule_thickness*sqrt 2, 90);
+x4=x8=.5w; x2=w-x6=x4-a;
+y2=y6=.5[y4,y8]=math_axis; y8=y2+a;
+fill z2r--z4r--z6r--z8r--cycle;
+unfill z8l--z6l--z4l--z2l--cycle;
+labels(2,4,6,8); endchar;
+
+iff known left_brace: cmchar "Left curly brace";
+beginchar(left_brace,9u#,body_height#,paren_depth#);
+italcorr body_height#*slant+.5vair#-u#;
+adjust_fit(0,0);
+forsuffixes $=1,1',4,4',7,7': penpos$(vair,0); endfor
+forsuffixes $=2,3,5,6: penpos$(stem,0); endfor
+x2=x3=x5=x6; x1=x1'=x7=x7'=w-x4=w-x4';
+x4l=hround(1.5u-.5vair); x2l=hround(.5w-.5stem);
+y1=h; y7=-d; .5[y4,y4']=.5[y1,y7]=.5[y2,y6]=.5[y3,y5];
+y1-y2=y3-y4=(y1-y4)/4; y1-y1'=y4-y4'=y7'-y7=vair;
+left_curly_path;
+penlabels(1,2,3,4,5,6,7); endchar;
+
+iff known right_brace: cmchar "Right curly brace";
+beginchar(right_brace,9u#,body_height#,paren_depth#);
+italcorr math_axis#*slant+.5vair#-u#;
+adjust_fit(0,0);
+forsuffixes $=1,1',4,4',7,7': penpos$(vair,0); endfor
+forsuffixes $=2,3,5,6: penpos$(stem,0); endfor
+x2=x3=x5=x6; x1=x1'=x7=x7'=w-x4=w-x4';
+x4r=hround(w-1.5u+.5vair); x2r=hround(.5w+.5stem);
+y1=h; y7=-d; .5[y4,y4']=.5[y1,y7]=.5[y2,y6]=.5[y3,y5];
+y1-y2=y3-y4=(y1-y4)/4; y1-y1'=y4-y4'=y7'-y7=vair;
+right_curly_path;
+penlabels(1,2,3,4,5,6,7); endchar;
+
+iff known straight_quotes: cmchar "Straight double quotes";
+beginchar(straight_quotes,9u#,asc_height#,0);
+numeric top_width#,spread#; top_width#=if serifs: flare# else: stem# fi;
+spread#=max(3u#,top_width#+.5u#); define_pixels(spread);
+italcorr asc_height#*slant+.5top_width#+.5spread#-4u#;
+adjust_fit(0,0);
+x1=x2; x3=x4=w-x1; x3-x1=spread+2; y1=y3;
+y2=y4=max(.5[bar_height,x_height]+.5vair,h-x_height);
+if serifs: pickup crisp.nib; pos1(flare,0); pos2(vair,0);
+ pos3(flare,0); pos4(vair,0);
+ y1+.5stem=h; filldraw circ_stroke z1e--z2e;  % left stem and bulb
+ filldraw circ_stroke z3e--z4e;  % right stem and bulb
+else: pickup fine.nib; pos1(stem,0); pos2(vair,0);
+ pos3(stem,0); pos4(vair,0);
+ top y1=h; filldraw stroke z1e--z2e;  % left stem
+ filldraw stroke z3e--z4e; fi  % right stem
+penlabels(1,2,3,4); endchar;
+
+iff known infty: cmchar "Infinity";
+beginchar(infty,18u#,x_height#,0);
+italcorr .7x_height#*slant-.5u#;
+adjust_fit(0,0);
+numeric theta,phi;
+if monospace: phi=-theta=90;
+else: phi=angle(4u,h); theta=angle(6u,-h); fi
+penpos1(vair,180);
+penpos3(curve,90+theta);
+penpos6(vair,180);
+penpos8(.3[vair,curve],phi-90);
+x1r=w-x6l=hround u; y1=y6=.5h; y2r=y7l=h+oo; y5l=y9r=-oo; z3=z8=.5[z1,z6];
+y2r-y2l=y5r-y5l=.5[vair,curve]; y7l-y7r=y9l-y9r=.2[vair,curve];
+if monospace:
+ forsuffixes e=l,r: x2e=x9e=.45[x1e,x3e]; x7e=x5e=.45[x6e,x8e]; endfor
+else:
+ % Fudge the slope a bit, to force the sides of the infinity to appear less
+ % round. This prevents the middle part from looking too un-round.
+ numeric slope; slope=-h/8u;
+ vellipse_set(1r,2r,12r,3r); vellipse_set(1l,2l,12l,3l);
+ vellipse_set(6r,5r,15r,3r); vellipse_set(6l,5l,15l,3l);
+ numeric slope; slope=h/7u;
+ vellipse_set(1r,9r,19r,8r); vellipse_set(1l,9l,19l,8l);
+ vellipse_set(6r,7r,17r,8r); vellipse_set(6l,7l,17l,8l);
+fi
+numeric tau; tau=max(.8,.20710678/(superness-.5));
+make_paths1(rev.l) z2e{left}..tension atleast tau..z1e{down}
+    ..tension atleast tau..{right}z9e;
+make_paths2(rev.r) z5e{right}..tension atleast tau..z6e{up}
+    ..tension atleast tau..{left}z7e;
+make_paths3(rev.l) z5e{left}..tension atleast tau..z3e{-dir theta}
+    ..tension atleast tau..{left}z2e;
+make_paths4(rev.l) z9e{right}..tension atleast tau..z8e{dir phi}
+    ..tension atleast tau..{right}z7e;
+%make_paths3(rev.l) z5e{left}...{z12e-z15e}z15e--z12e{z12e-z15e}...{left}z2e;
+%make_paths4(rev.l) z9e{right}...{z17e-z19e}z19e--z17e{z17e-z19e}...{right}z7e;
+fill rpath1 & combine(rpath4,lpath3) & lpath2 & combine(lpath4,rpath3) & cycle;
+unfill lpath1 & combine(lpath3,lpath4) & cycle;
+unfill rpath2 & combine(rpath3,rpath4) & cycle;
+penlabels(1,2,3,4,5,6,7,8,9); endchar;
+
+iff known integral: cmchar "Integral sign";
+beginchar(integral,5.25u#+max(1.25u#,stem#)+2max(1.5u#,curve#),
+ asc_height#,desc_depth#);
+italcorr asc_height#*slant-.5u#;
+adjust_fit(0,0);
+penpos1(curve,0); penpos2(hair,0); penpos3(vair,90); penpos4(.6[hair,stem],180);
+penpos5(stem,180); rev_pos5'(5); penpos6(.6[hair,stem],0);
+penpos7(vair,-90); penpos8(hair,-180); penpos9(curve,-180);
+x7=w-x3=2.4u; x1r=max(x3+eps,hround(w-u)); x9=w-x1;
+x5=.5[x4,x6]; x4-x6=1.5u; x5r=hround(.5w-.5stem);
+y9-.5curve=vround(-.9d-o+vair); y3-y1=y9-y7;
+y3r=h+o; y7r=-d-o; y5=.5[y3,y7]=.5[y4,y6]; y4-y6=2/3(y3-y7);
+make_paths1(rev.l) z3e{left}...z4e{(z5e-z4e)xscaled 1.1}
+ ..tension atleast 1 and atleast .8..{z6-z4}z5e;  % upper stem
+make_paths2(rev.r) z5'e{z6-z4}..tension atleast.8 and atleast 1
+ ..{(z6e-z5'e)xscaled 1.1}z6e...{left}z7e;  % lower stem
+fill bulb_path(3,2,1) & rpath1 & lpath2 & bulb_path(7,8,9)
+    & rpath2 & lpath1 & cycle;
+math_fit(0,-2u#); penlabels(1,2,3,4,5,6,7,8,9); endchar;

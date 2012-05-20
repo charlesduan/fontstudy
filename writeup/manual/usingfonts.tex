@@ -1,0 +1,26 @@
+\sectionname{Using the New Fonts}
+
+Once all the scripts have been run, MathGen will produce a directory
+\emph{output} that will contain all of the new fonts. Assuming the
+\emph{output\_prefix} is \emph{xxx}, the files present will be:
+\begin{description}
+\item[mathxxx.map] The \ac{dvips} map file for the math fonts. Consult the
+fontinst manual for its meaning and usage.
+\item[mathxxx.sty] The \LaTeX\ style file for the math fonts. Including this
+style file will instruct \LaTeX\ to use the new fonts for typesetting all math.
+\item[*xxx.fd] The \LaTeX\ font definition files for the math fonts. Consult the
+fontinst manual for their placement.
+\item[*.pfa] The \ac{pfa} files for the new fonts.
+\item[*.tfm] The \ac{tfm} font files.
+\item[*.vf] The virtual font files, which combine the font's own italic letters
+with the generated Greek letters to form a single math font.
+\end{description}
+For long-term use, these files should be moved to their appropriate directory
+locations, as specified in the fontinst manuals. For quick testing, though, they
+can be left in place.
+
+A sample test file is placed in the \emph{mathgen/auxiliaries} directory, named
+\emph{testfont.tex}. To use it, copy it into the \emph{output} directory and
+change the first few lines to use the appropriate text font and the new math
+font. The file should compile as normal (be sure to instruct dvips or pdflatex
+to use the new map file).

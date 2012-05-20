@@ -1,0 +1,56 @@
+%
+% E-beakdark.ps
+%
+flattenpath
+
+0.5 vertSplitLine pathLineIntc sortByY /EVertSplit exch def
+
+EVertSplit 4 2 getinterval loadArray
+/ETopTop defPoint /ETopBot defPoint
+{ ETopBot startAtPoint ETopTop endAtPoint } traceSubpath
+{ {
+    { 45 90 withinRange } startWhenAngle
+    { 165 90 withinRange } endBeforeAngle
+  } traceSubpath
+} useSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByY dup firstElt /EBeakBot defPoint lastElt /EBeakTop defPoint
+EBeakBot pointbox EBeakTop uppointbox
+
+0.75 horizSplitLine pathLineIntc sortByX 0 2 getinterval
+dup 1 get /EStemRight defPoint
+{ } forallPoint addPoint 2 div exch 2 div exch /EStemMid defPoint
+EStemMid pointbox
+EStemMid vertLineThrough drawLine
+ETopBot horizLineThrough drawLine
+intersect pop % Must be true
+/EStemTop defPoint
+EStemTop pointbox
+
+{ EStemRight startAtPoint { 180 135 withinRange } endBeforeAngle } traceSubpath
+subpathEndpoint /EBeakInside defPoint
+
+{
+    EBeakInside startAtPoint
+    { dup 45 lt exch 330 gt or } endBeforeAngle
+} traceSubpath
+drawSubpath
+subpathEndpoint /EBeakLBot defPoint
+EBeakLBot pointbox
+
+EBeakLBot EBeakBot subPoint EBeakTop addPoint EBeakLBot drawLine
+EStemTop horizLineThrough intersect pop /EBeakTriangle defPoint
+EBeakTriangle pointbox
+
+EBeakTriangle EStemTop avgPoint /EArmTriangle defPoint
+EArmTriangle pointbox
+
+EArmTriangle EBeakLBot drawLine avgPoint 2 copy pointbox EBeakTriangle drawLine
+4 copy subPoint magnitude /BeakDarknessDenom exch def
+pathLineIntc loadArray loadArray 2 copy pointbox
+EBeakTriangle subPoint magnitude /BeakDarknessNum exch def
+
+(Beak darkness)
+BeakDarknessNum BeakDarknessDenom div
+stringOfText

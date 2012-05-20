@@ -1,0 +1,72 @@
+\sectionname{Bugs in the Computer Modern Fonts}
+
+During the process of reviewing the Computer Modern math fonts to make changes,
+I noticed several errors. They have since been reported to the proper
+authorities, and I am awaiting their response.
+
+\begin{figure}
+\centering
+\leavevmode\raise 1cm\hbox{Incorrect}~\begin{pspicture}(0,-0.5)(2,2)
+\pscustom{ \psarc(1,3){3}{-110}{-70} \psarcn(1,3){2}{-70}{-110}
+    \closepath \fill[fillstyle=solid,fillcolor=lightgray] }
+\psline(1,0)(1,1)
+\qdisk(1,0.5){2pt}\uput[45](1,0.5){$c$}
+\psline[linestyle=dashed](0,0.5)(2,0.5)
+\uput[d](1,0){$r$}
+\end{pspicture}
+\quad
+\begin{pspicture}(0,-0.5)(2,2)
+\pscustom{ \psarc(1,3.5){3}{-110}{-70} \psarcn(1,3.5){2}{-70}{-110}
+    \closepath \fill[fillstyle=solid,fillcolor=lightgray] }
+\psline(1,0.5)(1,1.5)
+\qdisk(1,1){2pt}\uput[45](1,1){$c$}
+\psline[linestyle=dashed](0,0.5)(2,0.5)
+\uput[d](1,0.5){$r$}
+\end{pspicture}~\raise 1cm\hbox{Correct}
+\caption{Example of the general bug found in Computer Modern. The bottom edge of
+the gray stroke (point $r$) should line up with the dotted line. Instead, the
+programs specify the center of that stroke (point $c$) to align there.}
+\end{figure}
+
+In \MF, a ``stroke'' can be drawn by defining the left and right edges around
+points along that stroke and then tracing through those edges. The locations of
+those points are usually defined by the extremities of those edges (e.g., the
+left edge of this stroke should have this $x$-coordinate). In several places in
+the program, the edge of a stroke is defined by the wrong side of the stroke.
+For example, in the $\phi$ character, the bottom and top of the circular bowl
+are placed with respect to the middle of the circular stroke rather than the
+stroke's edge. The same occurs in the $\beta$ and $\delta$. Also, the left
+upward stroke of the $\beta$ is placed with respect to its right edge, but the
+code clearly implies that the placement should be with respect to the left edge.
+
+\begin{figure}
+\centering
+\begin{pspicture}(-0.5,0)(5,5)
+\pspolygon*[linecolor=lightgray](0,0)(1,0.7)(1,5)(-0.5,4.5)(-0.5,4)(0,4)
+\pscustom{
+\psbezier(5,5)(4.5,3)(2.5,0.5)(0.5,0)
+\psbezier(0.5,1)(2,1.5)(3.5,3.5)(4,5)
+\closepath
+\fill[fillstyle=solid,fillcolor=lightgray]
+}
+\pspolygon(0,0)(1,0.7)(1,5)(-0.5,4.5)(-0.5,4)(0,4)
+\qdisk(1,0.7){2pt}\uput[20](1,0.7){$c$}
+\qdisk(0,0){2pt}\uput[135](0,0){$e$}
+\end{pspicture}
+\caption{Example of the bug with the $\nu$ character in Computer Modern. The
+error is with the small notch in the lower left corner of the character. Note
+that, because the diagonal stroke is curved but $\overline{ec}$ is straight,
+there is no satisfactory location of $c$.}
+\end{figure}
+
+Finally, there is a bug that I haven't found a definitive way to fix. The
+character $\nu$ is made up of a vertical stem and a diagonal stroke. The bottom
+of the diagonal stroke is cut off so that it does not extend below the diagonal
+stroke, but it is cut off too much, so in certain conditions an unsightly
+``notch'' will appear at the base of the character.
+
+The reason that none of these bugs are problematic in the actual incarnation of
+the Computer Modern fonts is that the thin stroke widths are so small that the
+errors are barely visible. For fonts where the thin strokes are not so thin,
+such as sans serif fonts like Helvetica, these problems become much more obvious
+and troubling without correction.

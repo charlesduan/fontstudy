@@ -1,0 +1,92 @@
+%!PS-Adobe-2.0
+
+(functions.ps) run
+(bzfunc.ps) run
+(bzintc.ps) run
+(intersect.ps) run
+(extremes.ps) run
+(intcmgr.ps) run
+%(t1func.ps) run
+
+(padr8a.pfa) run
+
+/pointbox {
+    gsave
+	newpath moveto
+	-10 -10 rlineto
+	20 0 rlineto
+	closepath fill
+    grestore
+} def
+
+
+%%Page: 1 1
+
+50 200 translate
+0.6 0.6 scale
+
+% Clipping path
+newpath
+-50 0 moveto -50 300 lineto 300 0 lineto closepath
+true upath setExtremesClip
+stroke
+%/testline { 0 -100 500 -100 } def
+
+%newpath testline moveto lineto stroke
+
+/AGaramond-Regular findfont 1000 scalefont setfont
+newpath 0 0 moveto (S) true charpath
+/curx 0 def /cury 0 def
+
+% Show the character first, so we can see the calculations as we go
+gsave stroke grestore
+
+/rlinetoHook {
+    %currentpoint 4 2 roll
+    %testline intersect
+    %{ pointbox } if
+    currentpoint cmpPoint
+    cmpPoint
+} def
+
+/drawextrema {
+    1 dict begin
+	currentpoint 8 2 roll
+	8 packedarray cvx /points exch def
+	points curvetoExtremes
+	{ points 9 -1 roll curvetoPoint cmpPoint } forall
+	{ points 9 -1 roll curvetoPoint cmpPoint } forall
+	currentpoint cmpPoint
+	mark points cmpPoint cleartomark
+    end
+} def
+
+{
+    2 copy
+    /cury exch def /curx exch def
+    moveto
+} {
+    2 copy
+    rlinetoHook
+    lineto
+} {
+    6 copy drawextrema
+%    6 copy
+%    currentpoint 8 2 roll
+%    testline curvetoIntc
+%    -1 1 { pop pointbox } for
+    curveto
+} {
+    curx cury rlinetoHook
+    closepath
+} pathforall
+
+
+ExtremesDict begin
+minX pointbox
+maxX pointbox
+minY pointbox
+maxY pointbox
+clippingPath cvx dup == exec stroke
+end
+

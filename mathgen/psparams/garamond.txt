@@ -1,0 +1,11 @@
+output_prefix: zmn
+output_dir: garamond
+font_file: padr8a.pfb
+font_file: padri8a.pfb
+optical_size:
+roman_name: AGaramond-Regular
+italic_name: AGaramond-Italic
+roman_tfm: padr9e
+italic_tfm: padri9e
+sans_serif: no
+square_ends: no

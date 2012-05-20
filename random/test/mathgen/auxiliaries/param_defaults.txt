@@ -1,0 +1,88 @@
+# Default parameters.
+
+len u			=
+len width_adj		= 0
+len serif_fit		= 0
+len cap_serif_fit	= 5/36
+len letter_fit		= 0
+
+len body_height		=
+len asc_height		=
+len cap_height		=
+len fig_height		=
+len x_height		=
+len math_axis		=
+len bar_height		=
+len comma_depth		=
+len desc_depth		=
+
+len crisp		=
+len tiny		=
+len fine		=
+len thin_join		=
+len hair		=
+len stem		=
+len curve		=
+len ess			=
+len flare		=
+len dot_size		=
+len cap_hair		=
+len cap_stem		=
+len cap_curve		=
+len cap_ess		=
+len rule_thickness	=
+
+len dish		=
+len bracket		=
+len jut			=
+len cap_jut		=
+len beak_jut		=
+len beak		=
+len vair		=
+len notch_cut		= 10
+len bar			=
+len slab		=
+len cap_bar		=
+len cap_band		=
+len cap_notch_cut	= 10
+len serif_drop		=
+len stem_corr		= 1/36
+len vair_corr		=
+len apex_corr		= 0
+
+len o			=
+len apex_o		=
+
+ratio slant		=
+ratio fudge		= 1
+ratio math_spread	=
+ratio superness		= 1/sqrt 2
+ratio superpull		= 1/6
+ratio beak_darkness	= 11/30
+ratio ligs		= 2
+
+bool square_dots	= 0
+bool hefty		= 0
+bool serifs		= 1
+bool monospace		= 0
+bool variant_g		= 1
+bool low_asterisk	= 0
+bool math_fitting	= 1
+
+# New length parameters
+len A_jut		=
+len A_jut_in		=
+len A_outer_bracket	=
+len F_jut		=
+len H_jut		=
+
+len arm_slab		=
+
+ratio A_inner_dark	=
+ratio bigop_zoom	= 0.4
+ratio bigdel_zoom	= 0.25
+ratio O_superness	= 1/sqrt 2
+ratio miter_ratio	= 2/3
+
+# New booleans
+bool square_ends	= 0

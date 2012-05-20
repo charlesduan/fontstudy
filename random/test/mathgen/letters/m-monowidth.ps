@@ -1,0 +1,9 @@
+%
+% m-monospace.ps
+%
+(m) stringwidth pop /mwidth exch def
+(l) letterPath
+(l) stringwidth pop /lwidth exch def
+
+mwidth lwidth sub abs 1 lt { lwidth } { 0 } ifelse
+(Monospace) exch stringOfText

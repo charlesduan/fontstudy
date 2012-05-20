@@ -1,0 +1,22 @@
+%Filename: ts1pkh.fd
+%Created by: tex fontinst
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{ts1pkh.fd}
+   [2004/05/02 Fontinst v1.801 font definitions for TS1/pkh.]
+
+\DeclareFontFamily{TS1}{pkh}{}
+
+\DeclareFontShape{TS1}{pkh}{m}{n}{
+   <-> pkhr8c
+}{}
+
+\DeclareFontShape{TS1}{pkh}{m}{sl}{
+   <-> pkhro8c
+}{}
+
+\DeclareFontShape{TS1}{pkh}{m}{it}{<->ssub * pkh/m/sl}{}
+
+\endinput

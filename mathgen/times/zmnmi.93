@@ -1,0 +1,50 @@
+%!PS
+%%BoundingBox: 55 -249 335 715 
+%%Creator: MetaPost
+%%CreationDate: 2004.06.13:1454
+%%Pages: 1
+%%EndProlog
+%%Page: 1 1
+% MF2PT1: bbox 0 -217 392 683
+% MF2PT1: font_size 10
+% MF2PT1: font_slant 0
+% MF2PT1: font_identifier zmnmi
+% MF2PT1: font_coding_scheme TeX math italic
+% MF2PT1: font_fixed_pitch 0
+newpath 94.22763 462.9621 moveto
+55.71292 450.0277 lineto
+55.71292 356.47601 lineto
+94.22763 369.41042 lineto
+94.22763 12.93442 lineto
+55.71292 0 lineto
+55.71292 -93.55168 lineto
+94.22763 -80.61728 lineto
+94.22763 -248.55112 lineto
+128.62402 -236.99963 lineto
+128.62402 -69.06589 lineto
+261.36656 -24.48686 lineto
+261.36656 -192.42075 lineto
+295.76294 -180.86926 lineto
+295.76294 -12.93442 lineto
+334.27763 0 lineto
+334.27763 93.55168 lineto
+295.76294 80.61728 lineto
+295.76294 437.09328 lineto
+334.27763 450.0277 lineto
+334.27763 543.57938 lineto
+295.76294 530.64386 lineto
+295.76294 714.49678 lineto
+261.36656 702.94531 lineto
+261.36656 519.09251 lineto
+128.62402 474.51349 lineto
+128.62402 658.36641 lineto
+94.22763 646.81493 lineto
+ closepath fill
+ 1 setgray
+newpath 261.36656 425.54082 moveto
+261.36656 69.06482 lineto
+128.62402 24.4858 lineto
+128.62402 380.9618 lineto
+ closepath fill
+showpage
+%%EOF

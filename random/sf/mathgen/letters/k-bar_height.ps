@@ -1,0 +1,31 @@
+%
+% k-barheight.ps
+%
+% bar_height
+%
+% This is tricky, since the bar of the "e" is an especially bad indicator! We
+% will use the join of the "k" instead.
+%
+flattenpath
+
+% This line should be well below the junction point.
+0.1 horizSplitLine pathLineIntc sortByX
+1 get /kInnerLowerBar defPoint
+{ kInnerLowerBar startAtPoint { 270 gt } endWhenAngle } traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath sortByY lastElt /kJoinBot defPoint
+kJoinBot pointbox
+
+0 XHeight 0.9 mul horizLineThrough pathLineIntc sortByX
+2 get /kInnerUpperStroke defPoint
+{
+    kInnerUpperStroke startAtPoint
+    { 45 90 withinRange } endWhenAngle
+} traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath sortByY firstElt /kJoinTop defPoint
+kJoinTop uppointbox
+
+(bar_height)
+kJoinTop ycoor kJoinBot ycoor add 2 div
+stringOfText

@@ -1,0 +1,25 @@
+This is METAFONT, Version 2.7182 (Web2C 7.3.1) (base=mf 2002.9.6)  21 FEB 2004 16:02
+**6test.mf
+(6test.mf (/usr/share/texmf/fonts/source/public/cm/cmbase.mf)
+(/usr/share/texmf/fonts/source/public/cm/cmmi10.mf) (test1.mf) (test2.mf)
+(test.mf
+The letter F, cmmi10 [70]
+The letter F, test1 [70]
+The letter F, test2 [70]
+done with char 70. 
+
+Lowercase Greek alpha, cmmi10 [11]
+! Interruption.
+<for(1)> ...&", "&fontname[(EXPR0)];chartext.echar
+                                                  ;fi.fi ENDFOR
+;->...", "&fontname[k];chartext.echar;fi.fi.endfor
+                                                  .pause;
+l.41 penlabels(0,1,2,3,4,5,6,7); endchar;
+                                         
+? ^^XX
+Type <return> to proceed, S to scroll future error messages,
+R to run without stopping, Q to run quietly,
+I to insert something, E to edit your file,
+H for help, X to quit.
+? X
+Output written on 6test.2602gf (4 characters, 8880 bytes).

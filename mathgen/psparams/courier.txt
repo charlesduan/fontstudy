@@ -1,0 +1,10 @@
+output_prefix: zmn
+output_dir: courier
+#font_file: none required
+optical_size:
+roman_name: Courier
+italic_name: Courier-Oblique
+roman_tfm: pcrr8t
+italic_tfm: pcrro8t
+sans_serif: no
+square_ends: no

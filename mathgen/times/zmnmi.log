@@ -1,0 +1,9 @@
+This is MetaPost, Version 0.641 (Web2C 7.3.1) (mem=mgbase 2004.6.13)  13 JUN 2004 14:54
+**&mgbase \mode:=localfont; mag:=100.375; input ./zmnmi
+(./zmnmi.mf (mggreeku.mf [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] [10])
+(mggreekl.mf [11] [12] [13] [14] [15] [16] [17] [18] [19] [20] [21] [22] [23]
+[24] [25] [26] [27] [28] [29] [30] [31] [32] [33] [34] [35] [36] [37] [38]
+[39]) [64] [96] [125] [126] [127] [40] [41] [42] [43] [44] [45] [46] [47]
+(mgsym.mf [60] [62]) [61] [63] [91] [92] [93] [94] [95] )
+Font metrics written on zmnmi.tfm.
+62 output files written: zmnmi.0 .. zmnmi.127

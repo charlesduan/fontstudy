@@ -1,0 +1,12 @@
+output_prefix: zmn
+output_dir: futura
+font_file: Futura.pfa
+font_file: FuturaIt.pfa
+optical_size:
+roman_name: Futura-Book
+italic_name: Futura-BookOblique
+roman_tfm: pfuk8t
+italic_tfm: pfuko8t
+sans_serif: yes
+square_ends: yes
+set_param: alt_delta=1

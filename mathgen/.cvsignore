@@ -1,0 +1,6 @@
+*.pfa *.pfb output.ps out.txt output *.tfm helvetica times optima bookman
+palatino tiffany hardwood avantg garamond newcent courier futura helvfut poetica
+tekton utopia cmr didot khaki linotext
+replaceparams.sh fontparams.txt
+widths.txt widths.ps
+testbad.tex testfont.tex testpos.tex random.tex

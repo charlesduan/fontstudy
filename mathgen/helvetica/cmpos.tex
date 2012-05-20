@@ -1,0 +1,41 @@
+\documentclass[12pt]{article}
+%\usepackage{mathzmn}
+
+%\renewcommand\rmdefault{phv}
+
+\begin{document}
+
+\def\doGreek{%
+ \do\Gamma\do\Delta\do\Theta\do\Lambda\do\Xi\do\Pi\do\Sigma\do\Upsilon\do\Phi
+ \do\Psi\do\Omega
+}
+
+\def\dogreek{%
+ \do\alpha\do\beta\do\gamma\do\delta\do\epsilon\do\zeta\do\eta\do\theta\do\iota
+ \do\kappa\do\lambda\do\mu\do\nu\do\xi\do\pi\do\rho\do\sigma\do\tau\do\upsilon
+ \do\phi\do\chi\do\psi\do\omega\do\varepsilon\do\vartheta\do\varpi\do\varrho
+ \do\varsigma\do\varphi
+}
+
+\def\doRoman{%
+ \do A\do B\do C\do D\do E\do F\do G\do H\do I\do J\do K\do L\do M\do N%
+ \do O\do P\do Q\do R\do S\do T\do U\do V\do W\do X\do Y\do Z%
+}
+
+\def\doroman{%
+ \do a\do b\do c\do d\do e\do f\do g\do h\do i\do j\do k\do l\do m\do n%
+ \do o\do p\do q\do r\do s\do t\do u\do v\do w\do x\do y\do z%
+}
+
+\def\donumbers{\do1\do2\do3\do4\do5\do6\do7\do8\do9\do0}
+
+\def\do#1{$\vrule#1\vrule$ }
+
+\LARGE
+
+\doGreek\par \dogreek\par \doRoman\par \doroman\par \donumbers\par
+
+\def\do#1{$#1_o^o$ }
+
+\doGreek\par \dogreek\par \doRoman\par \doroman\par \donumbers\par
+\end{document}

@@ -1,0 +1,66 @@
+GNU Ghostscript 6.52 (2001-10-20)
+Copyright (C) 2001 artofcode LLC, Benicia, CA.  All rights reserved.
+This software comes with NO WARRANTY: see the file COPYING for details.
+Loading NimbusRomNo9L-Regu font from /usr/share/fonts/default/Type1/n021003l.pfb... 2417736 1049441 1622424 328620 0 done.
+Loading NimbusSanL-Regu font from /usr/share/fonts/default/Type1/n019003l.pfb... 2755936 1354322 1642520 336084 0 done.
+,-comma_depth = 108.0 # Comma depth
+.-dot_size = 87.96 # Dot size: 
+7-fig_height = 674.945 # fig_height
+=-math_axis = 216.999 # math_axis
+=-rule_thickness = 45.0 # Rule thickness
+A-apex_corr = -39.7603 # Apex correction
+A-apex_o = 13.3877 # Apex overshoot (A)
+A-cap_hair = 42.6362 # Uppercase hair
+A-u = 46.34 # Unit based on A
+C-superness = 0.728335 # Superness, C bottom left
+C-superpull = 0.0048907 # Superpull
+E-arm_slab = 46.2495 # Arm thickness
+E-cap_bar = 26.9198 # Capital bar
+H-cap_bar = 47.0252 # H bar
+H-cap_serif_space = 77.3169 # Sidebearing distance
+I-cap_height = 644.985 # cap_height
+I-cap_stem = 45.96 # cap_stem
+L-tiny-sans = 73.7238 # Tiny by L top curvature
+O-O_superness = 0.726371 # Superness, O bottom left
+O-O_superness = 0.687004 # Superness, O top left
+O-O_superness = 0.706345 # Superness, O bottom right
+O-O_superness = 0.735297 # Superness, O bottom right
+O-cap_curve-alt = 50.3961 # Lowercase curve (alt)
+O-cap_curve = 51.0001 # Lowercase curve
+O-o = 28.9599 # Top capital overshoot
+P-cap_curve = 45.9702 # Curve
+S-cap_ess = 46.7865 # Uppercase ess
+T-cap_bar = 46.3295 # T bar
+V-cap_hair = 39.885 # Uppercase hair
+V-cap_stem = 45.3271 # Uppercase stem (thinned)
+V-tiny = 46.8255 # Curvature of v apex
+Y-cap_hair = 45.3636 # Uppercase hair
+[-body_height = 674.945 # Body height
+b-u = 47.6 # Unit based on b
+d-stem = 76.7953 # Lowercase stem
+i-slant-ital = 0.140541 # Italic angle
+k-bar_height = 235.999 # bar_height
+l-asc_height = 655.985 # asc_height
+l-serif_drop-ital = 8.00104 # Serif drop
+l-stem = 45.96 # Lowercase stem
+m-monowidth = 0 # Monospace
+n-thin_join = 45.5939 # Thin join
+o-curve-alt = 47.7093 # Lowercase curve (alt)
+o-curve = 50.4424 # Lowercase curve
+o-o = 35.9466 # Bottom lowercase overshoot
+o-superness = 0.709348 # Superness, O bottom left
+o-superness = 0.70998 # Superness, O top left
+o-superness = 0.697321 # Superness, O bottom right
+o-superness = 0.730045 # Superness, O bottom right
+o-u = 53.056 # Unit based on o
+o-vair = 44.3791 # Lowercase vair (alt)
+o-vair_corr = 0 # Lowercase vair_corr
+q-desc_depth = 304.053 # desc_depth
+r-flare = 123.227 # Flare of tip
+s-ess = 44.9182 # Lowercase ess
+t-bar = 46.9651 # Bar thickness
+t-crisp-ital-sans = 48.4587 # Bar thickness
+v-hair = 42.7033 # Lowercase hair
+v-stem = 48.312 # Lowercase stem (thinned)
+v-tiny = 54.3422 # Curvature of v apex
+x-x_height = 439.985 # x_height

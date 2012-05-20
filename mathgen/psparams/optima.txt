@@ -1,0 +1,11 @@
+output_prefix: zmn
+output_dir: optima
+font_file: Optima.pfa
+font_file: OptimaIt.pfa
+optical_size:
+roman_name: Optima
+italic_name: Optima-Italic
+roman_tfm: popr8t
+italic_tfm: popri8t
+sans_serif: yes
+square_ends: yes

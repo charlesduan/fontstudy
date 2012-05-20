@@ -1,0 +1,62 @@
+cmchar "The letter F";
+beginchar("F",11.5u#-width_adj#,cap_height#,0);
+italcorr cap_height#*slant-beak_jut#-.25u#;
+adjust_fit(cap_serif_fit#,0);
+h:=vround(h-stem_corr);
+pickup tiny.nib; pos1(cap_stem,0); pos2(cap_stem,0);
+lft x1l=lft x2l=hround max(2u,3u-.5cap_stem); top y1=h; bot y2=0;
+filldraw stroke z1e--z2e; % stem
+pickup crisp.nib; pos3(slab,90); pos4(hair,0);
+top y3r=h; x3=x1; rt x4r=hround(w-.75u); y4=good.y(y3l-beak)-eps;
+arm(3,4,e,beak_darkness,beak_jut);  % upper arm and beak
+pos5(cap_bar,-90); pos6(hair,0);
+top y5l=vround(.5[y2,y1]+.5cap_bar); x5=x1;
+pos0(cap_bar,90); pos7(hair,0);
+z0=z5; x6=x7; y6-y5l=y0l-y7;
+if serifs: rt x6r=hround(w-4u+.5hair); y6=good.y(y5l+.6beak)+eps;
+ rt x9r=hround(w-.5u);
+else: rt x6r=hround(w-1.5u); y6=y5l+eps; rt x9r=hround(w-.75u); fi
+arm(5,6,f,beak_darkness,0); arm(0,7,g,beak_darkness,0);  % middle arm and serif
+if serifs: nodish_serif(1,2,a,1/3,cap_jut,b,1/3,.5cap_jut);  % upper serif
+ dish_serif(2,1,c,1/3,cap_jut,d,1/3,1.25cap_jut); fi  % lower serif
+math_fit(0,ic#-2.5u#); penlabels(0,1,2,3,4,5,6,7,8,9); endchar;
+
+
+cmchar "Lowercase Greek alpha";
+beginchar(oct"013",11u#,x_height#,0);
+italcorr max(1/3x_height#*slant+.5hair#+.5u#,x_height#*slant-.5u#);
+adjust_fit(0,0); pickup fine.nib;
+pos0(hair,0); pos1(vair,-90); pos2(curve,-180); pos3(vair,-270);
+z4=(w-3.25u,9/16h); z5=(w-2.75u,.5[vair,y4]);
+numeric theta; theta=angle(z4-z5)-90;
+pos4(stem,theta); pos5(stem,theta);
+pos6(vair,90); pos7(hair,180);
+rt x0r=hround(w-u); x1=x3=.5w-u; lft x2r=hround(1.5u-.5curve);
+x6=w-u; x7+.5hair=hround(w+.5hair-epsilon);
+top y0=vround .8[bar_height,h]; bot y1r=bot y6l=-oo;
+y2=.5[y1,y3]; top y3r=h+oo; y7=1/4bar_height;
+filldraw stroke z0e{down}...pulled_arc.e(1,2) & pulled_arc.e(2,3)
+ ...z4e---z5e...z6e{right}...{up}z7e; % diagonal, bowl, and hook
+math_fit(-.3x_height#*slant+.5curve#-u#,1/3x_height#*slant+.5hair#+.5u#);
+penlabels(0,1,2,3,4,5,6,7); endchar;
+
+cmchar "Lowercase Greek beta";
+beginchar(oct"014",9.5u#,asc_height#,desc_depth#);
+italcorr .5[x_height#,asc_height#]*slant-u#;
+adjust_fit(0,0); pickup fine.nib;
+pos0(hair,180); pos1(hair,180); pos2(vair,90);
+pos3(stem,0); pos4(vair,-90); pos5(hair,-180);
+pos6(vair,-270); pos7(curve,-360); pos8(vair,-450); pos9(hair,-540);
+x0=x1=x9; lft x0l=hround(1.5u-.5hair); x2=x4=x6=x8=.5w+.25u;
+rt x3r=hround(w-1.5u); rt x7r=hround(w-1.5u+.5curve); rt x5l=hround(x4-u);
+bot y0=-d; y1=top y6r=x_height; top y2r=h+oo; y3=.5[y2,y4];
+y5=.5[y4,y6]; top y6r-bot y4r=vstem+eps; bot y8=-oo; y7=y9=.5[y6,y8];
+if y6l<y4l: y6l:=y4l:=y5; fi
+filldraw stroke z0e---z1e...pulled_arc.e(2,3)
+ & pulled_arc.e(3,4)...{up}z5e;  % stem and upper bowl
+filldraw stroke z5e{up}...pulled_arc.e(6,7)
+ & pulled_arc.e(7,8)...{up}z9e;  % lower bowl
+math_fit(desc_depth#*slant+.5hair#-u#,.7x_height#*slant+.5curve#-1.5u#);
+penlabels(0,1,2,3,4,5,6,7,8,9); endchar;
+
+

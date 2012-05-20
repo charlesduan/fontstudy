@@ -1,0 +1,11 @@
+output_prefix: zmn
+output_dir: tiffany
+font_file: Tiffany.pfa
+font_file: TiffanyIt.pfa
+optical_size:
+roman_name: Tiffany
+italic_name: Tiffany-Italic
+roman_tfm: itfr8t
+italic_tfm: itfri8t
+sans_serif: no
+square_ends: no

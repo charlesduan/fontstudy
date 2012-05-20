@@ -1,0 +1,26 @@
+%
+% l-serifdrop.ps
+%
+% Drop of the upper serif.
+%
+flattenpath
+
+0.5 horizSplitLine pathLineIntc sortByX
+{ 2 copy pointbox } forallPoint
+/lStemRight defPoint /lStemLeft defPoint
+
+{ lStemRight startAtPoint lStemLeft endAtPoint } traceSubpath
+{ {
+    { 135 90 withinRange } startWhenAngle
+    { 225 90 withinRange } endBeforeAngle
+} traceSubpath } useSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByY dup firstElt /lTopSerifBot defPoint
+lastElt /lTopSerifTop defPoint
+lTopSerifBot pointbox
+lTopSerifTop uppointbox
+
+(Serif drop)
+lTopSerifTop ycoor lTopSerifBot ycoor sub 0 max
+stringOfText

@@ -1,0 +1,25 @@
+%!PS
+%%BoundingBox: 55 73 718 390 
+%%Creator: MetaPost
+%%CreationDate: 2004.06.12:1744
+%%Pages: 1
+%%EndProlog
+%%Page: 1 1
+% MF2PT1: bbox 0 74 775 389
+% MF2PT1: font_size 10
+% MF2PT1: font_slant 0
+% MF2PT1: font_identifier zmnr
+% MF2PT1: font_coding_scheme TeX text
+% MF2PT1: font_fixed_pitch 0
+newpath 55.20515 389.154 moveto
+55.20515 309.13692 lineto
+717.66698 309.13692 lineto
+717.66698 389.154 lineto
+ closepath fill
+newpath 55.20515 153.10262 moveto
+55.20515 73.08553 lineto
+717.66698 73.08553 lineto
+717.66698 153.10262 lineto
+ closepath fill
+showpage
+%%EOF

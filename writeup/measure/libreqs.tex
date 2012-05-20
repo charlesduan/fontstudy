@@ -1,0 +1,18 @@
+\sectionname{Requirements for the Library}
+
+The goal of the measurement library is to take a common digital representation
+of a font and to perform programmable analyisis on it. In MathGen, the font
+representation of choice is the PostScript Type~1 format. This format is chosen
+because it is natively supported by the PostScript programming language, so it
+is not necessary to write or acquire routines for interpreting the font. As a
+natural consequence, the library and the routines written with it are all done
+in the PostScript language.
+
+The Type~1 font format represents characters as outlines, series of conjoined
+curves and lines that define the edges of the character. The PostScript language
+provides a method for traversing and processing this outline, so the measurement
+routines must use this outline for inferring qualities of the characters. As a
+result, the library must offer mechanisms for identifying certain points on the
+outline, such as local extrema and intersections with other lines. Judicious
+identification of such points and their locations should allow the calculation
+of the necessary font parameters.

@@ -1,0 +1,17 @@
+%Filename: omxzmn.fd
+%Created by: tex zmn-fontinst
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{omxzmn.fd}
+   [2004/05/23 Fontinst v1.801 font definitions for OMX/zmn.]
+
+\DeclareFontFamily{OMX}{zmn}{}
+
+\DeclareFontShape{OMX}{zmn}{m}{n}{
+   <-> zmnex
+}{}
+
+
+\endinput

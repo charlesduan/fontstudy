@@ -1,0 +1,28 @@
+\sectionname{Khaki}
+
+Khaki is a font designed to look as if it were painted with a watercolor brush
+(an alternate version includes random splatters as well). Since this is a
+display font, perfect results are not expected, and it is pleasantly surprising
+to see that the generated math fonts are actually reasonable.
+
+Khaki violates some of the stem darkness assumptions of the font generation
+program. In particular, on the letter ``O,'' the right side is thin and the
+bottom thick; this is the opposite of what one would expect with a text font.
+Additionally, the letters have a degree of ``texture'' to them: the stems are
+slightly wavy, to mimic a watercolor brush.
+
+The resulting math fonts have very similar stem thicknesses: the wide stems are
+as wide as the widest in the original and the thin stems are equally thin.
+However, the designer of Khaki used an unusually wide size for the thicker stems
+and prevented the font from becoming too dark by making many areas that would
+traditionally be thick into thin areas. For example, the lowercase ``b'' has an
+unusually thick stem, but the adjacent bowl is entirely very thin, unlike any
+traditional text font. Consequently, the math fonts look extraordinarily dark,
+being unaware of this change. Also, naturally, the generated fonts do not
+capture the texture of the strokes.
+
+The generated characters do not look \emph{too} strange; clearly they are at
+least better than using any off-the-shelf math font such as Computer Modern.
+Possibly in this case it would be best to use the Computer Modern font programs
+as a starting point, changing them to reflect the odd usage of stem widths, in
+order to produce a more acceptable-looking font.

@@ -1,0 +1,8 @@
+%
+% d-stem.ps
+%
+0 XHeight 2 div horizLineThrough pathLineIntc sortByX revArray 0 2 getinterval
+loadArray /dStemLeft defPoint /dStemRight defPoint 
+dStemRight pointbox dStemLeft pointbox
+
+(Lowercase stem) dStemRight xcoor dStemLeft xcoor sub stringOfText

@@ -1,0 +1,759 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE bigdel.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% This file contains series of large delimiters for math extension fonts.
+
+% The sizes are `{\tt\char`\\big}' (|2dh#|), `{\tt\char`\\Big}' (|3dh#|),
+% `{\tt\char`\\bigg}' (|4dh#|), and `{\tt\char`\\Bigg}' (|5dh#|),
+% followed in most cases by an extensible character that can grow
+% arbitrarily large in |dh#| steps,
+% where |dh#| is 60\% of the font design size.
+% (For example, a 10-point font will have large delimiters in sizes
+% 12$\,$pt, 18$\,$pt, 24$\,$pt, 30$\,$pt, 36$\,$pt, 42$\,$pt, etc.)
+
+% Character codes \0000--\0105 and \0150--\0177 are generated.
+
+charlist oct"000": oct"020": oct"022": oct"040": oct"060";  % left parentheses
+charlist oct"001": oct"021": oct"023": oct"041": oct"061";  % right parentheses
+charlist oct"002": oct"150": oct"024": oct"042": oct"062";  % left brackets
+charlist oct"003": oct"151": oct"025": oct"043": oct"063";  % right brackets
+charlist oct"004": oct"152": oct"026": oct"044": oct"064";  % left floors
+charlist oct"005": oct"153": oct"027": oct"045": oct"065";  % right floors
+charlist oct"006": oct"154": oct"030": oct"046": oct"066";  % left ceilings
+charlist oct"007": oct"155": oct"031": oct"047": oct"067";  % right ceilings
+charlist oct"010": oct"156": oct"032": oct"050": oct"070";  % left braces
+charlist oct"011": oct"157": oct"033": oct"051": oct"071";  % right braces
+charlist oct"012": oct"104": oct"034": oct"052";  % left angle brackets
+charlist oct"013": oct"105": oct"035": oct"053";  % right angle brackets
+charlist oct"016": oct"056": oct"036": oct"054";  % slashes
+charlist oct"017": oct"057": oct"037": oct"055";  % backslashes
+charlist oct"160": oct"161": oct"162": oct"163": oct"164";  % radical signs
+
+extensible oct"014": 0,0,0,oct"014";  % vertical line
+extensible oct"015": 0,0,0,oct"015";  % double vertical line
+extensible oct"060": oct"060",0,oct"100",oct"102";  % left parenthesis
+extensible oct"061": oct"061",0,oct"101",oct"103";  % right parenthesis
+extensible oct"062": oct"062",0,oct"064",oct"066";  % left bracket
+extensible oct"063": oct"063",0,oct"065",oct"067";  % right bracket
+extensible oct"064": 0,0,oct"064",oct"066";  % left floor bracket
+extensible oct"065": 0,0,oct"065",oct"067";  % right floor bracket
+extensible oct"066": oct"062",0,0,oct"066";  % left ceiling bracket
+extensible oct"067": oct"063",0,0,oct"067";  % right ceiling bracket
+extensible oct"070": oct"070",oct"074",oct"072",oct"076";  % left brace
+extensible oct"071": oct"071",oct"075",oct"073",oct"076";  % right brace
+extensible oct"072": oct"070",0,oct"072",oct"076";  % sharp left parenthesis
+extensible oct"073": oct"071",0,oct"073",oct"076";  % sharp right parenthesis
+extensible oct"074": 0,0,0,oct"077";  % arrow extension modules only
+extensible oct"075": 0,0,0,oct"167";  % double arrow extension modules only
+extensible oct"076": 0,0,0,oct"076";  % brace extension modules only
+extensible oct"077": oct"170",0,oct"171",oct"077";  % updownarrow
+extensible oct"100": oct"070",0,oct"073",oct"076";  % left moustache
+extensible oct"101": oct"071",0,oct"072",oct"076";  % right moustache
+extensible oct"102": 0,0,0,oct"102";  % left parenthesis extension modules only
+extensible oct"103": 0,0,0,oct"103";  % right parenthesis extension modules only
+extensible oct"164": oct"166",0,oct"164",oct"165";  % radical sign
+extensible oct"167": oct"176",0,oct"177",oct"167";  % double updownarrow
+extensible oct"170": oct"170",0,0,oct"077";  % uparrow
+extensible oct"171": 0,0,oct"171",oct"077";  % downarrow
+extensible oct"176": oct"176",0,0,oct"167";  % double uparrow
+extensible oct"177": 0,0,oct"177",oct"167";  % double downarrow
+
+def zoom(expr size) = size*bigdel_zoom[1,zoom_ratio] enddef;
+thicker_rule = 0.1[rule_thickness,stem];
+
+% The extensible thicknesses of the curly braces is used several times so we
+% just calculate it once here.
+zoom_ratio:=6/2;
+thick_brace_min=zoom(hair);
+thick_brace_max=zoom(stem);
+
+cmchar "\big left parenthesis";
+beginchar(oct"000",7u#,rule_thickness#,2dh#-rule_thickness#);
+adjust_fit(1.5u#,-.25u#); left_paren(hair,stem); endchar;
+
+cmchar "\Big left parenthesis";
+beginchar(oct"020",9u#,rule_thickness#,3dh#-rule_thickness#);
+zoom_ratio:=3/2;
+adjust_fit(2u#,-.25u#); left_paren(zoom(hair),zoom(stem)); endchar;
+
+cmchar "\bigg left parenthesis";
+beginchar(oct"022",11u#,rule_thickness#,4dh#-rule_thickness#);
+zoom_ratio:=4/2;
+adjust_fit(2.5u#,-.25u#); left_paren(zoom(hair), zoom(stem)); endchar;
+
+cmchar "\Bigg left parenthesis";
+beginchar(oct"040",11.5u#,rule_thickness#,5dh#-rule_thickness#);
+zoom_ratio:=5/2;
+adjust_fit(3u#,-.25u#); left_paren(zoom(hair),zoom(stem)); endchar;
+
+cmchar "Extensible left parenthesis---top";
+beginchar(oct"060",12u#,rule_thickness#,3dh#-rule_thickness#);
+adjust_fit(4u#,-.25u#);
+penpos1(hround thick_brace_min,0); penpos2(hround thick_brace_max,0);
+x1r=hround(w-1.25u+.5thick_brace_min); x2l=hround 1.25u;
+y1=h-1; y2=-d-eps;
+pair v.l,v.r; forsuffixes e=l,r: v.e=(3(x2e-x1e),y2-y1); endfor
+fill z2r{up}...{-v.r}pen_rlend1(-v.r,fine,v.l){v.l}...{down}z2l--cycle;
+penlabels(1,2); endchar;
+
+cmchar "Extensible left parenthesis---bottom";
+beginchar(oct"100",12u#,rule_thickness#,3dh#-rule_thickness#);
+adjust_fit(4u#,-.25u#);
+penpos3(hround thick_brace_min,0); penpos2(hround thick_brace_max,0);
+x3r=hround(w-1.25u+.5thick_brace_min); x2l=hround 1.25u;
+y3=1-d; y2=h+eps;
+pair v.l,v.r; forsuffixes e=l,r: v.e=(3(x2e-x3e),y2-y3); endfor
+fill z2l{down}...{-v.l}pen_lrend3(-v.l,fine,v.r){v.r}...{up}z2r--cycle;
+penlabels(2,3); endchar;
+
+cmchar "Extensible left parenthesis---extension module";
+beginchar(oct"102",12u#,0,dh#);
+adjust_fit(4u#,-.25u#);
+penpos2(hround thick_brace_max,0); penpos2'(hround thick_brace_max,0);
+x2l=x2'l=hround 1.25u; y2=h+eps; y2'=-d-eps;
+fill rlend(2)--lrend(2')--cycle;
+penlabels(2,2'); endchar;
+
+cmchar "\big right parenthesis";
+beginchar(oct"001",7u#,rule_thickness#,2dh#-rule_thickness#);
+adjust_fit(-.25u#,1.5u#); right_paren(hair,stem); endchar;
+
+cmchar "\Big right parenthesis";
+beginchar(oct"021",9u#,rule_thickness#,3dh#-rule_thickness#);
+zoom_ratio:=3/2;
+adjust_fit(-.25u#,2u#); right_paren(zoom(hair),zoom(stem)); endchar;
+
+cmchar "\bigg right parenthesis";
+beginchar(oct"023",11u#,rule_thickness#,4dh#-rule_thickness#);
+zoom_ratio:=4/2;
+adjust_fit(-.25u#,2.5u#); right_paren(zoom(hair),zoom(stem)); endchar;
+
+cmchar "\Bigg right parenthesis";
+beginchar(oct"041",11.5u#,rule_thickness#,5dh#-rule_thickness#);
+zoom_ratio:=5/2;
+adjust_fit(-.25u#,3u#); right_paren(zoom(hair),zoom(stem)); endchar;
+
+cmchar "Extensible right parenthesis---top";
+beginchar(oct"061",12u#,rule_thickness#,3dh#-rule_thickness#);
+adjust_fit(-.25u#,4u#);
+penpos1(hround thick_brace_min,0); penpos2(hround thick_brace_max,0);
+x1l=hround(1.25u-.5thick_brace_min); x2r=hround(w-1.25u);
+y1=h-1; y2=-d-eps;
+pair v.l,v.r; forsuffixes e=l,r: v.e=(3(x2e-x1e),y2-y1); endfor
+fill z2r{up}...{-v.r}pen_rlend1(-v.r,fine,v.l){v.l}...{down}z2l--cycle;
+penlabels(1,2); endchar;
+
+cmchar "Extensible right parenthesis---bottom";
+beginchar(oct"101",12u#,rule_thickness#,3dh#-rule_thickness#);
+adjust_fit(-.25u#,4u#);
+penpos3(hround thick_brace_min,0); penpos2(hround thick_brace_max,0);
+x3l=hround(1.25u-.5thick_brace_min); x2r=hround(w-1.25u);
+y3=1-d; y2=h+eps;
+pair v.l,v.r; forsuffixes e=l,r: v.e=(3(x2e-x3e),y2-y3); endfor
+fill z2l{down}...{-v.l}pen_lrend3(-v.l,fine,v.r){v.r}...{up}z2r--cycle;
+penlabels(2,3); endchar;
+
+cmchar "Extensible right parenthesis---extension module";
+beginchar(oct"103",12u#,0,dh#);
+adjust_fit(-.25u#,4u#);
+penpos2(hround thick_brace_max,0); penpos2'(hround thick_brace_max,0);
+x2r=x2'r=hround(w-1.25u); y2=h+eps; y2'=-d-eps;
+fill rlend(2)--lrend(2')--cycle;
+penlabels(2,2'); endchar;
+
+cmchar "\big left bracket";
+beginchar(oct"002",6u#,rule_thickness#,2dh#-rule_thickness#);
+adjust_fit(1.5u#,0); left_bracket(rule_thickness,true,true); endchar;
+
+cmchar "\Big left bracket";
+beginchar(oct"150",6.5u#,rule_thickness#,3dh#-rule_thickness#);
+zoom_ratio:=3/2;
+adjust_fit(2u#,0); left_bracket(zoom(rule_thickness),true,true); endchar;
+
+cmchar "\bigg left bracket";
+beginchar(oct"024",7u#,rule_thickness#,4dh#-rule_thickness#);
+zoom_ratio:=4/2;
+adjust_fit(2.5u#,0); left_bracket(zoom(rule_thickness),true,true); endchar;
+
+cmchar "\Bigg left bracket";
+beginchar(oct"042",7.5u#,rule_thickness#,5dh#-rule_thickness#);
+zoom_ratio:=5/2;
+adjust_fit(3u#,0); left_bracket(zoom(rule_thickness),true,true); endchar;
+
+cmchar "Extensible left bracket---top";
+beginchar(oct"062",8u#,rule_thickness#,3dh#-rule_thickness#);
+adjust_fit(4u#,0);
+zoom_ratio:=6/2; save big_rule; big_rule=zoom(rule_thickness);
+penpos1(big_rule,-180); penpos2(big_rule,-180);
+y1=h-1; y2=-d-eps; x1r=x2r=hround(2.5u-.5big_rule);
+penpos4(big_rule,90);
+x4=hround(w-.75u+.5big_rule); y4r=y1;
+angled_pos(4,left,3,down,2);
+fill pen_lrend4(right,crisp,left)--pen_angle(left,z3r,crisp,down)
+    --rlend(2)--z3l--cycle;
+penlabels(1,2,3,4); endchar;
+
+cmchar "Extensible left bracket---bottom";
+beginchar(oct"064",8u#,rule_thickness#,3dh#-rule_thickness#);
+adjust_fit(4u#,0);
+zoom_ratio:=6/2; save big_rule; big_rule=zoom(rule_thickness);
+penpos1(big_rule,-180); penpos2(big_rule,-180);
+y1=h+eps; y2=1-d; x1r=x2r=hround(2.5u-.5big_rule);
+penpos6(big_rule,-90);
+x6=hround(w-.75u+.5big_rule); y6r=y2;
+angled_pos(1,down,5,right,6);
+fill lrend(1)--pen_angle(down,z5r,crisp,right)
+    --pen_rlend6(right,crisp,left)--z5l--cycle;
+penlabels(1,2,5,6); endchar;
+
+cmchar "Extensible left bracket---extension module";
+beginchar(oct"066",8u#,0,dh#);
+adjust_fit(4u#,0);
+zoom_ratio:=6/2; save big_rule; big_rule=zoom(rule_thickness);
+penpos1(big_rule,0); penpos2(big_rule,0);
+y1=h+1+eps; y2=-d-1-eps; x1l=x2l=hround(2.5u-.5big_rule);
+fill rlend(1)--lrend(2)--cycle;
+penlabels(1,2); endchar;
+
+cmchar "\big right bracket";
+beginchar(oct"003",6u#,rule_thickness#,2dh#-rule_thickness#);
+adjust_fit(0,1.5u#); right_bracket(rule_thickness,true,true); endchar;
+
+cmchar "\Big right bracket";
+beginchar(oct"151",6.5u#,rule_thickness#,3dh#-rule_thickness#);
+zoom_ratio:=3/2;
+adjust_fit(0,2u#); right_bracket(zoom(rule_thickness),true,true); endchar;
+
+cmchar "\bigg right bracket";
+beginchar(oct"025",7u#,rule_thickness#,4dh#-rule_thickness#);
+zoom_ratio:=4/2;
+adjust_fit(0,2.5u#); right_bracket(zoom(rule_thickness),true,true); endchar;
+
+cmchar "\Bigg right bracket";
+beginchar(oct"043",7.5u#,rule_thickness#,5dh#-rule_thickness#);
+zoom_ratio:=5/2;
+adjust_fit(0,3u#); right_bracket(zoom(rule_thickness),true,true); endchar;
+
+cmchar "Extensible right bracket---top";
+beginchar(oct"063",8u#,rule_thickness#,3dh#-rule_thickness#);
+adjust_fit(0,4u#);
+zoom_ratio:=6/2; save big_rule; big_rule=zoom(rule_thickness);
+penpos1(big_rule,0); penpos2(big_rule,0);
+y1=h-1; y2=-d-eps; x1r=x2r=hround(w-2.5u+.5big_rule);
+penpos4(big_rule,90);
+x4=hround(.75u-.5big_rule); y4r=y1;
+angled_pos(4,right,3,down,2);
+fill pen_angle(up,z3r,crisp,left)--pen_rlend4(left,crisp,right)--z3l
+    --lrend(2)--cycle;
+penlabels(1,2,3,4); endchar;
+
+cmchar "Extensible right bracket---bottom";
+beginchar(oct"065",8u#,rule_thickness#,3dh#-rule_thickness#);
+adjust_fit(0,4u#);
+zoom_ratio:=6/2; save big_rule; big_rule=zoom(rule_thickness);
+penpos1(big_rule,0); penpos2(big_rule,0);
+y1=h+eps; y2=1-d; x1r=x2r=hround(w-2.5u+.5big_rule);
+penpos6(big_rule,-90);
+x6=hround(.75u-.5big_rule); y6r=y2;
+angled_pos(6,right,5,up,1);
+fill pen_lrend6(left,crisp,right)--pen_angle(right,z5r,crisp,up)
+    --rlend(1)--z5l--cycle;
+penlabels(1,2,5,6); endchar;
+
+cmchar "Extensible right bracket---extension module";
+beginchar(oct"067",8u#,0,dh#);
+adjust_fit(0,4u#);
+zoom_ratio:=6/2; save big_rule; big_rule=zoom(rule_thickness);
+penpos1(big_rule,0); penpos2(big_rule,0);
+y1=h+1+eps; y2=-d-1-eps; x1r=x2r=hround(w-2.5u+.5big_rule);
+fill rlend(1)--lrend(2)--cycle;
+penlabels(1,2); endchar;
+
+cmchar "\big left floor bracket";
+beginchar(oct"004",7u#,rule_thickness#,2dh#-rule_thickness#);
+adjust_fit(1.5u#,0); left_bracket(rule_thickness,false,true); endchar;
+
+cmchar "\Big left floor bracket";
+beginchar(oct"152",7.5u#,rule_thickness#,3dh#-rule_thickness#);
+zoom_ratio:=3/2;
+adjust_fit(2u#,0); left_bracket(zoom(rule_thickness),false,true); endchar;
+
+cmchar "\bigg left floor bracket";
+beginchar(oct"026",8u#,rule_thickness#,4dh#-rule_thickness#);
+zoom_ratio:=4/2;
+adjust_fit(2.5u#,0); left_bracket(zoom(rule_thickness),false,true); endchar;
+
+cmchar "\Bigg left floor bracket";
+beginchar(oct"044",8.5u#,rule_thickness#,5dh#-rule_thickness#);
+zoom_ratio:=5/2;
+adjust_fit(3u#,0); left_bracket(zoom(rule_thickness),false,true); endchar;
+
+cmchar "\big right floor bracket";
+beginchar(oct"005",7u#,rule_thickness#,2dh#-rule_thickness#);
+adjust_fit(0,1.5u#); right_bracket(rule_thickness,false,true); endchar;
+
+cmchar "\Big right floor bracket";
+beginchar(oct"153",7.5u#,rule_thickness#,3dh#-rule_thickness#);
+zoom_ratio:=3/2;
+adjust_fit(0,2u#); right_bracket(zoom(rule_thickness),false,true); endchar;
+
+cmchar "\bigg right floor bracket";
+beginchar(oct"027",8u#,rule_thickness#,4dh#-rule_thickness#);
+zoom_ratio:=4/2;
+adjust_fit(0,2.5u#); right_bracket(zoom(rule_thickness),false,true); endchar;
+
+cmchar "\Bigg right floor bracket";
+beginchar(oct"045",8.5u#,rule_thickness#,5dh#-rule_thickness#);
+zoom_ratio:=5/2;
+adjust_fit(0,3u#); right_bracket(zoom(rule_thickness),false,true); endchar;
+
+cmchar "\big left ceiling bracket";
+beginchar(oct"006",7u#,rule_thickness#,2dh#-rule_thickness#);
+adjust_fit(1.5u#,0); left_bracket(rule_thickness,true,false); endchar;
+
+cmchar "\Big left ceiling bracket";
+beginchar(oct"154",7.5u#,rule_thickness#,3dh#-rule_thickness#);
+zoom_ratio:=3/2;
+adjust_fit(2u#,0); left_bracket(zoom(rule_thickness),true,false); endchar;
+
+cmchar "\bigg left ceiling bracket";
+beginchar(oct"030",8u#,rule_thickness#,4dh#-rule_thickness#);
+zoom_ratio:=4/2;
+adjust_fit(2.5u#,0); left_bracket(zoom(rule_thickness),true,false); endchar;
+
+cmchar "\Bigg left ceiling bracket";
+beginchar(oct"046",8.5u#,rule_thickness#,5dh#-rule_thickness#);
+zoom_ratio:=5/2;
+adjust_fit(3u#,0); left_bracket(zoom(rule_thickness),true,false); endchar;
+
+cmchar "\big right ceiling bracket";
+beginchar(oct"007",7u#,rule_thickness#,2dh#-rule_thickness#);
+adjust_fit(0,1.5u#); right_bracket(rule_thickness,true,false); endchar;
+
+cmchar "\Big right ceiling bracket";
+beginchar(oct"155",7.5u#,rule_thickness#,3dh#-rule_thickness#);
+zoom_ratio:=3/2;
+adjust_fit(0,2u#); right_bracket(zoom(rule_thickness),true,false); endchar;
+
+cmchar "\bigg right ceiling bracket";
+beginchar(oct"031",8u#,rule_thickness#,4dh#-rule_thickness#);
+zoom_ratio:=4/2;
+adjust_fit(0,2.5u#); right_bracket(zoom(rule_thickness),true,false); endchar;
+
+cmchar "\Bigg right ceiling bracket";
+beginchar(oct"047",8.5u#,rule_thickness#,5dh#-rule_thickness#);
+zoom_ratio:=5/2;
+adjust_fit(0,3u#); right_bracket(zoom(rule_thickness),true,false); endchar;
+
+cmchar "\big left curly brace";
+beginchar(oct"010",9u#,rule_thickness#,2dh#-rule_thickness#);
+adjust_fit(.75u#,.75u#); left_curly(hair,stem); endchar;
+
+cmchar "\Big left curly brace";
+beginchar(oct"156",10u#,rule_thickness#,3dh#-rule_thickness#);
+zoom_ratio:=3/2;
+adjust_fit(u#,u#); left_curly(zoom(hair),zoom(stem)); endchar;
+
+cmchar "\bigg left curly brace";
+beginchar(oct"032",11u#,rule_thickness#,4dh#-rule_thickness#);
+zoom_ratio:=4/2;
+adjust_fit(1.25u#,1.25u#); left_curly(zoom(hair),zoom(stem)); endchar;
+
+cmchar "\Bigg left curly brace";
+beginchar(oct"050",11.5u#,rule_thickness#,5dh#-rule_thickness#);
+zoom_ratio:=5/2;
+adjust_fit(1.5u#,1.5u#); left_curly(zoom(hair),zoom(stem)); endchar;
+
+cmchar "Extensible left curly brace---top";
+beginchar(oct"070",12u#,0,1.5dh#);
+adjust_fit(2u#,2u#);
+penpos1(thick_brace_min,0); penpos1'(thick_brace_min,0);
+penpos2(thick_brace_max,0); penpos3(thick_brace_max,0);
+x1r=x1'r=hround(w-1.5u+.5thick_brace_min);
+x2l=x3l=hround(.5w-.5thick_brace_max);
+y1=h-1; y3=-d-eps; y2=.5[y1,y3]; y1-y1'=thick_brace_min;
+pair v[]; v1=(3(x2l-x1l),y2-y1); v2=(3(x1r-x2r),y1'-y2);
+fill pen_angle(left,z1l,fine,v1){v1}...{down}z2l--lrend(3)--z2r{up}
+    ...{v2}pen_end(v2,z1'r,fine,z1r,left)--cycle;
+penlabels(1,2,3); endchar;
+
+cmchar "Extensible left curly brace---bottom";
+beginchar(oct"072",12u#,0,1.5dh#);
+adjust_fit(2u#,2u#);
+penpos7(thick_brace_min,0); penpos7'(thick_brace_min,0);
+penpos5(thick_brace_max,0); penpos6(thick_brace_max,0);
+x7r=x7'r=hround(w-1.5u+.5thick_brace_min);
+x5l=x6l=hround(.5w-.5thick_brace_max);
+y5=h+eps; y7=1-d; y6=.5[y5,y7]; y7'-y7=thick_brace_min;
+pair v[]; v1=(3(x7l-x6l),y7-y6); v2=(3(x6r-x7r),y6-y7');
+fill z5l--z6l{down}...{v1}pen_angle(v1,z7l,fine,right)
+    --pen_end(right,z7r,fine,z7'r,v2){v2}...{up}z6r--z5r--cycle;
+penlabels(5,6,7); endchar;
+
+cmchar "Extensible left curly brace---middle";
+beginchar(oct"074",12u#,0,3dh#);
+adjust_fit(2u#,2u#);
+penpos4(thick_brace_min,0); penpos4'(thick_brace_min,0);
+forsuffixes $=2,3,5,6: penpos$(thick_brace_max,0); endfor
+x4l=x4'l=hround(1.5u-.5thick_brace_min);
+x2=x3=x5=x6; x2l=hround(.5w-.5thick_brace_max);
+y2=h+eps; y6=-d-eps; .5[y4,y4']=.5[y2,y6]=.5[y3,y5];
+y3-y4=(y2-y6)/4; y4-y4'=thick_brace_min;
+pair v[]; v1=(3(x4l-x3l),y4-y3); v2=(3(x5l-x4l),y5-y4');
+v3=(3(x4r-x5r),.5[y4,y4']-y5); v4=(3(x3r-x4r),y3-.5[y4,y4']);
+fill z2l--z3l{down}...{v1}pen_end(v1,z4l,fine,z4'l,v2){v2}
+ ...{down}z5l--z6l--z6r--z5r{up}...{v3}.5[z4r,z4'r]{v4}
+ ...{up}z3r--z2r--cycle;  % stroke
+penlabels(2,3,4,5,6); endchar;
+
+cmchar "Extensible curly brace---extension module";
+beginchar(oct"076",12u#,0,.5dh#);
+adjust_fit(2u#,2u#);
+penpos2(thick_brace_max,0); penpos3(thick_brace_max,0);
+x2l=x3l=hround(.5w-.5thick_brace_max); y2=h+eps; y3=-d-eps;
+fill rlend(2)--lrend(3)--cycle;
+penlabels(2,3); endchar;
+
+cmchar "\big right curly brace";
+beginchar(oct"011",9u#,rule_thickness#,2dh#-rule_thickness#);
+adjust_fit(.75u#,.75u#); right_curly(hair,stem); endchar;
+
+cmchar "\Big right curly brace";
+beginchar(oct"157",10u#,rule_thickness#,3dh#-rule_thickness#);
+zoom_ratio:=3/2;
+adjust_fit(u#,u#); right_curly(zoom(hair),zoom(stem)); endchar;
+
+cmchar "\bigg right curly brace";
+beginchar(oct"033",11u#,rule_thickness#,4dh#-rule_thickness#);
+zoom_ratio:=4/2;
+adjust_fit(1.25u#,1.25u#); right_curly(zoom(hair),zoom(stem)); endchar;
+
+cmchar "\Bigg right curly brace";
+beginchar(oct"051",11.5u#,rule_thickness#,5dh#-rule_thickness#);
+zoom_ratio:=5/2;
+adjust_fit(1.5u#,1.5u#); right_curly(zoom(hair),zoom(stem)); endchar;
+
+cmchar "Extensible right curly brace---top";
+beginchar(oct"071",12u#,0,1.5dh#);
+adjust_fit(2u#,2u#);
+penpos1(thick_brace_min,0); penpos1'(thick_brace_min,0);
+penpos2(thick_brace_max,0); penpos3(thick_brace_max,0);
+x1l=x1'l=hround(1.5u-.5thick_brace_min);
+x2l=x3l=hround(.5w-.5thick_brace_max);
+y1=h-1; y3=-d-eps; y2=.5[y1,y3]; y1-y1'=thick_brace_min;
+pair v[]; v1=(3(x2r-x1r),y2-y1); v2=(3(x1l-x2l),y1'-y2);
+fill z3r--z2r{up}...{-v1}pen_angle(-v1,z1r,fine,left)
+    --pen_end(left,z1l,fine,z1'l,-v2){-v2}...{down}z2l--z3l--cycle;
+penlabels(1,2,3); endchar;
+
+cmchar "Extensible right curly brace---bottom";
+beginchar(oct"073",12u#,0,1.5dh#);
+adjust_fit(2u#,2u#);
+penpos7(thick_brace_min,0); penpos7'(thick_brace_min,0);
+penpos5(thick_brace_max,0); penpos6(thick_brace_max,0);
+x7l=x7'l=hround(1.5u-.5thick_brace_min);
+x5l=x6l=hround(.5w-.5thick_brace_max);
+y5=h+eps; y7=1-d; y6=.5[y5,y7]; y7'-y7=thick_brace_min;
+pair v[]; v1=(3(x7r-x6r),y7-y6); v2=(3(x6l-x7l),y6-y7');
+fill z5l--z6l{down}...{-v2}pen_end(-v2,z7'l,fine,z7l,right)
+    --pen_angle(right,z7r,fine,-v1){-v1}...{up}z6r--z5r--cycle;
+penlabels(5,6,7); endchar;
+
+cmchar "Extensible right curly brace---middle";
+beginchar(oct"075",12u#,0,3dh#);
+adjust_fit(2u#,2u#);
+penpos4(thick_brace_min,0); penpos4'(thick_brace_min,0);
+forsuffixes $=2,3,5,6: penpos$(thick_brace_max,0); endfor
+x4r=x4'r=hround(w-1.5u+.5thick_brace_min);
+x2=x3=x5=x6; x2l=hround(.5w-.5thick_brace_max);
+y2=h+eps; y6=-d-eps; .5[y4,y4']=.5[y2,y6]=.5[y3,y5];
+y3-y4=(y2-y6)/4; y4-y4'=thick_brace_min;
+pair v[]; v1=(3(x4r-x3r),y4-y3); v2=(3(x5r-x4r),y5-y4');
+v3=(3(x4l-x5l),.5[y4,y4']-y5); v4=(3(x3l-x4l),y3-.5[y4,y4']);
+fill z2l--z3l{down}...{-v4}.5[z4l,z4'l]{-v3}...{down}z5l--z6l--z6r--z5r{up}
+    ...{-v2}pen_end(-v2,z4'r,fine,z4r,-v1){-v1}...{up}z3r--z2r--cycle;
+penlabels(2,3,4,5,6); endchar;
+
+cmchar "Horizontal curly brace tip---down and left";
+beginchar(oct"172",.75dh#,3rule_thickness#,0);
+adjust_fit(0,0);
+penpos1(thick_brace_min,90); penpos1'(thick_brace_min,90);
+penpos2(thick_brace_max,90);
+y2l=0; y1l=y1'l=vround(y2-4.5u-.5thick_brace_min);
+.5[x1,x1']=-eps; x2=w+shrink_fit+eps; x1'-x1=thick_brace_min;
+pair v[]; v1=(x2-x1,3(y2r-y1r)); v2=(x1'-x2,3(y1-y2));
+fill z2r{left}...{-v1}pen_rlend1(-v1,fine,right)
+    --pen_angle(right,z1'l,fine,-v2){-v2}...{right}z2l--cycle;
+penlabels(1,2); endchar;
+
+cmchar "Horizontal curly brace tip---down and right";
+beginchar(oct"173",.75dh#,3rule_thickness#,0);
+adjust_fit(0,0);
+penpos1(thick_brace_min,90); penpos1'(thick_brace_min,90);
+penpos2(thick_brace_max,90);
+y2l=0; y1l=y1'l=vround(y2-4.5u-.5thick_brace_min);
+.5[x1,x1']=w+shrink_fit+eps; x2=-eps; x1-x1'=thick_brace_min;
+pair v[]; v1=(x2-x1,3(y2r-y1r)); v2=(x1'-x2,3(y1-y2));
+fill z2l{right}...{v2}pen_angle(v2,z1'l,fine,right)
+    --pen_lrend1(right,fine,v1){v1}...{left}z2r--cycle;
+penlabels(1,2); endchar;
+
+cmchar "Horizontal curly brace tip---up and left";
+beginchar(oct"174",.75dh#,3rule_thickness#,0);
+adjust_fit(0,0);
+penpos1(thick_brace_min,90); penpos1'(thick_brace_min,90);
+penpos2(thick_brace_max,90);
+y2l=0; y1r=y1'r=vround(y2+4.5u+.5thick_brace_min);
+.5[x1,x1']=-eps; x2=w+shrink_fit+eps; x1'-x1=thick_brace_min;
+pair v[]; v1=(x2-x1,3(y2l-y1l)); v2=(x1'-x2,3(y1-y2));
+fill z2r{left}...{v2}pen_angle(v2,z1'r,fine,left)
+    --pen_rlend1(left,fine,v1){v1}...{right}z2l--cycle;
+penlabels(1,2); endchar;
+
+cmchar "Horizontal curly brace tip---up and right";
+beginchar(oct"175",.75dh#,3rule_thickness#,0);
+adjust_fit(0,0);
+penpos1(thick_brace_min,90); penpos1'(thick_brace_min,90);
+penpos2(thick_brace_max,90);
+y2l=0; y1r=y1'r=vround(y2+4.5u+.5thick_brace_min);
+.5[x1,x1']=w+shrink_fit+eps; x2=-eps; x1-x1'=thick_brace_min;
+pair v[]; v1=(x2-x1,3(y2l-y1l)); v2=(x1'-x2,3(y1-y2));
+fill z2l{right}...{-v1}pen_lrend1(-v1,fine,left)
+    --pen_angle(left,z1'r,fine,-v2){-v2}...{left}z2r--cycle;
+penlabels(1,2); endchar;
+
+cmchar "\big left angle bracket";
+beginchar(oct"012",7u#,rule_thickness#,2dh#-rule_thickness#);
+adjust_fit(.75u#,.75u#); left_angle(rule_thickness); endchar;
+
+cmchar "\Big left angle bracket";
+beginchar(oct"104",9u#,rule_thickness#,3dh#-rule_thickness#);
+zoom_ratio:=3/2;
+adjust_fit(u#,u#); left_angle(zoom(rule_thickness)); endchar;
+
+cmchar "\bigg left angle bracket";
+beginchar(oct"034",11u#,rule_thickness#,4dh#-rule_thickness#);
+zoom_ratio:=4/2;
+adjust_fit(1.25u#,1.25u#); left_angle(zoom(rule_thickness)); endchar;
+
+cmchar "\Bigg left angle bracket";
+beginchar(oct"052",11.5u#,rule_thickness#,5dh#-rule_thickness#);
+zoom_ratio:=5/2;
+adjust_fit(1.5u#,1.5u#); left_angle(zoom(rule_thickness)); endchar;
+
+cmchar "\big right angle bracket";
+beginchar(oct"013",7u#,rule_thickness#,2dh#-rule_thickness#);
+adjust_fit(.75u#,.75u#); right_angle(rule_thickness); endchar;
+
+cmchar "\Big right angle bracket";
+beginchar(oct"105",9u#,rule_thickness#,3dh#-rule_thickness#);
+zoom_ratio:=3/2;
+adjust_fit(u#,u#); right_angle(zoom(rule_thickness)); endchar;
+
+cmchar "\bigg right angle bracket";
+beginchar(oct"035",11u#,rule_thickness#,4dh#-rule_thickness#);
+zoom_ratio:=4/2;
+adjust_fit(1.25u#,1.25u#); right_angle(zoom(rule_thickness)); endchar;
+
+cmchar "\Bigg right angle bracket";
+beginchar(oct"053",11.5u#,rule_thickness#,5dh#-rule_thickness#);
+zoom_ratio:=5/2;
+adjust_fit(1.5u#,1.5u#); right_angle(zoom(rule_thickness)); endchar;
+
+cmchar "\big slash";
+beginchar(oct"016",10.4u#,rule_thickness#,2dh#-rule_thickness#);
+big_slash(thicker_rule); endchar;
+
+cmchar "\Big slash";
+beginchar(oct"056",14.6u#,rule_thickness#,3dh#-rule_thickness#);
+zoom_ratio:=3/2;
+big_slash(zoom(thicker_rule)); endchar;
+
+cmchar "\bigg slash";
+beginchar(oct"036",18.8u#,rule_thickness#,4dh#-rule_thickness#);
+zoom_ratio:=4/2;
+big_slash(zoom(thicker_rule)); endchar;
+
+cmchar "\Bigg slash";
+beginchar(oct"054",23u#,rule_thickness#,5dh#-rule_thickness#);
+zoom_ratio:=5/2;
+big_slash(zoom(thicker_rule)); endchar;
+
+cmchar "\big backslash";
+beginchar(oct"017",10.4u#,rule_thickness#,2dh#-rule_thickness#);
+big_blash(thicker_rule); endchar;
+
+cmchar "\Big backslash";
+beginchar(oct"057",14.6u#,rule_thickness#,3dh#-rule_thickness#);
+zoom_ratio:=3/2;
+big_blash(zoom(thicker_rule)); endchar;
+
+cmchar "\bigg backslash";
+beginchar(oct"037",18.8u#,rule_thickness#,4dh#-rule_thickness#);
+zoom_ratio:=4/2;
+big_blash(zoom(thicker_rule)); endchar;
+
+cmchar "\Bigg backslash";
+beginchar(oct"055",23u#,rule_thickness#,5dh#-rule_thickness#);
+zoom_ratio:=5/2;
+big_blash(zoom(thicker_rule)); endchar;
+
+cmchar "Extensible vertical line---extension module";
+beginchar(oct"014",6u#,0,dh#);
+adjust_fit(0,0);
+penpos1(thicker_rule,0); penpos2(thicker_rule,0);
+x1=x2=.5w; y1=eps; y2=-d-eps;
+fill rlend(1)--lrend(2)--cycle;  % stem
+labels(1,2); endchar;
+
+cmchar "Extensible double vertical line---extension module";
+beginchar(oct"015",10u#,0,dh#);
+adjust_fit(0,0);
+penpos1(thicker_rule,0); penpos2(thicker_rule,0);
+penpos3(thicker_rule,0); penpos4(thicker_rule,0);
+x1=x2=.3w; x3=x4=w-x1; y1=y3=eps; y2=y4=-d-eps;
+fill rlend(1)--lrend(2)--cycle;  % stem
+fill rlend(3)--lrend(4)--cycle;  % stem
+labels(1,2,3,4); endchar;
+
+cmchar "Extensible vertical arrow--top";
+beginchar(oct"170",12u#,0,dh#);
+adjust_fit(0,0);
+numeric thickness,barr;
+thickness=hround(thicker_rule); barr=rule_thickness;
+penpos1(thickness,0); penpos2(thickness,0); penpos3(barr,90); penpos4(barr,90);
+x1l=hround(.5w-.5thickness); y1=-d-eps;
+x0=x1=x2; y0=h; x0-x3=x4-x0=4u+eps;
+y3=y4=y0-.29asc_height-eps;
+penpos5(barr,angle(z4-z0)); z5l=z0;
+penpos6(barr,angle(z3-z0)); z6l=z0;
+z9=.381966[.5[z3,z4],z0];
+path p; p=z4l{z9-z4}..z6r;
+numeric t; t = xpart(p intersectiontimes (z3l{z9-z3}..z5r));
+z0r=z0; z0l=point t of p;
+y2=h; fill reverse aux_left(z4e{z9-z4}..{curl 1}z0e..{z3-z9}z3e)(z2e--z1e);
+penlabels(0,1,2,3,4,5,6,9); endchar;
+
+cmchar "Extensible vertical arrow--bottom";
+beginchar(oct"171",12u#,0,dh#);
+adjust_fit(0,0);
+numeric thickness,barr;
+thickness=hround(thicker_rule); barr=rule_thickness;
+penpos1(thickness,0); penpos2(thickness,0);
+penpos3(barr,-90); penpos4(barr,-90);
+x1l=hround(.5w-.5thickness); y1=h+eps;
+x0=x1=x2; y0=-d; x0-x3=x4-x0=4u+eps;
+y3=y4=y0+.29asc_height+eps;
+penpos5(barr,angle(z4-z0)); z5l=z0;
+penpos6(barr,angle(z3-z0)); z6l=z0;
+z9=.381966[.5[z3,z4],z0];
+path p; p=z4l{z9-z4}..z6r;
+numeric t; t = xpart(p intersectiontimes (z3l{z9-z3}..z5r));
+z0r=z0; z0l=point t of p;
+y2=-d; fill aux_left(z4e{z9-z4}..{curl 1}z0e..{z3-z9}z3e)(z2e--z1e);
+penlabels(0,1,2,3,4,5,6,9); endchar;
+
+cmchar "Extensible vertical arrow--extension module";
+beginchar(oct"077",12u#,0,dh#);
+adjust_fit(0,0);
+numeric thickness; thickness=hround(thicker_rule);
+penpos1(thickness,0); penpos2(thickness,0);
+x1l=hround(.5w-.5thickness); x2=x1; y1=h+1+eps; y2=-d-1-eps;
+fill rlend(1)--lrend(2)--cycle;
+penlabels(1,2); endchar;
+
+cmchar "Extensible double vertical arrow--top";
+beginchar(oct"176",14u#,0,dh#);
+adjust_fit(0,0);
+numeric thickness; thickness=Vround(thicker_rule);
+penpos1(thickness,0); penpos2(thickness,0);
+penpos7(thickness,0); penpos8(thickness,0);
+y1=y2=-d-eps; y7=y8=h; y0=h+eps; x1=x7; x2=x8;
+x1r=hround(.5w+2u+.5thickness); .5[x1,x2]=x0=.5w;
+penpos3(thickness,90); penpos4(thickness,90);
+x2-x3=x4-x1=4u+eps; y3=y4=y0-.48asc_height-eps;
+penpos5(thickness,angle(z4-z0)); z5l=z0;
+penpos6(thickness,angle(z3-z0)); z6l=z0; z9=.381966[.5[z3,z4],z0];
+z0l=(z4l{z9-z4}..z6r) intersectionpoint (z3l{z9-z3}..z5r);
+fill reverse(z3r{z9-z3}..z0{curl 1}..{z4-z9}z4r
+ --aux_stroke(z4l{z9-z4}..z0l, z7e--z1e)
+ & aux_stroke(z0l..{z3-z9}z3l, z8e--z2e)--cycle);
+penlabels(0,1,2,3,4,5,6,7,8,9); endchar;
+
+cmchar "Extensible double vertical arrow--bottom";
+beginchar(oct"177",14u#,0,dh#);
+adjust_fit(0,0);
+numeric thickness; thickness=Vround(thicker_rule);
+penpos1(thickness,0); penpos2(thickness,0);
+penpos7(thickness,0); penpos8(thickness,0);
+y1=y2=h+eps; y7=y8=-d; y0=-d-eps; x1=x7; x2=x8;
+x1r=hround(.5w+2u+.5thickness); .5[x1,x2]=x0=.5w;
+penpos3(thickness,90); penpos4(thickness,90);
+x2-x3=x4-x1=4u+eps; y3=y4=y0+.48asc_height-eps;
+penpos5(thickness,angle(z4-z0)); z5l=z0;
+penpos6(thickness,angle(z3-z0)); z6l=z0; z9=.381966[.5[z3,z4],z0];
+z0r=(z4r{z9-z4}..z6r) intersectionpoint (z3r{z9-z3}..z5r);
+fill z3l{z9-z3}..z0{curl 1}..{z4-z9}z4l
+ --aux_stroke(z4r{z9-z4}..z0r, z7e--z1e)
+ & aux_stroke(z0r..{z3-z9}z3r, z8e--z2e)--cycle;
+penlabels(0,1,2,3,4,5,6,7,8,9); endchar;
+
+cmchar "Extensible double vertical arrow--extension module";
+beginchar(oct"167",14u#,0,dh#);
+adjust_fit(0,0);
+numeric thickness; thickness=Vround(thicker_rule);
+penpos1(thickness,0); penpos2(thickness,0);
+penpos7(thickness,0); penpos8(thickness,0);
+y1=y2=h+1+eps; y7=y8=-d-1-eps; x1=x7; x2=x8;
+x1r=hround(.5w+2u+.5thickness); .5[x1,x2]=.5w;
+fill rlend(1)--lrend(7)--cycle; fill rlend(2)--lrend(8)--cycle;
+penlabels(1,2,7,8); endchar;
+
+cmchar "\big radical sign";
+beginchar(oct"160",18u#,rule_thickness#,2dh#-rule_thickness#);
+big_sqrt; endchar;
+
+cmchar "\Big radical sign";
+beginchar(oct"161",18u#,rule_thickness#,3dh#-rule_thickness#);
+big_sqrt; endchar;
+
+cmchar "\bigg radical sign";
+beginchar(oct"162",18u#,rule_thickness#,4dh#-rule_thickness#);
+big_sqrt; endchar;
+
+cmchar "\Bigg radical sign";
+beginchar(oct"163",18u#,rule_thickness#,5dh#-rule_thickness#);
+big_sqrt; endchar;
+
+cmchar "Extensible radical sign---bottom";
+beginchar(oct"164",19u#,0,3dh#);
+adjust_fit(0,-letter_fit#);
+rulepos1(0); rulepos2(0);
+x1=x2=w-6u; y1=-d; y2=h+eps;
+x3l=3u; y3=.9[y1,y2];
+numeric alpha; alpha=diag_ratio(1,.5max(stem,rule_thickness),y3-y1,x1-x3l);
+penpos3(alpha*max(stem,rule_thickness),0);
+penpos5(vair,-45); x5l=x3l-u; z5l=whatever[z3r,(x2,body_height)];
+z6=z5r+whatever*((x2,body_height)-z3r)=whatever[z3l,z1l];
+z7=z3r+whatever*(z1l-z3l); x7=x1l;
+fill z2r--z2l--z7--pen_angle(z3r-z7,z3r,crisp,z5l-z3r)
+    --pen_lrend5(z5l-z3r,min(crisp,length(z6-z5r)),z6-z5r)--z6
+    --pen_lrend1(z1l-z6,crisp,up)--cycle;
+penlabels(1,2,3,4,5,6,7); endchar;
+
+cmchar "Extensible radical sign---extension module";
+beginchar(oct"165",19u#,0,dh#);
+adjust_fit(0,-letter_fit#);
+x1=x2=w-6u; y1=-d-1/10dh; y2=h+1/10dh;
+rulepos1(0); rulepos2(0);
+fill rlend(2)--lrend(1)--cycle;
+labels(1,2); endchar;
+
+cmchar "Extensible radical sign---top";
+beginchar(oct"166",19u#,rule_thickness#,dh#-rule_thickness#);
+adjust_fit(0,-letter_fit#);
+rulepos1(0); rulepos3(-90);
+x1=w-6u; x3=w+.5; y1=-d-eps; y3l=h;
+angled_pos(1,up,2,right,3);
+fill rlend(3)--lrthrough(2,lrend(1))--cycle;
+labels(1,2,3); endchar;

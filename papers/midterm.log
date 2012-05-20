@@ -1,0 +1,219 @@
+This is TeX, Version 3.14159 (Web2C 7.3.1) (format=latex 2002.4.12)  28 MAR 2004 17:07
+**midterm
+(midterm.tex
+LaTeX2e <2000/06/01>
+Babel <v3.7h> and hyphenation patterns for american, french, german, ngerman, i
+talian, nohyphenation, loaded.
+(/usr/share/texmf/tex/latex/base/article.cls
+Document Class: article 2000/05/19 v1.4b Standard LaTeX document class
+(/usr/share/texmf/tex/latex/base/size12.clo
+File: size12.clo 2000/05/19 v1.4b Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/home/c/d/cduan/texmf/tex/latex/personal/myarticle.sty
+Package: myarticle 2003/05/13 Customizations for articles
+
+(/home/c/d/cduan/texmf/tex/latex/personal/mytools.sty
+Package: mytools 2003/05/13 Basic package of my macros
+
+(/usr/share/texmf/tex/latex/tools/xspace.sty
+Package: xspace 1997/10/13 v1.06 Space after command names (DPC)
+)
+\c@phrasewords=\count87
+ Set \showoutput to show output
+\@opticalcbox=\box26
+)
+(/home/c/d/cduan/texmf/tex/latex/personal/roundflt.sty
+Package: roundflt 2004/12/19 v0.1 Rounded double floats
+\@dblstretch=\dimen103
+\rndfl@tempdim=\dimen104
+)
+(/usr/share/texmf/tex/latex/misc/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count88
+\float@exts=\toks14
+\float@box=\box27
+\@float@everytoks=\toks15
+\@floatcapt=\box28
+)
+(/usr/share/texmf/tex/latex/misc/subfigure.sty
+Package: subfigure 1995/03/06 v2.0 subfigure package
+
+Package: subfigure 1995/03/06 v2.0
+\c@subfigure=\count89
+\c@lofdepth=\count90
+\c@subtable=\count91
+\c@lotdepth=\count92
+)
+\@float@every@table=\toks16
+\@float@every@figure=\toks17
+\abstractwidth=\dimen105
+) (/home/c/d/cduan/texmf/tex/latex/personal/switcheml.sty
+Package: switcheml 2004/02/10 Obfuscate e-mail addresses
+)
+(/usr/share/texmf/tex/latex/mflogo/mflogo.sty
+Package: mflogo 1999/03/10 v2.0 LaTeX package for Metafont and MetaPost logos
+)
+(/home/c/d/cduan/texmf/tex/latex/psnfss/garamond.sty
+Package: garamond 
+
+(/usr/share/texmf/tex/latex/base/fontenc.sty
+Package: fontenc 2000/08/30 v1.91 Standard LaTeX package
+
+(/usr/share/texmf/tex/latex/base/t1enc.def
+File: t1enc.def 2000/08/30 v1.91 Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 38.
+))
+(/usr/share/texmf/tex/latex/base/textcomp.sty
+Package: textcomp 2000/08/30 v1.91 Standard LaTeX package
+
+(/usr/share/texmf/tex/latex/base/ts1enc.def
+File: ts1enc.def 1998/06/12 v3.0d (jk/car/fm) Standard LaTeX file
+))
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/zga/m/n on input line 13.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/zga/m/it on input line 14.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/zga/m/n on input line 15.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/padj/m/it on input line 18.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/padj/sb/n on input line 19.
+LaTeX Font Info:    Overwriting math alphabet `\mathcal' in version `normal'
+(Font)                  OMS/zga/m/n --> OT1/cal/m/it on input line 25.
+
+(/home/c/d/cduan/texmf/tex/latex/psnfss/futura.sty
+Package: futura 2002/05/28
+
+(/usr/share/texmf/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks18
+))
+(/home/c/d/cduan/texmf/tex/latex/psnfss/couriersc.sty
+Package: couriersc 2001/06/04 PSNFSS-v8.2 (WaS) 
+)
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 43.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> T1/pfu/m/n on input line 43.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> T1/pfu/m/n on input line 43.
+) (midterm.aux)
+\openout1 = `midterm.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 7.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 7.
+
+(/usr/share/texmf/tex/latex/base/ts1cmr.fd
+File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Try loading font information for T1+padj on input line 7.
+
+(/home/c/d/cduan/texmf/tex/latex/psnfss/t1padj.fd
+File: t1padj.fd 2002/05/21 Fontinst v1.801 font definitions for T1/padj.
+)
+LaTeX Font Info:    Font shape `T1/padj/bx/n' in size <12> not available
+(Font)              Font shape `T1/padj/b/n' tried instead on input line 8.
+LaTeX Font Info:    Font shape `T1/padj/bx/n' in size <17.28> not available
+(Font)              Font shape `T1/padj/b/n' tried instead on input line 8.
+LaTeX Font Info:    Try loading font information for OT1+zga on input line 8.
+
+(/home/c/d/cduan/texmf/tex/latex/psnfss/ot1zga.fd
+File: ot1zga.fd 2002/06/04 Fontinst v1.801 font definitions for OT1/zga.
+)
+LaTeX Font Info:    Try loading font information for OML+zga on input line 8.
+
+(/home/c/d/cduan/texmf/tex/latex/psnfss/omlzga.fd
+File: omlzga.fd 2002/06/04 Fontinst v1.801 font definitions for OML/zga.
+)
+LaTeX Font Info:    Try loading font information for OMS+zga on input line 8.
+
+(/home/c/d/cduan/texmf/tex/latex/psnfss/omszga.fd
+File: omszga.fd 2002/06/04 Fontinst v1.801 font definitions for OMS/zga.
+)
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 8.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 8.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 8.
+LaTeX Font Info:    Font shape `T1/padj/bx/n' in size <14.4> not available
+(Font)              Font shape `T1/padj/b/n' tried instead on input line 10.
+ [1
+
+]
+LaTeX Font Info:    Try loading font information for U+logo on input line 76.
+
+(/usr/share/texmf/tex/latex/mflogo/ulogo.fd
+File: ulogo.fd 1999/03/10 v2.0 LaTeX font defs for Metafont and MetaPost logos
+) [2]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 133.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 133.
+ [3]
+Overfull \hbox (1.15767pt too wide) in paragraph at lines 179--181
+[]\T1/padj/m/n/12 These rou-tines per-form sim-ple op-er-a-tions. They gen-er-a
+lly op-er-ate on sin-gle points
+
+\hbox(8.78993+3.22792)x390.0, glue set - 1.0
+.\hbox(0.0+0.0)x17.62482
+.\T1/padj/m/n/12 T
+.\T1/padj/m/n/12 h
+.\T1/padj/m/n/12 e
+.\T1/padj/m/n/12 s
+.etc.
+
+[4] [5] [6] [7]
+LaTeX Font Info:    Try loading font information for T1+pcrs on input line 376.
+
+ (/home/c/d/cduan/texmf/tex/latex/psnfss/t1pcrs.fd
+File: t1pcrs.fd 2001/06/04 font definitions for T1/pcrs.
+)
+LaTeX Font Info:    Font shape `T1/pcrs/m/n' will be
+(Font)              scaled to size 10.20007pt on input line 376.
+ [8] [9]
+LaTeX Font Info:    Try loading font information for TS1+padj on input line 449
+.
+
+(/home/c/d/cduan/texmf/tex/latex/psnfss/ts1padj.fd
+File: ts1padj.fd 2002/05/21 Fontinst v1.801 font definitions for TS1/padj.
+) [10] [11]
+LaTeX Font Info:    Font shape `T1/pcrs/m/n' will be
+(Font)              scaled to size 21.14815pt on input line 553.
+ [12] [13]
+[14] [15] (midterm.aux) ) 
+Here is how much of TeX's memory you used:
+ 1289 strings out of 20887
+ 16508 string characters out of 196274
+ 56448 words of memory out of 350001
+ 4240 multiletter control sequences out of 10000+15000
+ 53544 words of font info for 47 fonts, out of 400000 for 1000
+ 14 hyphenation exceptions out of 10000
+ 30i,10n,27p,336b,380s stack positions out of 3000i,100n,1500p,50000b,4000s
+
+Output written on midterm.dvi (15 pages, 43964 bytes).

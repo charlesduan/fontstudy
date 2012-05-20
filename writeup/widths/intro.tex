@@ -1,0 +1,15 @@
+\sectionname{Character Width \& Accent Placement}
+
+Simply creating a set of mathematical symbols and then inserting the italic
+letters as variables is not sufficient for high-quality math typesetting. The
+italic letter variables must also be properly fitted and spaced, and accents
+must be placed at their appropriate locations with those variables. The symbols
+generated from the Computer Modern fonts already contain these necessary width
+and placement adjustments, but the variables, taken from a text font without the
+necessary mathematical placement dimensions, need to be measured for proper
+placement and spacing.
+
+Using our library of character measurement routines, we can implement a simple
+algorithm for measuring the appropriate spacing and accent location for
+characters. In the following sections we describe those algorithms; in the font
+samples we show the accuracy of the measurements.

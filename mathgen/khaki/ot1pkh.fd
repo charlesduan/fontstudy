@@ -1,0 +1,26 @@
+%Filename: ot1pkh.fd
+%Created by: tex fontinst
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{ot1pkh.fd}
+   [2004/05/02 Fontinst v1.801 font definitions for OT1/pkh.]
+
+\DeclareFontFamily{OT1}{pkh}{}
+
+\DeclareFontShape{OT1}{pkh}{m}{n}{
+   <-> pkhr7t
+}{}
+
+\DeclareFontShape{OT1}{pkh}{m}{sc}{
+   <-> pkhrc7t
+}{}
+
+\DeclareFontShape{OT1}{pkh}{m}{sl}{
+   <-> pkhro7t
+}{}
+
+\DeclareFontShape{OT1}{pkh}{m}{it}{<->ssub * pkh/m/sl}{}
+
+\endinput

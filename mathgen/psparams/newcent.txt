@@ -1,0 +1,10 @@
+output_prefix: zmn
+output_dir: newcent
+#font_file: none required
+optical_size:
+roman_name: NewCenturySchlbk-Roman
+italic_name: NewCenturySchlbk-Italic
+roman_tfm: pncr8t
+italic_tfm: pncri8t
+sans_serif: no
+square_ends: no

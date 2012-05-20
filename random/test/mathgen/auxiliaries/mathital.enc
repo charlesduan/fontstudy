@@ -1,0 +1,183 @@
+% TeX math italic encoding.
+% No ligatures or kerns.
+% 
+/TeXMathItalicEncoding [          % now 256 chars follow
+% 0x0
+/Gamma
+/Delta
+/Theta
+/Lambda
+/Xi
+/Pi
+/Sigma
+/Upsilon
+
+% 0x8
+/Phi
+/Psi
+/Omega
+/alpha
+/beta
+/gamma
+/delta
+/epsilon1
+
+% 0x10
+/zeta
+/eta
+/theta
+/iota
+/kappa
+/lambda
+/mu
+/nu
+
+% 0x18
+/xi
+/pi
+/rho
+/sigma
+/tau
+/upsilon
+/phi
+/chi
+
+% 0x20
+/psi
+/omega
+/epsilon
+/theta1
+/pi1
+/rho1
+/sigma1
+/phi1
+
+% 0x28
+/arrowlefttophalf
+/arrowleftbothalf
+/arrowrighttophalf
+/arrowrightbothalf
+/arrowhookleft
+/arrowhookright
+/triangleright
+/triangleleft
+
+% 0x30
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+
+% 0x38
+/.notdef
+/.notdef
+/period
+/comma
+/less
+/slash
+/greater
+/star
+
+% 0x40
+/partialdiff
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+
+% 0x48
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+
+% 0x50
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+
+% 0x58
+/.notdef
+/.notdef
+/.notdef
+/flat
+/natural
+/sharp
+/slurbelow
+/slurabove
+
+% 0x60
+/lscript
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+
+% 0x68
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+
+% 0x70
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+
+% 0x78
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/weierstrass
+/vector
+/tie
+
+% Have to have 128 .notdef's now to fill things out.
+% 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+] def

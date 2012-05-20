@@ -1,0 +1,30 @@
+%
+% A-A_outer_bracket.ps
+%
+flattenpath
+
+0.3 horizSplitLine pathLineIntc sortByX firstElt /ATop defPoint
+ATop pointbox
+0.2 horizSplitLine pathLineIntc sortByX firstElt /ABot defPoint
+ABot pointbox
+
+% Find the end of the serif
+{ ATop startAtPoint { 135 75 withinRange } endWhenAngle } traceSubpath
+subpathEndpoint
+{ startAtPoint { 225 gt } endBeforeAngle } traceSubpath
+subpathEndpoint /ASerifEdge defPoint
+ASerifEdge pointbox
+
+% Line parallel to edge of A
+ABot ATop subPoint 4 scalePoint ATop addPoint ATop
+drawLine
+
+ASerifEdge horizLineThrough drawLine
+
+intersect pop /ACorner defPoint
+ACorner pointbox
+
+0.5 ABot ASerifEdge ACorner findBracket /ABracket defPoint
+
+(Outer bracket of A, adjusted for dark) ABracket ycoor 1.5 div stringOfText
+

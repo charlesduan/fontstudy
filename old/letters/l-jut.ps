@@ -1,0 +1,14 @@
+%
+% l-serifjut.ps
+%
+0.5 horizSplitLine pathLineIntc sortByX
+{ 2 copy pointbox } forallPoint
+/lStemRight defPoint /lStemLeft defPoint
+
+{ lStemLeft startAtPoint lStemRight endAtPoint } traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByX lastElt loadArray
+2 copy rtpointbox
+xcoor lStemRight xcoor sub
+(Lowercase jut) exch stringOfText

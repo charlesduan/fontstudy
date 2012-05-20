@@ -1,0 +1,20 @@
+%
+% S-cap_ess.ps
+%
+0.5 vertSplitLine
+pathLineIntc sortByY
+2 2 getinterval loadArray
+/STopPoint defPoint /SBotPoint defPoint
+STopPoint pathAngle pop 90 add
+dup cos exch sin 500 scalePoint STopPoint addPoint
+STopPoint pathLineIntc sortByY
+% Check if the last element is actually sTopPoint
+dup lastElt loadArray STopPoint 5 eqPoint {
+    % If so, get the second to last one.
+    revArray 1 get
+} {
+    lastElt
+} ifelse
+/STopPerpPoint defPoint
+
+(Uppercase ess) STopPoint STopPerpPoint subPoint magnitude stringOfText

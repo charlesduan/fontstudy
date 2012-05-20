@@ -1,0 +1,31 @@
+%
+% l-bracket.ps
+%
+0.5 vertSplitLine pathLineIntc sortByY firstElt /lBottomPoint defPoint
+0.5 horizSplitLine pathLineIntc sortByX lastElt /lRightPoint defPoint
+lBottomPoint pointbox
+lRightPoint rtpointbox
+
+{ lBottomPoint startAtPoint lRightPoint endAtPoint } traceSubpath
+{ {
+    flattenpath
+    { 45 90 withinRange } startWhenAngle 
+    { 135 90 withinRange } endBeforeAngle
+  } traceSubpath
+} useSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByY dup firstElt /lBotSlab defPoint
+lastElt /lTopSlab defPoint
+lBotSlab pointbox
+lTopSlab uppointbox
+
+{
+    lTopSlab startAtPoint
+    { 80 20 withinRange } endBeforeStartAngle
+} traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath sortByY lastElt /lBracketTop defPoint
+lBracketTop rtpointbox
+lBracketTop ycoor lTopSlab ycoor sub 0 max
+(Bracket: ) exch stringOfText

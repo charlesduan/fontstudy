@@ -1,0 +1,109 @@
+%!PS-Adobe-2.0
+
+%
+% extremes.ps
+%
+% Functions for manipulating extremes.
+%
+
+9 dict begin
+
+    % These four variables will be set when necessary.
+    % /minX
+    % /maxX
+    % /minY
+    % /maxY
+
+    % Functions to test what to do with a point. They should ONLY be called with
+    % this dictionary as the top one on the stack.
+    /comparePoint {
+	2 copy 2 packedarray cvx exch		% x { x y } y
+	% Test the Y coordinate
+	dup minY exch pop				% x { x y } y y minY
+	lt {
+	    % If it's smaller than minY, set /minY to it
+	    exch dup /minY exch def exch pop	% x { x y }
+	} {
+	    % Otherwise, it's a possible candidate for maxY.
+	    maxY exch pop				% x { x y } y maxY
+	    gt {
+		dup /maxY exch def			% x { x y }
+	    } if
+	} ifelse
+	exch
+	% Test the X coordinate
+	dup minX pop				% { x y } x x minX
+	lt {
+	    % If it's smaller than minX, set /minX to it
+	    pop /minX exch def			% empty
+	} {
+	    % Otherwise, it's a possible candidate for maxY.
+	    maxX pop				% { x y } x maxX
+	    gt {
+		/maxX exch def			% empty
+	    } {
+		pop
+	    } ifelse
+	} ifelse
+    } def
+
+    % Initialize the values, if they haven't been already. This should only be
+    % called once at the beginning of an extremes computation session.
+    /initExtremesDict {
+	2 packedarray cvx
+	dup /minX exch def
+	dup /maxX exch def
+	dup /minY exch def
+	/maxY exch def
+	/considerPoint { comparePoint } def
+    } def
+
+    /considerPoint {
+	initExtremesDict
+    } def
+
+    gsave
+    /clippingPath clippath true upath cvlit def
+    grestore
+
+currentdict
+end
+/ExtremesDict exch def
+
+
+% Now, the public interface
+
+% Given a coordinate pair, test it as an extreme point candidate. Require that
+% the point be within the clipping path for consideration.
+/cmpPoint {
+    ExtremesDict begin
+	2 copy clippingPath inufill {
+	    considerPoint
+	} {
+	    pop pop
+	}ifelse
+    end
+} def
+
+% Clear out the current extreme values.
+/resetExtremes {
+    ExtremesDict begin
+	/considerPoint { initExtremesDict } def
+	gsave
+	    /clippingPath clippath true upath cvlit def
+	grestore
+    end
+    ExtremesDict /minX undef
+    ExtremesDict /maxX undef
+    ExtremesDict /minY undef
+    ExtremesDict /maxY undef
+} def
+
+% Set the clipping path for the extremes area.
+% upath --
+/setExtremesClip {
+    ExtremesDict begin
+	cvlit
+	/clippingPath exch def
+    end
+} def

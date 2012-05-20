@@ -1,0 +1,26 @@
+%Filename: t1ptk.fd
+%Created by: tex texput
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{t1ptk.fd}
+   [2004/04/25 Fontinst v1.801 font definitions for T1/ptk.]
+
+\DeclareFontFamily{T1}{ptk}{}
+
+\DeclareFontShape{T1}{ptk}{m}{n}{
+   <-> ptkr8t
+}{}
+
+\DeclareFontShape{T1}{ptk}{m}{sc}{
+   <-> ptkrc8t
+}{}
+
+\DeclareFontShape{T1}{ptk}{m}{sl}{
+   <-> ptkro8t
+}{}
+
+\DeclareFontShape{T1}{ptk}{m}{it}{<->ssub * ptk/m/sl}{}
+
+\endinput

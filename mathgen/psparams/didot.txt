@@ -1,0 +1,11 @@
+output_prefix: zmn
+output_dir: didot
+font_file: lddr8a.pfb
+font_file: lddri8a.pfb
+optical_size:
+roman_name: DidotLH-Roman
+italic_name: DidotLH-Italic
+roman_tfm: lddr8t
+italic_tfm: lddri8t
+sans_serif: no
+square_ends: no

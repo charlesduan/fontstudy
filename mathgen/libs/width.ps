@@ -1,0 +1,193 @@
+%!PS-Adobe-2.0
+%
+% width.ps
+%
+% Determines the appropriate left width.
+%
+% This entire file is just one big function. It requires that someone (namely,
+% widthlibs.ps) define various values that specify the current letter's width,
+% various naming conventions, etc.
+%
+% Requires: pathtricks.ps points.ps functions.ps drawing.ps
+
+/LeftRightWidth {
+
+% Draw some reference lines
+gsave
+newpath 0 0 moveto 0 200 lineto stroke
+0 100 moveto WidthUnit 100 lineto stroke
+rightSidebearing 0 moveto 0 200 rlineto stroke
+grestore
+
+/Extremes pathExtremes def
+Extremes sortByX firstElt /LeftPoint defPoint
+Extremes sortByX lastElt /RightPoint defPoint
+Extremes sortByY firstElt /BotPoint defPoint
+Extremes sortByY lastElt /TopPoint defPoint
+LeftPoint ltpointbox
+RightPoint rtpointbox
+LeftPoint xcoor /LeftEdge exch def
+RightPoint xcoor /RightEdge exch def
+
+0 XHeight SubscriptFraction mul horizLineThrough pathLineIntc
+sortByX dup firstElt /HalfwayLeft defPoint lastElt /HalfwayRight defPoint
+
+gsave flattenpath
+{ HalfwayLeft startAtPoint HalfwayRight endAtPoint } traceSubpath
+{ pathExtremes } useSubpath sortByX lastElt /LowerRightPoint defPoint
+grestore
+LowerRightPoint rtpointbox
+LowerRightPoint xcoor /LowerRightEdge exch def
+
+% Chop the letter up into small slices each HeightUnit high. For each slice,
+% look at the x coordinates of the intersection, keeping the smallest and
+% largest values. Stuff them into an array.
+[
+    BotPoint ycoor
+    HeightUnit
+    TopPoint ycoor {
+	/curYcoor exch def
+	curYcoor XHeight SubscriptFraction mul HeightUnit withinRange {
+	    ] { gt } bubblesort /SubPoints exch def [ SubPoints loadArray
+	} if
+	curYcoor 0 exch horizLineThrough
+	pathLineIntc dup length 0 gt {
+	    sortByX dup firstElt xcoor exch lastElt xcoor
+	} {
+	    pop
+	} ifelse
+    } for
+] /Points exch { lt } bubblesort def
+
+% Sort the array by lowest x coordinate. For coordinate n, shift it outward by
+% WidthUnit/n. Of those coordinates, take the one that is farthest out.
+LeftEdge ForcedWidth sub
+1 1 Points length 2 div MaxUnits min {
+    dup 1 sub Points exch get exch
+    MaxUnits div WidthUnit mul sub
+    min
+} for
+
+% Draw a line at that farthest sidebearing point.
+gsave 2 setlinewidth newpath
+    dup dup BotPoint ycoor moveto TopPoint ycoor lineto
+stroke grestore
+
+/LeftPosition exch def LeftPosition % For subscript calculation
+
+doLeft (Left) exch neg AdjustScale round cvi stringOfText
+
+% Reverse the array and do everything again, for the right side.
+Points revArray pop
+
+RightEdge ForcedWidth add
+1 1 Points length 2 div MaxUnits min {
+    dup 1 sub Points exch get exch
+    MaxUnits div WidthUnit mul add
+    max
+} for
+
+gsave 2 setlinewidth newpath
+    dup dup BotPoint ycoor moveto TopPoint ycoor lineto
+stroke grestore
+
+/RightPosition exch def RightPosition % For subscript calculation
+
+doRight (Right) exch rightSidebearing sub AdjustScale round cvi stringOfText
+
+LowerRightEdge ForcedWidth add
+1 1 SubPoints length 2 div MaxSubscriptUnits min {
+    dup 1 sub SubPoints exch get exch
+    MaxSubscriptUnits div WidthUnit mul add
+    max
+} for
+
+% The subscript cannot extend past the superscript, and it cannot extend beyond
+% the specified subscript indentation limit.
+RightPosition min RightPosition MaxSubscriptIndent sub max
+
+gsave 2 setlinewidth newpath
+    dup dup BotPoint ycoor moveto XHeight SubscriptFraction mul lineto
+stroke grestore
+
+doSubscript (Right subscript) exch rightSidebearing sub AdjustScale round cvi
+stringOfText
+
+% Now, try to find the center of the top of the letter.
+
+unmeasurableAcccentLetter {
+    pathbbox avgPoint
+} {
+    % Hack: for T, i, and j, measure from the middle of the letter; all other
+    % letters, measure from near the top.
+    CurrentLetter (T) eq CurrentLetter (i) eq CurrentLetter (j) eq
+    or or { 0.5 } { 0.9 } ifelse
+    horizSplitLine pathLineIntc sortByX dup
+    firstElt /TopLeft defPoint lastElt /TopRight defPoint
+    TopLeft ltpointbox TopRight rtpointbox
+    TopLeft TopRight avgPoint
+} ifelse
+
+ /TopMiddle defPoint TopMiddle pointbox
+
+% This calculates the proper offset from TopMiddle to the accent position.
+TopPoint ycoor TopMiddle ycoor sub dup
+currentfont /FontInfo get /ItalicAngle get neg dup sin exch cos div mul exch
+TopMiddle addPoint /AccentPoint defPoint
+
+AccentPoint pointbox
+mark AccentPoint TopMiddle drawLine cleartomark
+
+AccentPoint xcoor RightPosition LeftPosition add 2 div sub
+
+doAccent (Accent point) exch AdjustScale round cvi stringOfText
+
+% In the case of the letters i and j, output the resulting widths so that we can
+% calculate the values for the dotless j, even if it doesn't exist.
+(i) CurrentLetter eq (j) CurrentLetter eq or {
+    /CurrentFile CurrentLetter (-width) append def
+    (Width) RightPosition LeftPosition sub AdjustScale round cvi stringOfText
+} if
+
+% In the case of the letter i, also do dotless i
+(i) CurrentLetter eq {
+    gsave 20 dict begin
+	0 1 currentfont /Encoding get length 1 sub {
+	    dup currentfont /Encoding get exch get /dotlessi eq {
+		/DotlessiPos 1 string def
+		DotlessiPos exch 0 exch put
+		/rightSidebearing { DotlessiPos stringwidth pop } def
+		/CurrentLetter (dotlessi) def
+		400 0 translate
+		DotlessiPos letterPath
+		LeftRightWidth
+		exit
+	    } {
+		pop
+	    } ifelse
+	} for
+    end grestore
+} if
+
+} def
+
+% Auxiliary function to find letters that should not be measured for the top
+% point (instead, the middle of the box should be used). Although it is highly
+% unlikely, you may wish to change this list as necessary. In fact, this list
+% really should be located somewhere else!
+/unmeasurableAcccentLetter {
+    false
+    UnmeasurableLetters {
+	CurrentLetter eq { pop true exit } if
+    } forall
+} def
+
+/UnmeasurableLetters [ (C) (E) (F) (G) (S) (Z) (a) (c) (e) (o) (r) (z) ] def
+
+% Helper functions in qualities of letters
+/doLeft { /CurrentFile { CurrentLetter (-left) append } def } def
+/doRight { /CurrentFile { CurrentLetter (-right) append } def } def
+/doSubscript { /CurrentFile { CurrentLetter (-subscript) append } def } def
+/doAccent { /CurrentFile { CurrentLetter (-accent) append } def } def
+/rightSidebearing { CurrentLetter stringwidth pop } def
+

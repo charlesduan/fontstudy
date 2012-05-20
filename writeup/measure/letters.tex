@@ -1,0 +1,134 @@
+\sectionname{Parameter Measurements}
+
+Using the functions provided by the measurement library we can measure many of
+the parameters of the Computer Modern font. Here we will consider a few of these
+measurement algorithms.
+
+\begin{figure}[b!]
+\centering
+\vskip 6pt
+\begin{pspicture}(0,0)(3,5)
+\pspolygon[fillstyle=solid,fillcolor=lightgray]%
+(0,0)(3,0)(3,.5)(2,.5)(2,5)(0,4.5)(0,4)(1,4.25)(1,.5)(0,.5)
+%\pspolygon[fillstyle=solid,fillcolor=lightgray](0,0)(3,0)(3,.5)(2,.5)(2,4.5)
+%(3,4.5)(3,5)(0,5)(0,4.5)(1,4.5)(1,.5)(0,.5)
+\psline(0,2.5)(3,2.5)
+\uput[l](0,2.5){$\alpha$}
+\uput[r](3,2.5){$\beta$}
+\qdisk(1,2.5){2pt}\uput[135](1,2.5){$\gamma$}
+\qdisk(2,2.5){2pt}\uput[45](2,2.5){$\delta$}
+\psline{<->}(1,2)(2,2)
+\end{pspicture}
+\caption{Measurement of the stem width from the lowercase letter l. The line
+$\overline{\alpha\beta}$ is drawn halfway up the height of the letter, and
+intersections $\gamma$ and $\delta$ are found. The stem width is the length
+$\gamma\delta$.}
+\end{figure}
+
+The \emph{stem} parameter specifies the width of upright stems in lowercase
+letters such as l, d, and t. That parameter's value can be easily measured by
+drawing a horizontal line halfway through the letter l, finding the (hopefully
+two) intersections between the line and the character outline, and finding the
+distance between those two intersections.
+
+\begin{figure}
+\centering
+\vskip 6pt
+\begin{pspicture}(0,0)(3,5)
+\pspolygon[fillstyle=solid,fillcolor=lightgray](0,0)(3,0)(3,.5)(2,.5)(2,4.5)
+(3,4.5)(3,5)(0,5)(0,4.5)(1,4.5)(1,.5)(0,.5)
+\psline(0,2.5)(3,2.5)
+\uput[l](0,2.5){$\alpha$}
+\uput[r](3,2.5){$\beta$}
+\qdisk(2,2.5){2pt}\uput[45](2,2.5){$\gamma$}
+\qdisk(3,.5){2pt}\uput[45](3,.5){$\delta$}
+\psline{<->}(2,1.5)(3,1.5)
+\psline[linestyle=dotted](3,1.5)(3,.5)
+\end{pspicture}
+\caption{Measurement of \emph{cap\_jut} from an uppercase I. The line
+$\overline{\alpha\beta}$ is drawn halfway through the letter, and point $\gamma$
+is found. Point $\delta$ is located as the point on the extreme right of the
+letter. The jut, then, is calculated as $y_\delta-y_\gamma$.}
+\end{figure}
+
+The \emph{cap\_jut} parameter specifies the distance by which serifs extend
+horizontally from the main character stem of uppercase letters. This is measured
+by drawing a horizontal line halfway up the capital I, finding the rightmost
+intersection of that line with the character outline, finding the rightmost
+point of the entire outline, and then subtracting to get the overall horizontal
+distance between those points.
+
+The use of the uppercase I in measuring the \emph{cap\_jut} raises an
+interesting question: why measure the jut of the uppercase I, rather than that
+of, say, an M or E, for which the horizontal serif jut can be just as easily
+measured. The answer is found by looking at the predominant use of that specific
+parameter in the math font programs: the \emph{cap\_jut} parameter is used in
+the uppercase Greek letters $\Gamma$, $\Lambda$, $\Pi$, $\Upsilon$, $\Phi$, and
+$\Psi$. Of these, the serifs on $\Gamma$ and $\Lambda$ require special treatment
+(as shown by experimentation), and the serifs on $\Upsilon$, $\Phi$, and $\Psi$
+are most like those of an uppercase I. For the $\Pi$ character, the serifs
+should actually look like those on a capital H, so a separate measurement is
+taken and applied only for the serifs on the $\Pi$ character. The problem of the
+capital serif jut is discussed further in Section~\ref{s:params}.
+
+The \emph{thin\_join} parameter specifies the stroke thickness at the ``join''
+locations between arches and upright stems on letters such as h, m, and n. Since
+it is not a simple task to analytically find the distance across a stroke given
+only the stroke's outline, we find the stroke's width by sampling many possible
+intersections. First we trace a subpath consisting of the underside of the arch
+of the letter. Next we find a point near the top of the join location (at the
+notch at the upper left of the letter n, for example). Then a series of lines
+are drawn starting from that point and at different angles toward the lower
+right of the letter. For each line drawn, we find the intersection of the line
+with the subpath formed above and thus the distance between that intersection
+point and the join location point. The minimum distance is taken to be the
+stroke thickness and reported as the \emph{thin\_join} value.
+
+\begin{figure}
+\vspace*{6pt}
+\begin{center}
+\begin{pspicture}(0,0)(7,4)
+\pscustom{
+\moveto(0,4)
+\lineto(5,4)\lineto(7,0)\lineto(6,0)
+\curveto(5.25,1.5)(3.9,2)(3,2)\lineto(0,2)
+\fill[fillstyle=solid,fillcolor=lightgray]\stroke\newpath
+\psset{linestyle=dashed}
+\moveto(2,2)\lineto(6,0)\lineto(5,2)\closepath\stroke\newpath
+\psset{linestyle=dashed}
+\moveto(4,1)\lineto(5,2)\stroke\newpath
+}
+\qdisk(4,1){2pt}\uput[d](4,1){$m$}
+\qdisk(5,2){2pt}\uput[u](5,2){$c$}
+\qdisk(4.55,1.55){2pt}\uput[d](4.55,1.55){$b$}
+\qdisk(2,2){2pt}\uput[u](2,2){$a$}
+\qdisk(6,0){2pt}\uput[45](6,0){$t$}
+\qdisk(7,0){2pt}\uput[45](7,0){$T$}
+\qdisk(5,4){2pt}\uput[-135](5,4){$C$}
+\end{pspicture}
+\end{center}
+\caption{Measurement of the \emph{beak\_darkness} parameter. The solid line
+represents the outline of the beak serif; the dotted lines are constructed.}
+\label{f:beak}
+\end{figure}
+
+Finally, the \emph{beak\_darkness} parameter, which measures the amount of
+curvature under beak serifs like the one terminating the top stroke of the
+letter F, provides an example of a relatively complex measurement routine.
+The explanation will reference the points in Figure~\ref{f:beak}. The
+measurement construction is based on the subroutine for drawing beaks, in
+\emph{C \& T} Vol. E, page 376~\cite{cte}.
+
+First, the points $T$, $C$, and $t$ are determined by identifying extrema on the
+beak serif; this is done without great difficulty. Point $a$ is defined as the
+point on the path whose $x$-coordinate is halfway between $T$ and the left end
+of the beak. Point $c$ is defined such that $\overline{ac}$ is horizontal and
+$\overline{ct}\mathbin\|\overline{CT}$. Point $m$ is then defined as the midpoint of
+$\overline{at}$, and $b$ is the intersection of the character outline with line
+segment $\overline{mc}$. The \emph{beak\_darkness} parameter, then, is:
+\[
+\mathit{beak\_darkness} = \frac{bc}{mc}
+\]
+
+These and many other routines are used to measure the values of parameters for
+the generation of the math symbol fonts.

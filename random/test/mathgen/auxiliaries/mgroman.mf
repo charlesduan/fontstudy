@@ -1,0 +1,122 @@
+slant := 0;
+math_fitting := false;
+
+% The Computer Modern Roman family of fonts (by D. E. Knuth, 1979--1985)
+
+font_coding_scheme:="TeX text";
+spanish_shriek=oct"074"; spanish_query=oct"076";
+
+mode_setup; font_setup;
+input mggreeku;  % Greek uppercase
+
+
+%%%%%%%%%%%%%%%%%%%%
+%
+% SYMBOLS
+%
+% For these, we reset the unit width so that they work properly with the symbol
+% fonts (e.g., overlapping slash).
+%
+%%%%%%%%%%%%%%%%%%%%
+
+if not monospace: u# := designsize / 18; define_pixels(u); fi
+
+cmchar "Left parenthesis";
+beginchar("(",7u# if monospace: -u# fi,body_height#,paren_depth#);
+italcorr body_height#*slant-.5u#;
+adjust_fit(0,0);
+penpos1(vair,0); penpos2(.75[hair,stem],0); penpos3(vair,0);
+x1r=x3r=hround(w-u); x2l=hround(x1-4u if monospace: +4/3u fi);
+y1=h; y2=.5[y1,y3]=math_axis;
+pair v[]l,v[]r;
+forsuffixes $=1,3: forsuffixes e=l,r: v$e=(z2e-z$e) xscaled 3; endfor endfor
+fill z2r{up}...{-v1r}pen_rlend1(-v1r,fine,v1l){v1l}
+    ...z2l{down}...{-v3l}pen_lrend3(-v3l,fine,v3r){v3r}...cycle;
+penlabels(1,2,3); endchar;
+
+cmchar "Right parenthesis";
+beginchar(")",7u# if monospace: -u# fi,body_height#,paren_depth#);
+italcorr math_axis#*slant-.5u#;
+adjust_fit(0,0);
+penpos1(vair,0); penpos2(.75[hair,stem],0); penpos3(vair,0);
+x1l=x3l=hround u; x2r=hround(x1+4u if monospace: -4/3u fi);
+y1=h; y2=.5[y1,y3]=math_axis;
+pair v[]l,v[]r;
+forsuffixes $=1,3: forsuffixes e=l,r: v$e=(z2e-z$e) xscaled 3; endfor endfor
+fill z2r{up}...{-v1r}pen_rlend1(-v1r,fine,v1l){v1l}
+    ...z2l{down}...{-v3l}pen_lrend3(-v3l,fine,v3r){v3r}...cycle;
+penlabels(1,2,3); endchar;
+
+cmchar "Left bracket";
+numeric wd#; wd#=max(5u#,4.5u#+.5if hefty:stem# else:rule_thickness# fi);
+beginchar("[",wd#,body_height#,paren_depth#);
+italcorr body_height#*slant;
+adjust_fit(0,0);
+numeric top_thickness,side_thickness;
+if hefty: top_thickness=vair;
+ side_thickness=max(crisp.breadth,stem-2stem_corr);
+else: top_thickness=side_thickness=rule_thickness; fi;
+penpos1(side_thickness,180);
+y1=.5[h,-d]; x1r=hround(2.5u-.5side_thickness)-1-eps;
+penpos4(top_thickness,90); penpos6(top_thickness,270);
+x4=x6=ceiling(w-.4u)+eps; y4r=h; y6r=-d;
+angled_pos(4,left,3,down,1); angled_pos(1,down,5,right,6);
+fill z5l--z3l--pen_lrend4(right,crisp,left)
+    --pen_end(left,z3r,crisp,z5r,right)--pen_rlend6(right,crisp,left)--cycle;
+penlabels(1,2,3,4,5,6); endchar;
+
+cmchar "Right bracket";
+numeric wd#; wd#=max(5u#,4.5u#+.5if hefty:stem# else:rule_thickness# fi);
+beginchar("]",wd#,body_height#,paren_depth#);
+italcorr body_height#*slant-2u#+.5if hefty:stem# else:rule_thickness# fi;
+adjust_fit(0,0);
+numeric top_thickness,side_thickness;
+if hefty: top_thickness=vair;
+ side_thickness=max(crisp.breadth,stem-2stem_corr);
+else: top_thickness=side_thickness=rule_thickness; fi;
+penpos1(side_thickness,0);
+y1=.5[h,-d]; x1r=hround(w-2.5u+.5side_thickness)+1+eps;
+penpos4(top_thickness,90); penpos6(top_thickness,-90);
+x4=x6=floor .4u-eps; y4r=h; y6r=-d;
+angled_pos(4,right,3,down,1); angled_pos(1,down,5,left,6);
+fill z3l--z5l--pen_lrend6(left,crisp,right)
+    --pen_end(right,z5r,crisp,z3r,left)--pen_rlend4(left,crisp,right)--cycle;
+penlabels(1,2,3,4,5,6); endchar;
+
+cmchar "Plus sign";
+beginarithchar("+");
+rulepos1(0); rulepos2(0); rulepos3(90); rulepos4(90);
+x1l=x2l=hround(.5w-.5rule_thickness); y1=h; .5[y1,y2]=math_axis;
+x3=hround u; x4=w-x3; y3=y4=math_axis;
+rulepos5(0); rulepos6(0); x5=x6=x1; y5=y3r; y6=y3l;
+fill rlend(3)--lrthrough(6,lrend(2))--lrend(4)--rlthrough(5,rlend(1))--cycle;
+labels(1,2,3,4); endchar;
+
+cmchar "Virgule (slash)";
+beginchar("/",9u#,body_height#,paren_depth#);
+italcorr body_height#*slant-.5u#;
+adjust_fit(0,0);
+x1r=hround(w-u)+eps; y1=h;
+x2l=hround u-eps; y2=-d;
+numeric alpha; alpha=diag_ratio(1,rule_thickness,y1-y2,x1r-x2l);
+penpos1(alpha*rule_thickness,0); penpos2(alpha*rule_thickness,0);
+fill rlend(1)--lrend(2)--cycle;
+penlabels(1,2); endchar;
+
+cmchar "Equals sign";
+compute_spread(.45x_height#,.55x_height#);
+beginchar("=",14u#,v_center(spread#+rule_thickness#));
+italcorr h#*slant-.5u#;
+adjust_fit(0,0);
+rulepos1(90); rulepos2(90); rulepos3(90); rulepos4(90);
+x1=x3=hround u; x2=x4=w-x1;
+y1=y2; y3=y4; y1-y3=spread; .5[y1,y3]=math_axis;
+fill rlend(1)--lrend(2)--cycle;
+fill rlend(3)--lrend(4)--cycle;
+labels(1,2,3,4); endchar;
+
+
+font_slant slant; font_x_height x_height#;
+font_quad 18u# if monospace: + 4letter_fit# fi;
+
+bye.

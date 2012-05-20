@@ -1,0 +1,445 @@
+if unknown mgbase: input mgbase fi
+
+font_identifier := "zmnmi";
+font_size 10 pt#;
+u# :=    0.62872 pt#;
+width_adj# :=    0.00000 pt#;
+serif_fit# :=    0.00000 pt#;
+cap_serif_fit# :=   -0.59601 pt#;
+letter_fit# :=    0.00000 pt#;
+body_height# :=    7.30027 pt#;
+asc_height# :=    7.29027 pt#;
+cap_height# :=    7.29027 pt#;
+fig_height# :=    7.08945 pt#;
+x_height# :=    5.24067 pt#;
+math_axis# :=    2.31987 pt#;
+bar_height# :=    2.88237 pt#;
+comma_depth# :=    1.47000 pt#;
+desc_depth# :=    2.18013 pt#;
+crisp# :=    0.01643 pt#;
+tiny# :=    0.00000 pt#;
+fine# :=    0.01544 pt#;
+thin_join# :=    0.47742 pt#;
+hair# :=    0.80057 pt#;
+stem# :=    0.84000 pt#;
+curve# :=    0.90038 pt#;
+ess# :=    0.82080 pt#;
+flare# :=    0.89428 pt#;
+dot_size# :=    1.04040 pt#;
+cap_hair# :=    0.88499 pt#;
+cap_stem# :=    0.92057 pt#;
+cap_curve# :=    0.93124 pt#;
+cap_ess# :=    0.90310 pt#;
+rule_thickness# :=    0.80057 pt#;
+dish# :=    0.00000 pt#;
+bracket# :=    0.00000 pt#;
+jut# :=    0.00000 pt#;
+cap_jut# :=    0.00000 pt#;
+beak_jut# :=    0.00000 pt#;
+beak# :=    0.00000 pt#;
+vair# :=    0.77046 pt#;
+notch_cut# :=   10.00000 pt#;
+bar# :=    0.68040 pt#;
+slab# :=    0.81960 pt#;
+cap_bar# :=    0.81960 pt#;
+cap_band# :=    0.81960 pt#;
+cap_notch_cut# :=   10.00000 pt#;
+serif_drop# :=    0.00000 pt#;
+stem_corr# :=    0.00028 pt#;
+vair_corr# :=    0.00001 pt#;
+apex_corr# :=    0.25897 pt#;
+o# :=    0.45947 pt#;
+apex_o# :=    0.00000 pt#;
+A_jut# :=    0.00000 pt#;
+A_jut_in# :=    0.00000 pt#;
+A_outer_bracket# :=    0.00000 pt#;
+F_jut# :=    0.00000 pt#;
+H_jut# :=    0.00000 pt#;
+arm_slab# :=    0.81960 pt#;
+slant := 0.212557;
+fudge := 1;
+math_spread := 0;
+superness := 0.73508425;
+superpull := 0.00643395;
+beak_darkness := 11/30;
+ligs := 2;
+A_inner_dark := 0;
+bigop_zoom := 0.4;
+bigdel_zoom := 0.25;
+O_superness := 0.72422575;
+miter_ratio := 2/3;
+square_dots := false;
+hefty := false;
+serifs := false;
+monospace := false;
+variant_g := true;
+low_asterisk := false;
+math_fitting := true;
+square_ends := true;
+% The Computer Modern Math Italic family (by D. E. Knuth, 1979--1985)
+
+font_coding_scheme:="TeX math italic";
+mode_setup; font_setup;
+
+skewchar=oct"177";
+
+input mggreeku;  % upper case greek letters
+input mggreekl;  % lower case Greek letters
+%input moditms; % special math italic symbols, without dotless i/j
+
+%%%%%%%%%%%%%%%%%%%%
+%
+% SPECIAL MATH ITALIC CHARACTERS
+%
+%%%%%%%%%%%%%%%%%%%%
+
+% This file contains miscellaneous symbols of math italic fonts.
+% The character codes are \0100, \0140, and \0173--\0177.
+
+cmchar "Partial differential sign";
+beginchar(oct"100",10u#,asc_height#,0);
+italcorr .7asc_height#*slant+.5curve#-1.5u#;
+adjust_fit(0,0);
+numeric top_thickness,bot_thickness,side_thickness,pull;
+top_thickness=max(fine.breadth,vair);
+bot_thickness=max(fine.breadth,vair');
+side_thickness=max(fine.breadth,hround 1/3[curve,cap_curve]);
+penpos2(top_thickness,90);
+penpos3(side_thickness,0); penpos4(bot_thickness,-90);
+penpos5(side_thickness,-180); penpos6(vair,-270);
+x5r=w-x3r=hround max(.75u,1.5u-.5side_thickness);
+x4=x6+.1u=x2 if not square_ends: +u fi=.5w;
+y2r=h+oo; y3=.5[y2,y4]; y4r=-oo;
+y5=.5[y4,y6]; y6=min(vround 5/8h,x_height)+oo;
+make_paths1(rev.r) pulled_arc.e(2,3);
+{{interim superness:=more_super; make_paths2(rev.r) pulled_arc.e(3,4) }};
+numeric t; t=xpart(lpath2 intersectiontimes((x3r,y5)--(x4,y5)));
+penpos7(hair,0); z7l=point t of lpath2;
+(x,y6r)=whatever[z7l,z6l]; x6r:=max(x,.5[x5r,x6]);
+{{less_tense; make_paths3(rev.r) pulled_arc.e(4,5) & pulled_arc.e(5,6) }};
+make_paths4(rev.r) z6e{right}...{direction t of lpath2}z7e;
+penpos1(hair,180); penpos0(flare,180);
+x0r=min(x2-eps,hround 1.2u);
+y0=vround min(.85h-.5flare,.8h+.5flare)+o;
+{{less_tense; path p; p=bulb_path(2,1,0)}};  % arc and bulb
+fill p & combine(lpath1 & lpath2,rpath4) & rpath3 & rpath2 & rpath1 & cycle;
+unfill subpath (t,infinity) of lpath2 & lpath3 & lpath4 & cycle;
+math_fit(-.3x_height#*slant+.5curve#-u#,ic#-u#);
+penlabels(0,1,2,3,4,5,6,7); endchar;
+
+cmchar "Lowercase italic script l";
+beginchar(oct"140",4.5u#+max(1.5u#,stem#),asc_height#,0);
+italcorr .8asc_height#*slant-u#;
+adjust_fit(if monospace:u#,u# else: 0,0 fi);
+penpos1(hair,-45); penpos2(hair,0); penpos3(vair,90);
+penpos4(stem,180); penpos5(vair,270); penpos6(hair,315);
+x1l=hround(x1l-x1); x2r=hround(w-1.5u); x3=.5w;
+x4r=hround .5u; x5=x3+.75u; x6=x1+w+1;
+y1=y6=.125h; y2=.8h; y3r=h+oo; y4=.5[y3,y5]; y5r=-oo;
+pair v; v=(10u,asc_height);
+path p[]; p1=z2l{down}...{-v}pen_lrend1(-v,fine,v){v}...{up}z2r;
+p2=z5r{right}...{v}pen_rlend6(v,fine,-v){-v}...{left}z5l;
+make_paths1(rev.l) z1e{10u,asc_height}...z2e{up};
+make_paths2(rev.l) z2e{up}...{left}z3e;
+make_paths3(rev.l) pulled_arc.e(3,4) & pulled_arc.e(4,5);
+fill p2 & combine(lpath3,rpath1) & rpath2 & aux_path(rpath3,p1) & cycle;
+unfill combine(lpath1,lpath3) & lpath2 & cycle;
+math_fit(0,ic#); penlabels(1,2,3,4,5,6); endchar;
+
+cmchar "Weierstrass p";
+beginchar(oct"175",11u#,x_height#,desc_depth#);
+italcorr .7x_height#*slant+.5stem#-u# if math_fitting:-.5u# fi;
+adjust_fit(0,0);
+numeric theta; theta=90-angle(8u,h); slope:=-h/8u;  % angle at middle
+penpos2(vair,-90); penpos1(vstem,theta); penpos7(vair,-90);
+x2+.5u=x1=x7-.5u=3u; y2l=h+o; y7r=-d-o; y1=.4[-d,h];
+x3l=hround .5u; x6r=hround max(x7+.5,.5w-.25u);
+x3r-x3l=x6r-x6l=(hround .5[vair,vstem]);
+ellipse_set(2l,3l,4l,1l); ellipse_set(2r,3r,4r,1r); y3=y3r;
+ellipse_set(7l,6l,5l,1l); ellipse_set(7r,6r,5r,1r); y6=y6r;
+make_paths1(rev.r) super_arc.e(2,3) & z3e{down}
+ ..z4e---z5e..z6e{down} & super_arc.e(6,7);  % flourish
+if vair>fine:
+ penpos2'(vair-fine,-90); z2'=z2+.5fine*right;
+ path p; p=z2r{right}...{up}z2'r--z2'l{up}...{left}z2l;
+else: path p; p=circ_end(2,right); fi
+penpos8(hair,180); penpos9(vair,90); penpos10(stem,0);
+penpos11(vair,-90); penpos12(hair,-180); penpos13(.3[hair,flare],-180);
+x10r=hround(w-1.5u+.5stem); x12r=hround(.5w-.5u);
+x8l=hround 2.25u; x9=x11=max(x12l+eps,.5w+1.5u);
+y8=0; y9r=vround(.9h+o); y10=.5[y9,y11]; y11r=-oo;
+make_paths2(rev.r) z7e{left}...z8e{up};
+make_paths3(rev.r) z8e{up}...pulled_arc.e(9,10) & pulled_arc.e(10,11);
+y13-.5(.6[hair,flare])=.15h;
+fill p & combine(lpath1, rpath3) & rpath2 & combine(rpath1,lpath3)
+    & bulb_path(11,12,13) & combine(rpath3,rpath1) & cycle;
+unfill combine(lpath3,lpath1) & lpath2 & cycle;
+math_fit(0,ic#); penlabels(1,2,3,4,5,6,7,8,9,10,11,12,13); endchar;
+
+% I really don't know why the tie and vector are slanted; it just messes up
+% everything with the positioning, considering that the math italic letters are
+% treated as non-slanted.
+
+slant:=mono_charic#:=0;  % the remaining characters will not be slanted
+currenttransform:=identity yscaled aspect_ratio scaled granularity;
+
+cmchar "Arrow (vector) accent";
+beginchar(oct"176",9u#,asc_height#+.5rule_thickness#,0);
+italcorr .7[x_height#,asc_height#]*slant;
+adjust_fit(0,0);
+rulepos1(90); rulepos2(90);
+rulepos3(0); rulepos4(0);
+y0=y1=y2=.7[x_height,asc_height]; x1=hround .5u; x0=hround(w-.25u);
+y3-y0=y0-y4; y3=h;
+x3=x4=x0-2u;
+rulepos5(angle(z4-z0)); z5l=z0;
+rulepos6(angle(z3-z0)); z6l=z0;
+z9=.4[.5[z3,z4],z0];
+z0r=z0; z0l=(z4l{z9-z4}..z6r) intersectionpoint (z3l{z9-z3}..z5r);
+x2=w; fill aux_left(z3e{z9-z3}..{curl 1}z0e..{z4-z9}z4e)(z2e--z1e);
+penlabels(0,1,2,3,4,5,6,9); endchar;
+
+cmchar "Tie accent";
+beginchar(oct"177",5u#,asc_height#,0);
+italcorr 4/9[x_height#,asc_height#]*slant+4.5u#+2letter_fit#+.5hair#;
+adjust_fit(if monospace:2u#,2u# else:serif_fit#,serif_fit# fi);
+penpos1(hair,180); penpos2(vround 1/5[vair,stem],90); penpos3(hair,0);
+x1r=hround(.5w-.5hair); x2=.5[x1,x3];
+x3r=hround(w+4u+2letter_fit+.5hair);
+y1=y3=4/9[x_height,asc_height]+.5fine; y2r=vround 8/9[x_height,asc_height];
+if hair>fine: penpos1'(hair-fine,180); penpos3'(hair-fine,0);
+ z1'-z1=z3'-z3=.5fine*down;
+ path p,q; p=z1r{down}...{right}z1'r--z1'l{right}...{up}z1l;
+ q=z3l{down}...{right}z3'l--z3'r{right}...{up}z3r;
+else: path p,q; p=circ_end(1,down); q=circ_end(3,down); fi
+make_paths1(rev.r) super_arc.e(1,2) & super_arc.e(2,3);  % arc
+fill rpath1 & p & lpath1 & q & cycle;
+penlabels(1,2,3); endchar;
+
+font_slant slant;  font_x_height x_height#;
+font_quad 18u#+4letter_fit#;
+
+
+
+%input olddig;  % oldstyle numerals
+%input modromms;  % roman math specials, without period/comma
+
+
+
+% This file contains special characters of ``math italic'' fonts
+% that actually are not supposed to be slanted.
+% Codes \0050--\0057, \0072--\0077, and \0133--\0137 are generated.
+
+% The italic corrections are zero in all of these characters.
+
+cmchar "Leftward top half arrow";
+compute_spread(.45x_height#,.55x_height#);
+beginchar(oct"050",18u#,v_center(spread#+rule_thickness#));
+adjust_fit(0,0);
+penpos0(rule_thickness,90); penpos1(rule_thickness,90);
+penpos3(rule_thickness,0); penpos4(rule_thickness,0);
+y0=y1=math_axis; x1=hround(w-u); x0=hround u;
+y3-y0=y0-y4=.36asc_height+eps; x3=x4=x0+4u+eps;
+penpos5(rule_thickness,angle(z4-z0)); z5l=z0;
+penpos6(rule_thickness,angle(z3-z0)); z6l=z0;
+fill z0l--z1l--var_combine(z1r--z0r,z5r{2(x3-x0),y3-y0}..z3r)
+ --z3l..{2(x0-x3),y0-y3}z0--cycle;  % arrowhead and stem
+penlabels(0,1,2,3,4,5,6); endchar;
+
+cmchar "Leftward bottom half arrow";
+compute_spread(.45x_height#,.55x_height#);
+beginchar(oct"051",18u#,v_center(spread#+rule_thickness#));
+adjust_fit(0,0);
+penpos0(rule_thickness,90); penpos1(rule_thickness,90);
+penpos3(rule_thickness,0); penpos4(rule_thickness,0);
+y0=y1=math_axis; x1=hround(w-u); x0=hround u;
+y3-y0=y0-y4=.36asc_height+eps; x3=x4=x0+4u+eps;
+penpos5(rule_thickness,angle(z4-z0)); z5l=z0;
+penpos6(rule_thickness,angle(z3-z0)); z6l=z0;
+fill z0{2(x4-x0),y4-y0}..z4l
+ --combine(z4r..{2(x0-x4),y0-y4}z6r, z0l--z1l)--z1r--z0r--cycle;
+penlabels(0,1,2,3,4,5,6); endchar;
+
+cmchar "Rightward top half arrow";
+compute_spread(.45x_height#,.55x_height#);
+beginchar(oct"052",18u#,v_center(spread#+rule_thickness#));
+adjust_fit(0,0);
+penpos0(rule_thickness,90); penpos1(rule_thickness,90);
+penpos3(rule_thickness,0); penpos4(rule_thickness,0);
+y0=y1=math_axis; x1=hround u; x0=hround(w-u);
+y3-y0=y0-y4=.36asc_height+eps; x3=x4=x0-4u-eps;
+penpos5(rule_thickness,angle(z4-z0)); z5l=z0;
+penpos6(rule_thickness,angle(z3-z0)); z6l=z0;
+fill z0{2(x3-x0),y3-y0}..z3r--combine(z3l..{2(x0-x3),y0-y3}z5r,z0r--z1r)
+    --z1l--z0l--cycle;
+penlabels(0,1,2,3,4,5,6); endchar;
+
+cmchar "Rightward bottom half arrow";
+compute_spread(.45x_height#,.55x_height#);
+beginchar(oct"053",18u#,v_center(spread#+rule_thickness#));
+adjust_fit(0,0);
+penpos0(rule_thickness,90); penpos1(rule_thickness,90);
+penpos3(rule_thickness,0); penpos4(rule_thickness,0);
+y0=y1=math_axis; x1=hround u; x0=hround(w-u);
+y3-y0=y0-y4=.36asc_height+eps; x3=x4=x0-4u-eps;
+penpos5(rule_thickness,angle(z4-z0)); z5l=z0;
+penpos6(rule_thickness,angle(z3-z0)); z6l=z0;
+fill z0r--z1r--combine(z1l--z0l,z6r{2(x4-x0),y4-y0}..z4l)--z4r
+    ..z0{2(x0-x4),y0-y4}--cycle;
+penlabels(0,1,2,3,4,5,6); endchar;
+
+cmchar "Left hook";
+compute_spread(.45x_height#,.55x_height#);
+beginchar(oct"054",5u#,v_center(2spread#+rule_thickness#));
+adjust_fit(0,0); autorounded;
+rulepos1(90); rulepos2(180); rulepos3(270);
+x2r=hround u-eps; x1=x3=w-x2;
+y1-y3=spread; y2=.5[y1,y3]; y3=math_axis;
+fill z2r{down}...circ_end(3,right)...z2l{up}...circ_end(1,right)...cycle;
+labels(1,2,3); endchar;
+
+cmchar "Right hook";
+compute_spread(.45x_height#,.55x_height#);
+beginchar(oct"055",5u#,v_center(2spread#+rule_thickness#));
+adjust_fit(0,0); autorounded;
+rulepos1(90); rulepos2(0); rulepos3(-90);
+x2r=hround(w-u)+eps; x1=x3=w-x2;
+y1-y3=spread; y2=.5[y1,y3]; y3=math_axis;
+fill z2l{down}...circ_end(3,left)...z2r{up}...circ_end(1,left)...cycle;
+labels(1,2,3); endchar;
+
+cmchar "Triangle pointing right";
+beginchar(oct"056",9u#,v_center(x_height#));
+adjust_fit(0,0);
+numeric a,b; a=sqrt(3.14159\\ /sqrt3); % triangle area $=$ circle area
+b=.5w-(hround u+.5rule_thickness); .5[x1,x2]=.5w; x2-x1=a*b*sqrt3;
+x1=x3; y2=.5[y1,y3]=math_axis; y1=y2+a*b;
+triangle(2,1,3);
+labels(1,2,3); endchar;
+
+cmchar "Triangle pointing left";
+beginchar(oct"057",9u#,v_center(x_height#));
+adjust_fit(0,0);
+numeric a,b; a=sqrt(3.14159\\ /sqrt3); % triangle area $=$ circle area
+b=.5w-(hround u+.5rule_thickness); .5[x1,x2]=.5w; x1-x2=a*b*sqrt3;
+x1=x3; y2=.5[y1,y3]=math_axis; y1=y2+a*b;
+triangle(2,3,1);
+labels(1,2,3); endchar;
+
+less=ASCII"<"; greater=ASCII">";
+input mgsym;
+
+cmchar "Virgule (slash)";
+beginchar(oct"075",9u#,body_height#,paren_depth#);  % non-ASCII position
+italcorr body_height#*slant-.5u#;
+adjust_fit(0,0);
+x1r=hround(w-u); y1=h;
+x2l=hround u; y2=-d;
+numeric theta; theta=diag_ratio(1, rule_thickness, y1-y2, x1r-x2l);
+penpos1(rule_thickness*theta, 0); penpos2(rule_thickness*theta, 0);
+fill stroke z1e--z2e;
+penlabels(1,2); endchar;
+
+cmchar "Five-pointed star";
+beginchar(oct"077",9u#,v_center(x_height#));
+adjust_fit(0,0);
+numeric theta; theta=360/5; % degrees between points
+penpos0(curve,0); penpos1(rule_thickness,90); x0=x1=.5w;
+y1r=vround(math_axis+.5x_height+.5rule_thickness+tiny);
+ypart(.5[z1,z0+(z1-z2) rotated 2theta])=math_axis;
+penpos2(curve,theta); penpos3(rule_thickness,90+theta);
+z2=z0; z3-z0=(z1-z0) rotated theta;
+z4=whatever[z0l,z1r]=whatever[z2r,z3r];
+pair v_in,v_out; v_out=z4-z1r; v_in=v_out yscaled -1;
+fill for n=0 upto 4:
+ (pen_angle(v_in,z1r-z0,min(tiny,.2curve),v_out)) rotated (n*theta) shifted z0
+    --z0+(z4-z0)rotated(n*theta)--endfor
+ cycle;  % star
+penlabels(0,1,2,3,4); endchar;
+
+cmchar "Musical flat sign";
+beginchar(oct"133",7u#,body_height#,0);
+adjust_fit(0,0);
+numeric light_hair; light_hair=if hefty: vair else: hair fi;
+penpos1(light_hair,0); penpos2(light_hair,180); penpos3(light_hair,0); x1=x2=x3;
+penpos4(.25[light_hair,curve],60); penpos5(curve,0);
+x1l=hround u; x4=.5w; x5r=hround(w-u);
+y1=h; y3=-o; y4=x_height+o;
+y2=y4-.2x_height; y5=3/4x_height;
+make_paths1(rev.r) z2e{up}...z4e{right}...z5e{down};
+pair v; v=(2(x3-x5r),y3-y5r);
+fill pen_lrend3(down,crisp,-v){-v}...trunc_end(rpath1,z3r--z1r)
+    --pen_rlend1(up,crisp,down)--cycle;
+unfill lpath1 & trunc_end(z5l{down}...{2(x3-x5l),y3-y5l}z3l,z3r--z1r)--cycle;
+penlabels(1,2,3,4,5); endchar;
+
+cmchar "Musical natural sign";
+beginchar(oct"134",7u#,asc_height#,desc_depth#);
+adjust_fit(0,0);
+numeric light_hair; light_hair=if hefty: vair else: hair fi;
+pair v; numeric theta; v=(w-15/4u,curve); theta=angle v;
+penpos1(diag_width(v rotated 90,light_hair),theta);
+penpos2(curve,90); penpos3(curve,90);
+penpos4(curve,90); penpos5(curve,90);
+penpos6(diag_width(v rotated 90,light_hair),theta);
+x1r=hround 15/8u; x6r=w-x2; y1=h+o; y6=-d-o;
+x0=x1l; y0=-curve; x0'=x6r; y0'=x_height+curve;
+x2=x4=x1r; x3=x5=x6l;
+z2l=z0+whatever*v; z3l=z0+whatever*v;
+z4r=z0'+whatever*v; z5r=z0'+whatever*v;
+fill pen_rlend1(up,crisp,down)--pen_angle(down,z0,crisp,v)--z3l
+    --pen_lrend6(down,crisp,up)--pen_angle(up,z0',crisp,-v)--z4r--cycle;
+unfill z4l--z5l--z3r--z2r--cycle;
+penlabels(1,2,3,4,5,6); endchar;
+
+cmchar "Musical sharp sign";
+beginchar(oct"135",7u#,asc_height#,desc_depth#);
+adjust_fit(0,0);
+numeric light_hair; light_hair=if hefty: vair else: hair fi;
+penpos1(curve,90); penpos2(curve,90); penpos3(curve,90); penpos4(curve,90);
+x1=x3=hround u; x2=x4=w-x1;
+y3r=0; .5[y3,y4]=0; y1-y3=y2-y4=x_height;
+numeric theta,hstem; theta=angle(z2-z1);
+(hstem-crisp)*cosd theta=light_hair-crisp;
+penpos5(hstem,theta); penpos6(hstem,theta);
+penpos7(hstem,theta); penpos8(hstem,theta);
+x5l=x6l=hround(2u-.5light_hair); x7=x8=w-x6;
+y7l=h+o; y6r=-d-o; z7-z5=z8-z6=(whatever,0) rotated theta;
+vardef side(suffix @)(expr main,out)(suffix $,$$)(suffix f,s) =
+ pair tmp[]f, tmp[]s; forsuffixes a=$,$$: forsuffixes b=f,s:
+   tmp.a.b=z@+whatever*main=z.a.b+whatever*out; endfor endfor
+ tmp$f--pen_end(out,z$f,crisp,z$s,-out)--tmp$s
+ --tmp$$f--pen_end(out,z$$f,crisp,z$$s,-out)
+enddef;
+pair v; v=z2-z1;
+fill side(5l,up,-v,1,3,r,l)--side(3l,v,down,6,8,l,r)
+    --side(7r,up,v,4,2,l,r)--side(1r,v,up,7,5,r,l)--cycle;
+forsuffixes a=1l,3r: forsuffixes b=5r,7l:
+  x.a.b=x.b; z.a.b=z.a+whatever*v; endfor endfor
+unfill z1l7l--z3r7l--z3r5r--z1l5r--cycle;
+penlabels(1,2,3,4,5,6,7,8); endchar;
+
+cmchar "Slur below (smile)";
+beginchar(oct"136",18u#,v_center(.5x_height#));
+adjust_fit(0,0);
+numeric light_stem; light_stem=vround .5[vair,stem];
+x1-.5hair=hround u; y1+.5hair=vround(h+.5hair); x3=w-x1; y3=y1;
+penpos2(light_stem,90); x2=.5w; y2l=good.y -d;
+numeric theta; theta=angle((z2-z1)yscaled 3);
+penpos1(hair,90+theta); penpos3(hair,90-theta);
+fill z2r...circ_end(1,left)...z2l...circ_end(3,right)...cycle;
+penlabels(1,2,3); endchar;
+
+cmchar "Slur above (frown)";
+beginchar(oct"137",18u#,v_center(.5x_height#));
+adjust_fit(0,0);
+numeric light_stem; light_stem=Vround .5[vair,stem];
+x1-.5hair=hround u; y1-.5hair=vround(-d-.5hair); x3=w-x1; y3=y1;
+penpos2(light_stem,90); x2=.5w; y2=good.y h;
+numeric theta; theta=angle((z2-z1)yscaled 3);
+penpos1(hair,90+theta); penpos3(hair,90-theta);
+fill z2r...circ_end(1,left)...z2l...circ_end(3,right)...cycle;
+penlabels(1,2,3); endchar;
+
+bye.
+

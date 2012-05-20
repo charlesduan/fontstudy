@@ -1,0 +1,98 @@
+This is TeX, Version 3.14159 (Web2C 7.3.1) (format=tex 2003.2.18)  26 MAR 2004 13:56
+**pad-fontinst
+(pad-fontinst.tex (/usr/share/texmf/tex/fontinst/base/fontinst.sty
+\a_count=\count26
+\b_count=\count27
+\c_count=\count28
+\d_count=\count29
+\e_count=\count30
+\f_count=\count31
+\g_count=\count32
+\a_dimen=\dimen16
+\b_dimen=\dimen17
+\c_dimen=\dimen18
+\d_dimen=\dimen19
+\a_toks=\toks12
+\b_toks=\toks13
+\c_toks=\toks14
+\out_file=\write0
+
+(/usr/share/texmf/tex/latex/graphics/trig.sty)
+\result=\count33
+\minimum_kern=\count34
+\char_slot=\count35
+\char_x_width=\count36
+\x_width=\count37
+\bbox_llx=\count38
+\bbox_lly=\count39
+\bbox_urx=\count40
+\bbox_ury=\count41
+\slot_number=\count42
+\glyph_width=\count43
+\glyph_height=\count44
+\glyph_depth=\count45
+\glyph_italic=\count46
+\glyph_map_commands=\toks15
+\glyph_map_fonts=\toks16
+\glyph_voffset=\count47
+\scaled_design_size=\dimen20
+\boundary_char=\count48
+\side_bearings=\dimen21
+\curr_bearings=\dimen22
+\font_count=\count49
+\next_mapfont=\count50
+\prev_mapfont=\count51
+\family_toks=\toks17
+
+No file fontinst.rc.
+) (padr8r.mtx) (/home/c/d/cduan/texmf/tex/fontinst/contrib/dotlessj.mtx)
+(padr.mtx) (/usr/share/texmf/tex/fontinst/base/latin.mtx)
+(/usr/share/texmf/tex/fontinst/base/ot1.etx)
+\openout0 = `padrk7t.vpl'.
+
+
+(/usr/share/texmf/tex/fontinst/base/ot1.etx)
+(/usr/share/texmf/tex/fontinst/base/ot1.etx)
+(/usr/share/texmf/tex/fontinst/base/ot1.etx
+Warning: missing glyph `lslashslash'.
+)
+Virtual font written on padrk7t.vpl.
+(padmi.mtx) (padri8r.mtx)
+(/home/c/d/cduan/texmf/tex/fontinst/contrib/dotlessj.mtx)
+(/usr/share/texmf/tex/fontinst/base/mathit.mtx)
+(/usr/share/texmf/tex/fontinst/base/oml.etx)
+\openout0 = `padrk7m.vpl'.
+
+
+(/usr/share/texmf/tex/fontinst/base/oml.etx)
+(/usr/share/texmf/tex/fontinst/base/oml.etx)
+(/usr/share/texmf/tex/fontinst/base/oml.etx)
+Virtual font written on padrk7m.vpl.
+(padsy.mtx) (/usr/share/texmf/tex/fontinst/base/oms.etx)
+\openout0 = `pady7y.pl'.
+
+
+(/usr/share/texmf/tex/fontinst/base/oms.etx)
+(/usr/share/texmf/tex/fontinst/base/oms.etx)
+Font written on pady7y.pl.
+(padex.mtx) (/usr/share/texmf/tex/fontinst/base/omx.etx)
+\openout0 = `pady7y.pl'.
+
+
+(/usr/share/texmf/tex/fontinst/base/omx.etx)
+(/usr/share/texmf/tex/fontinst/base/omx.etx)
+Font written on pady7y.pl.
+\openout0 = `ot1pad.fd'.
+
+Font definitions written on ot1pad.fd.
+\openout0 = `omlpad.fd'.
+
+Font definitions written on omlpad.fd.
+\openout0 = `omspad.fd'.
+
+Font definitions written on omspad.fd.
+\openout0 = `omxpad.fd'.
+
+Font definitions written on omxpad.fd.
+ )
+No pages of output.

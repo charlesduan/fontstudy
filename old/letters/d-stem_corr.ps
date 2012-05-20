@@ -1,0 +1,17 @@
+%
+% d-stemcorr.ps
+%
+0 XHeight 2 div horizLineThrough pathLineIntc sortByX revArray 0 2 getinterval
+loadArray /dStemLeft defPoint /dStemRight defPoint 
+dStemRight pointbox dStemLeft pointbox
+
+0 XHeight 1.1 mul horizLineThrough pathLineIntc sortByX revArray 0 2 getinterval
+loadArray /dSStemLeft defPoint /dSStemRight defPoint 
+dStemRight pointbox dStemLeft pointbox
+
+(Stem correction)
+dStemRight xcoor dStemLeft xcoor sub
+dSStemRight xcoor dSStemLeft xcoor sub
+sub
+0 max
+stringOfText

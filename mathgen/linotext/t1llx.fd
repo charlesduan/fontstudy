@@ -1,0 +1,26 @@
+%Filename: t1llx.fd
+%Created by: tex fontinst
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{t1llx.fd}
+   [2004/05/01 Fontinst v1.801 font definitions for T1/llx.]
+
+\DeclareFontFamily{T1}{llx}{}
+
+\DeclareFontShape{T1}{llx}{m}{n}{
+   <-> llxr8t
+}{}
+
+\DeclareFontShape{T1}{llx}{m}{sc}{
+   <-> llxrc8t
+}{}
+
+\DeclareFontShape{T1}{llx}{m}{sl}{
+   <-> llxro8t
+}{}
+
+\DeclareFontShape{T1}{llx}{m}{it}{<->ssub * llx/m/sl}{}
+
+\endinput

@@ -1,0 +1,24 @@
+\sectionname{Avant Garde}
+
+Avant Garde is a ``geometric'' sans serif typeface, meaning that its letters are
+drawn from simple shapes like circles and straight lines. It is characterized by
+very strictly monowidth strokes, an unusually large width and x-height, and
+widely open counters and bowls (parts of letters surrounded partially or
+entirely by the letter, such as the inside of an ``n'' or ``p'').
+
+The generated math font is easily able to capture the consistent stroke width
+and large x-height and width. Additionally, the \emph{superness} parameter
+allows for many of the circular letters, such as $\sigma$ and $\Theta$,  to
+appear roughly circular as well. One would expect the $\phi$ character to be
+circular as well, but it generated as wider on the horizontal axis. That is
+unfortunate but expected, as $\phi$ should be wider than $o$ to make up for the
+additional visual color from the cross-stroke.
+
+The Computer Modern Greek letters were not designed out of simple geometric
+shapes as Avant Garde is. As a result, although the generated letters are
+visually compatible with Avant Garde, they look stylistically very different. In
+a sense, Avant Garde is something of a display font, working under a certain
+design constraint. If the use of geometric typefaces is common enough, it might
+be worth designing a set of math metafonts that work under this constraint of
+simple geometric shapes; that could be used to generate math fonts that are both
+visually and stylistically compatible with a range of geometric typefaces.

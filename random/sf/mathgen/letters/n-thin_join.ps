@@ -1,0 +1,36 @@
+%
+% n-thin_join.ps
+%
+0.5 vertSplitLine pathLineIntc sortByY lastElt /nTop defPoint
+nTop pointbox
+
+flattenpath
+
+
+{ nTop startAtPoint { 179 lt } endBeforeAngle } traceSubpath
+subpathEndpoint /nJoin defPoint
+
+0.5 horizSplitLine pathLineIntc sortByX 1 2 getinterval loadArray
+/nInRight defPoint /nInLeft defPoint
+nInRight pointbox nInLeft pointbox
+
+{ nInLeft startAtPoint nInRight endAtPoint } traceSubpath
+drawSubpath
+cvlit /nInSubpath exch def
+
+/thinJoin 1000 def
+
+290 5 340 {
+    dup cos exch sin 300 scalePoint nJoin addPoint /nAngleEnd defPoint
+    nInSubpath { nAngleEnd nJoin pathLineIntc } useSubpath
+    dup length 0 gt {
+	sortByX firstElt loadArray nJoin subPoint magnitude
+	dup thinJoin lt {
+	    /thinJoin exch def
+	} { pop } ifelse
+    } {
+	pop
+    } ifelse
+} for
+
+(Thin join) thinJoin stringOfText

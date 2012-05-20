@@ -1,0 +1,24 @@
+\sectionname{Didot}
+
+The font Didot is a stark example of the modern style of type design, with its
+high stem width contrast, strong vertical stress, and unadorned serifs. As the
+Computer Modern fonts are also drawn in the modern style, one would expect the
+programs to be highly capable of creating matching fonts.
+
+The generated math fonts are surprisingly accurate. One distinctive feature of
+Didot is the rapid thinning of thick strokes into thin, observed in the
+lowercase and uppercase ``O''; this thinning is captured in the \emph{superpull}
+parameter. As a result, similar circular strokes such as in $\theta$ and
+$\Theta$ display the same rapid stroke thinning. The prominent darkness of beak
+serifs is also mimicked nicely.
+
+One unfortunate characteristic of Didot is that the italic letters are
+substantially thinner than the upright ones. This causes the Greek letters to
+appear much too dark. Additionally, the font seems to have reported its italic
+slant incorrectly (the slant is read directly from a coded parameter in the font
+rather than measured).
+
+The designer of Didot chose to make the \emph{rule\_thickness} parameter (which
+governs the thickness of strokes in mathematical symbols) about equal to the
+hairline thickness. It is questionable whether that is desirable, as the math
+symbols become barely visible at that thin size.

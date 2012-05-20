@@ -1,0 +1,87 @@
+This is TeX, Version 3.14159 (Web2C 7.3.1) (format=latex 2002.4.12)  9 MAY 2004 16:13
+**testpos
+(testpos.tex
+LaTeX2e <2000/06/01>
+Babel <v3.7h> and hyphenation patterns for american, french, german, ngerman, i
+talian, nohyphenation, loaded.
+(/usr/share/texmf/tex/latex/base/article.cls
+Document Class: article 2000/05/19 v1.4b Standard LaTeX document class
+(/usr/share/texmf/tex/latex/base/size12.clo
+File: size12.clo 2000/05/19 v1.4b Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+) (mathzmn.sty
+Package: mathzmn 
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/zmn/m/n on input line 3.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/zmn/m/it on input line 4.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/zmn/m/n on input line 5.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/zmn/m/n on input line 6.
+LaTeX Font Info:    Overwriting math alphabet `\mathcal' in version `normal'
+(Font)                  OMS/zmn/m/n --> OMS/zmn/m/n on input line 9.
+)
+(/usr/share/texmf/tex/latex/misc/fullpage.sty
+Style Option FULLPAGE Version 2 as of 15 Dec 1988
+) (../testpos.tex (testpos.aux)
+\openout1 = `testpos.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 1.
+LaTeX Font Info:    ... okay on input line 1.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 1.
+LaTeX Font Info:    ... okay on input line 1.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 1.
+LaTeX Font Info:    ... okay on input line 1.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 1.
+LaTeX Font Info:    ... okay on input line 1.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 1.
+LaTeX Font Info:    ... okay on input line 1.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 1.
+LaTeX Font Info:    ... okay on input line 1.
+LaTeX Font Info:    Try loading font information for OT1+pbk on input line 1.
+ (/usr/share/texmf/tex/latex/psnfss/ot1pbk.fd
+File: ot1pbk.fd 2000/01/12 PSNFSS-v8.1 font definitions for OT1/pbk.
+)
+LaTeX Font Info:    Font shape `OT1/pbk/m/n' in size <12> not available
+(Font)              Font shape `OT1/pbk/l/n' tried instead on input line 1.
+LaTeX Font Info:    Try loading font information for OT1+zmn on input line 29.
+
+(ot1zmn.fd
+File: ot1zmn.fd 2004/05/09 Fontinst v1.801 font definitions for OT1/zmn.
+)
+LaTeX Font Info:    Try loading font information for OML+zmn on input line 29.
+ (omlzmn.fd
+File: omlzmn.fd 2004/05/09 Fontinst v1.801 font definitions for OML/zmn.
+)
+LaTeX Font Info:    Try loading font information for OMS+zmn on input line 29.
+ (omszmn.fd
+File: omszmn.fd 2004/05/09 Fontinst v1.801 font definitions for OMS/zmn.
+)
+LaTeX Font Info:    Try loading font information for OMX+zmn on input line 29.
+ (omxzmn.fd
+File: omxzmn.fd 2004/05/09 Fontinst v1.801 font definitions for OMX/zmn.
+) [1
+
+] (testpos.aux) ) ) 
+Here is how much of TeX's memory you used:
+ 310 strings out of 20887
+ 3314 string characters out of 196274
+ 57707 words of memory out of 350001
+ 3301 multiletter control sequences out of 10000+15000
+ 8843 words of font info for 28 fonts, out of 400000 for 1000
+ 14 hyphenation exceptions out of 10000
+ 22i,4n,27p,170b,162s stack positions out of 3000i,100n,1500p,50000b,4000s
+
+Output written on testpos.dvi (1 page, 8560 bytes).

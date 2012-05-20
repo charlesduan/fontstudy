@@ -1,0 +1,10 @@
+output_prefix: zmn
+output_dir: linotext
+font_file: llxr8a.pfb
+optical_size:
+roman_name: Linotext
+italic_name: Linotext
+roman_tfm: llxr8t
+italic_tfm: llxr8t
+sans_serif: yes
+square_ends: yes

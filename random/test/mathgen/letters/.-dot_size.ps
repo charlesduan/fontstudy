@@ -1,0 +1,12 @@
+%
+% .-dot_size.ps
+%
+pathExtremes sortByX
+dup lastElt /DotRight defPoint
+firstElt /DotLeft defPoint
+
+DotRight pointbox DotLeft pointbox
+
+(Dot size: )
+DotRight xcoor DotLeft xcoor sub
+stringOfText

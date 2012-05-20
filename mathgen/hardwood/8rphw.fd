@@ -1,0 +1,22 @@
+%Filename: 8rphw.fd
+%Created by: tex texput
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{8rphw.fd}
+   [2004/04/21 Fontinst v1.801 font definitions for 8r/phw.]
+
+\DeclareFontFamily{8r}{phw}{}
+
+\DeclareFontShape{8r}{phw}{m}{n}{
+   <-> phwr8r
+}{}
+
+\DeclareFontShape{8r}{phw}{m}{sl}{
+   <-> phwro8r
+}{}
+
+\DeclareFontShape{8r}{phw}{m}{it}{<->ssub * phw/m/sl}{}
+
+\endinput

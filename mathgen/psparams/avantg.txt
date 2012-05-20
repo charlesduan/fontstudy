@@ -1,0 +1,10 @@
+output_prefix: zmn
+output_dir: avantg
+#font_file: none required
+optical_size:
+roman_name: AvantGarde-Book
+italic_name: AvantGarde-BookOblique
+roman_tfm: pagk8t
+italic_tfm: pagko8t
+sans_serif: yes
+square_ends: yes

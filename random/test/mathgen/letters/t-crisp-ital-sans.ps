@@ -1,0 +1,42 @@
+%
+% t-crisp-ital-sans.ps
+%
+
+0.5 horizSplitLine pathLineIntc sortByX 1 get loadArray
+20 0 addPoint vertLineThrough pathLineIntc sortByY revArray
+0 2 getinterval loadArray
+/tBarDown defPoint /tBarUp defPoint
+
+{ tBarDown startAtPoint tBarUp endAtPoint } traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath dup
+sortByX lastElt /tBarRight defPoint
+sortByY dup firstElt /tBarBot defPoint lastElt /tBarTop defPoint
+
+%tBarRight rtpointbox tBarBot pointbox tBarTop uppointbox
+
+mark
+tBarRight vertLineThrough drawLine
+tBarTop horizLineThrough drawLine
+tBarBot horizLineThrough drawLine
+cleartomark
+
+tBarRight xcoor tBarTop ycoor /tTopCorner defPoint
+tTopCorner rtpointbox
+tTopCorner -300 -300 addPoint tTopCorner 300 300 addPoint drawLine
+pathLineIntc sortByX lastElt /tTopPathCorner defPoint
+tTopPathCorner ltpointbox
+tTopCorner tTopPathCorner 90 penDiameter /tTopDiameter exch def
+
+tBarRight xcoor tBarBot ycoor /tBotCorner defPoint
+tBotCorner rtpointbox
+tBotCorner -300 300 addPoint tBotCorner 300 -300 addPoint drawLine
+pathLineIntc sortByX lastElt /tBotPathCorner defPoint
+tBotPathCorner ltpointbox
+tBotCorner tBotPathCorner 90 penDiameter /tBotDiameter exch def
+
+(Bar thickness)
+tBotDiameter tTopDiameter min
+stringOfText
+
+

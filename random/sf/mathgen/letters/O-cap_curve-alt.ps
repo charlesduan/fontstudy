@@ -1,0 +1,22 @@
+%
+% O-curve-alt.ps
+%
+pathLL /oBot exch def /oLeft exch def
+pathUR /oTop exch def /oRight exch def
+
+/oCurve 0 def
+
+oBot oTop oBot sub 30 div oTop {
+    dup oBot sub oTop exch sub oRight exch 3 -1 roll oLeft exch
+    pathLineIntc sortByX revArray dup length 4 ge {
+	dup firstElt /oOuter defPoint 1 get /oInner defPoint
+	oOuter ltpointbox oInner rtpointbox
+	oOuter oInner subPoint magnitude oCurve gt {
+	    /oCurve oOuter oInner subPoint magnitude def
+	} if
+    } {
+	pop
+    } ifelse
+} for
+
+(Lowercase curve \(alt\)) oCurve stringOfText

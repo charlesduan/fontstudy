@@ -1,0 +1,19 @@
+%
+% r-flare.ps
+%
+% Flare of tip of lowercase "r".
+%
+flattenpath
+0.3 horizSplitLine pathLineIntc sortByX lastElt /rStemRight defPoint
+{ rStemRight startAtPoint { 270 gt } endWhenAngle } traceSubpath
+subpathEndpoint /rInnerCurveTop defPoint
+{ rInnerCurveTop startAtPoint { 90 lt } endWhenAngle } traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath sortByY firstElt /rFlareBot defPoint
+rFlareBot pointbox
+rFlareBot vertLineThrough pathLineIntc sortByY lastElt /rFlareTop defPoint
+rFlareTop uppointbox
+
+(Flare of tip)
+rFlareTop ycoor rFlareBot ycoor sub
+stringOfText

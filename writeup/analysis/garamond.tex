@@ -1,0 +1,19 @@
+\sectionname{Adobe Garamond}
+
+Adobe Garamond is a very fine font designed after the typefaces of Claude
+Garamond. It exhibits a liberal use of curves, a relatively low stem thickness
+contrast, and a small x-height.
+
+The italic face of Adobe Garamond is significantly narrower than the roman face,
+so the Greek letters look too wide in comparison. Otherwise, the characters
+blend well in terms of darkness and character shape. The generated fonts are not
+able to capture the oblique interior of the ``O'' in the $\Theta$ character;
+this would be a good place for improvement and additional parametrization.
+
+One difficulty with Garamond is that, because it exhibits very long ascenders
+and descenders \emph{and} it has a very sharp italic angle, the spacing is
+fairly incorrect. In particular, letters with ascenders and descenders tend to
+``push'' other characters away, creating unsatisfactory visual whitespace. This
+could be solved by introducing kerning pairs into the math font, which would
+require using the measurement libraries to determine an optimum kerning between
+pairs of characters.

@@ -1,0 +1,16 @@
+%
+% o-curve.ps
+%
+flattenpath
+
+pathExtremes /oExtremes exch def
+
+oExtremes sortByX firstElt loadArray
+horizLineThrough pathLineIntc sortByX
+0 2 getinterval loadArray
+/oInside defPoint /oOutside defPoint
+oInside pointbox oOutside pointbox
+(Lowercase curve)
+oInside xcoor oOutside xcoor sub
+stringOfText
+

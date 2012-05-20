@@ -1,0 +1,17 @@
+%
+% O-overshoot.ps
+%
+% Overshoot of capital O. We use the top overshoot because that reflects the
+% usage of capital overshoot in the uppercase Greek letters Omega and Upsilon.
+%
+
+measureHeight /OHeight exch def
+
+gsave
+(I) letterPath
+measureHeight /IHeight exch def
+grestore
+
+0 drawHorizLine
+
+(Top capital overshoot) OHeight IHeight sub stringOfText

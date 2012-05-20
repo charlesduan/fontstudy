@@ -1,0 +1,197 @@
+This is TeX, Version 3.14159 (Web2C 7.3.1) (format=latex 2002.4.12)  20 MAY 2004 09:00
+**cmrandom
+(cmrandom.tex
+LaTeX2e <2000/06/01>
+Babel <v3.7h> and hyphenation patterns for american, french, german, ngerman, i
+talian, nohyphenation, loaded.
+(/usr/share/texmf/tex/latex/base/article.cls
+Document Class: article 2000/05/19 v1.4b Standard LaTeX document class
+(/usr/share/texmf/tex/latex/base/size12.clo
+File: size12.clo 2000/05/19 v1.4b Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+) (cmrandom.aux)
+\openout1 = `cmrandom.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <14.4> on input line 8.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 8.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 10.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 10.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 10.
+ [1
+
+]
+\testcount=\count87
+
+Overfull \hbox (0.70088pt too wide) detected at line 50
+\OT1/cmr/m/n/12 77: \myfont M 
+ []
+
+Missing character: There is no ^^80 in font cmsy10!
+Missing character: There is no ^^81 in font cmsy10!
+Missing character: There is no ^^82 in font cmsy10!
+Missing character: There is no ^^83 in font cmsy10!
+Missing character: There is no ^^84 in font cmsy10!
+Missing character: There is no ^^85 in font cmsy10!
+Missing character: There is no ^^86 in font cmsy10!
+Missing character: There is no ^^87 in font cmsy10!
+Missing character: There is no ^^88 in font cmsy10!
+Missing character: There is no ^^89 in font cmsy10!
+Missing character: There is no ^^8a in font cmsy10!
+Missing character: There is no ^^8b in font cmsy10!
+Missing character: There is no ^^8c in font cmsy10!
+Missing character: There is no ^^8d in font cmsy10!
+Missing character: There is no ^^8e in font cmsy10!
+Missing character: There is no ^^8f in font cmsy10!
+Missing character: There is no ^^90 in font cmsy10!
+Missing character: There is no ^^91 in font cmsy10!
+Missing character: There is no ^^92 in font cmsy10!
+Missing character: There is no ^^93 in font cmsy10!
+Missing character: There is no ^^94 in font cmsy10!
+Missing character: There is no ^^95 in font cmsy10!
+Missing character: There is no ^^96 in font cmsy10!
+Missing character: There is no ^^97 in font cmsy10!
+Missing character: There is no ^^98 in font cmsy10!
+Missing character: There is no ^^99 in font cmsy10!
+Missing character: There is no ^^9a in font cmsy10!
+Missing character: There is no ^^9b in font cmsy10!
+Missing character: There is no ^^9c in font cmsy10!
+Missing character: There is no ^^9d in font cmsy10!
+Missing character: There is no ^^9e in font cmsy10!
+Missing character: There is no ^^9f in font cmsy10!
+Missing character: There is no   in font cmsy10!
+Missing character: There is no ¡ in font cmsy10!
+Missing character: There is no ¢ in font cmsy10!
+Missing character: There is no £ in font cmsy10!
+Missing character: There is no ¤ in font cmsy10!
+Missing character: There is no ¥ in font cmsy10!
+Missing character: There is no ¦ in font cmsy10!
+Missing character: There is no § in font cmsy10!
+Missing character: There is no ¨ in font cmsy10!
+Missing character: There is no © in font cmsy10!
+Missing character: There is no ª in font cmsy10!
+Missing character: There is no « in font cmsy10!
+Missing character: There is no ¬ in font cmsy10!
+Missing character: There is no ­ in font cmsy10!
+Missing character: There is no ® in font cmsy10!
+Missing character: There is no ¯ in font cmsy10!
+Missing character: There is no ° in font cmsy10!
+Missing character: There is no ± in font cmsy10!
+Missing character: There is no ² in font cmsy10!
+Missing character: There is no ³ in font cmsy10!
+Missing character: There is no ´ in font cmsy10!
+Missing character: There is no µ in font cmsy10!
+Missing character: There is no ¶ in font cmsy10!
+Missing character: There is no · in font cmsy10!
+Missing character: There is no ¸ in font cmsy10!
+Missing character: There is no ¹ in font cmsy10!
+Missing character: There is no º in font cmsy10!
+Missing character: There is no » in font cmsy10!
+Missing character: There is no ¼ in font cmsy10!
+Missing character: There is no ½ in font cmsy10!
+Missing character: There is no ¾ in font cmsy10!
+Missing character: There is no ¿ in font cmsy10!
+Missing character: There is no À in font cmsy10!
+Missing character: There is no Á in font cmsy10!
+Missing character: There is no Â in font cmsy10!
+Missing character: There is no Ã in font cmsy10!
+Missing character: There is no Ä in font cmsy10!
+Missing character: There is no Å in font cmsy10!
+Missing character: There is no Æ in font cmsy10!
+Missing character: There is no Ç in font cmsy10!
+Missing character: There is no È in font cmsy10!
+Missing character: There is no É in font cmsy10!
+Missing character: There is no Ê in font cmsy10!
+Missing character: There is no Ë in font cmsy10!
+Missing character: There is no Ì in font cmsy10!
+Missing character: There is no Í in font cmsy10!
+Missing character: There is no Î in font cmsy10!
+Missing character: There is no Ï in font cmsy10!
+Missing character: There is no Ð in font cmsy10!
+Missing character: There is no Ñ in font cmsy10!
+Missing character: There is no Ò in font cmsy10!
+Missing character: There is no Ó in font cmsy10!
+Missing character: There is no Ô in font cmsy10!
+Missing character: There is no Õ in font cmsy10!
+Missing character: There is no Ö in font cmsy10!
+Missing character: There is no × in font cmsy10!
+Missing character: There is no Ø in font cmsy10!
+Missing character: There is no Ù in font cmsy10!
+Missing character: There is no Ú in font cmsy10!
+Missing character: There is no Û in font cmsy10!
+Missing character: There is no Ü in font cmsy10!
+Missing character: There is no Ý in font cmsy10!
+Missing character: There is no Þ in font cmsy10!
+Missing character: There is no ß in font cmsy10!
+Missing character: There is no à in font cmsy10!
+Missing character: There is no á in font cmsy10!
+Missing character: There is no â in font cmsy10!
+Missing character: There is no ã in font cmsy10!
+Missing character: There is no ä in font cmsy10!
+Missing character: There is no å in font cmsy10!
+Missing character: There is no æ in font cmsy10!
+Missing character: There is no ç in font cmsy10!
+Missing character: There is no è in font cmsy10!
+Missing character: There is no é in font cmsy10!
+Missing character: There is no ê in font cmsy10!
+Missing character: There is no ë in font cmsy10!
+Missing character: There is no ì in font cmsy10!
+Missing character: There is no í in font cmsy10!
+Missing character: There is no î in font cmsy10!
+Missing character: There is no ï in font cmsy10!
+Missing character: There is no ð in font cmsy10!
+Missing character: There is no ñ in font cmsy10!
+Missing character: There is no ò in font cmsy10!
+Missing character: There is no ó in font cmsy10!
+Missing character: There is no ô in font cmsy10!
+Missing character: There is no õ in font cmsy10!
+Missing character: There is no ö in font cmsy10!
+Missing character: There is no ÷ in font cmsy10!
+Missing character: There is no ø in font cmsy10!
+Missing character: There is no ù in font cmsy10!
+Missing character: There is no ú in font cmsy10!
+Missing character: There is no û in font cmsy10!
+Missing character: There is no ü in font cmsy10!
+Missing character: There is no ý in font cmsy10!
+Missing character: There is no þ in font cmsy10!
+Missing character: There is no ÿ in font cmsy10!
+[2
+
+] (cmrandom.aux) ) 
+Here is how much of TeX's memory you used:
+ 223 strings out of 20887
+ 2229 string characters out of 196274
+ 51377 words of memory out of 350001
+ 3230 multiletter control sequences out of 10000+15000
+ 7845 words of font info for 28 fonts, out of 400000 for 1000
+ 14 hyphenation exceptions out of 10000
+ 22i,7n,19p,140b,209s stack positions out of 3000i,100n,1500p,50000b,4000s
+
+Output written on cmrandom.dvi (2 pages, 6272 bytes).

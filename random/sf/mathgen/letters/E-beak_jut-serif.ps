@@ -1,0 +1,22 @@
+%
+% E-beakjut.ps
+%
+flattenpath
+0.5 vertSplitLine pathLineIntc sortByY /EVertSplit exch def
+
+EVertSplit 4 2 getinterval loadArray
+/ETopTop defPoint /ETopBot defPoint
+{ ETopBot startAtPoint ETopTop endAtPoint } traceSubpath
+{ {
+    { 75 90 withinRange } startWhenAngle
+    { 165 90 withinRange } endBeforeAngle
+  } traceSubpath
+} useSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByY dup firstElt /EBeakBot defPoint lastElt /EBeakTop defPoint
+EBeakBot pointbox EBeakTop uppointbox
+
+(Beak jut)
+EBeakBot xcoor EBeakTop xcoor sub
+stringOfText

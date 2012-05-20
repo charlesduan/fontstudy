@@ -1,0 +1,210 @@
+This is pdfTeX, Version 3.14159-14h-released-20010417 (Web2C 7.3.3.1) (format=pdflatex 2002.4.12)  25 MAY 2004 11:44
+**tugboat
+(./tugboat.tex{/usr/share/texmf/pdftex/config/pdftex.cfg}
+LaTeX2e <2000/06/01>
+Babel <v3.7h> and hyphenation patterns for american, french, german, ngerman, i
+talian, nohyphenation, loaded.
+(/home/c/d/cduan/texmf/tex/latex/tugboat/ltugproc.cls
+Document Class: ltugproc 2003/02/20 v1.4z4 TUG conference proceedings class
+Class ltugproc Info: Proceedings defined for year \relax 2004 on input line 67.
+
+(/home/c/d/cduan/texmf/tex/latex/tugboat/ltugboat.cls
+Document Class: ltugboat 2003/02/20 v1.4z4 TUGboat journal class
+(/usr/share/texmf/tex/latex/base/article.cls
+Document Class: article 2000/05/19 v1.4b Standard LaTeX document class
+(/usr/share/texmf/tex/latex/base/size10.clo
+File: size10.clo 2000/05/19 v1.4b Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texmf/tex/latex/mflogo/mflogo.sty
+Package: mflogo 1999/03/10 v2.0 LaTeX package for Metafont and MetaPost logos
+)
+\ResetCommands=\toks14
+LaTeX Info: Redefining \mp on input line 183.
+LaTeX Info: Redefining \TeX on input line 209.
+\normalparindent=\dimen103
+\T@stBox=\box26
+\TestBox=\box27
+\T@stCount=\count87
+\TestCount=\count88
+\T@stDimen=\dimen104
+\TestDimen=\dimen105
+\hours=\count89
+\minutes=\count90
+\raggedskip=\dimen106
+\raggedstretch=\dimen107
+\raggedparfill=\skip43
+LaTeX Info: Redefining \nobreakspace on input line 305.
+\issueseqno=\count91
+\@TBremarkfile=\write3
+\pagewd=\dimen108
+\trimwd=\dimen109
+\trimlgt=\dimen110
+\headmargin=\dimen111
+LaTeX Info: Redefining \LaTeX on input line 491.
+\signaturewidth=\dimen112
+\authornumber=\count92
+\stbaselineskip=\dimen113
+\stfontheight=\dimen114
+\PreTitleDrop=\dimen115
+\AboveTitleSkip=\skip44
+\BelowTitleSkip=\skip45
+\strulethickness=\dimen116
+LaTeX Info: Redefining \ref on input line 942.
+LaTeX Info: Redefining \pageref on input line 944.
+)
+\abstract@toks=\toks15
+)
+(/home/c/d/cduan/texmf/tex/latex/personal/switcheml.sty
+Package: switcheml 2004/02/10 Obfuscate e-mail addresses
+)
+(/usr/share/texmf/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks16
+)
+(/usr/share/texmf/tex/latex/graphics/graphics.sty
+Package: graphics 1999/02/16 v1.0l Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/share/texmf/tex/latex/config/graphics.cfg)
+Package graphics Info: Driver file: pdftex.def on input line 80.
+
+(/usr/share/texmf/tex/latex/graphics/pdftex.def
+File: pdftex.def 2000/06/16 v0.03a graphics/color for pdftex
+\Gread@gobject=\count93
+))
+\Gin@req@height=\dimen117
+\Gin@req@width=\dimen118
+) (./tugboat.aux)
+\openout1 = `tugboat.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+
+(/usr/share/texmf/tex/context/base/supp-pdf.tex
+(/usr/share/texmf/tex/context/base/supp-mis.tex
+loading : Context Support Macros / Missing
+\protectiondepth=\count94
+\scratchcounter=\count95
+\scratchtoks=\toks17
+\scratchdimen=\dimen119
+\scratchskip=\skip46
+\scratchmuskip=\muskip10
+\scratchbox=\box28
+\scratchread=\read1
+\scratchwrite=\write4
+\zeropoint=\dimen120
+\nextbox=\box29
+\nextdepth=\dimen121
+\everyline=\toks18
+\!!counta=\count96
+\!!countb=\count97
+\recursecounter=\count98
+)
+loading : Context Support Macros / PDF
+\nofMPsegments=\count99
+\nofMParguments=\count100
+\everyMPtoPDFconversion=\toks19
+)
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 65.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 65.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+LaTeX Font Info:    Try loading font information for U+logo on input line 73.
+
+(/usr/share/texmf/tex/latex/mflogo/ulogo.fd
+File: ulogo.fd 1999/03/10 v2.0 LaTeX font defs for Metafont and MetaPost logos
+)
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [1001{/usr/share/texmf/dvips/config/pdftex.map}
+
+
+
+]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [1002]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 188.
+
+
+(/usr/share/texmf/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 188.
+
+<helvetica.pdf 614.295pt, 794.97pt, image 38>
+File: helvetica.pdf Graphic file (type pdf)
+ <use helvetica.pdf>
+<times.pdf 614.295pt, 794.97pt, image 39>
+File: times.pdf Graphic file (type pdf)
+ <use times.pdf>
+<optima.pdf 614.295pt, 794.97pt, image 40>
+File: optima.pdf Graphic file (type pdf)
+ <use optima.pdf>
+Overfull \hbox (41.92378pt too wide) in paragraph at lines 227--230
+ []/cmr10/=[] |
+ []
+
+
+LaTeX Warning: Float too large for page by 147.96806pt on input line 230.
+
+[1003] [1004 <./helvetica.pdf>] [1005 <./times.pdf>] [1006 <./optima.pdf>]
+(./tugboat.bbl
+Underfull \hbox (badness 3312) in paragraph at lines 14--17
+[]/cmr10/Alan Hoenig.  /cmti10/Math-Kit/cmr10/: Al-ter-na-tives to
+ []
+
+
+Underfull \hbox (badness 1210) in paragraph at lines 14--17
+/cmr10/Com-puter Mod-ern Math-e-mat-ics.  /cmti10/TUG-boat/cmr10/,
+ []
+
+) [1007] (./tugboat.aux) ) 
+Here is how much of TeX's memory you used:
+ 1384 strings out of 50460
+ 16096 string characters out of 688539
+ 66990 words of memory out of 1500001
+ 4392 multiletter control sequences out of 10000+25000
+ 5994 words of font info for 23 fonts, out of 400000 for 1000
+ 18 hyphenation exceptions out of 10000
+ 35i,8n,23p,226b,243s stack positions out of 3000i,500n,3000p,50000b,5000s
+</usr/share/texmf/fonts/type1/bluesky/cm/cmsy10.pfb><
+/usr/share/texmf/fonts/type1/bluesky/cm/cmmi10.pfb></usr/share/texmf/fonts/type
+1/bluesky/cm/cmcsc10.pfb></usr/share/texmf/fonts/type1/hoekwater/mflogo/logo10.
+pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr7.pfb></usr/share/texmf/fonts/t
+ype1/bluesky/cm/cmti10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr10.pfb><
+/usr/share/texmf/fonts/type1/bluesky/cm/cmbx10.pfb></usr/share/texmf/fonts/type
+1/bluesky/cm/cmtt9.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr9.pfb></usr/
+share/texmf/fonts/type1/bluesky/cm/cmr12.pfb>
+Output written on tugboat.pdf (7 pages, 178064 bytes).

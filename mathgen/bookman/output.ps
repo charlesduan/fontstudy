@@ -1,0 +1,3998 @@
+%!PS-Adobe-2.0
+%%Pages: (atend)
+%%EndComments
+%%BeginProlog
+%%BeginResource: functions.ps
+%!PS-Adobe-2.0
+
+%
+% functions.ps
+%
+% Convenience functions for me, that I think are useful in multiple files.
+%
+
+% An inch
+/inch { 72 mul } bind def
+
+% Given a dictionary, print its keys. Leaves the dictionary on the stack.
+/pkeys {
+    dup { pop == } forall
+} bind def
+
+% Given a set of pairs 1 2 3 4 5 6 and a number of pairs 3, pulls pairs out and
+% leaves 1 3 5 2 4 6 on the stack.
+/seppairs {
+    2 dict begin
+    dup array /Evens exch def
+    dup array /Odds exch def
+    1 sub -1 0 {	% odd even index
+	dup Odds exch	% odd even index Odds index
+	5 2 roll	% Odds index odd even index
+	Evens exch	% Odds index odd even Evens index
+	3 -1 roll	% Odds index odd Evens index odd
+	put put
+    } for
+    Odds aload pop Evens aload pop
+    end
+} def
+
+% Min/max functions
+/min { 2 copy gt { exch } if pop } bind def
+/max { 2 copy lt { exch } if pop } bind def
+
+% Given a number and a base/bounds, determine whether that number falls within
+% the base/bounds. Accept all possible values for both base and bounds,
+% including negative.
+% value base bounds -- bool
+% Add a tolerance value to base and bounds, because sometimes the
+% floating-point arithmetic is a bit off.
+/withinRange {
+    dup 0 gt {
+	% If bounds is positive. value - base >= 0 and <= bounds.
+	3 1 roll sub	% bounds value-base
+	dup 0 ge {
+	    ge
+	} {
+	    pop pop false
+	} ifelse
+    } {
+	% If bounds is negative, value - base <= 0 and >= bounds.
+	3 1 roll sub
+	dup 0 le {
+	    le
+	} {
+	    pop pop false
+	} ifelse
+    } ifelse
+} def
+
+% Append two strings.
+/append {
+     2 copy length exch length add  % find the length of the new.
+     string dup     % string1 string2 string string
+     4 2 roll       % string string string1 string2
+     2 index 0 3 index
+     % string string string1 string2 string 0 string1
+     putinterval    % stuff the first string in.
+     % string string string1 string2
+     exch length exch putinterval
+} bind def
+
+% Sorts an array using a comparator function. The specification of the
+% comparator function is as follows:
+%
+% Takes two arguments. Returns TRUE iff the two arguments are in the correct
+% order in their presentation; false otherwise.
+%
+% The array is sorted IN PLACE; that is, its contents will be overwritten. If
+% this is not desired behavior, place at the beginning of the call:
+%
+% dup length array copy
+%
+% [array] {proc} -- [array]
+/bubblesort {
+    4 dict begin
+	/proc exch def
+	/ary exch def
+	ary length 2 sub -1 0 {
+	    /noexch true def
+	    0 1 3 -1 roll {
+		/pos exch def
+		ary pos get ary pos 1 add get 2 copy proc not {
+		    ary exch pos exch put
+		    ary exch pos 1 add exch put
+		    /noexch false def
+		} {
+		    pop pop
+		} ifelse
+	    } for
+	    noexch { exit } if
+	} for
+	ary
+    end
+} def
+
+% Reverses an array.
+/revArray {
+    2 dict begin
+	/ary exch def
+	/len ary length 1 sub def
+	0 1 ary length 2 idiv 1 sub {
+	    dup len exch sub ary exch get	% i ary[len-i]
+	    ary 2 index get			% i ary[len-i] ary[i]
+	    ary 3 index len exch sub 3 -1 roll	% i ary[len-i] ary len-i ary[i]
+	    put ary 3 1 roll put
+	} for
+	ary
+    end
+} def
+
+% Puts an array onto the stack.
+/loadArray { aload pop } bind def
+
+% Get the first or last element of an array.
+/firstElt { 0 get } bind def
+/lastElt { dup length 1 sub get } bind def
+
+% Iterates several times.
+% num { proc } --
+/iterate {
+    /IterateProc exch def
+    -1 0 { pop IterateProc } for
+} def
+%%EndResource
+%%BeginResource: points.ps
+%!PS-Adobe-2.0
+
+%
+% points.ps
+%
+% Utility functions for points.
+%
+
+% Requires: functions.ps
+
+% Given a pair of points, determines the average of them.
+% x1 y1 x2 y2 -- x1+x2/2 y1+y2/2
+/avgPoint {
+    3 -1 roll add 2 div 3 1 roll add 2 div exch
+} bind def
+
+% Given a pair of points and a tolerance, determine whether the second point is
+% within the tolerance range of the first point. Tolerance should be >= 0.
+% x1 y1 x2 y2 tol -- bool
+/eqPoint {
+    dup 6 2 roll	% tol tol x1 y1 x2 y2
+    3 -1 roll		% tol tol x1 x2 y2 y1
+    sub	abs		% tol tol x1 x2 |y2-y1|
+    3 1 roll		% tol tol dy x1 x2
+    sub abs		% tol tol dy dx
+    3 1 roll		% tol dx tol dy
+    ge			% tol dx bool
+    3 1 roll ge and
+} bind def
+
+% Given two points, tests them for exact equality.
+/equalPoint {
+    3 -1 roll eq 3 1 roll eq and
+} bind def
+
+% Scales a point by a constant.
+% x1 y1 scale -- x y
+/scalePoint {
+    dup 3 1 roll mul 3 1 roll mul exch
+} bind def
+
+% Add two points.
+% x1 y1 x2 y2 -- x y
+/addPoint {
+    3 -1 roll add 3 1 roll add exch
+} bind def
+
+% Subtract two points.
+/subPoint {
+    3 -1 roll exch sub 3 1 roll sub exch
+} bind def
+
+% Performs a dot product on 2d points.
+/dotProduct {
+    3 -1 roll mul 3 1 roll mul add
+} bind def
+
+/magnitude {
+    dup mul exch dup mul add sqrt
+} bind def
+
+% Iterates over a list of points. The point list is a list of 2-element lists.
+/ForallPointDict 1 dict def
+
+/forallPoint {
+    % We must make a global definition here, because without it we need to store
+    % the procedure on a local dictionary (which violates the nature of forall)
+    % or leave the procedure on the stack (which violates the nature of forall).
+    ForallPointDict exch /fp exch put
+    {
+        aload pop ForallPointDict /fp get exec
+    } forall
+} def
+
+% Given a pair of coordinates, get one of them. These are really stupid
+% functions, but they make the code easier to read.
+/xcoor { dup type /arraytype eq { 0 get } { pop } ifelse } bind def
+/ycoor { dup type /arraytype eq { 1 get } { exch pop } ifelse } bind def
+
+% Sorts an array of points by x or y coordinate, ascending.
+/sortByX {
+    { xcoor exch xcoor exch lt } bubblesort
+} def
+
+/sortByY {
+    { ycoor exch ycoor exch lt } bubblesort
+} def
+
+% Given a user path and a list of points, gives the points that are in the fill
+% region of the user path (by inufill).
+% [ [points] ] { upath } -- [ [points subset] ]
+/pointsInRegion {
+    1 dict begin
+	cvlit /ThePath exch def
+	[ exch {
+	    2 copy ThePath inufill {
+		[ 3 1 roll ]
+	    } {
+		pop pop
+	    } ifelse
+	} forallPoint
+	]
+    end
+} def
+
+% Defines a point.
+/defPoint {
+    dup type /nametype eq {
+	1 index type /arraytype eq { exch aload pop } { 3 1 roll } ifelse
+    } if
+    2 packedarray cvx def
+} def
+
+% If two points are too close for comfort, discard one of them.
+% [ [ point list ] ] -- [ [ subset ] ]
+/uniquePoints {
+    5 dict begin
+    /theArray exch def
+    /newArray [ ] def
+    0 1 theArray length 1 sub {
+	theArray exch get loadArray /curPoint defPoint
+	/noMatches true def
+	0 1 newArray length 1 sub {
+	    newArray exch get loadArray curPoint 3 eqPoint {
+		/noMatches false def
+		exit
+	    } if
+	} for
+	noMatches {
+	    /newArray [ newArray aload pop [ curPoint ] ] def
+	} if
+    } for
+    newArray
+    end
+} def
+%%EndResource
+%%BeginResource: angles.ps
+%!PS-Adobe-2.0
+
+%
+% angles.ps
+%
+% Fun tricks for curve segments and angles.
+%
+
+% Requires: functions.ps points.ps
+
+% Given two points, finds the angle in degrees from the horizontal of the line
+% defined ending at the first point.
+% x1 y1 x2 y2 -- angle of vector from (x1,y1) to (x2, y2)
+/lineAngle {
+    4 2 roll subPoint exch atan
+} bind def
+
+% Given a curveto (8 arguments), get the starting angle. This will be the
+% direction the curve starts out traveling.
+/curveStartAngle {
+    pop pop pop pop
+    lineAngle
+} def
+
+% Given a curveto (8 arguments), get the ending angle. This will be the
+% direction the curve would continue to travel in if it didn't stop.
+/curveEndAngle {
+    lineAngle 5 1 roll
+    pop pop pop pop
+} def
+
+% Takes two points p and q and an angle theta. Pretend that an angle was drawn
+% with a circular pen of radius r. If the pen had zero radius, then the path
+% would have angled at p with an angle of theta. But because the radius is
+% greater than zero, the "angle" occurs at point q. This function will return
+% the diameter 2*r.
+%            /
+%           /*
+%          / |
+%         /  `.   ..*|
+%        /    q.-^   | r
+%       /       \.   |
+%      /theta     ^*.|
+%     p----------------
+%
+/penDiameter {
+    2 div sin 5 1 roll subPoint magnitude	% sin(theta/2) l
+    1 index mul exch				% l*sin sin
+    1 exch sub div				% l*sin / (1-sin) = r
+    2 mul
+} def
+
+%
+% Given a box, defined by lower left and upper right points, and a point and an
+% angle, draw the line that fits in the bounding box, goes through that point,
+% and travels at that angle.
+%
+% +------------------+
+% | \                |
+% |  \               |
+% |   \ theta        |
+% |    p-------      |
+% |     \            |
+% |      \           |
+% |       \          |
+% +------------------+
+%
+/boundedLine {
+    6 dict begin
+	{ dup 0 ge { exit } if 180 add } loop
+	{ dup 180 lt { exit } if 180 sub } loop
+	/Theta exch def
+	/Point defPoint
+	% If the angle is over 90 degrees, swap left and right for convenience
+	2 seppairs 2 copy max /BoxTop exch def min /BoxBot exch def
+	2 copy max /BoxRt exch def min /BoxLft exch def
+	% First, the upper intersection point.
+	% Degenerate cases: point is on top of box and angle is horizontal
+	Point ycoor BoxTop eq
+	% Point is on side of box and angle is vertical
+	90 Theta eq Point xcoor BoxRt eq Point xcoor BoxLft eq or and
+	or {
+	    Point
+	} {
+	    Point BoxRt BoxTop lineAngle Theta ge {
+		BoxRt Point xcoor sub % horizontal distance
+		dup Theta sin mul Theta cos div % vertical distance
+		Point addPoint
+	    } {
+		Point BoxLft BoxTop lineAngle Theta ge {
+		    BoxTop Point ycoor sub
+		    dup Theta cos mul Theta sin div
+		    exch Point addPoint
+		} {
+		    BoxLft Point xcoor sub % horizontal distance
+		    dup Theta sin mul Theta cos div % vertical distance
+		    Point addPoint
+		} ifelse
+	    } ifelse
+	} ifelse
+	% Lower point.
+	% Degenerate cases: point is on top of box and angle is horizontal
+	Point ycoor BoxBot eq
+	% Point is on side of box and angle is vertical
+	90 Theta eq Point xcoor BoxLft eq Point xcoor BoxRt eq or and
+	or {
+	    Point
+	} {
+	    /Theta Theta 180 add def
+	    Point BoxLft BoxBot lineAngle Theta ge {
+		BoxLft Point xcoor sub % horizontal distance
+		dup Theta sin mul Theta cos div % vertical distance
+		Point addPoint
+	    } {
+		Point BoxRt BoxBot lineAngle Theta ge {
+		    BoxBot Point ycoor sub
+		    dup Theta cos mul Theta sin div
+		    exch Point addPoint
+		} {
+		    BoxRt Point xcoor sub % horizontal distance
+		    dup Theta sin mul Theta cos div % vertical distance
+		    Point addPoint
+		} ifelse
+	    } ifelse
+	} ifelse
+    end
+} def
+
+% Line bounded by the current path's bounding box. Takes a point and an angle.
+/bboxLine {
+    pathbbox 5 5 addPoint 4 2 roll 5 5 subPoint 4 2 roll 7 4 roll boundedLine
+} def
+%%EndResource
+%%BeginResource: extremes.ps
+%!PS-Adobe-2.0
+
+%
+% extremes.ps
+%
+% Functions for manipulating extremes.
+%
+
+2 dict begin
+
+    /pointList [ ] def
+
+    /addPoint {
+	[ 3 1 roll ] [ exch pointList aload pop ] /pointList exch def
+    } def
+
+currentdict
+end
+/ExtremesDict exch def
+
+
+% Now, the public interface
+
+% Given a coordinate pair, test it as an extreme point candidate. Require that
+% the point be within the clipping path for consideration.
+/cmpPoint {
+    ExtremesDict begin
+	addPoint
+    end
+} def
+
+% Clear out the current extreme values.
+/resetExtremes {
+    ExtremesDict begin
+	/pointList [ ] def
+    end
+} def
+%%EndResource
+%%BeginResource: intersect.ps
+%!PS-Adobe-2.0
+
+%
+% intersect.ps
+%
+
+% Requires: functions.ps
+
+% Given four absolute points, determine the intersection between the lines.
+% x1 y1 x2 y2 x3 y3 x4 y4 -- x y true OR false
+% The first line is the one between (x1,y1) and (x2,y2).
+/intersect {
+    16 dict begin
+	4 seppairs
+	% Given a pair of x or y coordinates, a parametrization of the line
+	% segment defined by them is {x,y} = mt + b, where b is one of the
+	% coordinates and m is the difference between the two of them.
+	dup /yb1 exch def sub /ym1 exch def
+	dup /yb2 exch def sub /ym2 exch def
+	dup /xb1 exch def sub /xm1 exch def
+	dup /xb2 exch def sub /xm2 exch def
+	% It turns out that the solution for the intersection is:
+	%      xm2(yb1-yb2) + ym2(xb2-xb1)
+	% t1 = ---------------------------
+	%           xm1 ym2 - xm2 ym1
+	%      xm1(yb1-yb2) + ym1(xb2-xb1)
+	% t2 = ---------------------------
+	%           xm1 ym2 - xm2 ym1
+	%
+	% Let's hope we code this right...
+	xm1 ym2 mul xm2 ym1 mul sub	% Denominator
+	/Denom exch def
+	yb1 yb2 sub xb2 xb1 sub		% factor1 factor2
+	2 copy
+	ym2 mul exch xm2 mul add	% f1 f2 t1-numerator
+	/t1num exch def
+	ym1 mul exch xm1 mul add	% t2-num
+	/t2num exch def
+	% If we've got coinciding lines, just take the middle
+	t1num 0 eq
+	Denom 0 eq
+	and {
+	    false
+	} {
+	    % Now we perform range checks. The numerators should each be at
+	    % least zero and no more than D.
+	    t1num 0 Denom withinRange t2num 0 Denom withinRange and {
+		% If true, then we simply plug in t1 into its respective x and y
+		% equations to get x and y values.
+		t1num Denom div dup
+		xm1 mul xb1 add exch
+		ym1 mul yb1 add
+		true
+	    } {
+		false
+	    } ifelse
+	} ifelse
+    end
+} def
+
+
+%%EndResource
+%%BeginResource: bzfunc.ps
+%!PS-Adobe-2.0
+
+%
+% bzfunc.ps
+%
+% Bezier curve functions
+%
+
+% Requires: functions.ps
+
+% Our bezier curve functions. Given the x or y coordinates and a t value,
+% calculate the value at that point.
+% x0 x1 x2 x3 t -- x
+/bezierFunc {
+    2 dict begin
+    /t exch def
+    /s 1 t sub def
+    t mul t mul t mul			% x3 * t^3
+    exch t mul t mul s mul 3 mul add	% x2 * 3t^2(1-t)
+    exch s mul s mul t mul 3 mul add	% x1 * 3t(1-t)^2
+    exch s mul s mul s mul add		% x0 * (1-t)^3
+    end
+} def
+
+% Given four points and t, calculate the bezier function at that value t.
+% x1 y1 x2 y2 x3 y3 t -- x y
+/curvetoPoint {
+    dup 5 seppairs	% x0 x1 x2 x3 t y0 y1 y2 y3 t
+    bezierFunc 6 1 roll
+    bezierFunc exch
+} def
+
+% Finds the Bezier extrema.
+% x0 x1 x2 x3 -- [ values ]
+% where values is, for each extreme, the value t. We assume that x0 = 0.
+/bezierExtremes {
+    6 dict begin
+	% Originally, this function assumed rcurveto semantics, so a would
+	% always be 0. But pathforall uses curveto instead. Since we don't want
+	% to do all the math all over again, we collect a first, and then make
+	% all the values relative. It makes no difference, since the value we
+	% return, time, is independent of the relative location of the curve.
+	4 -1 roll
+	/a exch def
+
+	% Define the four parameters
+	/d exch a sub def
+	/c exch a sub def
+	/b exch a sub def
+
+	% The function is:
+	%   3bt(1 - t)^2 + 3ct^2(1 - t) + dt^3
+	% Its derivative is (divided by three):
+	%   b - 4bt + 2ct + 3bt^2 - 3ct^2 + dt^2
+	% Which means the zero point is:
+	%       (2b-c) +- sqrt( b(b-c-d) + c^2)
+	%   t = -------------------------------
+	%               3b - 3c + d
+	% (the quadratic formula divided all over by two).
+	% Let B=2b-c, det=b(b-c-d)+c^2, and A=3b-3c+d.
+	/det b c sub d sub b mul c c mul add def
+	/A b 3 mul c 3 mul sub d add def
+	/B b 2 mul c sub def
+
+	A 0 eq {
+	    % If we've got a straight line on our hands; i.e., A=0
+	    % Then the function is:
+	    %   0 = 2(c-2b)t + b
+	    %   b = 2(2b-c)t
+	    %   t = b / 2(2b-c) = b / 2B
+	    B 0 eq {
+		% If B=0, then no solution, because it's horizontal
+		[ ]
+	    } {
+		% Otherwise it's at -c / -B. Recall we must add a back to the
+		% resulting value.
+		[
+		    b B 2 mul div dup 0 1 withinRange not { pop } if
+		]
+	    } ifelse
+	} {
+	    det 0 le {
+		% If the determinant is negative, there is no solution. If it's
+		% zero leave nothing on the stack, since the point we've found
+		% is neither a max nor a min.
+		[ ]
+	    } {
+		% Leave -B[+-]sqrt(det)/2A 2 on the stack. Recall we must add a
+		% back to the resulting value.
+		[
+		    B det sqrt add A div dup 0 1 withinRange not { pop } if
+		    B det sqrt sub A div dup 0 1 withinRange not { pop } if
+		]
+	    } ifelse
+	} ifelse
+    end
+} def
+
+% Returns the two extremes arrays, x extremes and then y extremes.
+% x0 x1 x2 x3 y0 y1 y2 y3 -- [ x ] [ y ]
+/curvetoExtremes {
+    4 seppairs
+    bezierExtremes 5 1 roll bezierExtremes exch
+} def
+
+%%EndResource
+%%BeginResource: bzintc.ps
+%!PS-Adobe-2.0
+
+%
+% bzintc.ps
+%
+% Intersection between a Bezier curve and a line.
+%
+% IMPLEMENTATION NOTE: while we could solve this problem systematically--the
+% cubic equation is solvable--the solution is over 2 pages long and takes about
+% a minute to derive for Mathematica. Instead, we derive it by picking out
+% segments from the Bezier curve and finding intersections via interpolation.
+%
+
+% Requires: bzfunc.ps intersect.ps
+
+
+% Takes curveto arguments (4 points) and two points defining a line segment for
+% intersection.
+/curvetoIntc {
+    10 dict begin
+	% Collect up the first four args, the line segment point
+	4 packedarray cvx /LineSegment exch def
+	% Collect up the next 8 args, the curve definition points
+	8 packedarray cvx /CurvePoints exch def
+	% Counter for how many intersections we've found. The tryCurveIntc
+	% function will leave the points on the stack.
+	/NumPoints 0 def
+	/ThisDict currentdict def
+	/AddPoint {
+	    ThisDict dup /NumPoints get 1 add /NumPoints exch put
+	} bind def
+	/RecursiveDepth 0 def
+	0 0.05 1 tryCurveIntc
+	NumPoints
+    end
+} def
+
+% Helper function for rcurvetoIntc. Assumes /LineSegment and /CurvePoints to
+% exist in some dictionary. Takes for-like arguments (init, delta, final) on the
+% stack, iterates over them, and searches for intersection points.
+% init delta final -- points
+/tryCurveIntc {
+    4 dict begin
+	/RecursiveDepth RecursiveDepth 1 add def
+	exch dup /Delta exch def exch
+	3 copy exch 2 div add exch	% i d f f+d/2 i
+	dup /LastT exch def		% Save i to lastT
+	CurvePoints 9 -1 roll curvetoPoint
+	2 packedarray cvx /LastPoint exch def % Using initial, get Bezier point
+	exch pop	% Kill original final; use augmented one
+	{	% Begin for loop
+	    dup						% t t
+	    CurvePoints 9 -1 roll curvetoPoint		% t x y
+	    2 copy LastPoint LineSegment intersect {	% t x y x-intc y-intc
+		% If we found an intersection
+		2 copy LastPoint 0.1 eqPoint RecursiveDepth 1000 gt or {
+		    % If the point happens to be close enough to LastPoint, then
+		    % we'll consider it good.
+		    AddPoint
+		    5 2 roll
+		} {
+		    % If they're too far apart, then we're in trouble. Using
+		    % LastT and T, we'll recursively call this function.
+		    pop pop			% t x y
+		    3 -1 roll dup 4 2 roll	% t t x y
+		    % Save off t, x, y, so whatever recursive tryCurveIntc does,
+		    % we can replace our old values at the top of the stack.
+		    3 packedarray cvx /Save exch def
+		    LastT exch 2 copy 		% LastT t LastT t
+		    exch sub 5 div		% LastT t (t-LastT)/5
+		    exch
+		    tryCurveIntc
+		    Save
+		} ifelse
+	    } if					% t x y
+	    2 packedarray cvx /LastPoint exch def
+	    /LastT exch def
+	} for
+    end
+} def
+%%EndResource
+%%BeginResource: intcmgr.ps
+%!PS-Adobe-2.0
+
+%
+% intcmgr.ps
+%
+% Manages intersections between a line and various curves.
+%
+
+% Requires: intersect.ps bzintc.ps functions.ps
+
+10 dict begin
+
+    % Place where points will be stored.
+    /pointList [ ] def
+
+    /addPoint {
+	[ 3 1 roll ] [ exch pointList aload pop ] /pointList exch def
+    } def
+
+    % Line to check for intersections.
+    %/intcLine { 0 0 0 0 } def
+
+currentdict
+end
+/IntersectDict exch def
+
+% Resets the intersection manager.
+/resetIntc {
+    IntersectDict begin
+	/pointList [ ] def
+    end
+} def
+
+% Sets the line to test against other points.
+/setIntcLine {
+    IntersectDict begin
+	4 packedarray cvx /intcLine exch def
+    end
+} def
+
+% Basically performs "intersect", but saves the result value.
+/intcLines {
+    IntersectDict begin
+	intcLine intersect {
+	    addPoint
+	} if
+    end
+} def
+
+% Performs curvetoIntc, calculates the actual intersection point, and saves the
+% result.
+/intcCurve {
+    IntersectDict begin
+	intcLine curvetoIntc -1 1 {
+	    pop addPoint
+	} for
+    end
+} def
+
+% Iterates over the points collected.
+/intcForall {
+    IntersectDict /pointList get exch forallPoint
+} def
+
+% Shows the intersection line (without messing up the path)
+/showIntcLine {
+    IntersectDict begin
+    gsave
+	newpath intcLine moveto lineto stroke
+    grestore
+    end
+} def
+%%EndResource
+%%BeginResource: drawing.ps
+%!PS-Adobe-2.0
+
+%
+% drawing.ps
+%
+% Drawing stuff.
+%
+
+/pointbox {
+    gsave
+	newpath moveto
+	-10 -10 rlineto
+	20 0 rlineto
+	closepath fill
+    grestore
+} bind def
+/uppointbox {
+    gsave
+	newpath moveto
+	-10 10 rlineto
+	20 0 rlineto
+	closepath fill
+    grestore
+} bind def
+/rtpointbox {
+    gsave
+	newpath moveto
+	10 -10 rlineto
+	0 20 rlineto
+	closepath fill
+    grestore
+} bind def
+/ltpointbox {
+    gsave
+	newpath moveto
+	-10 10 rlineto
+	0 -20 rlineto
+	closepath fill
+    grestore
+} bind def
+
+/drawHorizLine {
+    gsave
+	3 setlinewidth
+	newpath dup 0 exch moveto
+	700 exch lineto
+	stroke
+    grestore
+} def
+
+/drawLine {
+    gsave 4 copy moveto lineto stroke grestore
+} def
+
+
+%%EndResource
+%%BeginResource: pathtricks.ps
+%!PS-Adobe-2.0
+
+%
+% pathtricks.ps
+%
+% Methods for manipulating paths.
+%
+% All of the functions in this package assume that there is a current path. They
+% do not change the path at all.
+%
+
+% Requires: extremes.ps intcmgr.ps points.ps drawing.ps angles.ps
+
+% General method for executing pathforall in a useful method such that
+% currentpoint works correctly. Expects methods linetoHook, movetoHook,
+% curvetoHook, and closepathHook to exist. If startingHook and/or endingHook are
+% defined, then they will be executed at the appropriate times.
+%
+/tracePath {
+    10 dict begin	% Save the starting X and Y; also makes hooks local
+    gsave
+    /startingHook where {
+	pop startingHook
+    } if
+    {		% moveto
+	2 copy mark 3 1 roll movetoHook cleartomark
+	/startPoint defPoint
+	/curPoint startPoint defPoint
+    } {		% lineto
+	2 copy mark 3 1 roll linetoHook cleartomark
+	/curPoint defPoint
+    } {		% curveto
+	6 copy mark 7 1 roll curvetoHook cleartomark
+	/curPoint defPoint
+	pop pop pop pop
+    } {		% closepath
+	mark startPoint linetoHook cleartomark
+	mark closepathHook cleartomark	% just in case
+	/curPoint startPoint defPoint
+    } pathforall
+    /endingHook where {
+	pop endingHook
+    } if
+    grestore
+    end
+} def
+
+%
+% INTERSECTIONS
+%
+
+% Dictionary defining hooks for line intersections. It is expected that the user
+% of this dictionary initialize the line for the intersection manager.
+5 dict begin
+    /movetoHook { pop pop } def
+    /linetoHook {
+	curPoint intcLines
+    } def
+    /curvetoHook {
+	curPoint 8 2 roll
+	intcCurve
+    } def
+    /closepathHook { } def
+currentdict
+end
+/PathIntcDict exch def
+
+% Given the points for a line, determine an intersection.
+/pathLineIntc {
+    resetIntc
+    PathIntcDict begin
+	setIntcLine
+	showIntcLine
+	tracePath
+    end
+    IntersectDict /pointList get
+    uniquePoints
+} def
+
+% EXTREME VALUES
+
+5 dict begin
+    /movetoHook { pop pop } def
+    /linetoHook {
+	curPoint cmpPoint
+	cmpPoint
+    } def
+    /curvetoHook {
+	2 copy cmpPoint
+	curPoint cmpPoint
+	curPoint 8 2 roll
+	8 packedarray cvx /points exch def
+	points curvetoExtremes
+	{ points 9 -1 roll curvetoPoint cmpPoint } forall
+	{ points 9 -1 roll curvetoPoint cmpPoint } forall
+    } def
+    /closepathHook { } def
+currentdict
+end
+/PathExtrDict exch def
+
+% Determine the extremes.
+/pathExtremes {
+    resetExtremes
+    PathExtrDict begin
+	tracePath
+    end
+    ExtremesDict /pointList get
+} def
+
+
+% Direction of fill
+%
+% Given an array of points and a point offset, extracts those points that, when
+% the offset is applied to them, 
+% [ point array ] offx offy -- [ point array subset ]
+/offsetInFill {
+    1 dict begin
+	2 packedarray cvx /offset exch def
+	[ exch
+	{
+	    2 copy offset addPoint infill {
+		[ 3 1 roll ]
+	    } {
+		pop pop
+	    } ifelse
+	} forallPoint
+	]
+    end
+} def
+
+% Midpoint of the current path.
+/pathMidpoint {
+    pathbbox 2 seppairs add 2 div 3 1 roll add 2 div exch
+} def
+
+% Upper right coordinate of current path.
+/pathUR {
+    pathbbox 4 2 roll pop pop
+} def
+
+% Path lower left coordinate.
+/pathLL {
+    pathbbox pop pop
+} def
+
+% Vertical line that splits the bbox in half. Leaves the coordinates on the
+% stack.
+/vertSplitLine {
+    dup pathUR xcoor mul	% frac frac*llx
+    exch 1 exch sub		% frac*llx 1-frac
+    pathLL xcoor mul		% frac*llx (1-frac)*urx
+    add dup			% avgX avgX
+    pathLL ycoor 10 sub exch
+    pathUR ycoor 10 add
+} def
+/horizSplitLine {
+    dup pathUR ycoor mul	% frac frac*lly
+    exch 1 exch sub		% frac*lly 1-frac
+    pathLL ycoor mul		% frac*lly (1-frac)*ury
+    add				% avgY avgY
+    pathLL xcoor 10 sub exch
+    pathUR xcoor 10 add 1 index
+} def
+
+/vertLineThrough {
+    xcoor dup
+    pathLL ycoor 10 sub exch
+    pathUR ycoor 10 add
+} def
+/horizLineThrough {
+    ycoor
+    pathLL xcoor 10 sub exch
+    pathUR xcoor 10 add 1 index
+} def
+
+% Show a letter.
+/letterPath {
+    newpath 0 0 moveto true charpath
+    gsave stroke grestore
+} bind def
+
+
+
+%
+% ANGLE AT A POINT IN THE PATH
+%
+6 dict begin
+/movetoHook { pop pop } def
+/linetoHook {
+    /theAngle where {
+	pop pop pop
+    } {
+	curPoint 4 2 roll
+	4 copy thePoint linePtIntc {
+	    pop pop lineAngle /theAngle exch def
+	} if
+    } ifelse
+} def
+/curvetoHook { } def	% Should never occur, since we flatten the path
+/closepathHook { } def
+/endingHook { /theAngle where dup { exch pop theAngle exch } if } def
+currentdict
+end
+/PathAngleDict exch def
+
+/pathAngle {
+    PathAngleDict begin
+    gsave
+	flattenpath
+	/thePoint defPoint
+	tracePath
+    grestore
+    end
+} def
+
+% Produces the coordinates for a perpendicular through a given point.
+/perpThroughPoint {
+    90 add bboxLine
+} def
+
+% Measure height/depth of the path.
+/measureHeight {
+    gsave
+	flattenpath pathUR ycoor
+	dup drawHorizLine
+    grestore
+} def
+/measureDepth {
+    gsave
+	flattenpath pathLL ycoor
+	dup drawHorizLine
+	neg
+    grestore
+} def
+
+
+%%EndResource
+%%BeginResource: bracket.ps
+%!PS-Adobe-2.0
+%
+% bracket.ps
+%
+% Given the darkness parameter, a point on the stem, the edge of the serif, and
+% the corner where the stem and the edge should meet with no bracket, finds the
+% height of the bracket.
+%
+% Requires: points.ps pathtricks.ps drawing.ps
+%
+/findBracket {
+    4 dict begin
+	/corner defPoint	% Point where the serif and stem meet
+	/edge defPoint		% Point at top end of serif
+	/bracket defPoint	% Point where bracket should end
+	/fraction exch 1 exch div def	% Darkness parameter (usually 1/3)
+	10 {
+	    edge bracket drawLine avgPoint corner
+	    pathLineIntc dup length 0 eq {
+		/bracket corner defPoint
+		pop exit
+	    } if
+	    firstElt loadArray % Better only have one element!
+	    corner subPoint fraction scalePoint corner addPoint
+	    % First line for the intersection, that goes through edge. This line
+	    % should intersect the stem line at the bracket point.
+	    edge subPoint 10 scalePoint edge addPoint edge
+	    % Second line for the intersection
+	    bracket corner subPoint 20 scalePoint corner addPoint corner
+	    intersect {
+		/bracket defPoint
+	    } {
+		/bracket corner defPoint
+		exit
+	    } ifelse
+	} iterate
+	bracket pointbox
+	mark bracket edge drawLine avgPoint corner drawLine cleartomark
+	bracket
+    end
+} def
+
+
+%%EndResource
+%%BeginResource: pointintc.ps
+%!PS-Adobe-2.0
+
+%
+% pointintc.ps
+%
+% Determines when a point intersects with a line or a curve.
+%
+
+% Requires: functions.ps points.ps bzintc.ps
+
+% The tolerance range for intersections. By default 3 points.
+/PtIntcEps 3 def
+
+% Makes a line segment given one of the points and a true/false value for which
+% direction to draw the line.
+/epsilonLine {
+    {
+	2 copy
+	PtIntcEps 0 addPoint 4 2 roll
+	PtIntcEps 0 subPoint
+    } {
+	2 copy
+	0 PtIntcEps addPoint 4 2 roll
+	0 PtIntcEps subPoint
+    } ifelse
+} def
+
+% Given a line segment, does it intersect /pt1?
+% x1 y1 x2 y2 x y -- false OR x' y' true
+/linePtIntc {
+    5 dict begin
+	/p defPoint
+	/p1 defPoint
+	/p2 defPoint
+	/p2top p p2 subPoint defPoint
+	/p2top1 p1 p2 subPoint defPoint
+	/p2top1mag p2top1 magnitude def
+	p2top magnitude p1 p subPoint magnitude add p2top1mag sub
+	-1 2 withinRange {
+	    p2top1mag 0 eq {
+		p1 true
+	    } {
+		p2top1
+		p2top p2top1 dotProduct p2top1mag dup mul div
+		0 max 1 min
+		scalePoint
+		p2 addPoint true
+	    } ifelse
+	} {
+	    false
+	} ifelse
+    end
+} def
+
+/ifCurveIntc {
+    curvetoIntc dup 0 gt {
+	-1 2 {
+	    pop pop pop
+	} for
+	true
+    } {
+	pop false
+    } ifelse
+} def
+
+% Does a curve intersect?
+% x1 y1 ... x8 y8 x y -- x y true OR false
+/curvePtIntc {
+    10 copy true epsilonLine ifCurveIntc {
+	12 2 roll
+	pop pop pop pop pop pop pop pop pop pop	% 10 of them
+	true
+    } {
+	false epsilonLine ifCurveIntc
+    } ifelse
+} def
+
+%%EndResource
+%%BeginResource: subpath.ps
+%!PS-Adobe-2.0
+
+%
+% subpath.ps
+%
+% Produces subpaths based on starting and ending conditions.
+%
+
+% Requires: angles.ps pointintc.ps
+
+
+% Makes a subpath, as a user path.
+/traceSubpath {
+    20 dict begin	% Save the starting X and Y; also makes hooks local
+    /moveto { /moveto cvx } def
+    /lineto { /lineto cvx } def
+    /curveto { /curveto cvx } def
+    /closepath { /closepath cvx } def
+    % Execute the initialization hook, which should be at the top of the stack.
+    exec
+    [
+    pathbbox 100 100 addPoint 4 2 roll 100 100 subPoint 4 2 roll /setbbox cvx
+    % Each partial path segment in the path must be traced independently. Guess
+    % that there are at most 100 segments in any path.
+    1 1 100 {
+	/segmentToTrace exch def
+	/inSubpath false def
+	1 1 2 {
+	    /currentSegment 1 def
+	    pop	% Get rid of the for argument
+	    /ignoreCycle segmentToTrace currentSegment ne def
+
+	    {		% moveto
+		% You should never encounter a moveto in a subpath; it's bad
+		% karma. TODO We have to figure out how to deal with multiple
+		% subpaths within a path. The way we should do this: break the
+		% path up into individual parts, and then run all this stuff on
+		% each part.
+		ignoreCycle {
+		    pop pop
+		} {
+		    /nowPt defPoint
+		    /startPt nowPt defPoint
+		} ifelse
+
+	    } {		% lineto
+		2 copy /newPt defPoint
+		% If the new point equals the old point exactly, then ignore
+		% this entire thing.
+		newPt nowPt equalPoint ignoreCycle or {
+		    pop pop
+		} {
+		    2 packedarray cvx /linetoArgs exch def
+		    inSubpath {			% We're in the subpath.
+			/defaultEndSubpath { linetoArgs lineto } def
+			lineTestEnd {
+			    /inSubpath false def
+			    exit
+			} {
+			    linetoArgs lineto
+			} ifelse
+		    } {				% We're not in the subpath.
+			/defaultStartSubpath {
+			    nowPt moveto linetoArgs lineto
+			} def
+			lineTestStart {
+			    /inSubpath true def
+			} if
+		    } ifelse
+		    /nowPt newPt defPoint
+		} ifelse
+
+	    } {		% curveto
+		2 copy /newPt defPoint
+		newPt nowPt equalPoint ignoreCycle or {
+		    pop pop pop pop pop pop
+		} {
+		    6 packedarray cvx /curvetoArgs exch def
+		    inSubpath {			% We're in the subpath.
+			/defaultEndSubpath { curvetoArgs curveto } def
+			curveTestEnd {
+			    /inSubpath false def
+			    exit
+			} {
+			    curvetoArgs curveto
+			} ifelse
+		    } {				% We're not in the subpath.
+			/defaultStartSubpath {
+			    nowPt moveto curvetoArgs curveto
+			} def
+			curveTestStart {
+			    /inSubpath true def
+			} if
+		    } ifelse
+		    /nowPt newPt defPoint
+		} ifelse
+
+	    } {		% closepath
+		/newPt startPt defPoint
+		/linetoArgs startPt defPoint
+		newPt nowPt equalPoint ignoreCycle or not {
+		    inSubpath {
+			/defaultEndSubpath { linetoArgs lineto } def
+			lineTestEnd {
+			    /inSubpath false def
+			    exit
+			} {
+			    linetoArgs lineto
+			} ifelse
+		    } {				% We're not in the subpath.
+			/defaultStartSubpath {
+			    nowPt moveto linetoArgs lineto
+			} def
+			lineTestStart {
+			    /inSubpath true def
+			} if
+		    } ifelse
+		    /nowPt newPt defPoint
+		} if
+		/currentSegment currentSegment 1 add def
+		/ignoreCycle currentSegment segmentToTrace ne def
+	    } pathforall
+
+	    %inSubpath not { exit } if
+	} for
+	% If the last segment is greater than or equal to the segment we just
+	% traced plus one, then the next cycle will be useless so it and all
+	% following ones should be canceled.
+	currentSegment segmentToTrace 1 add lt { exit } if
+    } for
+
+    % Remove the last moveto
+    dup /moveto eq {
+	pop pop pop
+    } if
+    ] cvx
+    end
+} def
+
+/drawSubpath {
+    gsave
+	currentlinewidth 3 mul setlinewidth
+	dup ustroke
+    grestore
+} def
+
+/useSubpath {
+    gsave
+	exch newpath uappend
+	exec
+    grestore
+} def
+
+/subpathEndpoint {
+    gsave
+	newpath uappend currentpoint
+    grestore
+} def
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Some start and end condition functions
+%
+
+% Start when the angle meets some condition.
+% {cond} --
+/startWhenAngle {
+    /StartTestCond exch def
+    /lineTestStart {
+	nowPt linetoArgs lineAngle StartTestCond {
+	    defaultStartSubpath
+	    true
+	} {
+	    false
+	} ifelse
+    } def
+    /curveTestStart {
+	nowPt curvetoArgs curveStartAngle StartTestCond {
+	    defaultStartSubpath
+	    true
+	} {
+	    false
+	} ifelse
+    } def
+} def
+
+/endWhenAngle {
+    /EndTestCond exch def
+    /lineTestEnd {
+	nowPt linetoArgs lineAngle EndTestCond {
+	    defaultEndSubpath
+	    true
+	} {
+	    false
+	} ifelse
+    } def
+    /curveTestEnd {
+	nowPt curvetoArgs curveEndAngle EndTestCond {
+	    defaultEndSubpath
+	    true
+	} {
+	    false
+	} ifelse
+    } def
+} def
+
+/endBeforeAngle {
+    /EndTestCond exch def
+    /lineTestEnd {
+	nowPt linetoArgs lineAngle EndTestCond {
+	    true
+	} {
+	    false
+	} ifelse
+    } def
+    /curveTestEnd {
+	nowPt curvetoArgs curveEndAngle EndTestCond {
+	    true
+	} {
+	    false
+	} ifelse
+    } def
+} def
+
+/endBeforeStartAngle {
+    /EndTestCond exch def
+    /lineTestEnd {
+	nowPt linetoArgs lineAngle EndTestCond {
+	    true
+	} {
+	    false
+	} ifelse
+    } def
+    /curveTestEnd {
+	nowPt curvetoArgs curveStartAngle EndTestCond {
+	    true
+	} {
+	    false
+	} ifelse
+    } def
+} def
+
+/startAtPoint {
+    /StartPoint defPoint
+    /lineTestStart {
+	nowPt linetoArgs StartPoint linePtIntc {
+	    moveto linetoArgs lineto
+	    true
+	} {
+	    false
+	} ifelse
+    } def
+    /curveTestStart {
+	nowPt curvetoArgs StartPoint curvePtIntc {
+	    pop pop
+	    defaultStartSubpath
+	    true
+	} {
+	    false
+	} ifelse
+    } def
+} def
+
+/endAtPoint {
+    /EndPoint defPoint
+    /lineTestEnd {
+	nowPt linetoArgs EndPoint linePtIntc {
+	    lineto
+	    true
+	} {
+	    false
+	} ifelse
+    } def
+    /curveTestEnd {
+	nowPt curvetoArgs EndPoint curvePtIntc {
+	    pop pop
+	    defaultEndSubpath
+	    true
+	} {
+	    false
+	} ifelse
+    } def
+} def
+
+%%EndResource
+%%BeginResource: textmgr.ps
+%!PS-Adobe-2.0
+
+%
+% textmgr.ps
+%
+
+% Require: functions.ps
+
+<<
+    /TextFont /Helvetica findfont 30 scalefont def
+    /TextXPos 0 def
+    /TextTopYPos 900 def
+    /TextYPos 900 def
+    /TextLineSkip 40 def
+>>
+/TextDict exch def
+
+/resetText {
+    TextDict begin
+	/TextYPos TextTopYPos def
+    end
+} def
+
+/setTextPos {
+    TextDict begin
+	dup /TextTopYPos exch def
+	/TextYPos exch def
+	/TextXPos exch def
+    end
+} def
+
+%
+% font-dict baselineskip --
+/setTextFont {
+    TextDict begin
+	/TextLineSkip exch def
+	/TextFont exch def
+    end
+} def
+
+%
+% (string) number --
+/stringOfText {
+    gsave TextDict begin
+	TextFont setfont
+	newpath TextXPos TextYPos moveto
+	20 string cvs
+	CurrentFile ( = ) append exch append ( # ) append exch append
+	TextToConsole { dup = } if
+	show
+	/TextYPos TextYPos TextLineSkip sub def
+    end grestore
+} def
+
+/TextToConsole false def
+%%EndResource
+%%BeginResource: unitalic.ps
+%!PS-Adobe-2.0
+
+%
+% Takes a font dictionary, makes a new font dictionary that is unitalicized, and
+% produces the new font.
+%
+
+/unitalic {
+    dup /FontInfo get /ItalicAngle get
+    dup sin exch cos div % Angle had better not be 90
+    [ 1 0 4 -1 roll 1 0 0 ] makefont
+} def
+%%EndResource
+%%BeginResource: width.ps
+%!PS-Adobe-2.0
+%
+% width.ps
+%
+% Determines the appropriate left width.
+%
+% This entire file is just one big function. It requires that someone (namely,
+% widthlibs.ps) define various values that specify the current letter's width,
+% various naming conventions, etc.
+%
+% Requires: pathtricks.ps points.ps functions.ps drawing.ps
+
+/LeftRightWidth {
+
+% Draw some reference lines
+gsave
+newpath 0 0 moveto 0 200 lineto stroke
+0 100 moveto WidthUnit 100 lineto stroke
+rightSidebearing 0 moveto 0 200 rlineto stroke
+grestore
+
+/Extremes pathExtremes def
+Extremes sortByX firstElt /LeftPoint defPoint
+Extremes sortByX lastElt /RightPoint defPoint
+Extremes sortByY firstElt /BotPoint defPoint
+Extremes sortByY lastElt /TopPoint defPoint
+LeftPoint ltpointbox
+RightPoint rtpointbox
+LeftPoint xcoor /LeftEdge exch def
+RightPoint xcoor /RightEdge exch def
+
+0 XHeight SubscriptFraction mul horizLineThrough pathLineIntc
+sortByX dup firstElt /HalfwayLeft defPoint lastElt /HalfwayRight defPoint
+
+gsave flattenpath
+{ HalfwayLeft startAtPoint HalfwayRight endAtPoint } traceSubpath
+{ pathExtremes } useSubpath sortByX lastElt /LowerRightPoint defPoint
+grestore
+LowerRightPoint rtpointbox
+LowerRightPoint xcoor /LowerRightEdge exch def
+
+% Chop the letter up into small slices each HeightUnit high. For each slice,
+% look at the x coordinates of the intersection, keeping the smallest and
+% largest values. Stuff them into an array.
+[
+    BotPoint ycoor
+    HeightUnit
+    TopPoint ycoor {
+	/curYcoor exch def
+	curYcoor XHeight SubscriptFraction mul HeightUnit withinRange {
+	    ] { gt } bubblesort /SubPoints exch def [ SubPoints loadArray
+	} if
+	curYcoor 0 exch horizLineThrough
+	pathLineIntc dup length 0 gt {
+	    sortByX dup firstElt xcoor exch lastElt xcoor
+	} {
+	    pop
+	} ifelse
+    } for
+] /Points exch { lt } bubblesort def
+
+% Sort the array by lowest x coordinate. For coordinate n, shift it outward by
+% WidthUnit/n. Of those coordinates, take the one that is farthest out.
+LeftEdge ForcedWidth sub
+1 1 Points length 2 div MaxUnits min {
+    dup 1 sub Points exch get exch
+    MaxUnits div WidthUnit mul sub
+    min
+} for
+
+% Draw a line at that farthest sidebearing point.
+gsave 2 setlinewidth newpath
+    dup dup BotPoint ycoor moveto TopPoint ycoor lineto
+stroke grestore
+
+/LeftPosition exch def LeftPosition % For subscript calculation
+
+doLeft (Left) exch neg AdjustScale round cvi stringOfText
+
+% Reverse the array and do everything again, for the right side.
+Points revArray pop
+
+RightEdge ForcedWidth add
+1 1 Points length 2 div MaxUnits min {
+    dup 1 sub Points exch get exch
+    MaxUnits div WidthUnit mul add
+    max
+} for
+
+gsave 2 setlinewidth newpath
+    dup dup BotPoint ycoor moveto TopPoint ycoor lineto
+stroke grestore
+
+/RightPosition exch def RightPosition % For subscript calculation
+
+doRight (Right) exch rightSidebearing sub AdjustScale round cvi stringOfText
+
+LowerRightEdge ForcedWidth add
+1 1 SubPoints length 2 div MaxSubscriptUnits min {
+    dup 1 sub SubPoints exch get exch
+    MaxSubscriptUnits div WidthUnit mul add
+    max
+} for
+
+% The subscript cannot extend past the superscript, and it cannot extend beyond
+% the specified subscript indentation limit.
+RightPosition min RightPosition MaxSubscriptIndent sub max
+
+gsave 2 setlinewidth newpath
+    dup dup BotPoint ycoor moveto XHeight SubscriptFraction mul lineto
+stroke grestore
+
+doSubscript (Right subscript) exch rightSidebearing sub AdjustScale round cvi
+stringOfText
+
+% Now, try to find the center of the top of the letter.
+
+unmeasurableAcccentLetter {
+    pathbbox avgPoint
+} {
+    % Hack: for T, i, and j, measure from the middle of the letter; all other
+    % letters, measure from near the top.
+    CurrentLetter (T) eq CurrentLetter (i) eq CurrentLetter (j) eq
+    or or { 0.5 } { 0.9 } ifelse
+    horizSplitLine pathLineIntc sortByX dup
+    firstElt /TopLeft defPoint lastElt /TopRight defPoint
+    TopLeft ltpointbox TopRight rtpointbox
+    TopLeft TopRight avgPoint
+} ifelse
+
+ /TopMiddle defPoint TopMiddle pointbox
+
+% This calculates the proper offset from TopMiddle to the accent position.
+TopPoint ycoor TopMiddle ycoor sub dup
+currentfont /FontInfo get /ItalicAngle get neg dup sin exch cos div mul exch
+TopMiddle addPoint /AccentPoint defPoint
+
+AccentPoint pointbox
+mark AccentPoint TopMiddle drawLine cleartomark
+
+AccentPoint xcoor RightPosition LeftPosition add 2 div sub
+
+doAccent (Accent point) exch AdjustScale round cvi stringOfText
+
+% In the case of the letters i and j, output the resulting widths so that we can
+% calculate the values for the dotless j, even if it doesn't exist.
+(i) CurrentLetter eq (j) CurrentLetter eq or {
+    /CurrentFile CurrentLetter (-width) append def
+    (Width) RightPosition LeftPosition sub AdjustScale round cvi stringOfText
+} if
+
+% In the case of the letter i, also do dotless i
+(i) CurrentLetter eq {
+    gsave 20 dict begin
+	0 1 currentfont /Encoding get length 1 sub {
+	    dup currentfont /Encoding get exch get /dotlessi eq {
+		/DotlessiPos 1 string def
+		DotlessiPos exch 0 exch put
+		/rightSidebearing { DotlessiPos stringwidth pop } def
+		/CurrentLetter (dotlessi) def
+		400 0 translate
+		DotlessiPos letterPath
+		LeftRightWidth
+		exit
+	    } {
+		pop
+	    } ifelse
+	} for
+    end grestore
+} if
+
+} def
+
+% Auxiliary function to find letters that should not be measured for the top
+% point (instead, the middle of the box should be used). Although it is highly
+% unlikely, you may wish to change this list as necessary. In fact, this list
+% really should be located somewhere else!
+/unmeasurableAcccentLetter {
+    false
+    UnmeasurableLetters {
+	CurrentLetter eq { pop true exit } if
+    } forall
+} def
+
+/UnmeasurableLetters [ (C) (E) (F) (G) (S) (Z) (a) (c) (e) (o) (r) (z) ] def
+
+% Helper functions in qualities of letters
+/doLeft { /CurrentFile { CurrentLetter (-left) append } def } def
+/doRight { /CurrentFile { CurrentLetter (-right) append } def } def
+/doSubscript { /CurrentFile { CurrentLetter (-subscript) append } def } def
+/doAccent { /CurrentFile { CurrentLetter (-accent) append } def } def
+/rightSidebearing { CurrentLetter stringwidth pop } def
+
+%%EndResource
+%%BeginResource: superness.ps
+%
+% superness.ps
+%
+% Functions to determine superness parameters.
+%
+% Requires: points.ps pathtricks.ps functions.ps
+%
+
+% Given a horizontal extreme point and a vertical extreme point and a boolean
+% for whether to use the outer or inner intersection point, calculate the points
+% relevant to superness.
+/findSupernessPoints {
+    10 dict begin
+	/Outer exch def
+	/vertPoint defPoint /horizPoint defPoint
+	vertPoint xcoor horizPoint ycoor /Corner defPoint
+	horizPoint xcoor vertPoint ycoor /Center defPoint
+	Corner pointbox Center  pointbox
+	Center Corner pathLineIntc sortByX
+	Center xcoor Corner xcoor gt { revArray } if
+	dup length 1 gt {
+	    dup length 2 sub 2 getinterval
+	    Outer { 1 } { 0 } ifelse
+	} {
+	    0
+	} ifelse
+	get /SuperPoint defPoint
+	SuperPoint pointbox
+	Center Corner SuperPoint
+    end
+} def
+
+% Given a center, a corner, and a superness intersection point, determine the
+% superness.
+/findSuperness {
+    3 dict begin
+	/SuperPoint defPoint /Corner defPoint /Center defPoint
+	SuperPoint Center subPoint magnitude
+	Corner Center subPoint magnitude
+	div
+    end
+} def
+%%EndResource
+%%EndProlog
+%%BeginSetup
+% THE FONT
+/Bookman-Light findfont 1000 scalefont unitalic setfont
+/italfont {
+    /Bookman-LightItalic findfont 1000 scalefont unitalic setfont
+} def
+/doTranslation {
+    50 200 translate
+    0.6 0.6 scale
+} def
+
+/resetPage {
+    doTranslation
+    resetExtremes
+    resetIntc
+    resetText
+} def
+
+
+% Measure height of path
+gsave
+    nulldevice
+    0 0 moveto (x) true charpath flattenpath
+    pathbbox /XHeight exch def pop pop pop
+grestore
+
+/TextToConsole true def
+%%EndSetup
+%%Page: 1 1
+resetPage
+gsave 20 dict begin
+/CurrentFile (,-comma_depth) def
+/CurrentLetter (,) def
+(,) letterPath
+%
+% comma_depth.ps
+%
+(Comma depth) measureDepth stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 2 2
+resetPage
+gsave 20 dict begin
+/CurrentFile (.-dot_size) def
+/CurrentLetter (.) def
+(.) letterPath
+%
+% .-dot_size.ps
+%
+pathExtremes sortByX
+dup lastElt /DotRight defPoint
+firstElt /DotLeft defPoint
+
+DotRight pointbox DotLeft pointbox
+
+(Dot size: )
+DotRight xcoor DotLeft xcoor sub
+stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 3 3
+resetPage
+gsave 20 dict begin
+/CurrentFile (7-fig_height) def
+/CurrentLetter (7) def
+(7) letterPath
+%
+% 7-height.ps
+%
+% Height of number 7.
+%
+(fig_height)
+measureHeight
+stringOfText
+
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 4 4
+resetPage
+gsave 20 dict begin
+/CurrentFile (=-math_axis) def
+/CurrentLetter (=) def
+(=) letterPath
+%
+% =-mathaxis.ps
+%
+% Math axis as center of = sign.
+%
+
+(math_axis)
+measureHeight
+measureDepth neg
+add 2 div dup 0 exch pointbox
+stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 5 5
+resetPage
+gsave 20 dict begin
+/CurrentFile (=-rule_thickness) def
+/CurrentLetter (=) def
+(=) letterPath
+%
+% =-rule_thickness.ps
+%
+0.5 vertSplitLine pathLineIntc sortByY 0 2 getinterval loadArray
+/EqualRuleTop defPoint /EqualRuleBot defPoint
+EqualRuleTop uppointbox EqualRuleBot pointbox
+
+(Rule thickness)
+EqualRuleTop ycoor EqualRuleBot ycoor sub
+stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 6 6
+resetPage
+gsave 20 dict begin
+/CurrentFile (A-A_inner_dark-serif) def
+/CurrentLetter (A) def
+(A) letterPath
+%
+% A-A_inner_dark.ps
+%
+flattenpath
+
+0.3 horizSplitLine pathLineIntc sortByX 0 2 getinterval loadArray
+/AInTop defPoint /ATop defPoint
+0.2 horizSplitLine pathLineIntc sortByX 0 2 getinterval loadArray
+/AInBot defPoint /ABot defPoint
+
+% Find the end of the serif
+{ ATop startAtPoint { 135 75 withinRange } endWhenAngle } traceSubpath
+subpathEndpoint
+{ startAtPoint { 225 gt } endBeforeAngle } traceSubpath
+subpathEndpoint /ASerifEdge defPoint
+
+% Line parallel to edge of A
+ABot ATop subPoint 4 scalePoint ATop addPoint ATop
+drawLine
+
+ASerifEdge horizLineThrough drawLine
+
+intersect pop /ACorner defPoint
+ACorner pointbox
+
+0.5 ABot ASerifEdge ACorner findBracket /ABracket defPoint
+
+ABracket horizLineThrough pathLineIntc sortByX 1 get /AInnerBracket defPoint
+AInnerBracket pointbox
+
+{ ABot startAtPoint AInBot endAtPoint } traceSubpath
+{ {
+    { 45 90 withinRange } startWhenAngle 
+    { 135 90 withinRange } endBeforeAngle
+  } traceSubpath
+} useSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByX lastElt /AOutSlab defPoint
+
+AInBot AInTop subPoint 5 scalePoint AInBot addPoint AInTop drawLine
+AOutSlab horizLineThrough drawLine
+intersect pop /AInCorner defPoint
+AInCorner pointbox
+AInCorner 0.2 scalePoint AOutSlab 0.8 scalePoint addPoint
+vertLineThrough pathLineIntc sortByY 1 get /AInSlabTop defPoint
+
+AOutSlab xcoor AInSlabTop ycoor /AInSlabCorner defPoint
+AInSlabCorner uppointbox
+
+AInnerBracket AInSlabCorner drawLine avgPoint /AInTriangle defPoint
+AInTriangle pointbox
+AInTriangle AInCorner pathLineIntc dup length 1 eq {
+    loadArray /ADarkness defPoint
+} {     
+    pop /ADarkness AInCorner defPoint
+} ifelse
+
+ADarkness AInCorner subPoint magnitude
+AInTriangle AInCorner subPoint magnitude
+div
+(Darkness of inner bracket) exch stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 7 7
+resetPage
+gsave 20 dict begin
+/CurrentFile (A-A_jut-serif) def
+/CurrentLetter (A) def
+(A) letterPath
+%
+% A-A_jut.ps
+%
+pathExtremes sortByX firstElt /ASerif defPoint
+ASerif pointbox
+
+0.7 horizSplitLine pathLineIntc sortByX firstElt /ATop defPoint
+ATop pointbox
+0.3 horizSplitLine pathLineIntc sortByX firstElt /ABot defPoint
+ABot pointbox
+
+% Line parallel to edge of A
+ABot ATop subPoint 4 scalePoint ATop addPoint ATop
+drawLine
+
+ASerif horizLineThrough drawLine
+
+intersect pop /ANoSerif defPoint
+ANoSerif pointbox
+
+ANoSerif ASerif subPoint magnitude
+(Jut of A) exch stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 8 8
+resetPage
+gsave 20 dict begin
+/CurrentFile (A-A_jut_in-serif) def
+/CurrentLetter (A) def
+(A) letterPath
+%
+% A-A_jut.ps
+%
+0.2 horizSplitLine pathLineIntc sortByX 0 2 getinterval loadArray
+/AIn defPoint /AOut defPoint
+
+{ AOut startAtPoint AIn endAtPoint } traceSubpath
+{ {
+    flattenpath
+    { 45 90 withinRange } startWhenAngle 
+    { 135 90 withinRange } endBeforeAngle
+  } traceSubpath
+} useSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByY lastElt /ASerif defPoint
+ASerif pointbox
+
+
+0.3 horizSplitLine pathLineIntc sortByX 1 get /ATop defPoint
+ATop pointbox
+0.2 horizSplitLine pathLineIntc sortByX 1 get /ABot defPoint
+ABot pointbox
+
+% Line parallel to edge of A
+ABot ATop subPoint 4 scalePoint ATop addPoint ATop
+drawLine
+
+ASerif horizLineThrough drawLine
+
+intersect pop /ANoSerif defPoint
+ANoSerif pointbox
+
+ANoSerif ASerif subPoint magnitude
+(Inner jut of A) exch stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 9 9
+resetPage
+gsave 20 dict begin
+/CurrentFile (A-A_outer_bracket-serif) def
+/CurrentLetter (A) def
+(A) letterPath
+%
+% A-A_outer_bracket.ps
+%
+flattenpath
+
+0.3 horizSplitLine pathLineIntc sortByX firstElt /ATop defPoint
+ATop pointbox
+0.2 horizSplitLine pathLineIntc sortByX firstElt /ABot defPoint
+ABot pointbox
+
+% Find the end of the serif
+{ ATop startAtPoint { 135 75 withinRange } endWhenAngle } traceSubpath
+subpathEndpoint
+{ startAtPoint { 225 gt } endBeforeAngle } traceSubpath
+subpathEndpoint /ASerifEdge defPoint
+ASerifEdge pointbox
+
+% Line parallel to edge of A
+ABot ATop subPoint 4 scalePoint ATop addPoint ATop
+drawLine
+
+ASerifEdge horizLineThrough drawLine
+
+intersect pop /ACorner defPoint
+ACorner pointbox
+
+0.5 ABot ASerifEdge ACorner findBracket /ABracket defPoint
+
+(Outer bracket of A, adjusted for dark) ABracket ycoor 1.5 div stringOfText
+
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 10 10
+resetPage
+gsave 20 dict begin
+/CurrentFile (A-apex_corr) def
+/CurrentLetter (A) def
+(A) letterPath
+%
+% A-hair.ps
+%
+
+% Get the hair width (for use later). Note: this isn't the _real_ hair width; it
+% is the hair width determined by a straight cross-section of the left stem.
+0.7 horizSplitLine pathLineIntc sortByX dup firstElt /ALeftOuter defPoint
+1 get /ALeftInner defPoint
+ALeftOuter pointbox ALeftInner pointbox
+ALeftOuter ALeftInner subPoint magnitude /AHair exch def
+
+% Find points that define the outer triangle of the letter
+0.7 horizSplitLine pathLineIntc sortByX lastElt /ARightOuter defPoint
+0.8 horizSplitLine pathLineIntc sortByX dup
+firstElt /ALeftLower defPoint lastElt /ARightLower defPoint
+
+ARightOuter pointbox ALeftLower pointbox ARightLower pointbox
+
+% Extend the outer triangle lines upward
+ALeftLower ALeftOuter subPoint 5 scalePoint ALeftOuter addPoint
+/ALeftUpper defPoint
+ARightLower ARightOuter subPoint 5 scalePoint ARightOuter addPoint
+/ARightUpper defPoint
+
+% Find the top point of the A
+pathExtremes sortByY lastElt /ATop defPoint
+
+mark ATop horizLineThrough drawLine cleartomark
+
+% Intersect each of the diagonal triangle lines with the top line
+ALeftUpper ALeftLower drawLine ATop horizLineThrough intersect pop
+/LeftIntersection defPoint
+ARightUpper ARightLower drawLine ATop horizLineThrough intersect pop
+/RightIntersection defPoint
+
+% The apex correction is the distance between the intersection points minus the
+% hair width
+RightIntersection xcoor LeftIntersection xcoor sub AHair sub
+
+(Apex correction) exch stringOfText
+
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 11 11
+resetPage
+gsave 20 dict begin
+/CurrentFile (A-apex_o) def
+/CurrentLetter (A) def
+(A) letterPath
+%
+% A-apex_o.ps
+%
+% Apex measured as 2/3 the height of the A overshoot. This is consistent with
+% the A in Computer Modern so that it works with Delta, Lambda, and gradient.
+%
+measureHeight /AHeight exch def
+
+gsave
+(I) letterPath
+measureHeight /IHeight exch def
+grestore
+
+(Apex overshoot \(A\)) AHeight IHeight sub 2 mul 3 div stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 12 12
+resetPage
+gsave 20 dict begin
+/CurrentFile (A-cap_hair) def
+/CurrentLetter (A) def
+(A) letterPath
+%
+% A-hair.ps
+%
+0.7 horizSplitLine pathLineIntc sortByX firstElt /ALeftOuter defPoint
+ALeftOuter ALeftOuter pathAngle pop perpThroughPoint
+pathLineIntc sortByX 1 get /ALeftInner defPoint
+ALeftOuter pointbox ALeftInner pointbox
+
+ALeftOuter ALeftInner subPoint magnitude
+(Uppercase hair) exch stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 13 13
+resetPage
+gsave 20 dict begin
+/CurrentFile (A-u) def
+/CurrentLetter (A) def
+(A) letterPath
+%
+% n-u.ps
+%
+% Unit is 1/10 width of "n".
+%
+pathExtremes sortByX dup firstElt /oLeft defPoint lastElt /oRight defPoint
+(Unit based on A) oRight xcoor oLeft xcoor sub 12 div stringOfText
+
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 14 14
+resetPage
+gsave 20 dict begin
+/CurrentFile (C-superness) def
+/CurrentLetter (C) def
+(C) letterPath
+%
+% C-superness.ps
+%
+
+pathExtremes /CExtremes exch def
+
+CExtremes sortByX firstElt /CLeft defPoint
+
+CExtremes sortByY firstElt /CBot defPoint
+
+CBot CLeft true findSupernessPoints findSuperness
+
+(Superness, C bottom left) exch stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 15 15
+resetPage
+gsave 20 dict begin
+/CurrentFile (C-superpull) def
+/CurrentLetter (C) def
+(C) letterPath
+%
+% C-superpull.ps
+%
+pathExtremes /CExtremes exch def
+
+CExtremes sortByX firstElt /CLeft defPoint
+
+CExtremes sortByY firstElt /CBot defPoint
+
+CBot CLeft true findSupernessPoints
+2 copy /COuterSuperPoint defPoint
+findSuperness /COuterSuperness exch def
+
+{ flattenpath CBot startAtPoint { 180 gt } endWhenAngle } traceSubpath
+subpathEndpoint /CSomewhereRight defPoint
+CSomewhereRight pointbox
+0.5 vertSplitLine pathLineIntc sortByY revArray 1 get /CInnerTop defPoint
+{ CSomewhereRight startAtPoint CInnerTop endAtPoint } traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath dup
+sortByY firstElt /CInnerBot defPoint
+sortByX firstElt /CInnerLeft defPoint
+CInnerBot uppointbox CInnerLeft pointbox
+
+CInnerBot CInnerLeft false findSupernessPoints
+/CInnerSuperPoint defPoint /CInnerCorner defPoint /CInnerCenter defPoint
+CInnerCorner COuterSuperness scalePoint
+CInnerCenter 1 COuterSuperness sub scalePoint
+addPoint
+/CInnerSuperPointExpected defPoint
+
+(Superpull)
+CInnerSuperPointExpected CInnerSuperPoint subPoint magnitude
+CInnerSuperPointExpected COuterSuperPoint subPoint magnitude
+div
+stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 16 16
+resetPage
+gsave 20 dict begin
+/CurrentFile (E-arm_slab) def
+/CurrentLetter (E) def
+(E) letterPath
+%
+% E-arm_slab.ps
+%
+0.5 vertSplitLine pathLineIntc sortByY revArray 0 2 getinterval loadArray
+/eArmBot defPoint /eArmTop defPoint
+eArmBot pointbox eArmTop pointbox
+
+(Arm thickness) eArmTop ycoor eArmBot ycoor sub stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 17 17
+resetPage
+gsave 20 dict begin
+/CurrentFile (E-beak_darkness-serif) def
+/CurrentLetter (E) def
+(E) letterPath
+%
+% E-beakdark.ps
+%
+flattenpath
+
+0.5 vertSplitLine pathLineIntc sortByY revArray /EVertSplit exch def
+
+EVertSplit 0 2 getinterval loadArray
+/ETopBot defPoint /ETopTop defPoint
+
+{ ETopBot startAtPoint ETopTop endAtPoint } traceSubpath
+{ pathExtremes } useSubpath sortByY firstElt /EBeakBot defPoint
+EBeakBot pointbox
+
+0.75 horizSplitLine pathLineIntc sortByX 0 2 getinterval
+dup 1 get /EStemRight defPoint
+{ } forallPoint addPoint 2 div exch 2 div exch /EStemMid defPoint
+EStemMid pointbox
+EStemMid vertLineThrough drawLine
+ETopBot horizLineThrough drawLine
+intersect pop % Must be true
+/EStemTop defPoint
+EStemTop pointbox
+
+EStemTop 0.2 scalePoint EBeakBot 0.8 scalePoint addPoint
+horizLineThrough pathLineIntc sortByX revArray 1 get /EBeakOne defPoint
+EBeakOne ltpointbox
+
+% Find the beak jut angle, which we will duplicate inside the beak
+{ ETopBot startAtPoint ETopTop endAtPoint } traceSubpath
+{ {
+    { 75 90 withinRange } startWhenAngle
+    { 165 90 withinRange } endBeforeAngle
+  } traceSubpath
+} useSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByY dup firstElt /EBeakBot defPoint lastElt /EBeakTop defPoint
+EBeakBot pointbox EBeakTop uppointbox
+EBeakTop EBeakBot subPoint /EBeakDiff defPoint
+
+
+EBeakDiff 2 scalePoint EBeakOne addPoint
+EBeakDiff -1 scalePoint EBeakOne addPoint
+4 copy
+drawLine
+EStemTop horizLineThrough intersect pop /EBeakCorner defPoint
+EBeakBot horizLineThrough intersect pop /EBeakTip defPoint
+EBeakCorner uppointbox EBeakTip pointbox
+
+EBeakCorner EStemTop avgPoint /EArmMid defPoint EArmMid pointbox
+
+EArmMid EBeakTip drawLine avgPoint /ETriangle defPoint ETriangle pointbox
+ETriangle EBeakCorner drawLine pathLineIntc dup length 0 gt {
+    sortByY lastElt /EBeakPoint defPoint EBeakPoint pointbox
+    EBeakPoint EBeakCorner subPoint magnitude
+    ETriangle EBeakCorner subPoint magnitude div
+} { 0 } ifelse
+
+(Beak darkness) exch stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 18 18
+resetPage
+gsave 20 dict begin
+/CurrentFile (E-beak_jut-serif) def
+/CurrentLetter (E) def
+(E) letterPath
+%
+% E-beakjut.ps
+%
+flattenpath
+0.5 vertSplitLine pathLineIntc sortByY /EVertSplit exch def
+
+EVertSplit 4 2 getinterval loadArray
+/ETopTop defPoint /ETopBot defPoint
+{ ETopBot startAtPoint ETopTop endAtPoint } traceSubpath
+{ {
+    { 75 90 withinRange } startWhenAngle
+    { 165 90 withinRange } endBeforeAngle
+  } traceSubpath
+} useSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByY dup firstElt /EBeakBot defPoint lastElt /EBeakTop defPoint
+EBeakBot pointbox EBeakTop uppointbox
+
+(Beak jut)
+EBeakBot xcoor EBeakTop xcoor sub
+stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 19 19
+resetPage
+gsave 20 dict begin
+/CurrentFile (E-beak_withbar-serif) def
+/CurrentLetter (E) def
+(E) letterPath
+%
+% E-beak_withbar.ps
+%
+flattenpath
+
+0.5 vertSplitLine pathLineIntc sortByY /EVertSplit exch def
+
+EVertSplit 4 2 getinterval loadArray
+/ETopTop defPoint /ETopBot defPoint
+{ ETopBot startAtPoint ETopTop endAtPoint } traceSubpath
+{ pathExtremes } useSubpath
+sortByY dup
+firstElt /EBeakBot defPoint lastElt /EBeakTop defPoint
+EBeakBot pointbox EBeakTop uppointbox
+
+(Beak height)
+EBeakTop ycoor EBeakBot ycoor sub
+stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 20 20
+resetPage
+gsave 20 dict begin
+/CurrentFile (E-cap_bar) def
+/CurrentLetter (E) def
+(E) letterPath
+%
+% E-bar.ps
+%
+flattenpath
+
+0.5 vertSplitLine pathLineIntc sortByY /EVertSplit exch def
+EVertSplit 2 2 getinterval loadArray
+/EBarTop defPoint /EBarBot defPoint
+
+0.2 horizSplitLine pathLineIntc sortByX 1 get
+{ startAtPoint EBarBot endAtPoint } traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath sortByY lastElt /EBarBot defPoint
+{ EBarTop startAtPoint { 170 lt } endWhenAngle } traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath sortByY firstElt /EBarTop defPoint
+EBarTop uppointbox EBarBot pointbox
+
+(Capital bar)
+EBarTop ycoor EBarBot ycoor sub
+stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 21 21
+resetPage
+gsave 20 dict begin
+/CurrentFile (E-hair-serif) def
+/CurrentLetter (E) def
+(E) letterPath
+%
+% E-beakdark.ps
+%
+flattenpath
+
+0.5 vertSplitLine pathLineIntc sortByY /EVertSplit exch def
+
+EVertSplit 4 2 getinterval loadArray
+/ETopTop defPoint /ETopBot defPoint
+ETopTop uppointbox ETopBot pointbox
+
+{ ETopBot startAtPoint ETopTop endAtPoint } traceSubpath
+{ pathExtremes } useSubpath sortByY firstElt /EBeakBot defPoint
+EBeakBot pointbox
+
+ETopBot 0.2 scalePoint EBeakBot 0.8 scalePoint addPoint
+horizLineThrough pathLineIntc sortByX revArray 0 2 getinterval loadArray
+/EBeakInside defPoint /EBeakOutside defPoint
+EBeakOutside rtpointbox EBeakInside ltpointbox
+
+(Hair by beak thickness)
+EBeakOutside xcoor EBeakInside xcoor sub
+stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 22 22
+resetPage
+gsave 20 dict begin
+/CurrentFile (F-F_jut-serif) def
+/CurrentLetter (F) def
+(F) letterPath
+%
+% F-F_jut-serif.ps
+%
+pathExtremes sortByX firstElt /FLeftSerif defPoint
+FLeftSerif pointbox
+
+0.5 horizSplitLine pathLineIntc sortByX firstElt /FLeftStem defPoint
+
+(Leftward jut of F) FLeftStem xcoor FLeftSerif xcoor sub stringOfText
+
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 23 23
+resetPage
+gsave 20 dict begin
+/CurrentFile (H-H_jut-serif) def
+/CurrentLetter (H) def
+(H) letterPath
+%
+% H-H_jut-serif.ps
+%
+0.5 horizSplitLine pathLineIntc sortByX firstElt /HStemLeft defPoint
+
+pathExtremes sortByX firstElt /HJutLeft defPoint
+
+(H outer jut) HStemLeft xcoor HJutLeft xcoor sub stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 24 24
+resetPage
+gsave 20 dict begin
+/CurrentFile (H-cap_bar) def
+/CurrentLetter (H) def
+(H) letterPath
+%
+% H-bar.ps
+%
+0.5 vertSplitLine pathLineIntc sortByY 0 2 getinterval loadArray
+/HBarTop defPoint /HBarBot defPoint
+HBarTop uppointbox HBarBot pointbox
+
+(H bar) HBarTop ycoor HBarBot ycoor sub stringOfText
+
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 25 25
+resetPage
+gsave 20 dict begin
+/CurrentFile (H-cap_serif_space) def
+/CurrentLetter (H) def
+(H) letterPath
+%
+% H-cap_serif_space.ps
+%
+% Space between the edge of the stem of a capital letter and the vertical
+% sidebearings.
+%
+0.5 horizSplitLine pathLineIntc sortByX firstElt /HLeft defPoint
+HLeft pointbox
+0 HLeft ycoor pointbox
+
+(Sidebearing distance) HLeft xcoor stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 26 26
+resetPage
+gsave 20 dict begin
+/CurrentFile (I-bracket-serif) def
+/CurrentLetter (I) def
+(I) letterPath
+%
+% l-bracket-alt.ps
+%
+0.5 vertSplitLine pathLineIntc sortByY firstElt /lBottomPoint defPoint
+0.5 horizSplitLine pathLineIntc sortByX lastElt /lRightPoint defPoint
+lBottomPoint pointbox
+lRightPoint rtpointbox
+
+{ lBottomPoint startAtPoint lRightPoint endAtPoint } traceSubpath
+{ {
+    flattenpath
+    { 45 90 withinRange } startWhenAngle 
+    { 135 90 withinRange } endBeforeAngle
+  } traceSubpath
+} useSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByY lastElt /lTopSlab defPoint
+lTopSlab uppointbox
+
+lRightPoint vertLineThrough drawLine lTopSlab horizLineThrough drawLine
+intersect pop /lSerifCorner defPoint
+
+lTopSlab lSerifCorner subPoint exch lSerifCorner addPoint
+/lBracketPoint defPoint
+
+1 3 div lBracketPoint lTopSlab lSerifCorner findBracket
+/lBracketPoint defPoint
+
+(Lowercase bracket \(alt\)) lBracketPoint ycoor stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 27 27
+resetPage
+gsave 20 dict begin
+/CurrentFile (I-cap_height) def
+/CurrentLetter (I) def
+(I) letterPath
+%
+% I-height.ps
+%
+% Height of capital "I".
+%
+(cap_height)
+measureHeight
+stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 28 28
+resetPage
+gsave 20 dict begin
+/CurrentFile (I-cap_jut-serif) def
+/CurrentLetter (I) def
+(I) letterPath
+%
+% I-cap_jut.ps
+%
+0.5 horizSplitLine pathLineIntc sortByX
+{ 2 copy pointbox } forallPoint
+/IStemRight defPoint /IStemLeft defPoint
+
+{ IStemLeft startAtPoint IStemRight endAtPoint } traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByX lastElt loadArray
+2 copy rtpointbox
+xcoor IStemRight xcoor sub 1.05 div % Correction derived from CM value
+(Uppercase jut) exch stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 29 29
+resetPage
+gsave 20 dict begin
+/CurrentFile (I-cap_stem) def
+/CurrentLetter (I) def
+(I) letterPath
+%
+% I-stem.ps
+%
+% Stem width of "I".
+%
+0.5 horizSplitLine pathLineIntc sortByX 0 2 getinterval
+{ 2 copy pointbox } forallPoint
+subPoint magnitude
+(cap_stem) exch stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 30 30
+resetPage
+gsave 20 dict begin
+/CurrentFile (I-crisp-serif) def
+/CurrentLetter (I) def
+(I) letterPath
+%
+% I-crisp.ps
+%
+pathExtremes sortByY firstElt /lLowestPoint defPoint
+
+0.5 vertSplitLine pathLineIntc sortByY firstElt /lBottomPoint defPoint
+0.5 horizSplitLine pathLineIntc sortByX lastElt /lRightPoint defPoint
+
+{
+    lBottomPoint startAtPoint
+    lRightPoint endAtPoint
+} traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByX lastElt /lRightSlab defPoint
+lRightSlab rtpointbox
+
+lRightSlab vertLineThrough drawLine
+lLowestPoint horizLineThrough drawLine
+intersect pop /lCrispOuter defPoint
+lCrispOuter 45 perpThroughPoint pathLineIntc sortByY firstElt
+/lCrispPoint defPoint
+
+% The distance between lCrispOuter and lCrispPoint = crisp * (sqrt(2) - 1).
+lCrispOuter lCrispPoint subPoint magnitude
+2 sqrt 1 sub div 2 mul 0 max
+(Crisp) exch stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 31 31
+resetPage
+gsave 20 dict begin
+/CurrentFile (I-dish-serif) def
+/CurrentLetter (I) def
+(I) letterPath
+%
+% l-dish.ps
+%
+0.5 vertSplitLine pathLineIntc sortByY firstElt /lBottomPoint defPoint
+%0.5 horizSplitLine pathLineIntc sortByX lastElt /lRightPoint defPoint
+lBottomPoint pointbox
+%lRightPoint rtpointbox
+
+%{ lBottomPoint startAtPoint lRightPoint endAtPoint } traceSubpath
+%{ {
+%    flattenpath
+%    { 45 90 withinRange } startWhenAngle 
+%    { 135 90 withinRange } endBeforeAngle
+%  } traceSubpath
+%} useSubpath
+%drawSubpath
+%{ pathExtremes } useSubpath
+%sortByY dup firstElt /lBotSlab defPoint
+%lastElt /lTopSlab defPoint
+%lBotSlab pointbox
+%lTopSlab uppointbox
+
+pathExtremes sortByY firstElt /lLowestPoint defPoint
+lLowestPoint pointbox
+
+(Dish)
+lBottomPoint ycoor
+lLowestPoint ycoor sub
+0 max
+stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 32 32
+resetPage
+gsave 20 dict begin
+/CurrentFile (I-slab-serif) def
+/CurrentLetter (I) def
+(I) letterPath
+%
+% l-slab.ps
+%
+% Thickness of serif of "l"
+%
+0.5 vertSplitLine pathLineIntc sortByY firstElt /lBottomPoint defPoint
+0.5 horizSplitLine pathLineIntc sortByX lastElt /lRightPoint defPoint
+lBottomPoint pointbox
+lRightPoint rtpointbox
+
+% Find the place where the top of the serif begins.
+{ lBottomPoint startAtPoint lRightPoint endAtPoint } traceSubpath
+{ {
+    flattenpath
+    { 45 90 withinRange } startWhenAngle 
+    { 135 90 withinRange } endBeforeAngle
+  } traceSubpath
+} useSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByY lastElt /lTopSlab defPoint
+lTopSlab uppointbox
+
+% Take a weighted average of lRightPoint and lTopSlab, ratio 4:1.
+lTopSlab 0.8 scalePoint lRightPoint 0.2 scalePoint addPoint
+vertLineThrough pathLineIntc sortByY 0 2 getinterval loadArray
+/lSlabTop defPoint /lSlabBot defPoint
+
+lSlabTop uppointbox lSlabBot pointbox
+
+(Serif thickness)
+lSlabTop ycoor
+lSlabBot ycoor sub
+stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 33 33
+resetPage
+gsave 20 dict begin
+/CurrentFile (O-O_superness) def
+/CurrentLetter (O) def
+(O) letterPath
+%
+% O-superness.ps
+%
+
+pathExtremes /OExtremes exch def
+
+OExtremes sortByX firstElt /OLeft defPoint
+OExtremes sortByX lastElt /ORight defPoint
+OExtremes sortByY firstElt /OBot defPoint
+OExtremes sortByY lastElt /OTop defPoint
+
+OBot OLeft true findSupernessPoints findSuperness
+(Superness, O bottom left) exch stringOfText
+
+OTop OLeft true findSupernessPoints findSuperness
+(Superness, O top left) exch stringOfText
+
+OBot ORight true findSupernessPoints findSuperness
+(Superness, O bottom right) exch stringOfText
+
+OTop ORight true findSupernessPoints findSuperness
+(Superness, O bottom right) exch stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 34 34
+resetPage
+gsave 20 dict begin
+/CurrentFile (O-cap_curve-alt) def
+/CurrentLetter (O) def
+(O) letterPath
+%
+% O-curve-alt.ps
+%
+pathLL /oBot exch def /oLeft exch def
+pathUR /oTop exch def /oRight exch def
+
+/oCurve 0 def
+
+oBot oTop oBot sub 30 div oTop {
+    dup oBot sub oTop exch sub oRight exch 3 -1 roll oLeft exch
+    pathLineIntc sortByX revArray dup length 4 ge {
+	dup firstElt /oOuter defPoint 1 get /oInner defPoint
+	oOuter ltpointbox oInner rtpointbox
+	oOuter oInner subPoint magnitude oCurve gt {
+	    /oCurve oOuter oInner subPoint magnitude def
+	} if
+    } {
+	pop
+    } ifelse
+} for
+
+(Lowercase curve \(alt\)) oCurve stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 35 35
+resetPage
+gsave 20 dict begin
+/CurrentFile (O-cap_curve) def
+/CurrentLetter (O) def
+(O) letterPath
+%
+% O-curve.ps
+%
+
+pathLL /oBot exch def /oLeft exch def
+pathUR /oTop exch def /oRight exch def
+
+/oCurve 0 def
+
+oBot oTop oBot sub 30 div oTop {
+    dup oBot sub oTop exch sub oRight exch 3 -1 roll oLeft exch
+    pathLineIntc sortByX dup length 4 ge {
+	dup firstElt /oOuter defPoint 1 get /oInner defPoint
+	oOuter ltpointbox oInner rtpointbox
+	oOuter oInner subPoint magnitude oCurve gt {
+	    /oCurve oOuter oInner subPoint magnitude def
+	} if
+    } {
+	pop
+    } ifelse
+} for
+
+(Lowercase curve) oCurve stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 36 36
+resetPage
+gsave 20 dict begin
+/CurrentFile (O-o) def
+/CurrentLetter (O) def
+(O) letterPath
+%
+% O-overshoot.ps
+%
+% Overshoot of capital O. We use the top overshoot because that reflects the
+% usage of capital overshoot in the uppercase Greek letters Omega and Upsilon.
+%
+
+measureHeight /OHeight exch def
+
+gsave
+(I) letterPath
+measureHeight /IHeight exch def
+grestore
+
+0 drawHorizLine
+
+(Top capital overshoot) OHeight IHeight sub stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 37 37
+resetPage
+gsave 20 dict begin
+/CurrentFile (P-cap_curve) def
+/CurrentLetter (P) def
+(P) letterPath
+%
+% P-curve.ps
+%
+pathExtremes sortByX lastElt /PRight defPoint
+PRight pointbox
+PRight horizLineThrough pathLineIntc sortByX revArray 1 get /PRightIn defPoint
+PRightIn pointbox
+
+(Curve) PRight xcoor PRightIn xcoor sub stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 38 38
+resetPage
+gsave 20 dict begin
+/CurrentFile (S-cap_ess) def
+/CurrentLetter (S) def
+(S) letterPath
+%
+% S-cap_ess.ps
+%
+0.5 vertSplitLine
+pathLineIntc sortByY
+2 2 getinterval loadArray
+/STopPoint defPoint /SBotPoint defPoint
+STopPoint pathAngle pop 90 add
+dup cos exch sin 500 scalePoint STopPoint addPoint
+STopPoint pathLineIntc sortByY
+% Check if the last element is actually sTopPoint
+dup lastElt loadArray STopPoint 5 eqPoint {
+    % If so, get the second to last one.
+    revArray 1 get
+} {
+    lastElt
+} ifelse
+/STopPerpPoint defPoint
+
+(Uppercase ess) STopPoint STopPerpPoint subPoint magnitude stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 39 39
+resetPage
+gsave 20 dict begin
+/CurrentFile (T-cap_bar) def
+/CurrentLetter (T) def
+(T) letterPath
+%
+% T-bar.ps
+%
+0.2 horizSplitLine pathLineIntc sortByX 0 2 getinterval loadArray
+/TStemRight defPoint /TStemLeft defPoint
+TStemRight pointbox TStemLeft pointbox
+
+{
+    TStemRight startAtPoint
+    { dup 0 eq exch 270 gt or } endWhenAngle
+} traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath sortByY lastElt /TRightBarBot defPoint
+TRightBarBot pointbox
+
+TRightBarBot vertLineThrough pathLineIntc sortByY lastElt /TRightBarTop defPoint
+TRightBarTop uppointbox
+
+(T bar) TRightBarTop ycoor TRightBarBot ycoor sub stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 40 40
+resetPage
+gsave 20 dict begin
+/CurrentFile (V-cap_hair) def
+/CurrentLetter (V) def
+(V) letterPath
+%
+% V-hair.ps
+%
+0.5 horizSplitLine pathLineIntc
+sortByX 3 get loadArray
+2 copy pathAngle {
+    perpThroughPoint
+	resetIntc
+    pathLineIntc sortByX revArray
+    0 2 getinterval { 2 copy pointbox } forallPoint
+    subPoint magnitude
+    (Uppercase hair) exch stringOfText
+} {
+    pop pop
+} ifelse
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 41 41
+resetPage
+gsave 20 dict begin
+/CurrentFile (V-cap_stem) def
+/CurrentLetter (V) def
+(V) letterPath
+%
+% V-stem.ps
+%
+0.5 horizSplitLine pathLineIntc
+sortByX 0 get loadArray
+2 copy pathAngle {
+    perpThroughPoint
+	resetIntc
+    pathLineIntc sortByX
+    0 2 getinterval { 2 copy pointbox } forallPoint
+    subPoint magnitude
+    (Uppercase stem (thinned)) exch stringOfText
+} {
+    pop pop
+} ifelse
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 42 42
+resetPage
+gsave 20 dict begin
+/CurrentFile (V-tiny) def
+/CurrentLetter (V) def
+(V) letterPath
+%
+% v-tiny.ps
+%
+0.06 horizSplitLine pathLineIntc sortByX dup
+firstElt /vLStrokeOne defPoint lastElt /vRStrokeOne defPoint
+0.03 horizSplitLine pathLineIntc sortByX dup
+firstElt /vLStrokeTwo defPoint lastElt /vRStrokeTwo defPoint
+
+/leftDiagLine {
+    vLStrokeTwo vLStrokeOne subPoint 1000 scalePoint vLStrokeTwo addPoint
+    vLStrokeOne 
+} def
+/rightDiagLine {
+    vRStrokeTwo vRStrokeOne subPoint 1000 scalePoint vRStrokeTwo addPoint
+    vRStrokeOne
+} def
+/bottomLine {
+    pathLL horizLineThrough
+} def
+
+mark
+leftDiagLine drawLine
+rightDiagLine drawLine
+bottomLine drawLine
+cleartomark
+
+leftDiagLine bottomLine
+intersect pop % Assert true
+/vStrokeCorner defPoint
+vStrokeCorner pointbox
+
+% What is the angle of each of the lines? Then we can draw the angle bisector.
+/vLAngle leftDiagLine lineAngle def
+/vRAngle bottomLine lineAngle def
+
+% This calculates the angle of the angle bisector line
+vLAngle vRAngle sub 2 div vRAngle add
+
+% Make a line of this angle through the V's corner
+dup cos exch sin /vBisectorOffset defPoint
+vBisectorOffset 1000 scalePoint vStrokeCorner addPoint
+vBisectorOffset -100 scalePoint vStrokeCorner addPoint
+
+pathLineIntc dup length 0 gt {
+    sortByY firstElt /vCorner defPoint
+    vCorner uppointbox
+    vStrokeCorner vCorner vLAngle vRAngle sub penDiameter
+} {
+    pop 0
+} ifelse
+
+(Curvature of v apex) exch stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 43 43
+resetPage
+gsave 20 dict begin
+/CurrentFile (Y-cap_hair) def
+/CurrentLetter (Y) def
+(Y) letterPath
+%
+% Y-hair.ps
+%
+0.7 horizSplitLine pathLineIntc sortByX lastElt /YLeftOuter defPoint
+YLeftOuter YLeftOuter pathAngle pop perpThroughPoint
+pathLineIntc sortByX revArray 1 get /YLeftInner defPoint
+YLeftOuter pointbox YLeftInner pointbox
+
+YLeftOuter YLeftInner subPoint magnitude
+(Uppercase hair) exch stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 44 44
+resetPage
+gsave 20 dict begin
+/CurrentFile ([-body_height) def
+/CurrentLetter ([) def
+([) letterPath
+%
+% (-body_height.ps
+%
+% ) to match it...
+measureHeight /parenHeight exch def
+(d) letterPath measureHeight /ascHeight exch def
+
+parenHeight ascHeight le {
+    ascHeight 1 add
+} {
+    parenHeight
+} ifelse
+
+(Body height) exch stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 45 45
+resetPage
+gsave 20 dict begin
+/CurrentFile (b-u) def
+/CurrentLetter (b) def
+(b) letterPath
+%
+% n-u.ps
+%
+% Unit is 1/10 width of "n".
+%
+pathExtremes sortByX lastElt /bRight defPoint
+0.5 horizSplitLine pathLineIntc sortByX firstElt /bLeft defPoint
+(Unit based on b) bRight xcoor bLeft xcoor sub 7.5 div stringOfText
+
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 46 46
+resetPage
+gsave 20 dict begin
+/CurrentFile (d-stem) def
+/CurrentLetter (d) def
+(d) letterPath
+%
+% d-stem.ps
+%
+0 XHeight 2 div horizLineThrough pathLineIntc sortByX revArray 0 2 getinterval
+loadArray /dStemLeft defPoint /dStemRight defPoint 
+dStemRight pointbox dStemLeft pointbox
+
+(Lowercase stem) dStemRight xcoor dStemLeft xcoor sub stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 47 47
+resetPage
+gsave 20 dict begin
+/CurrentFile (i-slant-ital) def
+/CurrentLetter (i) def
+italfont
+(i) letterPath
+%
+% i-slant-ital.ps
+%
+currentfont /FontInfo get /ItalicAngle get
+neg dup sin exch cos div
+
+(Italic angle) exch stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 48 48
+resetPage
+gsave 20 dict begin
+/CurrentFile (k-bar_height) def
+/CurrentLetter (k) def
+(k) letterPath
+%
+% k-barheight.ps
+%
+% bar_height
+%
+% This is tricky, since the bar of the "e" is an especially bad indicator! We
+% will use the join of the "k" instead.
+%
+flattenpath
+
+% This line should be well below the junction point.
+0.1 horizSplitLine pathLineIntc sortByX
+1 get /kInnerLowerBar defPoint
+{ kInnerLowerBar startAtPoint { 270 gt } endWhenAngle } traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath sortByY lastElt /kJoinBot defPoint
+kJoinBot pointbox
+
+0 XHeight 0.9 mul horizLineThrough pathLineIntc sortByX
+2 get /kInnerUpperStroke defPoint
+{
+    kInnerUpperStroke startAtPoint
+    { 45 90 withinRange } endWhenAngle
+} traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath sortByY firstElt /kJoinTop defPoint
+kJoinTop uppointbox
+
+(bar_height)
+kJoinTop ycoor kJoinBot ycoor add 2 div
+stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 49 49
+resetPage
+gsave 20 dict begin
+/CurrentFile (l-asc_height) def
+/CurrentLetter (l) def
+(l) letterPath
+%
+% l-asc.ps
+%
+% Ascender height of "l".
+%
+(asc_height)
+measureHeight
+stringOfText
+
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 50 50
+resetPage
+gsave 20 dict begin
+/CurrentFile (l-bracket-serif) def
+/CurrentLetter (l) def
+(l) letterPath
+%
+% l-bracket-alt.ps
+%
+0.5 vertSplitLine pathLineIntc sortByY firstElt /lBottomPoint defPoint
+0.5 horizSplitLine pathLineIntc sortByX lastElt /lRightPoint defPoint
+lBottomPoint pointbox
+lRightPoint rtpointbox
+
+{ lBottomPoint startAtPoint lRightPoint endAtPoint } traceSubpath
+{ pathExtremes } useSubpath sortByX lastElt /lRightJut defPoint
+lRightJut rtpointbox
+
+lRightPoint 0.2 scalePoint lRightJut 0.8 scalePoint addPoint
+vertLineThrough pathLineIntc sortByY 1 get /lSlabTop defPoint
+lSlabTop uppointbox
+
+lRightJut xcoor lSlabTop ycoor /lSlabCorner defPoint
+
+lRightPoint xcoor lSlabCorner ycoor /lCorner defPoint
+
+lSlabCorner uppointbox
+lCorner pointbox
+
+1 3 div lRightPoint lSlabCorner lCorner findBracket
+/lBracketPoint defPoint
+
+(Lowercase bracket \(alt\)) lBracketPoint ycoor stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 51 51
+resetPage
+gsave 20 dict begin
+/CurrentFile (l-crisp-serif) def
+/CurrentLetter (l) def
+(l) letterPath
+%
+% l-crisp.ps
+%
+pathExtremes sortByY firstElt /lLowestPoint defPoint
+
+0.5 vertSplitLine pathLineIntc sortByY firstElt /lBottomPoint defPoint
+0.5 horizSplitLine pathLineIntc sortByX lastElt /lRightPoint defPoint
+
+{
+    lBottomPoint startAtPoint
+    lRightPoint endAtPoint
+} traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByX lastElt /lRightSlab defPoint
+lRightSlab rtpointbox
+
+lRightSlab vertLineThrough drawLine
+lLowestPoint horizLineThrough drawLine
+intersect pop /lCrispOuter defPoint
+lCrispOuter 45 perpThroughPoint pathLineIntc sortByY firstElt
+/lCrispPoint defPoint
+
+% The distance between lCrispOuter and lCrispPoint = crisp * (sqrt(2) - 1).
+lCrispOuter lCrispPoint subPoint magnitude
+2 sqrt 1 sub div 2 mul 0 max
+(Crisp) exch stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 52 52
+resetPage
+gsave 20 dict begin
+/CurrentFile (l-dish-serif) def
+/CurrentLetter (l) def
+(l) letterPath
+%
+% l-dish.ps
+%
+0.5 vertSplitLine pathLineIntc sortByY firstElt /lBottomPoint defPoint
+%0.5 horizSplitLine pathLineIntc sortByX lastElt /lRightPoint defPoint
+lBottomPoint pointbox
+%lRightPoint rtpointbox
+
+%{ lBottomPoint startAtPoint lRightPoint endAtPoint } traceSubpath
+%{ {
+%    flattenpath
+%    { 45 90 withinRange } startWhenAngle 
+%    { 135 90 withinRange } endBeforeAngle
+%  } traceSubpath
+%} useSubpath
+%drawSubpath
+%{ pathExtremes } useSubpath
+%sortByY dup firstElt /lBotSlab defPoint
+%lastElt /lTopSlab defPoint
+%lBotSlab pointbox
+%lTopSlab uppointbox
+
+pathExtremes sortByY firstElt /lLowestPoint defPoint
+lLowestPoint pointbox
+
+(Dish)
+lBottomPoint ycoor
+lLowestPoint ycoor sub
+0 max
+stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 53 53
+resetPage
+gsave 20 dict begin
+/CurrentFile (l-serif_drop-ital) def
+/CurrentLetter (l) def
+italfont
+(l) letterPath
+%
+% l-serifdrop.ps
+%
+% Drop of the upper serif.
+%
+flattenpath
+
+0.5 horizSplitLine pathLineIntc sortByX
+{ 2 copy pointbox } forallPoint
+/lStemRight defPoint /lStemLeft defPoint
+
+{ lStemRight startAtPoint lStemLeft endAtPoint } traceSubpath
+{ {
+    { 135 90 withinRange } startWhenAngle
+    { 225 90 withinRange } endBeforeAngle
+} traceSubpath } useSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByY dup firstElt /lTopSerifBot defPoint
+lastElt /lTopSerifTop defPoint
+lTopSerifBot pointbox
+lTopSerifTop uppointbox
+
+(Serif drop)
+lTopSerifTop ycoor lTopSerifBot ycoor sub 0 max
+stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 54 54
+resetPage
+gsave 20 dict begin
+/CurrentFile (l-slab-serif) def
+/CurrentLetter (l) def
+(l) letterPath
+%
+% l-slab.ps
+%
+% Thickness of serif of "l"
+%
+0.5 vertSplitLine pathLineIntc sortByY firstElt /lBottomPoint defPoint
+0.5 horizSplitLine pathLineIntc sortByX lastElt /lRightPoint defPoint
+lBottomPoint pointbox
+lRightPoint rtpointbox
+
+% Find the place where the top of the serif begins.
+{ lBottomPoint startAtPoint lRightPoint endAtPoint } traceSubpath
+{ {
+    flattenpath
+    { 45 90 withinRange } startWhenAngle 
+    { 135 90 withinRange } endBeforeAngle
+  } traceSubpath
+} useSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByY lastElt /lTopSlab defPoint
+lTopSlab uppointbox
+
+% Take a weighted average of lRightPoint and lTopSlab, ratio 4:1.
+lTopSlab 0.8 scalePoint lRightPoint 0.2 scalePoint addPoint
+vertLineThrough pathLineIntc sortByY 0 2 getinterval loadArray
+/lSlabTop defPoint /lSlabBot defPoint
+
+lSlabTop uppointbox lSlabBot pointbox
+
+(Serif thickness)
+lSlabTop ycoor
+lSlabBot ycoor sub
+stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 55 55
+resetPage
+gsave 20 dict begin
+/CurrentFile (l-stem) def
+/CurrentLetter (l) def
+(l) letterPath
+%
+% l-stem.ps
+%
+0.5 horizSplitLine pathLineIntc sortByX
+{ 2 copy pointbox } forallPoint
+/lStemRight defPoint /lStemLeft defPoint
+lStemRight lStemLeft subPoint magnitude
+(Lowercase stem) exch stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 56 56
+resetPage
+gsave 20 dict begin
+/CurrentFile (m-monowidth) def
+/CurrentLetter (m) def
+(m) letterPath
+%
+% m-monospace.ps
+%
+(m) stringwidth pop /mwidth exch def
+(l) letterPath
+(l) stringwidth pop /lwidth exch def
+
+mwidth lwidth sub abs 1 lt { lwidth } { 0 } ifelse
+(Monospace) exch stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 57 57
+resetPage
+gsave 20 dict begin
+/CurrentFile (n-jut-serif) def
+/CurrentLetter (n) def
+(n) letterPath
+%
+% l-serifjut.ps
+%
+0.5 horizSplitLine pathLineIntc sortByX firstElt
+/lStemLeft defPoint
+
+pathExtremes sortByX firstElt /lJutLeft defPoint
+
+lStemLeft xcoor lJutLeft xcoor sub
+(Lowercase jut) exch stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 58 58
+resetPage
+gsave 20 dict begin
+/CurrentFile (n-thin_join) def
+/CurrentLetter (n) def
+(n) letterPath
+%
+% n-thin_join.ps
+%
+0.5 vertSplitLine pathLineIntc sortByY lastElt /nTop defPoint
+nTop pointbox
+
+flattenpath
+
+
+{ nTop startAtPoint { 179 lt } endBeforeAngle } traceSubpath
+subpathEndpoint /nJoin defPoint
+
+0.5 horizSplitLine pathLineIntc sortByX 1 2 getinterval loadArray
+/nInRight defPoint /nInLeft defPoint
+nInRight pointbox nInLeft pointbox
+
+{ nInLeft startAtPoint nInRight endAtPoint } traceSubpath
+drawSubpath
+cvlit /nInSubpath exch def
+
+/thinJoin 1000 def
+
+290 5 340 {
+    dup cos exch sin 300 scalePoint nJoin addPoint /nAngleEnd defPoint
+    nInSubpath { nAngleEnd nJoin pathLineIntc } useSubpath
+    dup length 0 gt {
+	sortByX firstElt loadArray nJoin subPoint magnitude
+	dup thinJoin lt {
+	    /thinJoin exch def
+	} { pop } ifelse
+    } {
+	pop
+    } ifelse
+} for
+
+(Thin join) thinJoin stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 59 59
+resetPage
+gsave 20 dict begin
+/CurrentFile (o-curve-alt) def
+/CurrentLetter (o) def
+(o) letterPath
+%
+% O-curve-alt.ps
+%
+pathLL /oBot exch def /oLeft exch def
+pathUR /oTop exch def /oRight exch def
+
+/oCurve 0 def
+
+oBot oTop oBot sub 30 div oTop {
+    dup oBot sub oTop exch sub oRight exch 3 -1 roll oLeft exch
+    pathLineIntc sortByX revArray dup length 4 ge {
+	dup firstElt /oOuter defPoint 1 get /oInner defPoint
+	oOuter ltpointbox oInner rtpointbox
+	oOuter oInner subPoint magnitude oCurve gt {
+	    /oCurve oOuter oInner subPoint magnitude def
+	} if
+    } {
+	pop
+    } ifelse
+} for
+
+(Lowercase curve \(alt\)) oCurve stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 60 60
+resetPage
+gsave 20 dict begin
+/CurrentFile (o-curve) def
+/CurrentLetter (o) def
+(o) letterPath
+%
+% O-curve.ps
+%
+
+pathLL /oBot exch def /oLeft exch def
+pathUR /oTop exch def /oRight exch def
+
+/oCurve 0 def
+
+oBot oTop oBot sub 30 div oTop {
+    dup oBot sub oTop exch sub oRight exch 3 -1 roll oLeft exch
+    pathLineIntc sortByX dup length 4 ge {
+	dup firstElt /oOuter defPoint 1 get /oInner defPoint
+	oOuter ltpointbox oInner rtpointbox
+	oOuter oInner subPoint magnitude oCurve gt {
+	    /oCurve oOuter oInner subPoint magnitude def
+	} if
+    } {
+	pop
+    } ifelse
+} for
+
+(Lowercase curve) oCurve stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 61 61
+resetPage
+gsave 20 dict begin
+/CurrentFile (o-o) def
+/CurrentLetter (o) def
+(o) letterPath
+%
+% o-overshoot.ps
+%
+measureDepth /oDepth exch def
+
+0 drawHorizLine
+
+(Bottom lowercase overshoot) oDepth 2 mul stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 62 62
+resetPage
+gsave 20 dict begin
+/CurrentFile (o-superness) def
+/CurrentLetter (o) def
+(o) letterPath
+%
+% o-superness.ps
+%
+
+pathExtremes /OExtremes exch def
+
+OExtremes sortByX firstElt /OLeft defPoint
+OExtremes sortByX lastElt /ORight defPoint
+OExtremes sortByY firstElt /OBot defPoint
+OExtremes sortByY lastElt /OTop defPoint
+
+OBot OLeft true findSupernessPoints findSuperness
+(Superness, O bottom left) exch stringOfText
+
+OTop OLeft true findSupernessPoints findSuperness
+(Superness, O top left) exch stringOfText
+
+OBot ORight true findSupernessPoints findSuperness
+(Superness, O bottom right) exch stringOfText
+
+OTop ORight true findSupernessPoints findSuperness
+(Superness, O bottom right) exch stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 63 63
+resetPage
+gsave 20 dict begin
+/CurrentFile (o-u) def
+/CurrentLetter (o) def
+(o) letterPath
+%
+% n-u.ps
+%
+% Unit is 1/10 width of "n".
+%
+pathExtremes sortByX dup firstElt /oLeft defPoint lastElt /oRight defPoint
+(Unit based on o) oRight xcoor oLeft xcoor sub 7.5 div stringOfText
+
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 64 64
+resetPage
+gsave 20 dict begin
+/CurrentFile (o-vair) def
+/CurrentLetter (o) def
+(o) letterPath
+%
+% o-vair-alt.ps
+%
+pathLL /oBot exch def /oLeft exch def
+pathUR /oTop exch def /oRight exch def
+/pathMidHt oBot oTop add 2 div def
+
+/oVair 1000 def
+
+oLeft oRight oLeft sub 20 div oRight {
+    0 vertLineThrough pathLineIntc sortByY dup length 0 gt {
+	lastElt /curPoint defPoint
+	curPoint curPoint pathAngle pop perpThroughPoint
+	pathLineIntc dup length 2 ge {
+	    sortByY revArray 1 get /curInside defPoint
+	    curPoint uppointbox curInside pointbox
+	    curPoint curInside subPoint magnitude oVair lt {
+		/oVair curPoint curInside subPoint magnitude def
+	    } if
+	} {
+	    pop
+	} ifelse
+    } {
+	pop
+    } ifelse
+} for
+
+(Lowercase vair \(alt\)) oVair stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 65 65
+resetPage
+gsave 20 dict begin
+/CurrentFile (o-vair_corr) def
+/CurrentLetter (o) def
+(o) letterPath
+%
+% o-vair_corr.ps
+%
+pathLL /oBot exch def /oLeft exch def
+pathUR /oTop exch def /oRight exch def
+/pathMidHt oBot oTop add 2 div def
+
+/oVair 1000 def
+/oBotVair 1000 def
+
+oLeft oRight oLeft sub 20 div oRight {
+    0 vertLineThrough pathLineIntc sortByY dup length 1 gt {
+	dup lastElt /curPoint defPoint firstElt /curBot defPoint
+	curPoint curPoint pathAngle pop perpThroughPoint
+	pathLineIntc dup length 2 ge {
+	    sortByY revArray 1 get /curInside defPoint
+	    curPoint uppointbox curInside pointbox
+	    curPoint curInside subPoint magnitude oVair lt {
+		/oVair curPoint curInside subPoint magnitude def
+	    } if
+	} {
+	    pop
+	} ifelse
+	curBot curBot pathAngle pop perpThroughPoint
+	pathLineIntc dup length 2 ge {
+	    sortByY 1 get /curBotInside defPoint
+	    curBot pointbox curBotInside uppointbox
+	    curBot curBotInside subPoint magnitude oBotVair lt {
+		/oBotVair curBot curBotInside subPoint magnitude def
+	    } if
+	} {
+	    pop
+	} ifelse
+    } {
+	pop
+    } ifelse
+} for
+
+(Lowercase vair_corr) oBotVair oVair sub 0 max stringOfText
+
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 66 66
+resetPage
+gsave 20 dict begin
+/CurrentFile (q-desc_depth) def
+/CurrentLetter (q) def
+(q) letterPath
+%
+% q-desc.ps
+%
+% Measures descender of "q".
+%
+
+(desc_depth)
+measureDepth
+stringOfText
+
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 67 67
+resetPage
+gsave 20 dict begin
+/CurrentFile (r-flare) def
+/CurrentLetter (r) def
+(r) letterPath
+%
+% r-flare.ps
+%
+% Flare of tip of lowercase "r".
+%
+
+% The old algorithm wasn't robust enough.
+%flattenpath
+%0.3 horizSplitLine pathLineIntc sortByX lastElt /rStemRight defPoint
+%rStemRight pointbox
+%{ rStemRight startAtPoint { 270 gt } endWhenAngle } traceSubpath
+%subpathEndpoint /rInnerCurveTop defPoint
+%{ rInnerCurveTop startAtPoint { 90 lt } endWhenAngle } traceSubpath
+%drawSubpath
+%{ pathExtremes } useSubpath sortByY firstElt /rFlareBot defPoint
+%rFlareBot pointbox
+%rFlareBot vertLineThrough pathLineIntc sortByY lastElt /rFlareTop defPoint
+%rFlareTop uppointbox
+%
+%(Flare of tip)
+%rFlareTop ycoor rFlareBot ycoor sub
+%stringOfText
+
+0.3 horizSplitLine pathLineIntc sortByX 1 get /rStemRight defPoint
+rStemRight xcoor 20 add /rArcLeft exch def
+
+pathExtremes sortByY lastElt /rTopPoint defPoint
+
+{ rStemRight startAtPoint rTopPoint endAtPoint } traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath sortByX lastElt xcoor 5 sub /rArcRight exch def
+
+/rFlareBBox { rArcLeft pathLL ycoor rArcRight pathUR ycoor } def
+
+mark
+rArcLeft
+rArcRight rArcLeft sub 20 div
+/rFlare 0 def
+rArcRight {
+    0 vertLineThrough pathLineIntc sortByY lastElt /rTopPt defPoint
+    rFlareBBox rTopPt rTopPt pathAngle pop 90 add boundedLine
+    pathLineIntc sortByY revArray
+    dup length 2 ge {
+	0 2 getinterval loadArray /pt1 defPoint /pt2 defPoint
+	    pt1 pointbox pt2 pointbox
+	pt1 pt2 subPoint magnitude
+	dup rFlare gt {
+	    /rFlare exch def
+	} if
+    } if
+} for
+cleartomark
+
+(Flare of tip) rFlare stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 68 68
+resetPage
+gsave 20 dict begin
+/CurrentFile (s-ess) def
+/CurrentLetter (s) def
+(s) letterPath
+%
+% s-ess.ps
+%
+0.5 vertSplitLine
+pathLineIntc sortByY
+2 2 getinterval loadArray
+/sTopPoint defPoint /sBotPoint defPoint
+sTopPoint pathAngle pop 90 add
+dup cos exch sin 500 scalePoint sTopPoint addPoint
+sTopPoint pathLineIntc sortByY
+% Check if the last element is actually sTopPoint
+dup lastElt loadArray sTopPoint 5 eqPoint {
+    % If so, get the second to last one.
+    revArray 1 get
+} {
+    lastElt
+} ifelse
+/sTopPerpPoint defPoint
+sTopPerpPoint pointbox
+
+(Lowercase ess) sTopPoint sTopPerpPoint subPoint magnitude stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 69 69
+resetPage
+gsave 20 dict begin
+/CurrentFile (t-bar) def
+/CurrentLetter (t) def
+(t) letterPath
+%
+% t-bar.ps
+%
+0.5 horizSplitLine pathLineIntc sortByX 1 get loadArray
+20 0 addPoint vertLineThrough pathLineIntc sortByY revArray
+0 2 getinterval loadArray
+/tBarBot defPoint /tBarTop defPoint
+tBarBot pointbox tBarTop uppointbox
+
+(Bar thickness)
+tBarTop ycoor tBarBot ycoor sub
+stringOfText
+
+
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 70 70
+resetPage
+gsave 20 dict begin
+/CurrentFile (v-hair) def
+/CurrentLetter (v) def
+(v) letterPath
+%
+% v-hair.ps
+%
+% Hair width of v.
+%
+0.5 horizSplitLine pathLineIntc
+sortByX 3 get loadArray
+2 copy pathAngle {
+    perpThroughPoint
+	resetIntc
+    pathLineIntc sortByX revArray
+    0 2 getinterval { 2 copy pointbox } forallPoint
+    subPoint magnitude
+    (Lowercase hair) exch stringOfText
+} {
+    pop pop
+} ifelse
+
+
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 71 71
+resetPage
+gsave 20 dict begin
+/CurrentFile (v-stem) def
+/CurrentLetter (v) def
+(v) letterPath
+%
+% v-stem.ps
+%
+0.5 horizSplitLine pathLineIntc
+sortByX 0 get loadArray
+2 copy pathAngle {
+    perpThroughPoint
+	resetIntc
+    pathLineIntc sortByX
+    0 2 getinterval { 2 copy pointbox } forallPoint
+    subPoint magnitude
+    (Lowercase stem (thinned)) exch stringOfText
+} {
+    pop pop
+} ifelse
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 72 72
+resetPage
+gsave 20 dict begin
+/CurrentFile (v-tiny) def
+/CurrentLetter (v) def
+(v) letterPath
+%
+% v-tiny.ps
+%
+0.06 horizSplitLine pathLineIntc sortByX dup
+firstElt /vLStrokeOne defPoint lastElt /vRStrokeOne defPoint
+0.03 horizSplitLine pathLineIntc sortByX dup
+firstElt /vLStrokeTwo defPoint lastElt /vRStrokeTwo defPoint
+
+/leftDiagLine {
+    vLStrokeTwo vLStrokeOne subPoint 1000 scalePoint vLStrokeTwo addPoint
+    vLStrokeOne 
+} def
+/rightDiagLine {
+    vRStrokeTwo vRStrokeOne subPoint 1000 scalePoint vRStrokeTwo addPoint
+    vRStrokeOne
+} def
+/bottomLine {
+    pathLL horizLineThrough
+} def
+
+mark
+leftDiagLine drawLine
+rightDiagLine drawLine
+bottomLine drawLine
+cleartomark
+
+leftDiagLine bottomLine
+intersect pop % Assert true
+/vStrokeCorner defPoint
+vStrokeCorner pointbox
+
+% What is the angle of each of the lines? Then we can draw the angle bisector.
+/vLAngle leftDiagLine lineAngle def
+/vRAngle bottomLine lineAngle def
+
+% This calculates the angle of the angle bisector line
+vLAngle vRAngle sub 2 div vRAngle add
+
+% Make a line of this angle through the V's corner
+dup cos exch sin /vBisectorOffset defPoint
+vBisectorOffset 1000 scalePoint vStrokeCorner addPoint
+vBisectorOffset -100 scalePoint vStrokeCorner addPoint
+
+pathLineIntc dup length 0 gt {
+    sortByY firstElt /vCorner defPoint
+    vCorner uppointbox
+    vStrokeCorner vCorner vLAngle vRAngle sub penDiameter
+} {
+    pop 0
+} ifelse
+
+(Curvature of v apex) exch stringOfText
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Page: 73 73
+resetPage
+gsave 20 dict begin
+/CurrentFile (x-x_height) def
+/CurrentLetter (x) def
+(x) letterPath
+%
+% x-height.ps
+%
+% x height.
+%
+(x_height) measureHeight stringOfText
+
+count 0 gt { (There's stuff on the stack!) == } if
+end grestore
+showpage
+%%Trailer
+%%Pages: 73
+%%EOF

@@ -1,0 +1,450 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE bigop.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% This file contains pairs of large operators for math extension fonts.
+
+% Each operator has a `{\tt\char`\\textstyle}' form, for math in text,
+% and a `{\tt\char`\\displaystyle}' form, for displayed formulas.
+
+% Character codes \0106--\0141 are generated.
+
+charlist oct"106": oct"107";  % square union signs
+charlist oct"110": oct"111";  % contour integral signs
+charlist oct"112": oct"113";  % circle-dot operators
+charlist oct"114": oct"115";  % circle-plus operators
+charlist oct"116": oct"117";  % circle-times operators
+charlist oct"120": oct"130";  % summation signs
+charlist oct"121": oct"131";  % product signs
+charlist oct"122": oct"132";  % integral signs
+charlist oct"123": oct"133";  % union signs
+charlist oct"124": oct"134";  % intersection signs
+charlist oct"125": oct"135";  % multiset union signs
+charlist oct"126": oct"136";  % lattice infimum signs
+charlist oct"127": oct"137";  % lattice supremum signs
+charlist oct"140": oct"141";  % coproduct signs
+
+cmchar "\textstyle square set union sign";
+beginchar(oct"106",15u#,0,10/6dh#);
+adjust_fit(0,0);
+penpos1(stem,-180); penpos3(stem,-90); penpos5(stem,0);
+x1r=hround u; x3=.5w; x5=w-x1;
+y1=y5=h; y3r=-d;
+angled_pos(1,down,2,right,3); angled_pos(3,right,4,up,5);
+fill lrthrough(2,lrend(1))--rlthrough(4,rlend(5))--cycle;
+labels(1,2,4,5); endchar;
+
+cmchar "\displaystyle square set union sign";
+beginchar(oct"107",20u#,0,14/6dh#); padded 1/6dh#;
+adjust_fit(0,0);
+numeric zoom; zoom=bigop_zoom[1,14/10];
+penpos1(zoom*stem,-180); penpos3(zoom*stem,-90); penpos5(zoom*stem,0);
+x1r=hround u; x3=.5w; x5=w-x1;
+y1=y5=h; y3r=-d;
+angled_pos(1,down,2,right,3); angled_pos(3,right,4,up,5);
+fill lrthrough(2,lrend(1))--rlthrough(4,rlend(5))--cycle;
+labels(1,2,4,5); endchar;
+
+cmchar "\textstyle circle-dot operator";
+beginchar(oct"112",20u#,0,10/6dh#);
+adjust_fit(0,0);
+draw_a_circle(w-2u,h+d,(.5w,.5[h,-d]),stem);
+penpos5(1.5dot_size,0); penpos6(1.5dot_size,90); z5=z6=(.5w,.5[h,-d]);
+fulldot(5,6);
+labels(1,2,3,4,5,6,7,8); endchar;
+
+cmchar "\displaystyle circle-dot operator";
+beginchar(oct"113",27.2u#,0,14/6dh#); padded 1/6dh#;
+adjust_fit(0,0);
+numeric zoom; zoom=bigop_zoom[1,14/10];
+draw_a_circle(w-2u,h+d,(.5w,.5[h,-d]),stem*zoom);
+penpos5(zoom*1.5dot_size,0); penpos6(zoom*1.5dot_size,90); z5=z6=(.5w,.5[h,-d]);
+fulldot(5,6);
+labels(1,2,3,4,5,6,7,8); endchar;
+
+def do_quadrant(expr quarter, firstpath, secondpath, center) =
+ save s_, q_; pair s_; pair q_;
+ s_=quarter intersectiontimes firstpath;
+ q_=quarter intersectiontimes secondpath;
+ unfill reverse(center
+    --point ypart s_ of firstpath
+    ..controls postcontrol xpart s_ of quarter
+	   and precontrol xpart q_ of quarter
+    ..point ypart q_ of secondpath
+    --cycle)
+enddef;
+
+cmchar "\textstyle circle-plus operator";
+beginchar(oct"114",20u#,0,10/6dh#);
+adjust_fit(0,0);
+draw_solid_circle(w-2u,h+d,(.5w,.5[h,-d]),stem);
+penpos1'(stem, 90); penpos2'(stem, 0);
+penpos3'(stem, 90); penpos4'(stem, 0);
+z1'=z1r; z2'=z2r; z3'=z3r; z4'=z4r;
+do_quadrant(z1l{up}..{left}z2l, z1'r--z3'r, z2'r--z4'r, (x2'r, y1'r));
+do_quadrant(z2l{left}..{down}z3l, z2'l--z4'l, z1'r--z3'r, (x2'l, y1'r));
+do_quadrant(z3l{down}..{right}z4l, z1'l--z3'l, z2'l--z4'l, (x2'l, y1'l));
+do_quadrant(z4l{right}..{up}z1l, z2'r--z4'r, z1'l--z3'l, (x2'r, y1'l));
+labels(1,2,3,4,5,6,7,8); endchar;
+
+cmchar "\displaystyle circle-plus operator";
+beginchar(oct"115",27.2u#,0,14/6dh#); padded 1/6dh#;
+adjust_fit(0,0);
+numeric zoom; zoom=bigop_zoom[1,14/10];
+draw_solid_circle(w-2u,h+d,(.5w,.5[h,-d]),stem*zoom);
+penpos1'(stem*zoom, 90); penpos2'(stem*zoom, 0);
+penpos3'(stem*zoom, 90); penpos4'(stem*zoom, 0);
+z1'=z1r; z2'=z2r; z3'=z3r; z4'=z4r;
+do_quadrant(z1l{up}..{left}z2l, z1'r--z3'r, z2'r--z4'r, (x2'r, y1'r));
+do_quadrant(z2l{left}..{down}z3l, z2'l--z4'l, z1'r--z3'r, (x2'l, y1'r));
+do_quadrant(z3l{down}..{right}z4l, z1'l--z3'l, z2'l--z4'l, (x2'l, y1'l));
+do_quadrant(z4l{right}..{up}z1l, z2'r--z4'r, z1'l--z3'l, (x2'r, y1'l));
+labels(1,2,3,4,5,6,7,8); endchar;
+
+cmchar "\textstyle circle-times operator";
+beginchar(oct"116",20u#,0,10/6dh#);
+adjust_fit(0,0);
+draw_solid_circle(w-2u,h+d,(.5w,.5[h,-d]),stem);
+penpos5(stem, -45); penpos6(stem, -135);
+penpos7(stem, 135); penpos8(stem, 45);
+x5=x8=x1r; x6=x7=x3r; y5=y6=y2r; y7=y8=y4r;
+angled_pos(7, z5-z7, 9, z8-z6, 8);
+angled_pos(5, z7-z5, 10, z8-z6, 8);
+unfill reverse trunc_cycle(z1l{up}..z2l{left}..{down}z3l, z5l--z9r--z6l);
+unfill reverse trunc_cycle(z2l{left}..z3l{down}..{right}z4l, z6r--z10l--z7r);
+unfill reverse trunc_cycle(z3l{down}..z4l{right}..{up}z1l, z7l--z9l--z8l);
+unfill reverse trunc_cycle(z4l{right}..z1l{up}..{left}z2l, z8r--z10r--z5r);
+labels(1,2,3,4,5,6,7,8); endchar;
+
+cmchar "\displaystyle circle-times operator";
+beginchar(oct"117",27.2u#,0,14/6dh#); padded 1/6dh#;
+adjust_fit(0,0);
+numeric zoom; zoom=bigop_zoom[1,14/10];
+draw_solid_circle(w-2u,h+d,(.5w,.5[h,-d]),stem*zoom);
+penpos5(stem*zoom, -45); penpos6(stem*zoom, -135);
+penpos7(stem*zoom, 135); penpos8(stem*zoom, 45);
+x5=x8=x1r; x6=x7=x3r; y5=y6=y2r; y7=y8=y4r;
+angled_pos(7, z5-z7, 9, z8-z6, 8);
+angled_pos(5, z7-z5, 10, z8-z6, 8);
+unfill reverse trunc_cycle(z1l{up}..z2l{left}..{down}z3l, z5l--z9r--z6l);
+unfill reverse trunc_cycle(z2l{left}..z3l{down}..{right}z4l, z6r--z10l--z7r);
+unfill reverse trunc_cycle(z3l{down}..z4l{right}..{up}z1l, z7l--z9l--z8l);
+unfill reverse trunc_cycle(z4l{right}..z1l{up}..{left}z2l, z8r--z10r--z5r);
+labels(1,2,3,4,5,6,7,8); endchar;
+
+def big_summation =
+numeric tmp;
+forsuffixes $=arm_slab,cap_vstem,cap_stem,cap_hair,hair,beak,beak_jut:
+    tmp:=$; save $; $=zoom_ratio*tmp; endfor
+numeric bot_arm_thickness;
+bot_arm_thickness=Vround .25[arm_slab,cap_vstem];
+x1l=hround u; x1l=x2l=x4l; x3l-x1l=4/11(w-2u);
+y1=h; y2=h-arm_slab-eps; y4=-d; y3=-.5d;
+numeric alpha[]; alpha1=((x3l-x1l)++(y2-y3))/(y2-y3);
+penpos1(alpha1*cap_stem,0); penpos2(alpha1*cap_stem,0);
+penpos3(alpha1*cap_stem,0);
+alpha2=diag_ratio(1,cap_hair,y3-y4,x3r-x4l);
+penpos4(alpha2*cap_hair,0);
+z0=whatever[z2l,z3l]=z4l+whatever*(z3r-z4r);
+penpos5(arm_slab,90); penpos6(hair,0);
+y5r=h; x5=.5[x1,x3]; x6r=hround(w-u); y6=y5l-beak-eps;
+penpos7(bot_arm_thickness,-90); penpos8(hair,0);
+y7r=-d; x7=x5; x8=x6; y8=y7l+beak+eps;
+y4'=y7l; z4'=whatever[z4r,z3r];
+fill arm_path(5,6,a,beak_darkness,beak_jut)
+    --pen_end(left,z1l,tiny,z2l,z0-z2l)--z0--pen_angle(z4l-z0,z4l,tiny,right)
+    --arm_path(7,8,b,beak_darkness,beak_jut)--z4'
+    --pen_angle(z3r-z4',z3r,tiny,z2r-z3r)--z2r--cycle;
+penlabels(0,1,2,3,4,5,6,7,8); 
+enddef;
+
+cmchar "\textstyle summation sign";
+beginchar(oct"120",19u#,0,10/6dh#);
+adjust_fit(0,0); pickup tiny.nib;
+numeric zoom_ratio; zoom_ratio = 1;
+big_summation;
+endchar;
+
+cmchar "\displaystyle summation sign";
+beginchar(oct"130",26u#,0,14/6dh#); padded 1/6dh#;
+adjust_fit(0,0); pickup tiny.nib;
+numeric zoom_ratio; zoom_ratio = bigop_zoom[1, (h+d)/cap_height];
+big_summation;
+endchar;
+
+def big_product(expr upward) =
+numeric tmp;
+forsuffixes $=slab,bracket,dish,cap_jut,cap_stem,cap_bar:
+    tmp:=$; save $; $=tmp*zoom_ratio;
+endfor
+if not serifs: slab:=arm_slab; cap_jut:=hround 1/7w; fi
+penpos1(cap_stem,0); penpos2(cap_stem,0);
+penpos3(cap_stem,0); penpos4(cap_stem,0);
+x1l=x2l=hround(cap_jut+u); x3=x4=w-x1;
+y1=y3=if upward: h else: -d fi; y2=y4=if upward: -d else: h fi;
+penpos5(cap_bar,if not upward: - fi 90);
+penpos6(cap_bar,if not upward: - fi 90);
+x5=x1r; x6=x3l; y5r=y6r=y1;
+if serifs: numeric inner_jut;
+ if x1r+cap_jut+.5u+1<=x3l-cap_jut: inner_jut=cap_jut;
+ else: x1r+inner_jut+.5u+1=x3l-inner_jut; fi
+fi
+if upward:
+fill serif_path_(1,2,a,1/3,-cap_jut)
+ --dish_serif_path(2,1,c,1/3,cap_jut,d,1/3,inner_jut)
+ --z5l--z6l--dish_serif_path(4,3,g,1/3,inner_jut,h,1/3,cap_jut)
+ --serif_path_(3,4,f,1/3,cap_jut)--cycle;
+else:
+fill serif_path_(3,4,f,1/3,cap_jut)
+ --dish_serif_path(4,3,g,1/3,inner_jut,h,1/3,cap_jut)--z6l--z5l
+ --dish_serif_path(2,1,c,1/3,cap_jut,d,1/3,inner_jut)
+ --serif_path_(1,2,a,1/3,-cap_jut)--cycle;
+fi
+penlabels(1,1',2,2',3,3',4,4',11,12,13,14,22,24); 
+enddef;
+
+cmchar "\textstyle product sign";
+beginchar(oct"121",17u#,0,10/6dh#);
+adjust_fit(0,0);
+numeric zoom_ratio; zoom_ratio = 1;
+big_product(true);
+endchar;
+
+cmchar "\displaystyle product sign";
+beginchar(oct"131",23u#,0,14/6dh#); padded 1/6dh#;
+adjust_fit(0,0);
+numeric zoom_ratio; zoom_ratio = bigop_zoom[1,2];
+big_product(true);
+endchar;
+
+cmchar "\textstyle coproduct sign";
+beginchar(oct"140",17u#,0,10/6dh#);
+adjust_fit(0,0);
+numeric zoom_ratio; zoom_ratio = 1;
+big_product(false);
+endchar;
+
+cmchar "\displaystyle coproduct sign";
+beginchar(oct"141",23u#,0,14/6dh#); padded 1/6dh#;
+adjust_fit(0,0);
+numeric zoom_ratio; zoom_ratio = bigop_zoom[1,2];
+big_product(false);
+endchar;
+
+cmchar "\textstyle integral sign";
+beginchar(oct"122",12u#,0,100/54dh#);
+italcorr 3.5u#; % \TeX\ kerning between upper limit and lower limit
+adjust_fit(0,-ic#);
+penpos1(curve,0); penpos2(hair,0); penpos3(vair,90); penpos4(stem,180);
+penpos5(curve,180); rev_pos5'(5); penpos6(stem,0);
+penpos7(vair,-90); penpos8(hair,-180); penpos9(curve,-180);
+x1r=hround(w-u); x9=w-x1; x7=w-x3=3u;
+x5=.5[x4,x6]; x4-x6=1.2u; x5r=hround(.5w-.5curve);
+y3r=h; y7r=-d; y9-.5curve=vround(y7l+.25curve);
+y3-y1=y9-y7; y5=.5[y3,y7]=.5[y4,y6]; y4-y6=.6(y3-y7);
+make_paths1(rev.l) z3e{left}...z4e{(z5e-z4e)xscaled 1.1}
+ ..tension atleast 1 and atleast .8..{z6-z4}z5e;  % upper stem
+make_paths2(rev.r) z5'e{z6-z4}..tension atleast.8 and atleast 1
+ ..{(z6e-z5'e)xscaled 1.1}z6e...{left}z7e;  % lower stem
+fill bulb_path(3,2,1) & rpath1 & lpath2 & bulb_path(7,8,9)
+    & rpath2 & lpath1 & cycle;
+penlabels(1,2,3,4,5,6,7,8,9); endchar;
+
+def big_integral =
+italcorr 8u#; % \TeX\ kerning between upper limit and lower limit
+adjust_fit(0,-ic#);
+numeric zoom_ratio; zoom_ratio = bigop_zoom[1, 2];
+numeric bulb_size, max_size, zoomed_stem, zoomed_hair, zoomed_vair;
+bulb_size=max_size=hround(zoom_ratio * curve);
+zoomed_stem=hround(zoom_ratio * stem);
+zoomed_hair=hround(zoom_ratio * hair);
+zoomed_vair=hround(zoom_ratio * vair);
+penpos1(bulb_size,0); penpos2(zoomed_hair,0); penpos3(zoomed_vair,90);
+penpos4(zoomed_stem,180);
+penpos5(max_size,180); rev_pos5'(5); penpos6(zoomed_stem,0);
+penpos7(zoomed_vair,-90); penpos8(zoomed_hair,-180); penpos9(bulb_size,-180);
+x1r=hround(w-u); x9=w-x1;
+x7=w-x3=max(3u,x9l+if square_ends: u else: epsilon fi);
+x5=.5[x4,x6]; x7+3.6u=x6; x5r=hround(.5w-.5max_size);
+y3r=0; y7r=-d;
+y9-.5bulb_size=vround(y7l+.25bulb_size); y3-y1=y9-y7;
+y5=.5[y3,y7]=.5[y4,y6]; y4-y6=.6(y3-y7);
+make_paths1(rev.l) z3e{left}...z4e{(z5e-z4e)xscaled 1.1}
+ ..tension atleast 1 and atleast .8..{z6-z4}z5e;  % upper stem
+make_paths2(rev.r) z5'e{z6-z4}..tension atleast.8 and atleast 1
+ ..{(z6e-z5'e)xscaled 1.1}z6e...{left}z7e;  % lower stem
+enddef;
+
+cmchar "\displaystyle integral sign";
+beginchar(oct"132",18u#,0,200/54dh#);
+big_integral;
+fill bulb_path(3,2,1) & rpath1 & lpath2 & bulb_path(7,8,9)
+    & rpath2 & lpath1 & cycle;
+penlabels(1,2,3,4,5,6,7,8,9); endchar;
+
+cmchar "\textstyle contour integral sign";
+beginchar(oct"110",12u#,0,100/54dh#);
+italcorr 3.5u#; % \TeX\ kerning between upper limit and lower limit
+adjust_fit(0,-ic#);
+penpos1(curve,0); penpos2(hair,0); penpos3(vair,90); penpos4(stem,180);
+penpos5(curve,180); rev_pos5'(5); penpos6(stem,0);
+penpos7(vair,-90); penpos8(hair,-180); penpos9(curve,-180);
+x1r=hround(w-u); x9=w-x1; x7=w-x3=3u;
+x5=.5[x4,x6]; x4-x6=1.2u; x5r=hround(.5w-.5curve);
+y3r=0; y7r=-d; y9-.5curve=vround(y7l+.25curve);
+y3-y1=y9-y7; y5=.5[y3,y7]=.5[y4,y6]; y4-y6=.6(y3-y7);
+make_paths1(rev.l) z3e{left}...z4e{(z5e-z4e)xscaled 1.1}
+ ..tension atleast 1 and atleast .8..{z6-z4}z5e;  % upper stem
+make_paths2(rev.r) z5'e{z6-z4}..tension atleast.8 and atleast 1
+ ..{(z6e-z5'e)xscaled 1.1}z6e...{left}z7e;  % lower stem
+rulepos10(0); rulepos11(90); rulepos12(180); rulepos13(270);
+.5[z10,z12]=.5[z11,z13]=z5;
+y11-y13=x10-x12=min(.5w,w-rule_thickness); y10=y5; x11=x5;
+make_paths3(rev.l) z10e{up}...z11e{left}...{down}z12e;
+make_paths4(rev.l) z12e{down}...z13e{right}...{up}z10e;
+fill bulb_path(3,2,1) & combine(rpath1,rpath3) & combine(rpath4,lpath2)
+   & bulb_path(7,8,9) & combine(rpath2,rpath4) & combine(rpath3,lpath1) & cycle;
+unfill combine(lpath4,rpath2) & combine(lpath1,lpath3) & cycle;
+unfill combine(lpath3,rpath1) & combine(lpath2,lpath4) & cycle;
+penlabels(1,2,3,4,5,6,7,8,9); endchar;
+
+cmchar "\displaystyle contour integral sign";
+beginchar(oct"111",18u#,0,200/54dh#);
+big_integral;
+rulepos10(0); rulepos11(90); rulepos12(180); rulepos13(270);
+.5[z10,z12]=.5[z11,z13]=z5;
+y11-y13=x10-x12=min(.5w,w-rule_thickness); y10=y5; x11=x5;
+make_paths3(rev.l) z10e{up}...z11e{left}...{down}z12e;
+make_paths4(rev.l) z12e{down}...z13e{right}...{up}z10e;
+fill bulb_path(3,2,1) & combine(rpath1,rpath3) & combine(rpath4,lpath2)
+   & bulb_path(7,8,9) & combine(rpath2,rpath4) & combine(rpath3,lpath1) & cycle;
+unfill combine(lpath4,rpath2) & combine(lpath1,lpath3) & cycle;
+unfill combine(lpath3,rpath1) & combine(lpath2,lpath4) & cycle;
+penlabels(1,2,3,4,5,6,7,8,9); endchar;
+
+cmchar "\textstyle set union sign";
+beginchar(oct"123",15u#,0,10/6dh#);
+adjust_fit(0,0);
+penpos1(stem,-180); penpos2(stem,-180); penpos3(stem,-90);
+penpos4(stem,0); penpos5(stem,0);
+x1r=x2r=w-x4r=hround u; x3=w-x3; x4=x5;
+y1=y5=h; y3r=-d; y2=y4=2/3[y1,y3];
+make_paths1(rev.l) z1e--z2e{down}...z3e{right}...z4e{up}--z5e;
+fill rpath1--lpath1--cycle;
+labels(1,2,3,4,5); endchar;
+
+cmchar "\displaystyle set union sign";
+beginchar(oct"133",20u#,0,14/6dh#); padded 1/6dh#;
+adjust_fit(0,0);
+numeric zoom; zoom=bigop_zoom[1,14/10];
+penpos1(stem*zoom,-180); penpos2(stem*zoom,-180); penpos3(stem*zoom,-90);
+penpos4(stem*zoom,0); penpos5(stem*zoom,0);
+x1r=x2r=w-x4r=hround u; x3=w-x3; x4=x5;
+y1=y5=h; y3r=-d; y2=y4=2/3[y1,y3];
+make_paths1(rev.l) z1e--z2e{down}...z3e{right}...z4e{up}--z5e;
+fill rpath1--lpath1--cycle;
+labels(1,2,3,4,5); endchar;
+
+cmchar "\textstyle set intersection sign";
+beginchar(oct"124",15u#,0,10/6dh#);
+adjust_fit(0,0);
+penpos1(stem,180); penpos2(stem,180); penpos3(stem,90);
+penpos4(stem,0); penpos5(stem,0);
+x1r=hround u; x2=x1; x3=w-x3; x4=x5=w-x1;
+y3r=h; y1=-d; y2=y4=2/3[y1,y3]; y5=y1;
+make_paths1(rev.r) z1e--z2e{up}...z3e{right}...z4e{down}--z5e;
+fill rpath1--lpath1--cycle;
+labels(1,2,3,4,5); endchar;
+
+cmchar "\displaystyle set intersection sign";
+beginchar(oct"134",20u#,0,14/6dh#); padded 1/6dh#;
+adjust_fit(0,0); pickup pencircle scaled curve;
+numeric zoom; zoom=bigop_zoom[1,14/10];
+penpos1(stem*zoom,180); penpos2(stem*zoom,180); penpos3(stem*zoom,90);
+penpos4(stem*zoom,0); penpos5(stem*zoom,0);
+x1r=hround u; x2=x1; x3=w-x3; x4=x5=w-x1;
+y3r=h; y1=-d; y2=y4=2/3[y1,y3]; y5=y1;
+make_paths1(rev.r) z1e--z2e{up}...z3e{right}...z4e{down}--z5e;
+fill rpath1--lpath1--cycle;
+labels(1,2,3,4,5); endchar;
+
+cmchar "\textstyle multiset union sign";
+beginchar(oct"125",15u#,0,10/6dh#);
+adjust_fit(0,0);
+penpos1(stem,-180); penpos2(stem,-180); penpos3(stem,-90);
+penpos4(stem,0); penpos5(stem,0);
+x1r=x2r=w-x4r=hround u; x3=w-x3; x4=x5;
+y1=y5=h; y3r=-d; y2=y4=2/3[y1,y3];
+make_paths1(rev.l) z1e--z2e{down}...z3e{right}...z4e{up}--z5e;
+fill rpath1--lpath1--cycle;
+penpos6(stem,0); penpos7(stem,0); penpos8(stem,90); penpos9(stem,90);
+y8=y9=.47[y1,y3]; x8=w-x9=x1l+stem+eps; x6=x7=x3;
+.5[y6,y7]=y8; y7-y6=x9-x8;
+forsuffixes e=l,,r: x10e=x11e=x6e; y10e=y8r; y11e=y8l; endfor
+fill rlend(8)--lrthrough(11,lrend(6))--lrend(9)--rlthrough(10,rlend(7))--cycle;
+labels(1,2,3,4,5,6,7,8,9); endchar;
+
+cmchar "\displaystyle multiset union sign";
+beginchar(oct"135",20u#,0,14/6dh#); padded 1/6dh#;
+adjust_fit(0,0);
+numeric zoom; zoom=bigop_zoom[1,14/10];
+penpos1(stem*zoom,-180); penpos2(stem*zoom,-180); penpos3(stem*zoom,-90);
+penpos4(stem*zoom,0); penpos5(stem*zoom,0);
+x1r=hround u; x2=x1; x3=w-x3; x4=x5=w-x1;
+y1=h; y3r=-d; y2=y4=2/3[y1,y3]; y5=y1;
+make_paths1(rev.l) z1e--z2e{down}...z3e{right}...z4e{up}--z5e;
+fill rpath1--lpath1--cycle;
+penpos6(stem*zoom,0); penpos7(stem*zoom,0);
+penpos8(stem*zoom,90); penpos9(stem*zoom,90);
+y8=y9=.47[y1,y3]; x8=w-x9=x1l+stem*zoom+eps; x6=x7=x3;
+.5[y6,y7]=y8; y7-y6=x9-x8;
+forsuffixes e=l,,r: x10e=x11e=x6e; y10e=y8r; y11e=y8l; endfor
+fill rlend(8)--lrthrough(11,lrend(6))--lrend(9)--rlthrough(10,rlend(7))--cycle;
+labels(1,2,3,4,5,6,7,8,9); endchar;
+
+%
+% Draws a bounded angle stroke. z$r and z$$r are known, as is y@. The stroke
+% will be bounded by the box defined by those three points. Additionally, the
+% stroke will have specified width wid; the top end of the angle will have width
+% miter_ratio*wid.
+def bounded_angle(suffix $,$$,@)(expr wid) =
+.5[x@r,x@'l]=.5[x$r,x$$r]; x@r-x@'l=miter_ratio*wid; y@'l=y@;
+numeric stroke_wid; stroke_wid=diag_width(z@'l-(x$r,y$),wid);
+penpos$(stroke_wid,-180); penpos$$(stroke_wid,0);
+penpos@(stroke_wid,0); penpos@'(stroke_wid,0);
+z=whatever[z$l,z@'r]=whatever[z$$l,z@l];
+fill if y@>y$: reverse fi (lrend($)--z@'l--z@r--rlend($$)--z--cycle)
+enddef;
+
+cmchar "\textstyle lattice infimum sign";
+beginchar(oct"126",15u#,0,10/6dh#);
+adjust_fit(0,0);
+x1r=hround u-eps; x5r=w-x1r;
+y3=h; y1=y5=-d;
+bounded_angle(1,5,3,stem);
+labels(1,3,5); endchar;
+
+cmchar "\displaystyle lattice infimum sign";
+beginchar(oct"136",20u#,0,14/6dh#); padded 1/6dh#;
+adjust_fit(0,0);
+numeric zoom; zoom=bigop_zoom[1,14/10];
+x1r=hround u-eps; x5r=w-x1r;
+y3=h; y1=y5=-d;
+bounded_angle(1,5,3,stem);
+labels(1,3,5); endchar;
+
+cmchar "\textstyle lattice supremum sign";
+beginchar(oct"127",15u#,0,10/6dh#);
+adjust_fit(0,0);
+x1r=hround u; x5r=w-x1r;
+y1=h; y3=-d; y5=y1;
+bounded_angle(1,5,3,stem);
+labels(1,3,5); endchar;
+
+cmchar "\displaystyle lattice supremum sign";
+beginchar(oct"137",20u#,0,14/6dh#); padded 1/6dh#;
+adjust_fit(0,0);
+numeric zoom; zoom=bigop_zoom[1,14/10];
+x1r=hround u; x5r=w-x1r;
+y1=h; y3=-d; y5=y1;
+bounded_angle(1,5,3,stem);
+labels(1,3,5); endchar;

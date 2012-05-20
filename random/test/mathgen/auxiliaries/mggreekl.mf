@@ -1,0 +1,859 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE greekl.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% This lowercase Greek alphabet was prepared by D. E. Knuth in December, 1979,
+% inspired by the Monotype faces used in {\sl The Art of Computer Programming}.
+% (It has been designed for math formulas, not Greek texts.)
+% The programs were revised for the new \MF\ conventions in 1985.
+
+% Character codes \0013--\0047 are generated.
+
+% Loop from point $ to $$ to $$$. Point $$ should be perpendicular to $ and $$$
+% (which are parallel); it is the extreme end of the loop.
+%
+% All points are known (although some may be changed by this routine).
+boolean thinned,thinned.thinned;
+thinned=false; thinned.thinned=true;
+vardef loop_points(suffix $,$$,$$$)suffix modifier =
+ save perp,parallel,toright; pair perp,parallel; boolean toright;
+ perp=z$$$-z$; toright=(z$$-z$) rightof perp;
+ parallel=perp rotated if toright: -90 else: 90 fi;
+ if square_ends:
+  same_pos($',$); same_pos($$$',$$$);
+  numeric thin_; thin_=if thinned.modifier: .4 else: .25 fi;
+  if (z$$$l-z$l) dotprod perp < 0: z$'=z$$$; z$$$'=z$;
+  else: thin_[z$'r,z$'l]=thin_[z$$$'r,z$$$'l]=.5[z$,z$$$]; fi
+  force_point($,$'); force_point($$$,$$$');
+  z$$'l=z$l+whatever*parallel=z$$r+whatever*perp;
+  z$$'r=z$$$l+whatever*parallel=z$$r+whatever*perp;
+  if toright: z$$$l--pen_rlend$$'(parallel,fine,-parallel)--z$l
+  else: z$l--pen_lrend$$'(parallel,fine,-parallel)--z$$$l fi
+ elseif toright: z$r{parallel}...z$$r{perp}...{-parallel}z$$$r
+ else: z$$$r{parallel}...z$$r{-perp}...{-parallel}z$r
+ fi
+enddef;
+
+vardef loop_inside(suffix $,$$,$$$)(expr inpath,outpath) =
+ if (not square_ends) and ((z$l-z$$$l) dotprod (z$-z$$$) > 0):
+   if length(z$l-z$$$l)>.3hair:
+     unfill combine(outpath,inpath)
+       ...z$$l{(point 0 of outpath)-(point infinity of inpath)}...cycle; fi
+ fi
+enddef;
+
+vardef loop_incoming(suffix $,$$,$$$)(expr inpath,outpath) =
+ if square_ends or (z$$$=z$): inpath else: combine(inpath,outpath) fi
+enddef;
+
+vardef loop_outgoing(suffix $,$$,$$$)(expr inpath,outpath) =
+ if square_ends or (z$$$=z$): outpath else: combine(inpath,outpath) fi
+enddef;
+
+cmchar "Lowercase Greek alpha";
+beginchar(oct"013",11u#,x_height#,0);
+italcorr max(1/3x_height#*slant+.5hair#+.5u#,x_height#*slant-.5u#);
+adjust_fit(0,0);
+penpos0(hair,0); penpos1(vair,-90); penpos2(curve,-180); penpos3(vair,-270);
+z4=(w-3.25u,9/16h); z5=(w-2.75u,.5[vair,y4]);
+numeric theta; theta=angle(z4-z5)-90;
+penpos4(stem,theta); penpos5(stem,theta);
+penpos6(vair,90); penpos7(hair,180);
+x0r=hround(w-u); x1=x3=.5w-u; x2r=hround(1.5u-.5curve);
+x6=w-u; x7+.5hair=hround(w+.5hair-epsilon);
+y0=vround .8[bar_height,h]; y1r=y6l=-oo;
+y2=.5[y1,y3]; y3r=h+oo; y7=vround max(y6r+fine,1/4bar_height);
+path p[]; p1=z1r{right}...{up}pen_rlend0(up,fine,down){down}
+    ...{left}z1l; % Top tail
+p2=z6l{right}...{up}pen_lrend7(up,fine,down){down}...{left}z6r; % Bottom tail
+make_paths1(rev.r) z3e{right}...z4e---z5e...{right}z6e; % Diagonal stem
+make_paths2(rev.r) z0e{down}...pulled_arc.e(1,2) & pulled_arc.e(2,3); % Big loop
+fill aux_path(rpath1, p1) & combine(rpath2, lpath1) & p2 & cycle;
+unfill combine(lpath1, lpath2) & cycle;
+math_fit(-.3x_height#*slant+.5curve#-u#,1/3x_height#*slant+.5hair#+.5u#);
+math_kern(x3);
+penlabels(0,1,2,3,4,5,6,7); endchar;
+
+cmchar "Lowercase Greek beta";
+beginchar(oct"014",9.5u#,asc_height#,desc_depth#);
+italcorr .5[x_height#,asc_height#]*slant-u#;
+adjust_fit(0,0); path p[];
+penpos0(stem,180); penpos1(stem,180); penpos2(vair,90);
+penpos3(stem,0); penpos4(vair,-90); penpos5(hair,-180); penpos6(vair,-270);
+penpos7(curve,-360); penpos8(vair,-450); penpos9(hair,-540);
+x0=x1; x9l=x0l; x0r=hround(1.5u-.5stem); x2=x8=.5w-.25u; x4=x6=x2;
+x3r=hround(w-1.75u); x7r=hround(w-u);
+x5r-x1l=hround u;
+y0=-d; y1=0.6[y4,y3];
+y5=min(x_height if not square_ends: + oo fi - .5vstem, vround(0.52 h));
+y2r=h+oo; y3=.5[y2,y4];
+y5=.5[y4,y6]; y6r-y4r=vstem+eps; y8r=-oo; y7=y9=.55[y6,y8];
+%if y6l<y4l: y6l:=y4l:=y5; fi
+p1=loop_points(4,5,6);
+p2=z1r--pen_rlend0(down,fine,up);
+make_paths1(rev.r) pulled_arc.e(1,2) & pulled_arc.e(2,3) & pulled_arc.e(3,4);
+make_paths2(rev.r) pulled_arc.e(6,7) & pulled_arc.e(7,8)...{up}z9e;
+fill combine(trunc_start(rpath2,z1l--z0l),rpath1) & p2--cycle;
+unfill loop_incoming(4,5,6,lpath1,rpath2) & p1
+    & trunc_end(loop_outgoing(4,5,6,rpath1,lpath2),z1l--z0l)--cycle;
+loop_inside(4,5,6,lpath1,lpath2);
+math_fit(max(desc_depth#*slant+.5stem#-u#,0), .7x_height#*slant+.5curve#-1.5u#);
+math_kern(x2);
+penlabels(0,1,2,3,4,5,6,7,8,9); endchar;
+
+cmchar "Lowercase Greek gamma";
+beginchar(oct"015",10u#,x_height#,desc_depth#);
+italcorr x_height#*slant-.5u#;
+adjust_fit(0,0); path p[];
+penpos1(hair,180); penpos2(vstem+dw,90);
+penpos4(hair,0); penpos5(vair,-90); penpos6(hair,-180);
+penpos7(stem,-180);
+y1=.5772156649h; y2r=h+oo; y4=y6=-.5d;
+y5r=-d-o; y7=h;
+x1r=hround(.5u-.5hair); x7l=hround(w-u);
+x7r-x4r=hround(.5u); x5=.5[x4,x6]; x2=1/3[x1l,x6r];
+x4r-x6r=hround 1/3[hair,stem]+eps;
+%if x4l<x6l: x4l:=x6l:=x5; fi
+p1=loop_points(4,5,6)thinned;
+penpos3(hair,angle(z4-z2)+90); x3=superness[x2,x4]; y3=superness[y4,y2];
+p2=z2r{left}...{down}pen_rlend1(down,fine,up){up}...{right}z2l;
+make_paths1(rev.r) z2e{right}...z3e{z4-z2}...z4e{down};
+pair v.l,v.r; forsuffixes e=l,r: v.e=(2(x7e-x6e),y7e-y6e); endfor
+p3=z6l{up}...{v.l}pen_lrend7(v.l,fine,-v.r){-v.r}...{down}z6r;
+lpath2:=subpath (0,1) of p3; rpath2:=subpath (1,infinity) of p3;
+fill p2 & loop_incoming(4,5,6,lpath1,rpath2) & p1
+    & loop_outgoing(4,5,6,rpath1,lpath2) & combine(rpath2,rpath1) & cycle;
+loop_inside(4,5,6,lpath1,lpath2);
+math_fit(-.5772156649x_height#*slant,ic#-u#);
+math_kern(x3);
+penlabels(1,2,3,4,5,6,7); endchar;
+
+
+cmchar "Lowercase Greek delta";
+beginchar(oct"016",8u#,asc_height#,0);
+italcorr .9asc_height#*slant+.5hair#-1.5u#;
+adjust_fit(0,0);
+x0=-u; y0=1.1h;
+numeric light_flare; light_flare=2/3[vair,flare];
+numeric big_vair; big_vair = .2[vair, light_flare];
+x1=w-2u if not square_ends: -.5light_flare fi; y1=h-.5light_flare;
+penpos6(vair,-90); penpos7(stem,-180); penpos8(vair,-270);
+x6=.5w+.5u; y8r=x_height+oo; z4=z8;
+y5+.1x_height=y7=.5[y6,y8]; y6r=-oo;
+x7r=hround(1.4u-.5stem); x5r=hround(w-u);
+if 0.8light_flare < big_vair: % If there isn't enough stem contrast
+  vardef linetoangle(expr l) =
+    90 + angle((x5-l,y4)-z3) > 2*angle((x5-l,y4)-z5)-180
+  enddef;
+  penpos1(light_flare,-90); penpos2(big_vair,-90);
+  penpos3(hair,0); penpos5(stem, 0);
+  z2r=z3r; y2l = h; x3l=hround (x_height/h)[x7l, x7r];
+  x4=x5 - solve linetoangle(0, w);
+  penpos4(.7[hair,stem], angle(z4-z3)+90);
+  make_paths1(rev.l) pulled_arc.e(8,7) & pulled_arc.e(7,6);
+  make_paths2(rev.r) pulled_arc.e(5,6);
+  z3'l=z3l; z3'r=z4r+whatever*(z3'l-z4l)=whatever[z3'l,z1r]; z3'=.5[z3'r,z3'l];
+  make_paths3(rev.r) z3'e--z4e{z4-z3'}...{down}z5e;
+  if square_ends:
+   same_pos(2',2); z2'r=z3'l;
+   path p; p=z3'r--pen_rlend1(right,fine,left)--pen_lrend2'(left,fine,z4l-z3'l);
+   lpath3:=point infinity of p--z4l{z4-z3'}...{down}z5l;
+  else: path p; p=z3'r--circ_end(1,right)--z2l{left}..{z4l-z3'l}z3'l; fi
+  x.krn=.5[x1,x3l];
+else:
+  x4=x6;
+  penpos4(.8[hair,curve],angle(z4-z0)+90);
+  penpos5(stem, 30);
+  numeric theta; theta=angle (z1-z0);
+  penpos1(light_flare,theta-90); penpos2(big_vair,-90); penpos3(vair,theta);
+  x2=x3+u; y2=h;
+  z3r=.5[.5[z1,z4],z0];
+  make_paths1(rev.l) pulled_arc.e(8,7) & pulled_arc.e(7,6);
+  make_paths2(rev.r) z5e{down}...{left}z6e;
+  make_paths3(rev.r) z3e{(z0-z1)rotated 90}...z4e{z4e-z0}...z5e{down};
+  path p; p=z3r{(z1-z0)rotated 90}....z2r....
+   if square_ends: pen_rlend1(z1r-z0,fine,z0-z1l)
+   else: z1r{z1r-z0}...z1l{z0-z1l} fi
+   ....z2l....z3l{(z0-z1)rotated 90};
+  x.krn=x2;
+fi
+fill rpath2 & rpath3 & p & var_combine(lpath3, rpath1) & cycle;
+unfill combine(lpath1, lpath3) & lpath2 & cycle;
+math_fit(-.3x_height#*slant+.5curve#-u#,.7x_height#*slant-.5u#);
+math_kern(x.krn);
+penlabels(0,1,2,3,4,5,6,7,8); endchar;
+
+cmchar "Lowercase Greek epsilon";
+beginchar(oct"017",8u#,x_height#,0);
+italcorr x_height#*slant+.5hair#-2u#;
+adjust_fit(0,0);
+penpos0(bar,90); penpos1(bar,90); penpos2(curve,180);
+penpos3(vair,270); penpos4(hair,300); penpos6(bar,90); penpos7(bar,90);
+x1=.5w+.5u; x0=x1+u if square_ends: + 0.5bar fi;
+x2r=hround(1.5u-.5curve);
+x4r=hround(w-u); x3=min(.5[x0,x1],x4l-fine); x5=w+.5u; x6=x0; z7=z2l;
+y0r=y1r=h; y2=y5=y6=bar_height; y3r=-oo;
+path p; p=z3r{right}...{up}z5;
+numeric t; t=ypart(((x4r,y3r)--(x4r,y5))intersectiontimes p);
+pair v; v=direction t of p;
+y4r=ypart point t of p;
+make_paths1(rev.l) pulled_arc.e(1,2) & pulled_arc.e(2,3);
+if square_ends:
+ fill pen_lrend0(right,fine,left)--rpath1...{v}pen_rlend4(v,fine,-v){-v}
+    ...aux_path(lpath1, z7r--pen_rlend6(right,fine,left)--z7l)--cycle;
+else:
+ fill circ_end(0,right)--rpath1...{v}pen_rlend4(v,fine,-v){-v}
+    ...aux_path(lpath1, z7l--circ_end(6,right)--z7r)--cycle;
+fi
+math_fit(-.3x_height#*slant+.5curve#-u#,ic#); math_kern(.5w);
+penlabels(0,1,2,3,4,5,6,7); endchar;
+
+cmchar "Lowercase Greek zeta";
+beginchar(oct"020",9u#,asc_height#,desc_depth#);
+italcorr .75[x_height#,asc_height#]*slant-1.5u#;
+adjust_fit(0,0); path p[];
+penpos0(hair,-180); penpos1(vair,-90); penpos2(hair,0); penpos3(vair,90);
+numeric theta; theta=90-angle(25u,x_height); slope:=-x_height/25u;
+penpos6(stem,theta+180); penpos7(vair,90);
+x0r=hround 3.5u; x1=x3=.5[x0,x2]; x2r=hround max(x0l,w-2u)+eps;
+y0=h; y3r=y1r+vstem+eps=vround(y0-.25(h-x_height)); y2=.5[y1,y3];
+%if y1l>y3l: y1l:=y3l:=y2; fi
+p1=loop_points(1,2,3)thinned;
+x4r=hround u; x4l-x4r=(hround .6[vair,stem]);
+x6+.5u=x7=w-2u; x8=.5w+.75u;
+y6=-.1d; y8=-3/4d-oo; y7l=-d-oo;
+ellipse_set(3r,4r,5r,6r); ellipse_set(3l,4l,5l,6l);
+y4r:=.9[y6,y4r]; y4=y4l:=.9[y6,y4l];
+pair v; v=(z7-z8) yscaled 2; penpos8(vair,angle v+90);
+if square_ends:
+ p0=z1l{left}...{up}pen_lrend0(up,fine,down){down}...{right}z1r;
+ p2=z7r{left}...{-v}pen_rlend8(-v,fine,v){v}...{right}z7l;
+else:
+ p0=z1l{left}...circ_end(0,up)...{right}z1r;
+ p2=z7r{left}...circ_end(8,left)...{right}z7l;
+fi
+lpath1:=subpath (0,1) of p0; rpath1:=subpath (1,infinity) of p0;
+make_paths2(rev.r) z7e{right}...z6e---z5e....{up}z4e
+  ..tension 1 and atleast1.5..{right}z3e;  % main stroke
+fill combine(rpath1,rpath2) & p2 & loop_incoming(1,2,3,lpath2,rpath1)
+    & p1 & loop_outgoing(1,2,3,rpath2,lpath1) & cycle;
+loop_inside(1,2,3,lpath2,lpath1);
+math_fit(-.2asc_height#*slant-.5u#,0); math_kern(x0);
+penlabels(0,1,2,3,4,5,6,7,8); endchar;
+
+cmchar "Lowercase Greek eta";
+beginchar(oct"021",9u#,x_height#,desc_depth#);
+italcorr .8x_height#*slant+.5stem#-u#;
+adjust_fit(0,0);
+x0=0; x1=x2; penpos2(stem,0); x2l=hround(2.5u-.5stem);
+hook_in_points(0,a,1);  % opening hook
+x4+.5stem=hround(w-1.5u+.5stem);
+penpos5(stem,0); x5=x4;
+path p[];
+% p1 is the left stem, p2 is the right stem
+% rpath1 and lpath1 are the upper arch
+if square_ends:
+ y2=0; p1=z1l--pen_lrend2(down,fine,up)--z1r;
+ ital_arch_paths1(2,3,4);
+ y5=-d; p2=z4l--pen_lrend5(down,fine,up)--z4r;
+else:
+ y2-.5stem=-oo; p1=z1l..circ_end(2,down)..z1r;
+ ital_arch_paths1(2,3,4);
+ y5-.5stem=-d-o; p2=z4l..circ_end(5,down)..z4r;
+fi
+% p0 is the hook
+p0=z2r--hook_in_path(fine,0,a,1);
+fill combine(rpath1, p0) & var_combine(p1, lpath1) & p2 & cycle;
+math_fit(min(-2/3x_height#*slant+.5hair#+.5u#,.5hair#),ic#-1/3x_height#*slant);
+math_kern(.8[x2,x3]);
+penlabels(0,a,1,2,3,4,5); endchar;
+
+cmchar "Lowercase Greek theta";
+beginchar(oct"022",8.25u#,asc_height#,0);
+italcorr .7asc_height#*slant+.5curve#-u#;
+adjust_fit(0,0);
+penpos1(vair,90); penpos2(curve,180); penpos3(vair,270); penpos4(curve,360);
+x1=x3=.5w; x2r=hround(1.5u-.5curve); x4=w-x2;
+y1r=h+oo; y2=y4=.5[y1,y3]; y3r=-oo;
+tracingonline:=1;
+make_paths1(rev.l) pulled_arc.e(1,2) & pulled_arc.e(2,3);
+make_paths2(rev.l) pulled_arc.e(3,4) & pulled_arc.e(4,1);
+penpos2'(bar,90); penpos4'(bar,90); z2'=z2l; z4'=z4l;
+fill rpath1 & rpath2 & cycle; % Outer oval
+unfill trunc_both(lpath2, lpath1, z2'l--z4'l)--cycle; % Top
+unfill trunc_both(lpath1, lpath2, z2'r--z4'r)--cycle; % Bottom
+math_fit(-.3asc_height#*slant-u#+.5curve#,ic#-.5u#); math_kern(x1);
+penlabels(1,2,3,4); endchar;
+
+cmchar "Lowercase Greek iota";
+beginchar(oct"023",5u#,x_height#,0);
+italcorr 1/3x_height#*slant+.5hair#+.5u#;
+adjust_fit(if monospace: u#,u# else: 0,0 fi);
+penpos1(stem,0); x1l=hround(1.5u-.5stem);
+x2=x1; x4=w; hook_out_points(2,3,4);  % closing hook
+if square_ends:
+ y1=h; fill hook_out_path(fine,2,3,4)..{up}pen_rlend1(up,fine,down)--cycle;
+else:
+ y1+.5stem=h+oo; fill z1l{down}..hook_out_path(fine,2,3,4)..{up}z1r..cycle;
+fi
+math_fit(0,ic#); math_kern(x1); penlabels(1,2,3,4); endchar;
+
+cmchar "Lowercase Greek kappa";
+beginchar(oct"024",9u#,x_height#,0);
+italcorr 1/3x_height#*slant+.5hair#+.5u#;
+adjust_fit(0,0); path p[];
+penpos1(stem,0); penpos2(stem,0); x1=x2=x3; x1l=hround(1.5u-.5stem);
+% p1 contains the upper end of the stem; p2 the lower.
+if square_ends:
+  y1=h; y2=0;
+  p1=z2r--pen_rlend1(up,fine,down); p2=pen_lrend2(down,fine,up)--z1r;
+else:
+  y1+.5stem=h+oo; y2-.5stem=-oo;
+  p1=z2r--circ_end(1,up); p2=circ_end(2,down)--z1r;
+fi
+y3=bar_height;
+% p3 is the upper diagonal, calculated as below.
+if square_ends:
+ y4=h; x4r=hround(w-1.5u);
+ numeric alpha; alpha=diag_ratio(1, .5hair, y4-y3, x4r-x3);
+ penpos4(alpha*hair, 0);
+ penpos3(vair,90); penpos3'(whatever,-90); x3'=x3; y3'l=y3r;
+ z4r-z3'r=whatever*(z4l-z3'l);
+ p3=z3'r--pen_rlend4(z4r-z3'r,fine,z3'l-z4l)--z3'l;
+else:
+ numeric light_flare; light_flare=vround(.5[stem,flare]);
+ penpos3(vair,90); penpos4(vair,90); penpos5(light_flare,90);
+ y4r=h; x4+.5light_flare=hround(w-1.5u); z5r=z4r;
+ path p; p=z3{right}..{right}z4;
+ penpos3'(vair, 90 + angle(direction 0.5 of p)); z3'=point 0.5 of p;
+ make_paths1(rev.r) z3e{right}..z3'e..{right}z4e;
+ p3=combine(lpath1,circ_end(5,left) & circ_end(5,right)) & rpath1;
+fi
+penpos7(stem,0); penpos8(vair,90); penpos9(hair,180);
+x9+.5hair=hround(w+.5hair-epsilon); y9=1/3x_height;
+x7l=hround(w-2.75u-.5stem); y7=1/2y3; x8=w-1.2u; y8l=-oo;
+% Lower diagonal. Note that we can't use hook_out_path, because y9-y7>2.5u.
+make_paths1(rev.r) z3e{right}...{down}z7e...{right}z8e;
+fill var_combine(p2,lpath1)...{up}pen_lrend9(up,fine,down){down}
+ ...combine(rpath1,subpath (0,1) of p3)
+ &  combine(subpath (1,infinity) of p3, p1)--cycle;
+math_fit(0,ic#); math_kern(.5[x1,x4]); penlabels(1,2,3,4,5,7,8,9); endchar;
+
+cmchar "Lowercase Greek lambda";
+beginchar(oct"025",10.5u#,asc_height#,0);
+adjust_fit(0,0); path p[];
+penpos1(vair,90); x1=hround .1u if square_ends: - 0.5vair fi; y1r=h;
+x2=x1+2u; y2=.7[x_height,h]; x3=w-2u; y4=if square_ends: 0 else: -oo fi;
+y3=max(.07h,y4+eps);
+% If fine is too large, then don't add the little flare at the diagonal end.
+z4 if fine<.4stem: -(.25u,0) fi=whatever[z2,z3];
+numeric theta; theta=angle(z2-z3)-90;
+penpos2(stem,theta); penpos3(stem,theta); penpos4(diag_width(z2-z3,stem),0);
+y5=.5[bar_height,x_height]; z5=whatever[z2,z3];
+x6=1.5u; penpos5(hair,theta-90);
+pair v; v=z3-z2;
+% p1 is the minor diagonal. p2 is the upper hook of the major diagonal.
+if square_ends:
+ z5'=z5; y6=0; penpos6(diag_width(z6-z5,stem),0);
+ p1=z5l--pen_lrend6(z6l-z5l,fine,z5r-z6r)--z5r;
+ p2=z2r{-v}...{left}pen_rlend1(left,fine,right){right}...{v}z2l;
+else:
+ y6-.5stem=-oo; penpos6(stem,angle(z5-z6)-90);
+ % x6' is the bottom of the short diagonal.
+ x6'=x6; y6'=-oo; p1=z5l--z6l{z6l-z5l}...z6'...{z5r-z6r}z6r--z5r;
+ p2=z2r{-v}...circ_end(1,left)...{v}z2l;
+fi
+% p3 is the bottom tail of the major diagonal.
+pair v.l,v.r; forsuffixes e=l,r: v.e=(2(x4e-x3e),y4e-y3e); endfor
+if fine<.4stem: p3=z3l{v}...{v.l}pen_lrend4(v.l,fine,-v.r){-v.r}...{-v}z3r;
+else: p3=pen_lrend4(v,fine,-v); fi
+fill p2 & var_combine(z2l--z3l,subpath (0,1) of p1)
+    & trunc_end(subpath (1,infinity) of p1,z2l--z3l)--p3--cycle;
+math_kern(x5-slant*(h-y5));
+penlabels(1,2,3,4,5,6); endchar;
+
+cmchar "Lowercase Greek mu";
+beginchar(oct"026",9u#,x_height#,desc_depth#);
+italcorr 1/3x_height#*slant+.5hair#+.5u#;
+adjust_fit(0,0); interim superness:=more_super; path p[];
+penpos1(stem,-180); penpos2(stem,-180); x1=x2=x3; x1r=hround(1.5u-.5stem);
+penpos3(stem,-180); penpos4(vair,-90); penpos5(hair,0); x4=.5[x3,x5];
+penpos6(stem,0); x6r=hround(w-2.5u+.5stem);
+x5=x6=x7; x9=w;
+y3=.7[y4,y5]; y4r=-oo; y5=.57h;
+hook_out_points(7,8,9);  % closing hook
+% p1 is the upper end of the left stem. p2 is the lower end.
+% p3 is the right stem and closing hook.
+if square_ends:
+ y1=h; y2=-d;
+ p1=z3l--pen_lrend1(up,fine,down); p2=pen_rlend2(down,fine,up)--z1l;
+ y6=h; p3=pen_rlend6(up,fine,down)--hook_out_path(fine,7,8,9);
+else:
+ y1+.5stem=h+oo; y2-.5stem=-d-o;
+ p1=z3l--circ_end(1,up); p2=circ_end(2,down)--z1l;
+ y6+.5stem=h; p3=circ_end(6,up)--hook_out_path(fine,7,8,9);
+fi
+% [rl]path1 is the lower arc, left half. path2 is the right half.
+make_paths1(rev.l) super_arc.e(3,4); make_paths2(rev.l) z4e{right}...{up}z5e;
+fill var_combine(p2,rpath1) & combine(rpath2, p3)--combine(p3,lpath2)
+    & lpath1 & p1--cycle;
+math_fit(max(desc_depth#*slant+.5stem#-u#,0), ic#); math_kern(.5[x1,x6]);
+penlabels(1,2,3,4,5,6,7,8,9); endchar;
+
+cmchar "Lowercase Greek nu";
+beginchar(oct"027",8.5u#,x_height#,0);
+italcorr x_height#*slant+.5stem#-u#;
+adjust_fit(0,0); path p[];
+penpos3(vair,-90); penpos4(stem,0); y3r=0;
+x3-.5stem=hround(1.5u-.5stem); x4+.5stem=hround(w-1.5u+.5stem);
+if square_ends:
+ y4=h; p1=z3r{36u,h}...pen_rlend4(up,fine,down)...{-36u,-h}z3l;
+else:
+ y4+.5stem=h+oo; p1=z3r{36u,h}...circ_end(4,up)...{-36u,-h}z3l;
+fi
+penpos1(stem,0); penpos2(stem,0);
+y1=h+min(oo,serif_drop); y2=0; x1=x2=x3;
+if serifs: p3=sloped_serif_path.l(1,2,a,1/3,jut,serif_drop);
+ else: p3=pen_rlend1(up,tiny,down); fi
+p2=z2r--p3--pen_angle(down,z2l,tiny,right);
+fill subpath (0,1) of (p1) & combine(subpath (1,infinity) of p1,p2)--cycle;
+math_fit(0,ic#-1/3x_height#*slant-.5u#); math_kern(.5[x1,x4]);
+penlabels(1,2,3,4); endchar;
+
+cmchar "Lowercase Greek xi";
+beginchar(oct"030",9u#,asc_height#,desc_depth#);
+italcorr .75[x_height#,asc_height#]*slant-2u#;
+adjust_fit(0,0); path p[];
+penpos10(hair,-540); penpos11(vair,-450);
+penpos12(hair,-360); penpos13(vair,-270);
+x10r=hround 1/3w; x11=x13=.5[x10,x12]; x12r=hround(w-2.5u);
+y10=h; y13r=y11r+vstem+eps=vround(y10-.25(h-x_height));
+y12=.5[y11,y13]; %if y11l>y13l: y11l:=y13l:=y12; fi
+p1=loop_points(11, 12, 13)thinned;
+penpos0(curve,-180); penpos1(vair,-90); penpos2(hair,0); penpos3(vair,90);
+numeric theta; theta=90-angle(22u,x_height); slope:=-x_height/22u;
+penpos6(stem,theta+180); penpos7(vair,90);
+x0r=hround u; x1=x3=x11; x2=x12;
+y0=.5[y13,y1]; y3r=vround .5h=y1r+vstem+eps; y2=.5[y1,y3];
+%if y1l>y3l: y1l:=y3l:=y2; fi
+p2=loop_points(1, 2, 3);
+x4r=hround u; x4l-x4r=hround .5[vair,stem];
+x6=x7=w-2u; x8=.5w+.5u; y6=-.3d; y7l=-d-oo; y8=max(-3/4d-oo,y7r);
+ellipse_set(3r,4r,5r,6r); ellipse_set(3l,4l,5l,6l);
+y4r:=.9[y6,y4r]; y4=y4l:=.9[y6,y4l];
+pair v; v=(z7-z8) yscaled 2; penpos8(vair,angle v+90);
+if square_ends:
+ p0=z11l{left}...{up}pen_lrend10(up,fine,down){down}...{right}z11r;
+ p3=z7r{left}...{-v}pen_rlend8(-v,fine,v){v}...{right}z7l;
+else:
+ p0=z11l{left}...circ_end(10,up)...{right}z11r;
+ p3=z7r{left}...circ_end(8,left)...{right}z7l;
+fi
+lpath1:=subpath (0,1) of p0; rpath1:=subpath (1,infinity) of p0;
+make_paths2(rev.l) pulled_arc.e(13,0); % upper arc, upper half
+make_paths3(rev.l) pulled_arc.e(0,1); % upper arc, lower half
+make_paths4(rev.r) z7e{right}...{z5e-z6e}z6e--z5e{z5e-z6e}...{up}z4e
+    ...{right}z3e; % main stroke
+fill combine(rpath1,rpath2) & combine(rpath3,rpath4) & p3
+    & loop_incoming(1,2,3,lpath4,rpath3) & p2
+    & loop_outgoing(1,2,3,rpath4,lpath3)
+    & loop_incoming(11,12,13,lpath2,rpath1) & p1
+    & loop_outgoing(11,12,13,rpath2,lpath1) & cycle;
+loop_inside(11,12,13,lpath2,lpath1); loop_inside(1,2,3,lpath4,lpath3);
+math_fit(-.2asc_height#*slant-.5u#,0); math_kern(x10);
+penlabels(0,1,2,3,4,5,6,7,8,10,11,12,13); endchar;
+
+cmchar "Lowercase Greek pi";
+beginchar(oct"031",10u#,x_height#,0);
+italcorr x_height#*slant+.5stem#-u#;
+adjust_fit(0,0); path p[]; p1=pen_pi_stroke; % hook and bar
+penpos4(hair,0); penpos6(hair,0); x4=3.5u; x6=w-4u; y4=y6=y2;
+x5=3u; x7=w-2.5u; y5=y7= if square_ends: 0 else: .5stem-oo fi;
+pair v[]; v1=(z4-z5) xscaled 3.14159; v2=(z6-z7) xscaled 3.14159;
+if square_ends:
+ penpos5(diag_width(v1, stem),0); penpos7(diag_width(v2, stem),0);
+ p2=z4l{down}...{-v1}pen_lrend5(-v1,fine,v1){v1}...{up}z4r;
+ p3=z6l{down}...{-v2}pen_lrend7(-v2,fine,v2){v2}...{up}z6r;
+else:
+ penpos5(stem,angle v1-90); penpos7(stem,angle v2-90);
+ p2=z4l{down}...circ_end(5,down)...{up}z4r;
+ p3=z6l{down}...circ_end(7,down)...{up}z6r;
+fi
+fill aux_path(aux_path(p1, p2), p3)--cycle;
+math_fit(-.7x_height#*slant+.5hair#+.5u#,ic#-1/3x_height#*slant);
+math_kern(.5[x4,x6]);
+penlabels(1,2,3,4,5,6,7); endchar;
+
+cmchar "Lowercase Greek rho";
+beginchar(oct"032",8.25u#,x_height#,desc_depth#);
+italcorr .7x_height#*slant+.5curve#-u# if math_fitting:-.5u# fi;
+adjust_fit(0,0);
+penpos1(stem,180); penpos2(stem,180); penpos3(vair,90);
+penpos4(curve,0); penpos5(vair,-90); penpos6(hair,-180);
+x2r=hround(1.5u-.5stem); x1=x2=x6; x3=x5=.5[x2,x4];
+x4r=hround(w-1.5u+.5curve);
+y2=y4=y6=.5[y3,y5]; y3r=h+oo; y5r=-oo;
+make_paths1(rev.r) pulled_arc.e(2,3) & pulled_arc.e(3,4); % Top bowl
+make_paths2(rev.r) pulled_arc.e(4,5) & pulled_arc.e(5,6); % Bottom bowl
+if square_ends:
+ y1=-d; fill var_combine(pen_rlend1(down,fine,up)--z2l, rpath2) & rpath1--cycle;
+else:
+ y1-.5stem=-d-o; fill var_combine(circ_end(1,down)--z2l,rpath2) & rpath1--cycle;
+fi
+unfill lpath1 & trunc_end(lpath2, z1l--z2l)--cycle;
+math_fit(max(desc_depth#*slant+.5stem#-u#, 0), ic#); math_kern(x3);
+penlabels(1,2,3,4,5,6); endchar;
+
+cmchar "Lowercase Greek sigma";
+beginchar(oct"033",10.25u#,x_height#,0);
+italcorr x_height#*slant+.5stem#-u#;
+adjust_fit(0,0);
+penpos1(.5[vair,vstem],90); penpos2(stem,0); penpos3(vair,-90);
+penpos4(stem,-180); penpos5(vstem,-270); penpos6(vstem,-270);
+x1=x3=x5=.5[x2,x4]; x2r=hround(w-2.5u);
+x4r=hround(1.5u-.5curve);x6=w-1.5u if square_ends: + vstem - oo fi;
+y1r=h; y2=y4=.5[y1,y3]; y3r=-oo; y6r=y5r=y1r;
+make_paths1(rev.l) pulled_arc.e(1,4) & pulled_arc.e(4,3);
+make_paths2(rev.l) pulled_arc.e(3,2) & pulled_arc.e(2,1);
+if square_ends:
+ fill rpath1 & combine(rpath2, z5l--pen_lrend6(right,fine,left))--cycle;
+else:
+ fill rpath1 & combine(rpath2, z5l--circ_end(6,right))--cycle;
+fi
+unfill lpath2 & lpath1 & cycle;
+math_fit(-.3x_height#*slant+.5curve#-u#,ic#-1/3x_height#*slant); math_kern(x1);
+penlabels(1,2,3,4,5,6); endchar;
+
+cmchar "Lowercase Greek tau";
+beginchar(oct"034",9u#,x_height#,0);
+italcorr x_height#*slant+.5stem#-u#;
+adjust_fit(0,0);
+path p; p=pen_pi_stroke; % hook and bar
+penpos4(hair,0); penpos5(stem,0);
+x4=x5; x5-.5stem=hround(.5w-.5u-.5stem); y4=y2;
+if square_ends:
+ y5=0; fill aux_path(p, z4l--pen_lrend5(z5l-z4l,fine,z4r-z5r)--z4r)--cycle;
+else:
+ y5-.5stem=-oo;
+ fill aux_path(p, z4l--circ_end(5,down)--z4r)--cycle;
+fi
+math_fit(-.7x_height#*slant+.5hair#+.5u#,-.5u#); math_kern(x5);
+penlabels(1,2,3,4,5); endchar;
+
+cmchar "Lowercase Greek upsilon";
+beginchar(oct"035",9u#,x_height#,0);
+italcorr x_height#*slant;
+adjust_fit(0,0); interim superness:=more_super;
+x0=0; x2=x3+.25u; penpos3(stem,-180); x3r=hround(2.5u-.5stem);
+hook_in_points(0,1,2)(skewed);  % opening hook
+rev_pos2'(2); penpos4(vair,-90); penpos5(hair,0);
+x4=.5w+u; x5r=hround(w-.5u); y3=.7[y4,y5]; y4r=-oo; y5=.57h;
+make_paths1(rev.l) super_arc.e(3,4)..tension atleast 1.05..{up}z5e;
+if square_ends:
+ penpos6(curve, 0); y6=x_height; x6r=w-u;
+ make_paths2(rev.l) z5e{up}..z6e;
+ pair v[]; v1=-predir 1 of rpath2; v2=postdir 0 of lpath2;
+ fill hook_in_path(fine,0,1,2)skewed...rpath1...{v1}pen_rlend6(v1,fine,v2){v2}
+  ...lpath1...cycle;
+else:
+ %v_bulb(5,6);  % closing bulb
+ fill hook_in_path(fine,0,1,2)skewed...super_arc.r(3,4)
+    ..tension atleast 1.05..v_bulb_path(5,6)
+    ..tension atleast 1.05..super_arc.l(4,3)...cycle;
+fi
+math_fit(min(-2/3x_height#*slant+.5hair#+.5u#,.5hair#),2/3ic#);
+math_kern(.5[x3r,x5r]);
+penlabels(0,1,2,3,4,5,6); endchar;
+
+cmchar "Lowercase Greek phi";
+beginchar(oct"036",11u#,asc_height#,desc_depth#);
+italcorr .7x_height#*slant+.5curve#-u# if math_fitting:-.5u# fi;
+adjust_fit(0,0);
+% Originally the curve was even smaller, which looked weird.
+numeric light_curve; light_curve=hround(curve-2stem_corr);
+penpos1(vair,90); penpos2(light_curve,180);
+penpos3(vair,270); penpos4(light_curve,360);
+x1=x3=.5w; x2r=hround(1.5u-.5light_curve); x4=w-x2;
+y1r=x_height+oo; y2=y4=.5[y1,y3]; y3r=-oo;
+make_paths1(rev.l) pulled_arc.e(4,1) & pulled_arc.e(1,2); % Top path
+make_paths2(rev.l) pulled_arc.e(2,3) & pulled_arc.e(3,4); % Bottom path
+penpos5(hair,0); penpos6(hair,0); x5=x6=.5w; y5=h; y6=-d-oo;
+path ptop, pbot; ptop=z6r--pen_rlend5(up,fine,down)--z6l;
+pbot=z5l--pen_lrend6(down,fine,up)--z5r;
+% Outer contour
+fill aux_path(rpath1, ptop) & aux_path(rpath2, pbot) & cycle;
+unfill trunc_both(lpath1, lpath2, z5r--z6r)--cycle;
+unfill trunc_both(lpath2, lpath1, z5l--z6l)--cycle;
+math_fit(-.3x_height#*slant+.5curve#-u#,ic#); math_kern(x5);
+penlabels(1,2,3,4,5,6); endchar;
+
+cmchar "Lowercase Greek chi";
+beginchar(oct"037",11u#,x_height#,desc_depth#);
+italcorr x_height#*slant+.5hair#-1.5u#;
+adjust_fit(0,0); path p[];
+penpos1(hair,180); penpos2(vair,80); penpos5(vair,80); penpos6(hair,180);
+x1-.5hair=hround-.5hair; x6=w-x1; x2=w-x5=u;
+y1=y2l-h/8; y2r=h+oo; y5l=-d-oo; y6=y5r+h/8;
+z0=.5[z2,z5]; z2'=z2l+(.5u,0); z5'=z5r-(.5u,0);
+numeric theta; theta=angle(z5'-z2')+90; pair v; v=z5'-z2';
+penpos3(stem,theta); penpos4(stem,theta);
+y3r=y2r-h/8; y4l=y5l+h/8; z3l=whatever[z2',z0]; z4r=whatever[z0,z5'];
+x8=w-x7=2u; h-y7=y8+d=if square_ends: 0 else: .5hair fi;
+% p1 and p2 are the opening and closing hooks of the main diagonal.
+p1=z2r{left}...{down}pen_rlend1(down,fine,up){up}...{right}z2l;
+p2=z5l{right}...{up}pen_lrend6(up,fine,down){down}...{left}z5r;
+% z0 is now used as a strut through the arc of the main diagonal.
+z0r=whatever[z7,z8]=whatever[z3r,z4r]; z0l=whatever[z7,z8]=whatever[z3l,z4l];
+% [lr]path1 is the main diagonal body.
+make_paths1(rev.r) z2e{right}...z3e{v}..z0e..z4e{v}...{right}z5e;
+% p3 is the upper end of the minor diagonal; p4 the lower end.
+if square_ends:
+ penpos7(diag_width(z7-z8,hair), 0); penpos8(diag_width(z7-z8,hair), 0);
+ v:=z7-z8;
+ p3=z8r--pen_rlend7(v,fine,-v)--z8l; p4=z7l--pen_lrend8(-v,fine,v)--z7r;
+else:
+ numeric theta; theta=angle(z7-z8)-90;
+ penpos7(hair,theta); penpos8(hair,theta);
+ p3=z8r--circ_end(7,up)--z8l; p4=z7l--circ_end(8,down)--z7r;
+fi
+fill aux_path(rpath1,p3) & p1 & aux_path(lpath1,p4) & p2 & cycle;
+math_fit((desc_depth#-x_height#)*slant+ic#,ic#); math_kern(x0);
+penlabels(0,1,2,2',3,4,5',5,6,7,8); endchar;
+
+cmchar "Lowercase Greek psi";
+beginchar(oct"040",11u#,asc_height#,desc_depth#);
+italcorr x_height#*slant;
+adjust_fit(0,0); interim superness:=more_super;
+x0=0; x2=x3+.25u; penpos3(stem,-180); x3r=hround(2.5u-.5stem);
+hook_in_points(0,1,2)(skewed);  % opening hook
+rev_pos2'(2); penpos4(vair,-90); penpos5(hair,0);
+x4=.5w+u; x5r=hround(w-.5u); y3=.7[y4,y5]; y4r=-oo; y5=.57x_height;
+make_paths1(rev.l) super_arc.e(3,4)..tension atleast 1.05..{up}z5e;
+penpos7(hair,0); penpos8(hair,0); x7=x8=.5w+.5u; y7=h; y8=-d-oo;
+path ptop, pbot; ptop=z8r--pen_rlend7(up,fine,down)--z8l;
+pbot=z7l--pen_lrend8(down,fine,up)--z7r;
+if square_ends:
+ penpos6(curve, 0); y6=x_height; x6r=w-u;
+ make_paths2(rev.l) z5e{up}..z6e;
+ pair v[]; v1=-predir 1 of rpath2; v2=postdir 0 of lpath2;
+ fill hook_in_path(fine,0,1,2)skewed...aux_path(rpath1, pbot)
+  ...{v1}pen_rlend6(v1,fine,v2){v2}...aux_path(lpath1, ptop)...cycle;
+else:
+ fill hook_in_path(fine,0,1,2)skewed...aux_path(rpath1, pbot)
+  & v_bulb_path(5,6) & aux_path(lpath1, ptop)...cycle;
+fi
+math_fit(min(-2/3x_height#*slant+.5hair#+.5u#,.5hair#),2/3ic#);
+math_kern(x7);
+penlabels(0,1,2,3,4,5,6,7,8); endchar;
+
+cmchar "Lowercase Greek omega";
+beginchar(oct"041",11u#,x_height#,0);
+italcorr x_height#*slant;
+adjust_fit(0,0); path p[];
+penpos2(hair,-180); x2r=hround.5u; y2=y4=y6=y8=bar_height;
+x1=x2+.75u;
+pair v; v=(z1-z2) xscaled 2;
+if square_ends:
+ y1=h; penpos1(diag_width(v, hair+dw), -180);
+else:
+ y1+.5hair=h; penpos1(hair+dw,angle v+90);
+fi
+penpos3(vstem+dw,-90); penpos4(hair,0); penpos5(vair,90);
+penpos6(hair,180); penpos7(vstem+dw,270); penpos8(hair,360);
+y3r=y7r=-oo; y5r=vround(.2[y4,h]+.5vair);
+x3=.5[x2,x4]; x7-.25u=.5[x6,x8]; x8r=hround(w-.5u);
+x5+.5stem=hround(.5w+.5stem)+eps;
+x5=.5[x4,x6]; x4r-x6r=min(stem,2hair)+2eps;
+%if x4l<x6l: x4l:=x6l:=x5; fi
+p1=loop_points(4,5,6)thinned;
+if square_ends:
+ penpos9(curve, 0); y9=x_height; x9r=w-u;
+ make_paths2(rev.l) z8e{up}..z9e;
+ pair v[]; v1=-predir 1 of rpath2; v2=postdir 0 of lpath2;
+ p2=z8r{up}...{v1}pen_rlend9(v1,fine,v2){v2}...{down}z8l;
+ p3=z2l{up}...{v}pen_lrend1(v,fine,-v){-v}...{down}z2r;
+else:
+ p2=v_bulb_path(8,9);
+ p3=z2l{up}...circ_end(1,up)...{down}z2r;
+fi
+make_paths1(rev.l) z2e{down}...z3e{right}...{up}z4e;  % left arc
+make_paths2(rev.l) z6e{down}...z7e{right}...{up}z8e;  % right arc
+fill p3 & combine(rpath1,rpath2) & p2 & loop_incoming(4,5,6,lpath2,rpath1)
+    & p1 & loop_outgoing(4,5,6,rpath2,lpath1) & cycle;
+loop_inside(4,5,6,lpath2,lpath1);
+math_fit(-bar_height#*slant,2/3ic#); math_kern(x5);
+penlabels(1,2,3,4,5,6,7,8,9); endchar;
+
+cmchar "Variant lowercase Greek epsilon";
+beginchar(oct"042",8u#,x_height#,0);
+italcorr x_height#*slant-.5u#;
+adjust_fit(0,0); path p[];
+penpos2(vair,90); x2=x8=.5w+.5u; y2r=h+oo;
+penpos3(stem,180); penpos4(vair,270); penpos5(hair,360); penpos6(vair,450);
+penpos7(.6[stem,curve],540); penpos8(vair',630);
+x3r=hround u; x4=x6=.5w; x5r=hround(w-2.5u); x7=x3;
+y5=bar_height=.5[y4,y6]; y6r-y4r=vstem+eps;
+p1=loop_points(4,5,6)thinned;
+y3=.5[y2,y4]; y7=.5[y6,y8]; y8r=-oo;
+if square_ends:
+ numeric light_flare; light_flare=4/7[vair',flare];
+ x1=hround(w-1.2u); y1r=vround(.82[bar_height,y2r]);
+ penpos1(light_flare,80);
+ pair v.l,v.r; forsuffixes e=l,r: v.e=predir 1 of (z2e{right}....z1e); endfor
+ p2=z2l{right}....{-v.l}pen_lrend1(-v.l,fine,v.r){v.r}....{left}z2r;
+ numeric bot_flare; bot_flare=.6[vair',flare];
+ penpos9(bot_flare,310);
+ x9r=hround(w-.5u); y9r=1/3bar_height;
+ pair v.l,v.r;
+ forsuffixes e=l,r: v.e=-predir 1 of (z8e{right}....z9e);
+   if angle v.e>75: v.e:=dir 75; fi
+ endfor
+ p3=z8r{right}....{v.r}pen_rlend9(v.r,fine,-v.l){-v.l}....{left}z8l;
+else:
+ numeric light_flare; light_flare=4/7[hair,stem];
+ x1=hround(w-u)-.5light_flare; y1=vround(y2l)-.5light_flare;
+ pair v; v=direction 1 of (z2{right}...z1...(x1,bar_height));
+ penpos1(light_flare,angle v+90);
+ p2=z2l{right}...circ_end(1,down)...{left}z2r;
+ x9+.5vair=hround(w-.5u); y9=1/3[y8,bar_height];
+ pair v; v=direction 1 of (z8{right}...z9...(x9,bar_height));
+ penpos9(.2[vair,stem],angle v-90);
+ p3=z8r{right}...circ_end(9,right)...{left}z8l;
+fi
+make_paths1(rev.l) pulled_arc.e(2,3) & pulled_arc.e(3,4);
+make_paths2(rev.l) pulled_arc.e(6,7) & pulled_super_arc.e(7,8)(.5superpull);
+fill p2 & combine(rpath1,rpath2) & p3
+    & loop_incoming(4,5,6,lpath2,rpath1) & p1
+    & loop_outgoing(4,5,6,rpath2,lpath1) & cycle;
+loop_inside(4,5,6,lpath2,lpath1);
+math_fit(-.5bar_height#*slant-.5u#,ic#); math_kern(.5w);
+penlabels(1,2,3,4,5,6,7,8,9); endchar;
+
+cmchar "Variant lowercase Greek theta";
+beginchar(oct"043",9u#,asc_height#,0);
+italcorr .5[bar_height#,x_height#]*slant+.5vair#+.5u#;
+adjust_fit(0,0);
+numeric light_curve; light_curve=hround .5[stem,curve];
+x0=0; x2-.5stem=hround(2.5u-.5stem); hook_in_points(0,1,2);  % opening hook
+rev_pos2'(2); penpos3(stem,-180); penpos4(vair,-90);
+penpos5(light_curve,0); penpos6(vair,90); penpos7(hair,180); penpos8(vair,270);
+x3=x2; x4=x6=.5[x3,x5]; x5r=hround(w-1.5u+.5light_curve);
+x7r=hround(3.25u-.5hair); x8+.5vair=hround(w+.5vair-epsilon);
+y3=.4x_height; y4r=-oo; y5=.5[y4,y6]; y6r=h+oo;
+y7=.5[x_height,h]; y8=.5[bar_height,x_height];
+pair v; v=(4(x8-x7),y8-y7);
+make_paths1(rev.l) {{interim superness:=hein_super; super_arc.e(3,4)}}
+    & pulled_arc.e(4,5) & pulled_arc.e(5,6);
+make_paths2(rev.l) z6e{left}...{down}z7e;
+make_paths3(rev.l) z7e{down}...{v}z8e;
+path p; p=z7r{down}...{v}pen_rlend8(v,fine,-v){-v}...{up}z7l;
+fill hook_in_path(fine,0,1,2)--aux_path(rpath1,p) & rpath2
+ & combine(rpath3,lpath1)--cycle;
+unfill combine(lpath1,lpath3) & lpath2 & cycle;
+math_fit(min(-2/3x_height#*slant+.5hair#+.5u#,.5hair#),ic#); math_kern(x4);
+penlabels(0,a,1,2,3,4,5,6,7,8); endchar;
+
+cmchar "Variant lowercase Greek pi";
+beginchar(oct"044",14.5u#,x_height#,0);
+italcorr x_height#*slant+.5stem#-u#;
+adjust_fit(0,0); path p; p=pen_pi_stroke;
+penpos4(hair,-180); penpos5(hair,-180); penpos6(vstem,-90);
+penpos7(hair,0); rev_pos7'(7);
+penpos8(vstem,-90); penpos9(hair,0); penpos0(hair,0);
+x4=x5+1.5u; x5r=hround 2u; x6=x4+.5u; x7l=hround(.5w+.25u-.5hair);
+x8=w-4.5u; x9r=hround(w-1.5u); x0=x9-1.25u;
+y4=y0=h; y5+.1h=y7-.1h=y9=bar_height; y6r=y8r=-oo;
+make_paths1(rev.l) z4e{2(x5-x4),y5-y4}...z5e{down}
+ ...z6e{right}...z7e{up};  % left bowl
+make_paths2(rev.r) z0e{2(x9-x0),y9-y0}...z9e{down}
+ ...z8e{left}...z7'e{up};  % right bowl
+fill combine(combine(p,rpath1),combine(rpath2,p))--cycle;
+unfill trunc_start(subpath(0,length(lpath2)-1) of lpath2,z2r--z3r)
+    ...{up}pen_rlend7(up,fine,down){down}
+    ...trunc_end(subpath(1,infinity) of lpath1,z2r--z3r)--cycle;
+math_fit(-.7x_height#*slant+.5hair#+.5u#,ic#-.5u#); math_kern(x7);
+penlabels(0,1,2,3,4,5,6,7,8,9); endchar;
+
+cmchar "Variant lowercase Greek rho";
+beginchar(oct"045",8.25u#,x_height#,desc_depth#);
+italcorr .7x_height#*slant+.5curve#-u# if math_fitting:-.5u# fi;
+adjust_fit(0,0); path p;
+penpos2(stem,180); penpos3(vair,90); penpos4(curve,0);
+penpos5(vair,-90); penpos6(stem,-180);
+x2r=hround(1.5u-.5stem); x2=x6; x3=x5=.5[x2,x4];
+x4r=hround(w-1.5u+.5curve);
+y2=y4=y6=.5[y3,y5]; y3r=h+oo; y5r=-oo;
+make_paths1(rev.r) pulled_arc.e(2,3) & pulled_arc.e(3,4);
+make_paths2(rev.r) pulled_arc.e(4,5) & pulled_arc.e(5,6);  % bowl
+penpos2'(hair,-180); z2'r=z2r;
+if square_ends:
+ penpos0(vstem, -90); y0r=-d; x0=w-u;
+ angled_pos(2', down, 1, right, 0);
+ p=z2'r--pen_angle(down,z1r,fine,right)--pen_rlend0(right,fine,left)--z1l--z2'l;
+else:
+ penpos1(vstem,-90); z1'=z1; z1'r=z1l; z1'l=z1r;
+ penpos0(hair,0); x0r=hround(w-u); y0=-d; y1r=vround-.9d; x1=x5;
+ penpos0'(hair-fine,0); y0'=y0-.5fine; x0=x0';
+ interim superness:=sqrt superness;
+ p=pulled_arc.r(2',1) & pulled_arc.l(1',0)..{right}z0'l--z0'r{right}
+  ..pulled_arc.r(0,1') & pulled_arc.l(1,2');
+fi
+fill subpath(0,1) of (p) & combine(subpath(1,infinity) of p,rpath2)
+    & rpath1 & cycle;
+unfill lpath1 & lpath2 & cycle;
+math_fit(max(desc_depth#*slant+.5stem#-u#,0), ic#); math_kern(x3);
+penlabels(0,1,2,3,4,5,6); endchar;
+
+cmchar "Variant lowercase Greek sigma";
+beginchar(oct"046",8u#,x_height#,.5min(desc_depth#,.5x_height#));
+italcorr x_height#*slant-.5u#;
+adjust_fit(0,0);
+numeric heavy_vair; heavy_vair=.25[vair,vstem];
+penpos2(vair,-90);
+x1 if not square_ends: +.5heavy_vair fi =hround(w-u); y1=.1[y2r,bar_height];
+x2=min(.5w+u,x1-vair); y2l=h+oo;
+penpos1(heavy_vair,angle(x2-x1,2(y2-y1))+90);
+numeric theta; theta=90-angle(16u,x_height); slope:=-x_height/16u;
+penpos6(stem,theta); penpos7(vair,-90);
+x4l=hround u; x4r-x4l=(hround .5[vair,stem]);
+x6=x7=w-2u; x8=min(.5w+u,x7-1.5fine); y6=.25[y8,y2]; y8=y7+1/8d; y7r=-d-oo;
+ellipse_set(2l,4l,5l,6l); ellipse_set(2r,4r,5r,6r); y4=y4r;
+path p[]; pair v[]; v1=(x2-x1,2(y2-y1)); v2=(x7-x8,2(y7-y8));
+if square_ends: penpos8(vair,-135);
+ p1=z2r{right}...{-v1}pen_rlend1(-v1,fine,v1){v1}...{left}z2l;
+ p2=z7l{left}...{-v2}pen_lrend8(-v2,fine,v2){v2}...{right}z7r;
+else: penpos8(diag_width(v2 rotated 90,vair),angle v2-90);
+ p1=z2r{right}...circ_end(1,right)...{left}z2l;
+ p2=z7l{left}...circ_end(8,left)...{right}z7r;
+fi
+make_paths1(rev.l) z7e{right}
+  ...{z5e-z6e}z6e--z5e{z5e-z6e}...{up}z4e...{right}z2e; % main stroke
+fill rpath1 & p1 & lpath1 & p2 & cycle;
+math_fit(-.5x_height#*slant-.5u#,0); math_kern(.5w);
+penlabels(1,2,4,5,6,7,8); endchar;
+
+cmchar "Variant lowercase Greek phi";
+beginchar(oct"047",11u#,x_height#,desc_depth#);
+italcorr .7x_height#*slant;
+adjust_fit(0,0); path p[]; pair v;
+penpos1(hair,-180); x1=x2+.75u; y1=h;
+penpos2(hair,-180); x2r=hround .5u; y2=bar_height;
+v=(z1-z2) xscaled 3; p1=z2l{up}...{v}pen_lrend1(v,fine,-v){-v}...{down}z2r;
+penpos3(vstem,-90); x3=.5(w+u); y3r=-oo;
+penpos4(hair,0); x4r=hround(w-.5u); y4=y2;
+make_paths1(rev.l) z2e{down}...z3e{right}...{up}z4e;
+penpos5(vstem,90); x5=.52[x6,x4]; y5r=h+oo;
+penpos6(hair,180); x6=x7; y6=1/3h;
+penpos7(stem,180); x7r=hround(.5w-.5u-.5stem);
+if square_ends:
+ y7=-d; p2=z6r--pen_rlend7(z7r-z6r,fine,z6l-z7l)--z6l;
+else:
+ y7-.5stem=-d-o; z7'=z7+.5stem*down;
+ p2=z6r--z7r{z7r-z6r}...z7'{right}...{z7l-z7l}z7l--z6l;
+fi
+make_paths2(rev.l) z4e{up}...{left}z5e;
+make_paths3(rev.l) z5e{left}...{z7e-z6e}z6e--z7e;
+fill p1 & aux_path(rpath1,p2) & rpath2 & combine(rpath3,lpath1) & cycle;
+unfill combine(lpath1,lpath3) & lpath2 & cycle;
+math_fit(-.3x_height#*slant,ic#); math_kern(x7);
+penlabels(1,2,3,4,5,6,7); endchar;
+

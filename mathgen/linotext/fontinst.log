@@ -1,0 +1,463 @@
+This is TeX, Version 3.14159 (Web2C 7.3.1) (format=tex 2002.9.6)  1 MAY 2004 23:12
+**&tex fontinst.sty
+(/usr/share/texmf/tex/fontinst/base/fontinst.sty
+\a_count=\count26
+\b_count=\count27
+\c_count=\count28
+\d_count=\count29
+\e_count=\count30
+\f_count=\count31
+\g_count=\count32
+\a_dimen=\dimen16
+\b_dimen=\dimen17
+\c_dimen=\dimen18
+\d_dimen=\dimen19
+\a_toks=\toks12
+\b_toks=\toks13
+\c_toks=\toks14
+\out_file=\write0
+
+(/usr/share/texmf/tex/latex/graphics/trig.sty)
+\result=\count33
+\minimum_kern=\count34
+\char_slot=\count35
+\char_x_width=\count36
+\x_width=\count37
+\bbox_llx=\count38
+\bbox_lly=\count39
+\bbox_urx=\count40
+\bbox_ury=\count41
+\slot_number=\count42
+\glyph_width=\count43
+\glyph_height=\count44
+\glyph_depth=\count45
+\glyph_italic=\count46
+\glyph_map_commands=\toks15
+\glyph_map_fonts=\toks16
+\glyph_voffset=\count47
+\scaled_design_size=\dimen20
+\boundary_char=\count48
+\side_bearings=\dimen21
+\curr_bearings=\dimen22
+\font_count=\count49
+\next_mapfont=\count50
+\prev_mapfont=\count51
+\family_toks=\toks17
+
+No file fontinst.rc.
+)
+*\latinfamily{llx}{}\bye
+INFO> parse family <llx><>
+INFO> to make LaTeX font shape <llx,m,n,> seek llxr8r.mtx
+INFO> run \transformfont  <llxr8r> from <llxr8a>
+\openout0 = `llxr8a.mtx'.
+
+(llxr8a.afm)
+Metrics written on llxr8a.mtx.
+\openout0 = `llxr8a.pl'.
+
+(llxr8a.mtx)
+Raw font written on llxr8a.pl.
+(/usr/share/texmf/tex/fontinst/base/8r.etx)
+\openout0 = `llxr8r.mtx'.
+
+ (llxr8a.mtx)
+Transformed metrics written on llxr8r.mtx.
+\openout0 = `llxr8r.pl'.
+
+(llxr8r.mtx)
+Raw font written on llxr8r.pl.
+INFO> run \installrawfont <llxr8r><llxr8r,8r><8r><8r><llx><m><n>
+(llxr8r.mtx) (/usr/share/texmf/tex/fontinst/base/8r.mtx)
+(/usr/share/texmf/tex/fontinst/base/8r.etx)
+\openout0 = `llxr8r.pl'.
+
+
+(/usr/share/texmf/tex/fontinst/base/8r.etx
+Warning: \ligature for unknown slot `ffi'.
+Warning: \ligature for unknown slot `ffl'.
+Warning: \ligature for unknown slot `ff'.
+) (/usr/share/texmf/tex/fontinst/base/8r.etx)
+Font written on llxr8r.pl.
+INFO> run \installfont <llxr7t><llxr8r,latin><OT1><OT1><llx><m><n>
+(llxr8r.mtx) (/usr/share/texmf/tex/fontinst/base/latin.mtx)
+(/usr/share/texmf/tex/fontinst/base/ot1.etx)
+\openout0 = `llxr7t.vpl'.
+
+
+(/usr/share/texmf/tex/fontinst/base/ot1.etx)
+(/usr/share/texmf/tex/fontinst/base/ot1.etx)
+(/usr/share/texmf/tex/fontinst/base/ot1.etx
+Warning: missing glyph `Gamma'.
+Warning: missing glyph `Delta'.
+Warning: missing glyph `Theta'.
+Warning: missing glyph `Lambda'.
+Warning: missing glyph `Xi'.
+Warning: missing glyph `Pi'.
+Warning: missing glyph `Sigma'.
+Warning: missing glyph `Upsilon'.
+Warning: missing glyph `Phi'.
+Warning: missing glyph `Psi'.
+Warning: missing glyph `Omega'.
+Warning: missing glyph `dotlessj'.
+Warning: missing glyph `lslashslash'.
+)
+Virtual font written on llxr7t.vpl.
+INFO> run \installfont <llxr8t><llxr8r,latin><T1><T1><llx><m><n>
+(/usr/share/texmf/tex/fontinst/base/t1.etx)
+\openout0 = `llxr8t.vpl'.
+
+
+(/usr/share/texmf/tex/fontinst/base/t1.etx)
+(/usr/share/texmf/tex/fontinst/base/t1.etx)
+(/usr/share/texmf/tex/fontinst/base/t1.etx
+Warning: missing glyph `perthousandzero'.
+Warning: missing glyph `dotlessj'.
+Warning: missing glyph `Eng'.
+Warning: missing glyph `eng'.
+)
+Virtual font written on llxr8t.vpl.
+INFO> run \installfont <llxr8c><llxr8r,textcomp><TS1><TS1><llx><m><n>
+(llxr8r.mtx) (/usr/share/texmf/tex/fontinst/base/textcomp.mtx)
+(/usr/share/texmf/tex/fontinst/base/ts1.etx)
+\openout0 = `llxr8c.vpl'.
+
+
+(/usr/share/texmf/tex/fontinst/base/ts1.etx)
+(/usr/share/texmf/tex/fontinst/base/ts1.etx)
+(/usr/share/texmf/tex/fontinst/base/ts1.etx
+Warning: missing glyph `arrowleft'.
+Warning: missing glyph `arrowright'.
+Warning: missing glyph `tieaccentlowercase'.
+Warning: missing glyph `tieaccentcapital'.
+Warning: missing glyph `newtieaccentlowercase'.
+Warning: missing glyph `newtieaccentcapital'.
+Warning: missing glyph `blank'.
+Warning: missing glyph `hyphendbl'.
+Warning: missing glyph `zerooldstyle'.
+Warning: missing glyph `oneoldstyle'.
+Warning: missing glyph `twooldstyle'.
+Warning: missing glyph `threeoldstyle'.
+Warning: missing glyph `fouroldstyle'.
+Warning: missing glyph `fiveoldstyle'.
+Warning: missing glyph `sixoldstyle'.
+Warning: missing glyph `sevenoldstyle'.
+Warning: missing glyph `eightoldstyle'.
+Warning: missing glyph `nineoldstyle'.
+Warning: missing glyph `angbracketleft'.
+Warning: missing glyph `angbracketright'.
+Warning: missing glyph `Omegainv'.
+Warning: missing glyph `bigcircle'.
+Warning: missing glyph `Omega'.
+Warning: missing glyph `arrowup'.
+Warning: missing glyph `arrowdown'.
+Warning: missing glyph `born'.
+Warning: missing glyph `divorced'.
+Warning: missing glyph `died'.
+Warning: missing glyph `leaf'.
+Warning: missing glyph `married'.
+Warning: missing glyph `musicalnote'.
+Warning: missing glyph `hyphendblchar'.
+Warning: missing glyph `dollaroldstyle'.
+Warning: missing glyph `centoldstyle'.
+Warning: missing glyph `colonmonetary'.
+Warning: missing glyph `won'.
+Warning: missing glyph `naira'.
+Warning: missing glyph `guarani'.
+Warning: missing glyph `peso'.
+Warning: missing glyph `lira'.
+Warning: missing glyph `recipe'.
+Warning: missing glyph `interrobang'.
+Warning: missing glyph `interrobangdown'.
+Warning: missing glyph `dong'.
+Warning: missing glyph `pertenthousand'.
+Warning: missing glyph `pilcrow'.
+Warning: missing glyph `baht'.
+Warning: missing glyph `numero'.
+Warning: missing glyph `discount'.
+Warning: missing glyph `estimated'.
+Warning: missing glyph `openbullet'.
+Warning: missing glyph `servicemark'.
+Warning: missing glyph `quillbracketleft'.
+Warning: missing glyph `quillbracketright'.
+Warning: missing glyph `copyleft'.
+Warning: missing glyph `circledP'.
+Warning: missing glyph `referencemark'.
+Warning: missing glyph `radical'.
+Warning: missing glyph `euro'.
+)
+Virtual font written on llxr8c.vpl.
+INFO> to make LaTeX font shape <llx,m,sc,> seek llxrc8r.mtx
+INFO> run \installfont <llxrc7t><llxr8r,latin><OT1c><OT1><llx><m><sc>
+(llxr8r.mtx) (/usr/share/texmf/tex/fontinst/base/latin.mtx)
+(/usr/share/texmf/tex/fontinst/base/ot1c.etx
+(/usr/share/texmf/tex/fontinst/base/ot1.etx))
+\openout0 = `llxrc7t.vpl'.
+
+
+(/usr/share/texmf/tex/fontinst/base/ot1c.etx
+(/usr/share/texmf/tex/fontinst/base/ot1.etx))
+(/usr/share/texmf/tex/fontinst/base/ot1c.etx
+(/usr/share/texmf/tex/fontinst/base/ot1.etx))
+(/usr/share/texmf/tex/fontinst/base/ot1c.etx
+(/usr/share/texmf/tex/fontinst/base/ot1.etx
+Warning: missing glyph `Gamma'.
+Warning: missing glyph `Delta'.
+Warning: missing glyph `Theta'.
+Warning: missing glyph `Lambda'.
+Warning: missing glyph `Xi'.
+Warning: missing glyph `Pi'.
+Warning: missing glyph `Sigma'.
+Warning: missing glyph `Upsilon'.
+Warning: missing glyph `Phi'.
+Warning: missing glyph `Psi'.
+Warning: missing glyph `Omega'.
+Warning: missing glyph `lslashslash'.
+))
+Virtual font written on llxrc7t.vpl.
+INFO> run \installfont <llxrc8t><llxr8r,latin><T1c><T1><llx><m><sc>
+(/usr/share/texmf/tex/fontinst/base/t1c.etx
+(/usr/share/texmf/tex/fontinst/base/t1.etx))
+\openout0 = `llxrc8t.vpl'.
+
+
+(/usr/share/texmf/tex/fontinst/base/t1c.etx
+(/usr/share/texmf/tex/fontinst/base/t1.etx))
+(/usr/share/texmf/tex/fontinst/base/t1c.etx
+(/usr/share/texmf/tex/fontinst/base/t1.etx))
+(/usr/share/texmf/tex/fontinst/base/t1c.etx
+(/usr/share/texmf/tex/fontinst/base/t1.etx
+Warning: missing glyph `perthousandzero'.
+Warning: missing glyph `Eng'.
+Warning: missing glyph `Eng'.
+))
+Virtual font written on llxrc8t.vpl.
+INFO> to make LaTeX font shape <llx,m,sl,> seek llxro8r.mtx
+INFO> run \transformfont  <llxro8r> from <llxr8r> (faking oblique)
+Faking oblique font llxro8r from llxr8r
+\openout0 = `llxro8r.mtx'.
+
+(llxr8r.mtx)
+Transformed metrics written on llxro8r.mtx.
+\openout0 = `llxro8r.pl'.
+
+(llxro8r.mtx)
+Raw font written on llxro8r.pl.
+INFO> run \installrawfont <llxro8r><llxro8r,8r><8r><8r><llx><m><sl>
+(llxro8r.mtx) (/usr/share/texmf/tex/fontinst/base/8r.mtx)
+(/usr/share/texmf/tex/fontinst/base/8r.etx)
+\openout0 = `llxro8r.pl'.
+
+
+(/usr/share/texmf/tex/fontinst/base/8r.etx
+Warning: \ligature for unknown slot `ffi'.
+Warning: \ligature for unknown slot `ffl'.
+Warning: \ligature for unknown slot `ff'.
+) (/usr/share/texmf/tex/fontinst/base/8r.etx)
+Font written on llxro8r.pl.
+INFO> run \installfont <llxro7t><llxro8r,latin><OT1><OT1><llx><m><sl>
+(llxro8r.mtx) (/usr/share/texmf/tex/fontinst/base/latin.mtx)
+(/usr/share/texmf/tex/fontinst/base/ot1.etx)
+\openout0 = `llxro7t.vpl'.
+
+
+(/usr/share/texmf/tex/fontinst/base/ot1.etx)
+(/usr/share/texmf/tex/fontinst/base/ot1.etx)
+(/usr/share/texmf/tex/fontinst/base/ot1.etx
+Warning: missing glyph `Gamma'.
+Warning: missing glyph `Delta'.
+Warning: missing glyph `Theta'.
+Warning: missing glyph `Lambda'.
+Warning: missing glyph `Xi'.
+Warning: missing glyph `Pi'.
+Warning: missing glyph `Sigma'.
+Warning: missing glyph `Upsilon'.
+Warning: missing glyph `Phi'.
+Warning: missing glyph `Psi'.
+Warning: missing glyph `Omega'.
+Warning: missing glyph `dotlessj'.
+Warning: missing glyph `lslashslash'.
+)
+Virtual font written on llxro7t.vpl.
+INFO> run \installfont <llxro8t><llxro8r,latin><T1><T1><llx><m><sl>
+(/usr/share/texmf/tex/fontinst/base/t1.etx)
+\openout0 = `llxro8t.vpl'.
+
+
+(/usr/share/texmf/tex/fontinst/base/t1.etx)
+(/usr/share/texmf/tex/fontinst/base/t1.etx)
+(/usr/share/texmf/tex/fontinst/base/t1.etx
+Warning: missing glyph `perthousandzero'.
+Warning: missing glyph `dotlessj'.
+Warning: missing glyph `Eng'.
+Warning: missing glyph `eng'.
+)
+Virtual font written on llxro8t.vpl.
+INFO> run \installfont <llxro8c><llxro8r,textcomp><TS1><TS1><llx><m><sl>
+(llxro8r.mtx) (/usr/share/texmf/tex/fontinst/base/textcomp.mtx)
+(/usr/share/texmf/tex/fontinst/base/ts1.etx)
+\openout0 = `llxro8c.vpl'.
+
+
+(/usr/share/texmf/tex/fontinst/base/ts1.etx)
+(/usr/share/texmf/tex/fontinst/base/ts1.etx)
+(/usr/share/texmf/tex/fontinst/base/ts1.etx
+Warning: missing glyph `arrowleft'.
+Warning: missing glyph `arrowright'.
+Warning: missing glyph `tieaccentlowercase'.
+Warning: missing glyph `tieaccentcapital'.
+Warning: missing glyph `newtieaccentlowercase'.
+Warning: missing glyph `newtieaccentcapital'.
+Warning: missing glyph `blank'.
+Warning: missing glyph `hyphendbl'.
+Warning: missing glyph `zerooldstyle'.
+Warning: missing glyph `oneoldstyle'.
+Warning: missing glyph `twooldstyle'.
+Warning: missing glyph `threeoldstyle'.
+Warning: missing glyph `fouroldstyle'.
+Warning: missing glyph `fiveoldstyle'.
+Warning: missing glyph `sixoldstyle'.
+Warning: missing glyph `sevenoldstyle'.
+Warning: missing glyph `eightoldstyle'.
+Warning: missing glyph `nineoldstyle'.
+Warning: missing glyph `angbracketleft'.
+Warning: missing glyph `angbracketright'.
+Warning: missing glyph `Omegainv'.
+Warning: missing glyph `bigcircle'.
+Warning: missing glyph `Omega'.
+Warning: missing glyph `arrowup'.
+Warning: missing glyph `arrowdown'.
+Warning: missing glyph `born'.
+Warning: missing glyph `divorced'.
+Warning: missing glyph `died'.
+Warning: missing glyph `leaf'.
+Warning: missing glyph `married'.
+Warning: missing glyph `musicalnote'.
+Warning: missing glyph `hyphendblchar'.
+Warning: missing glyph `dollaroldstyle'.
+Warning: missing glyph `centoldstyle'.
+Warning: missing glyph `colonmonetary'.
+Warning: missing glyph `won'.
+Warning: missing glyph `naira'.
+Warning: missing glyph `guarani'.
+Warning: missing glyph `peso'.
+Warning: missing glyph `lira'.
+Warning: missing glyph `recipe'.
+Warning: missing glyph `interrobang'.
+Warning: missing glyph `interrobangdown'.
+Warning: missing glyph `dong'.
+Warning: missing glyph `pertenthousand'.
+Warning: missing glyph `pilcrow'.
+Warning: missing glyph `baht'.
+Warning: missing glyph `numero'.
+Warning: missing glyph `discount'.
+Warning: missing glyph `estimated'.
+Warning: missing glyph `openbullet'.
+Warning: missing glyph `servicemark'.
+Warning: missing glyph `quillbracketleft'.
+Warning: missing glyph `quillbracketright'.
+Warning: missing glyph `copyleft'.
+Warning: missing glyph `circledP'.
+Warning: missing glyph `referencemark'.
+Warning: missing glyph `radical'.
+Warning: missing glyph `euro'.
+)
+Virtual font written on llxro8c.vpl.
+INFO> to make LaTeX font shape <llx,m,it,> seek llxri8r.mtx
+INFO> to make LaTeX font shape <llx,m,n,c> seek llxr8rn.mtx
+INFO> to make LaTeX font shape <llx,m,sc,c> seek llxrc8rn.mtx
+INFO> to make LaTeX font shape <llx,m,sl,c> seek llxro8rn.mtx
+INFO> to make LaTeX font shape <llx,m,it,c> seek llxri8rn.mtx
+INFO> to make LaTeX font shape <llx,m,n,> seek llxk8r.mtx
+INFO> to make LaTeX font shape <llx,m,sc,> seek llxkc8r.mtx
+INFO> to make LaTeX font shape <llx,m,sl,> seek llxko8r.mtx
+INFO> to make LaTeX font shape <llx,m,it,> seek llxki8r.mtx
+INFO> to make LaTeX font shape <llx,m,n,c> seek llxk8rn.mtx
+INFO> to make LaTeX font shape <llx,m,sc,c> seek llxkc8rn.mtx
+INFO> to make LaTeX font shape <llx,m,sl,c> seek llxko8rn.mtx
+INFO> to make LaTeX font shape <llx,m,it,c> seek llxki8rn.mtx
+INFO> to make LaTeX font shape <llx,b,n,> seek llxb8r.mtx
+INFO> to make LaTeX font shape <llx,b,sc,> seek llxbc8r.mtx
+INFO> to make LaTeX font shape <llx,b,sl,> seek llxbo8r.mtx
+INFO> to make LaTeX font shape <llx,b,it,> seek llxbi8r.mtx
+INFO> to make LaTeX font shape <llx,b,n,c> seek llxb8rn.mtx
+INFO> to make LaTeX font shape <llx,b,sc,c> seek llxbc8rn.mtx
+INFO> to make LaTeX font shape <llx,b,sl,c> seek llxbo8rn.mtx
+INFO> to make LaTeX font shape <llx,b,it,c> seek llxbi8rn.mtx
+INFO> to make LaTeX font shape <llx,sb,n,> seek llxs8r.mtx
+INFO> to make LaTeX font shape <llx,sb,sc,> seek llxsc8r.mtx
+INFO> to make LaTeX font shape <llx,sb,sl,> seek llxso8r.mtx
+INFO> to make LaTeX font shape <llx,sb,it,> seek llxsi8r.mtx
+INFO> to make LaTeX font shape <llx,sb,n,c> seek llxs8rn.mtx
+INFO> to make LaTeX font shape <llx,sb,sc,c> seek llxsc8rn.mtx
+INFO> to make LaTeX font shape <llx,sb,sl,c> seek llxso8rn.mtx
+INFO> to make LaTeX font shape <llx,sb,it,c> seek llxsi8rn.mtx
+INFO> to make LaTeX font shape <llx,db,n,> seek llxd8r.mtx
+INFO> to make LaTeX font shape <llx,db,sc,> seek llxdc8r.mtx
+INFO> to make LaTeX font shape <llx,db,sl,> seek llxdo8r.mtx
+INFO> to make LaTeX font shape <llx,db,it,> seek llxdi8r.mtx
+INFO> to make LaTeX font shape <llx,db,n,c> seek llxd8rn.mtx
+INFO> to make LaTeX font shape <llx,db,sc,c> seek llxdc8rn.mtx
+INFO> to make LaTeX font shape <llx,db,sl,c> seek llxdo8rn.mtx
+INFO> to make LaTeX font shape <llx,db,it,c> seek llxdi8rn.mtx
+INFO> to make LaTeX font shape <llx,mb,n,> seek llxm8r.mtx
+INFO> to make LaTeX font shape <llx,mb,sc,> seek llxmc8r.mtx
+INFO> to make LaTeX font shape <llx,mb,sl,> seek llxmo8r.mtx
+INFO> to make LaTeX font shape <llx,mb,it,> seek llxmi8r.mtx
+INFO> to make LaTeX font shape <llx,mb,n,c> seek llxm8rn.mtx
+INFO> to make LaTeX font shape <llx,mb,sc,c> seek llxmc8rn.mtx
+INFO> to make LaTeX font shape <llx,mb,sl,c> seek llxmo8rn.mtx
+INFO> to make LaTeX font shape <llx,mb,it,c> seek llxmi8rn.mtx
+INFO> to make LaTeX font shape <llx,eb,n,> seek llxc8r.mtx
+INFO> to make LaTeX font shape <llx,eb,sc,> seek llxcc8r.mtx
+INFO> to make LaTeX font shape <llx,eb,sl,> seek llxco8r.mtx
+INFO> to make LaTeX font shape <llx,eb,it,> seek llxci8r.mtx
+INFO> to make LaTeX font shape <llx,eb,n,c> seek llxc8rn.mtx
+INFO> to make LaTeX font shape <llx,eb,sc,c> seek llxcc8rn.mtx
+INFO> to make LaTeX font shape <llx,eb,sl,c> seek llxco8rn.mtx
+INFO> to make LaTeX font shape <llx,eb,it,c> seek llxci8rn.mtx
+INFO> to make LaTeX font shape <llx,eb,n,> seek llxh8r.mtx
+INFO> to make LaTeX font shape <llx,eb,sc,> seek llxhc8r.mtx
+INFO> to make LaTeX font shape <llx,eb,sl,> seek llxho8r.mtx
+INFO> to make LaTeX font shape <llx,eb,it,> seek llxhi8r.mtx
+INFO> to make LaTeX font shape <llx,eb,n,c> seek llxh8rn.mtx
+INFO> to make LaTeX font shape <llx,eb,sc,c> seek llxhc8rn.mtx
+INFO> to make LaTeX font shape <llx,eb,sl,c> seek llxho8rn.mtx
+INFO> to make LaTeX font shape <llx,eb,it,c> seek llxhi8rn.mtx
+INFO> to make LaTeX font shape <llx,eb,n,> seek llxx8r.mtx
+INFO> to make LaTeX font shape <llx,eb,sc,> seek llxxc8r.mtx
+INFO> to make LaTeX font shape <llx,eb,sl,> seek llxxo8r.mtx
+INFO> to make LaTeX font shape <llx,eb,it,> seek llxxi8r.mtx
+INFO> to make LaTeX font shape <llx,eb,n,c> seek llxx8rn.mtx
+INFO> to make LaTeX font shape <llx,eb,sc,c> seek llxxc8rn.mtx
+INFO> to make LaTeX font shape <llx,eb,sl,c> seek llxxo8rn.mtx
+INFO> to make LaTeX font shape <llx,eb,it,c> seek llxxi8rn.mtx
+INFO> to make LaTeX font shape <llx,ub,n,> seek llxu8r.mtx
+INFO> to make LaTeX font shape <llx,ub,sc,> seek llxuc8r.mtx
+INFO> to make LaTeX font shape <llx,ub,sl,> seek llxuo8r.mtx
+INFO> to make LaTeX font shape <llx,ub,it,> seek llxui8r.mtx
+INFO> to make LaTeX font shape <llx,ub,n,c> seek llxu8rn.mtx
+INFO> to make LaTeX font shape <llx,ub,sc,c> seek llxuc8rn.mtx
+INFO> to make LaTeX font shape <llx,ub,sl,c> seek llxuo8rn.mtx
+INFO> to make LaTeX font shape <llx,ub,it,c> seek llxui8rn.mtx
+INFO> to make LaTeX font shape <llx,l,n,> seek llxl8r.mtx
+INFO> to make LaTeX font shape <llx,l,sc,> seek llxlc8r.mtx
+INFO> to make LaTeX font shape <llx,l,sl,> seek llxlo8r.mtx
+INFO> to make LaTeX font shape <llx,l,it,> seek llxli8r.mtx
+INFO> to make LaTeX font shape <llx,l,n,c> seek llxl8rn.mtx
+INFO> to make LaTeX font shape <llx,l,sc,c> seek llxlc8rn.mtx
+INFO> to make LaTeX font shape <llx,l,sl,c> seek llxlo8rn.mtx
+INFO> to make LaTeX font shape <llx,l,it,c> seek llxli8rn.mtx
+\openout0 = `8rllx.fd'.
+
+Font definitions written on 8rllx.fd.
+\openout0 = `ot1llx.fd'.
+
+Font definitions written on ot1llx.fd.
+\openout0 = `t1llx.fd'.
+
+Font definitions written on t1llx.fd.
+\openout0 = `ts1llx.fd'.
+
+Font definitions written on ts1llx.fd.
+No pages of output.

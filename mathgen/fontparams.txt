@@ -1,0 +1,10 @@
+output_prefix: zmn
+output_dir: times
+#font_file: none required
+optical_size:
+roman_name: Times-Roman
+italic_name: Times-Italic
+roman_tfm: ptmr8t
+italic_tfm: ptmri8t
+sans_serif: no
+square_ends: no

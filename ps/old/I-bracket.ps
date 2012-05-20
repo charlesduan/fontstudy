@@ -1,0 +1,34 @@
+%
+% I-bracket.ps
+%
+0.5 vertSplitLine pathLineIntc sortByY firstElt /IBottomPoint defPoint
+0.5 horizSplitLine pathLineIntc sortByX lastElt /IRightPoint defPoint
+IBottomPoint pointbox
+IRightPoint rtpointbox
+
+{ IBottomPoint startAtPoint IRightPoint endAtPoint } traceSubpath
+{ {
+    flattenpath
+    { 45 90 withinRange } startWhenAngle 
+    { 135 90 withinRange } endBeforeAngle
+  } traceSubpath
+} useSubpath
+drawSubpath
+{ pathExtremes } useSubpath
+sortByY dup firstElt /IBotSlab defPoint
+lastElt /ITopSlab defPoint
+IBotSlab pointbox
+ITopSlab uppointbox
+
+{
+    ITopSlab startAtPoint
+    { 80 20 withinRange } endBeforeStartAngle
+} traceSubpath
+drawSubpath
+{ pathExtremes } useSubpath sortByY lastElt /IBracketTop defPoint
+IBracketTop rtpointbox
+IBracketTop ycoor
+% According to the diagram, the bracket includes slab.
+%ITopSlab ycoor sub
+0 max
+(Bracket: ) exch stringOfText

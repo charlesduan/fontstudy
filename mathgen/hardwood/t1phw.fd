@@ -1,0 +1,26 @@
+%Filename: t1phw.fd
+%Created by: tex texput
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{t1phw.fd}
+   [2004/04/21 Fontinst v1.801 font definitions for T1/phw.]
+
+\DeclareFontFamily{T1}{phw}{}
+
+\DeclareFontShape{T1}{phw}{m}{n}{
+   <-> phwr8t
+}{}
+
+\DeclareFontShape{T1}{phw}{m}{sc}{
+   <-> phwrc8t
+}{}
+
+\DeclareFontShape{T1}{phw}{m}{sl}{
+   <-> phwro8t
+}{}
+
+\DeclareFontShape{T1}{phw}{m}{it}{<->ssub * phw/m/sl}{}
+
+\endinput

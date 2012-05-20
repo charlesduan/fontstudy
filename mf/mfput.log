@@ -1,0 +1,19 @@
+This is METAFONT, Version 2.7182 (Web2C 7.3.1) (base=mf 2002.9.6)  17 FEB 2004 20:08
+**\relax
+
+*drawdot (0,0); showit;
+
+*drawdot (100,100); showit;
+
+*drawdot (200,200); showit;
+
+*drawdot (100,-100); showit;
+
+*drawdot(35,70); showit;
+
+*drawdot(65,70);showit;
+
+*draw(20,40)..(50,25)..(80,40); showit;
+
+*end.
+

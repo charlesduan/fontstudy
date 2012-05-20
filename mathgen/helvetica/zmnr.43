@@ -1,0 +1,28 @@
+%!PS
+%%BoundingBox: 55 -101 718 564 
+%%Creator: MetaPost
+%%CreationDate: 2004.06.12:1744
+%%Pages: 1
+%%EndProlog
+%%Page: 1 1
+% MF2PT1: bbox 0 -100 775 564
+% MF2PT1: font_size 10
+% MF2PT1: font_slant 0
+% MF2PT1: font_identifier zmnr
+% MF2PT1: font_coding_scheme TeX text
+% MF2PT1: font_fixed_pitch 0
+newpath 55.20515 271.12831 moveto
+55.20515 191.11122 lineto
+346.42754 191.11122 lineto
+346.42754 -100.96846 lineto
+426.44463 -100.96846 lineto
+426.44463 191.11122 lineto
+717.66698 191.11122 lineto
+717.66698 271.12831 lineto
+426.44463 271.12831 lineto
+426.44463 563.208 lineto
+346.42754 563.208 lineto
+346.42754 271.12831 lineto
+ closepath fill
+showpage
+%%EOF

@@ -1,0 +1,10 @@
+output_prefix: zmn
+output_dir: helvfut
+#font_file: none required
+optical_size:
+roman_name: Helvetica
+italic_name: Helvetica-Oblique
+roman_tfm: pfuk8t
+italic_tfm: pfuko8t
+sans_serif: yes
+square_ends: yes

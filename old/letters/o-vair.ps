@@ -1,0 +1,12 @@
+%
+% o-vair-alt.ps
+%
+pathExtremes /oExtremes exch def
+oExtremes sortByY lastElt loadArray
+
+vertLineThrough pathLineIntc sortByY revArray
+0 2 getinterval loadArray /oTopBot defPoint /oTopTop defPoint
+oTopBot pointbox oTopTop uppointbox
+
+oTopTop ycoor oTopBot ycoor sub
+(Lowercase vair \(alt\)) exch stringOfText

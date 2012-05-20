@@ -1,0 +1,85 @@
+if unknown cmbase: input cmbase; fi
+font_identifier := "padmi"; font_size 10 pt#;
+
+font_size 10 pt#;
+                   u# :=     61.122/100 pt#;
+           width_adj# :=      0.000/100 pt#;
+           serif_fit# :=      0.000/100 pt#;
+       cap_serif_fit# :=     14.717/100 pt#;
+          letter_fit# :=      0.000/100 pt#;
+         body_height# :=    795.958/100 pt#;
+          asc_height# :=    736.998/100 pt#;
+          cap_height# :=    722.067/100 pt#;
+          fig_height# :=    703.998/100 pt#;
+            x_height# :=    465.987/100 pt#;
+           math_axis# :=    252.987/100 pt#;
+          bar_height# :=    239.999/100 pt#;
+         comma_depth# :=    183.000/100 pt#;
+          desc_depth# :=    202.053/100 pt#;
+               crisp# :=      0.000/100 pt#;
+                tiny# :=     26.237/100 pt#;
+                fine# :=      0.000/100 pt#;
+           thin_join# :=     37.075/100 pt#;
+                hair# :=     46.344/100 pt#;
+                stem# :=     94.952/100 pt#;
+               curve# :=    105.000/100 pt#;
+                 ess# :=     97.277/100 pt#;
+               flare# :=    145.109/100 pt#;
+            dot_size# :=    125.000/100 pt#;
+            cap_hair# :=     53.920/100 pt#;
+            cap_stem# :=    111.779/100 pt#;
+           cap_curve# :=    132.005/100 pt#;
+             cap_ess# :=    119.286/100 pt#;
+      rule_thickness# :=     80.040/100 pt#;
+                dish# :=      0.000/100 pt#;
+             bracket# :=     86.295/100 pt#;
+                 jut# :=     83.053/100 pt#;
+             cap_jut# :=    109.012/100 pt#;
+            beak_jut# :=     14.000/100 pt#;
+                beak# :=    220.009/100 pt#;
+                vair# :=     42.960/100 pt#;
+           notch_cut# :=   1000.000/100 pt#;
+                 bar# :=     42.960/100 pt#;
+                slab# :=     36.059/100 pt#;
+             cap_bar# :=     47.040/100 pt#;
+            cap_band# :=     47.040/100 pt#;
+       cap_notch_cut# :=   1000.000/100 pt#;
+          serif_drop# :=     11.053/100 pt#;
+           stem_corr# :=      0.992/100 pt#;
+           vair_corr# :=      0.000/100 pt#;
+           apex_corr# :=      0.000/100 pt#;
+                   o# :=     29.947/100 pt#;
+              apex_o# :=      9.252/100 pt#;
+               A_jut# :=    102.941/100 pt#;
+            A_jut_in# :=    184.412/100 pt#;
+     A_outer_bracket# :=     80.795/100 pt#;
+        A_inner_dark  :=    0.52805;
+               slant  :=    0.26795;
+               fudge  :=          1;
+         math_spread  :=          0;
+           superness  :=    0.70711;
+           superpull  :=    0.16667;
+       beak_darkness  :=    0.49091;
+                ligs  :=          2;
+         square_dots  :=      false;
+               hefty  :=      false;
+              serifs  :=       true;
+           monospace  :=      false;
+           variant_g  :=       true;
+        low_asterisk  :=      false;
+        math_fitting  :=       true;
+font_coding_scheme:="TeX math italic";
+mode_setup; font_setup;
+input greeku;  % upper case greek letters
+input greekl;  % lower case Greek letters
+input italms;  % special symbols for math italic
+font_slant slant;  font_x_height x_height#;
+font_quad 18u#+4letter_fit#;
+
+slant:=mono_charic#:=0;  % the remaining characters will not be slanted
+currenttransform:=identity yscaled aspect_ratio scaled granularity;
+
+input romms;  % roman math specials
+skewchar=oct"177"; skew#=.5u#;
+bye.
+

@@ -1,0 +1,39 @@
+\sectionname{Placement of Accents}
+
+Another use of the measurement library is in determining the placement of
+accents on the tops of characters. It is often not satisfactory to simply place
+accents at the center of the character, in particular for characters with
+ascenders (lowercase ``b,'' ``d'') and slanted or italic letters.
+
+To measure the proper accent positioning, we draw a line at about 90\% of the
+height of the character and find its intersections with that character's
+outline. We then take the extreme left and extreme right intersection and
+average them, taking that to be the approximate center of the character. The
+accent is placed directly above that average point, skewed to compensate for the
+italic slant.
+
+This method works well for most characters, but does not work if the letter has
+an open bowl or a left stem but no corresponding right (e.g., ``c,'' ``G'',
+``E''). For those characters, we simply take the middle point of the letter and
+place the accent directly above it (compensating for italic slant, again). For
+the letter ``T,'' the measurement is taken at 50\% of the letter height, so the
+accent is placed directly over the stem of the T.
+
+For letters like ``b,'' ``d,'' ``h,'' and ``L,'' the accent is placed directly
+over the stem of the character. It is questionable whether or not this is
+desired behavior. On the one hand, the accent is skewed very far to one side, so
+it is obviously off-center. On the other hand, placing the accent directly above
+center would place it over blank space, which looks strange. The author's
+decision was to place the accents off-center but not over blank space; if one
+should desire the opposite effect, it would not be difficult to rewrite the
+routine using the functions of the measurement library to do so.\looseness=-1,
+
+\linespace
+
+The resulting sidebearings and accent locations are not perfect. Many of the
+characters are placed too tightly together (in particular, the right edge of the
+lowercase c is too small), and some of the accents are placed incorrectly (in
+particular, the accent is too far to the left on the \emph{f} in Palatino).
+However, hand-tuning these values is not difficult, and with the automatically
+measured values as a starting point, the job is made much easier for the end
+user.

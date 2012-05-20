@@ -1,0 +1,22 @@
+%Filename: 8rptk.fd
+%Created by: tex texput
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{8rptk.fd}
+   [2004/04/25 Fontinst v1.801 font definitions for 8r/ptk.]
+
+\DeclareFontFamily{8r}{ptk}{}
+
+\DeclareFontShape{8r}{ptk}{m}{n}{
+   <-> ptkr8r
+}{}
+
+\DeclareFontShape{8r}{ptk}{m}{sl}{
+   <-> ptkro8r
+}{}
+
+\DeclareFontShape{8r}{ptk}{m}{it}{<->ssub * ptk/m/sl}{}
+
+\endinput

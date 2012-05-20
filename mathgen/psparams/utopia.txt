@@ -1,0 +1,10 @@
+output_prefix: zmn
+output_dir: utopia
+#font_file: none required
+optical_size:
+roman_name: Utopia-Regular
+italic_name: Utopia-Italic
+roman_tfm: putr8t
+italic_tfm: putri8t
+sans_serif: no
+square_ends: no

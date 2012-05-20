@@ -1,0 +1,30 @@
+%!PS
+%%BoundingBox: 20 -266 192 728 
+%%Creator: MetaPost
+%%CreationDate: 2004.06.12:1744
+%%Pages: 1
+%%EndProlog
+%%Page: 1 1
+% MF2PT1: bbox 0 -265 289 728
+% MF2PT1: font_size 10
+% MF2PT1: font_slant 0
+% MF2PT1: font_identifier zmnr
+% MF2PT1: font_coding_scheme TeX text
+% MF2PT1: font_fixed_pitch 0
+newpath 111.52571 647.28009 moveto
+111.52571 -185.04056 lineto
+20.82143 -185.04056 lineto
+20.36958 -185.04056 20.0033 -185.40685 20.0033 -185.85869 curveto
+20.0033 -264.23952 lineto
+20.0033 -264.69136 20.36958 -265.05765 20.82143 -265.05765 curveto
+190.72467 -265.05765 lineto
+191.17651 -265.05765 191.5428 -264.69136 191.5428 -264.23952 curveto
+191.5428 726.47905 lineto
+191.5428 726.9309 191.17651 727.29718 190.72467 727.29718 curveto
+20.82143 727.29718 lineto
+20.36958 727.29718 20.0033 726.9309 20.0033 726.47905 curveto
+20.0033 648.09822 lineto
+20.0033 647.64638 20.36958 647.28009 20.82143 647.28009 curveto
+ closepath fill
+showpage
+%%EOF

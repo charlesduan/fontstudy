@@ -1,0 +1,12 @@
+%
+% O-curve.ps
+%
+flattenpath
+
+pathExtremes sortByX dup lastElt /ORight defPoint firstElt /OLeft defPoint
+ORight uppointbox OLeft pointbox
+
+ORight horizLineThrough pathLineIntc sortByX revArray 1 get /ORightIn defPoint
+ORightIn uppointbox
+
+(Curve) ORight xcoor ORightIn xcoor sub stringOfText

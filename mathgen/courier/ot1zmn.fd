@@ -1,0 +1,17 @@
+%Filename: ot1zmn.fd
+%Created by: tex zmn-fontinst
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{ot1zmn.fd}
+   [2004/06/13 Fontinst v1.801 font definitions for OT1/zmn.]
+
+\DeclareFontFamily{OT1}{zmn}{}
+
+\DeclareFontShape{OT1}{zmn}{m}{n}{
+   <-> zmnr7t
+}{}
+
+
+\endinput

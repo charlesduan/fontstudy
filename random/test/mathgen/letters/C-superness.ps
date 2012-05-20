@@ -1,0 +1,13 @@
+%
+% C-superness.ps
+%
+
+pathExtremes /CExtremes exch def
+
+CExtremes sortByX firstElt /CLeft defPoint
+
+CExtremes sortByY firstElt /CBot defPoint
+
+CBot CLeft true findSupernessPoints findSuperness
+
+(Superness, C bottom left) exch stringOfText

@@ -1,0 +1,29 @@
+\begin{thebibliography}{1}
+
+\bibitem{plrm}
+{Adobe Systems Incorporated}.
+\newblock {\em The {PostScript} Language Reference Manual}.
+\newblock Addison-Wesley Publishing Company, third edition, 1999.
+
+\bibitem{bouche}
+Thierry Bouche.
+\newblock {Diversity in math fonts}.
+\newblock {\em TUGboat}, 19(2):120--134, June 1998.
+
+\bibitem{mathkit}
+Alan Hoenig.
+\newblock {{{\it MathKit\/}: Alternatives to Computer Modern Mathematics}}.
+\newblock {\em TUGboat}, 20(3):282--289, September 1999.
+
+\bibitem{cte}
+Donald~Erwin Knuth.
+\newblock {\em Computers \& Typesetting}, volume E --- Computer Modern
+  Typefaces.
+\newblock Addison-Wesley Publishing Company, 1986.
+
+\bibitem{lehman}
+Philipp Lehman.
+\newblock The font installation guide.
+\newblock April 2004.
+
+\end{thebibliography}

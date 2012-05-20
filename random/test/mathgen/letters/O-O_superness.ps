@@ -1,0 +1,22 @@
+%
+% O-superness.ps
+%
+
+pathExtremes /OExtremes exch def
+
+OExtremes sortByX firstElt /OLeft defPoint
+OExtremes sortByX lastElt /ORight defPoint
+OExtremes sortByY firstElt /OBot defPoint
+OExtremes sortByY lastElt /OTop defPoint
+
+OBot OLeft true findSupernessPoints findSuperness
+(Superness, O bottom left) exch stringOfText
+
+OTop OLeft true findSupernessPoints findSuperness
+(Superness, O top left) exch stringOfText
+
+OBot ORight true findSupernessPoints findSuperness
+(Superness, O bottom right) exch stringOfText
+
+OTop ORight true findSupernessPoints findSuperness
+(Superness, O bottom right) exch stringOfText

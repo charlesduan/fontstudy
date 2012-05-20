@@ -1,0 +1,18 @@
+%Filename: omlzmn.fd
+%Created by: tex zmn-fontinst
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{omlzmn.fd}
+   [2004/06/12 Fontinst v1.801 font definitions for OML/zmn.]
+
+\DeclareFontFamily{OML}{zmn}{\skewchar \font =127}
+
+\DeclareFontShape{OML}{zmn}{m}{it}{
+   <-> zmnr7m
+}{}
+
+\DeclareFontShape{OML}{zmn}{m}{sl}{<->ssub * zmn/m/it}{}
+
+\endinput

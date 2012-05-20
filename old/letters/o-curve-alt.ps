@@ -1,0 +1,12 @@
+%
+% o-curve-alt.ps
+%
+flattenpath
+pathExtremes /oExtremes exch def
+
+oExtremes sortByX lastElt loadArray
+horizLineThrough pathLineIntc sortByX
+2 2 getinterval
+{ 2 copy uppointbox } forallPoint
+subPoint magnitude
+(Lowercase curve \(alt\)) exch stringOfText

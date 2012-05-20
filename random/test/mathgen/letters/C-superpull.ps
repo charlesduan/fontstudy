@@ -1,0 +1,33 @@
+%
+% C-superpull.ps
+%
+pathExtremes /CExtremes exch def
+
+CExtremes sortByX firstElt /CLeft defPoint
+
+CExtremes sortByY firstElt /CBot defPoint
+
+CBot CLeft true findSupernessPoints
+6 copy /COuterSuperPoint defPoint pop pop /CCenter defPoint
+findSuperness /COuterSuperness exch def
+
+% The inner points from which superness are calculated are arranged so that the
+% center point for both superness calculations is identical.
+CCenter CCenter xcoor pathLL ycoor 5 sub % Push the bottom point down a bit
+pathLineIntc sortByY 1 get /CInnerBot defPoint
+CCenter pathLL xcoor 5 sub CCenter ycoor % Push the left point left a bit
+pathLineIntc sortByX 1 get /CInnerLeft defPoint
+CInnerBot uppointbox CInnerLeft pointbox
+
+CInnerBot CInnerLeft false findSupernessPoints
+/CInnerSuperPoint defPoint /CInnerCorner defPoint /CInnerCenter defPoint
+CInnerCorner COuterSuperness scalePoint
+CInnerCenter 1 COuterSuperness sub scalePoint
+addPoint
+/CInnerSuperPointExpected defPoint
+
+(Superpull)
+CInnerSuperPointExpected CInnerSuperPoint subPoint magnitude
+CInnerSuperPointExpected COuterSuperPoint subPoint magnitude
+div
+stringOfText

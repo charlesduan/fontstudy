@@ -1,0 +1,17 @@
+%Filename: omxpad.fd
+%Created by: tex pad-fontinst
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{omxpad.fd}
+   [2004/03/27 Fontinst v1.801 font definitions for OMX/pad.]
+
+\DeclareFontFamily{OMX}{pad}{}
+
+\DeclareFontShape{OMX}{pad}{m}{n}{
+   <-> padr7v
+}{}
+
+
+\endinput

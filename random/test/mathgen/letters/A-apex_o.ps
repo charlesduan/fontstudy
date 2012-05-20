@@ -1,0 +1,14 @@
+%
+% A-apex_o.ps
+%
+% Apex measured as 2/3 the height of the A overshoot. This is consistent with
+% the A in Computer Modern so that it works with Delta, Lambda, and gradient.
+%
+measureHeight /AHeight exch def
+
+gsave
+(I) letterPath
+measureHeight /IHeight exch def
+grestore
+
+(Apex overshoot \(A\)) AHeight IHeight sub 2 mul 3 div stringOfText

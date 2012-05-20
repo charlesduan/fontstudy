@@ -1,0 +1,27 @@
+This is TeX, Version 3.14159 (Web2C 7.3.1) (format=latex 2002.4.12)  29 APR 2004 21:14
+**\show\mathcal
+
+*\makeatletter
+
+*\show\@mathcal
+> \@mathcal=macro:
+->\relax \ifmmode \else \non@alpherr \@mathcal \fi \use@mathgroup \M@OMS \symsy
+mbols .
+<*> \show\@mathcal
+                  
+? 
+! Emergency stop.
+<*> \show\@mathcal
+                  
+End of file on the terminal!
+
+ 
+Here is how much of TeX's memory you used:
+ 1 string out of 20887
+ 10 string characters out of 196274
+ 44118 words of memory out of 350001
+ 3028 multiletter control sequences out of 10000+15000
+ 3640 words of font info for 14 fonts, out of 400000 for 1000
+ 14 hyphenation exceptions out of 10000
+ 4i,0n,1p,43b,7s stack positions out of 3000i,100n,1500p,50000b,4000s
+No pages of output.

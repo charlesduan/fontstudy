@@ -1,0 +1,52 @@
+%
+% v-tiny.ps
+%
+0.06 horizSplitLine pathLineIntc sortByX dup
+firstElt /vLStrokeOne defPoint lastElt /vRStrokeOne defPoint
+0.03 horizSplitLine pathLineIntc sortByX dup
+firstElt /vLStrokeTwo defPoint lastElt /vRStrokeTwo defPoint
+
+/leftDiagLine {
+    vLStrokeTwo vLStrokeOne subPoint 1000 scalePoint vLStrokeTwo addPoint
+    vLStrokeOne 
+} def
+/rightDiagLine {
+    vRStrokeTwo vRStrokeOne subPoint 1000 scalePoint vRStrokeTwo addPoint
+    vRStrokeOne
+} def
+/bottomLine {
+    pathLL horizLineThrough
+} def
+
+mark
+leftDiagLine drawLine
+rightDiagLine drawLine
+bottomLine drawLine
+cleartomark
+
+leftDiagLine bottomLine
+intersect pop % Assert true
+/vStrokeCorner defPoint
+vStrokeCorner pointbox
+
+% What is the angle of each of the lines? Then we can draw the angle bisector.
+/vLAngle leftDiagLine lineAngle def
+/vRAngle bottomLine lineAngle def
+
+% This calculates the angle of the angle bisector line
+vLAngle vRAngle sub 2 div vRAngle add
+
+% Make a line of this angle through the V's corner
+dup cos exch sin /vBisectorOffset defPoint
+vBisectorOffset 1000 scalePoint vStrokeCorner addPoint
+vBisectorOffset -100 scalePoint vStrokeCorner addPoint
+
+pathLineIntc dup length 0 gt {
+    sortByY firstElt /vCorner defPoint
+    vCorner uppointbox
+    vStrokeCorner vCorner vLAngle vRAngle sub penDiameter
+} {
+    pop 0
+} ifelse
+
+(Curvature of v apex) exch stringOfText

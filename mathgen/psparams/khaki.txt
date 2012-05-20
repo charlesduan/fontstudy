@@ -1,0 +1,10 @@
+output_prefix: zmn
+output_dir: khaki
+font_file: pkhr8a.pfb
+optical_size:
+roman_name: Khaki-One
+italic_name: Khaki-One
+roman_tfm: pkhr8t
+italic_tfm: pkhr8t
+sans_serif: yes
+square_ends: no

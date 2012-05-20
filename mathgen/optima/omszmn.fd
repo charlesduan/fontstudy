@@ -1,0 +1,17 @@
+%Filename: omszmn.fd
+%Created by: tex zmn-fontinst
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{omszmn.fd}
+   [2004/05/23 Fontinst v1.801 font definitions for OMS/zmn.]
+
+\DeclareFontFamily{OMS}{zmn}{\skewchar \font =48}
+
+\DeclareFontShape{OMS}{zmn}{m}{n}{
+   <-> zmnsy
+}{}
+
+
+\endinput

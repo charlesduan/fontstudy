@@ -1,0 +1,15 @@
+%
+% o-vair_corr.ps
+%
+pathExtremes /oExtremes exch def
+
+oExtremes sortByY firstElt loadArray
+vertLineThrough pathLineIntc sortByY loadArray
+/oTopTop defPoint /oTopBot defPoint
+/oBotTop defPoint /oBotBot defPoint
+oBotBot pointbox oBotTop uppointbox
+
+oBotTop ycoor oBotBot ycoor sub
+oTopTop ycoor oTopBot ycoor sub
+sub 0 max
+(Lowercase vair_corr) exch stringOfText

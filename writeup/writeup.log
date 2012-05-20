@@ -1,0 +1,403 @@
+This is TeX, Version 3.14159 (Web2C 7.3.1) (format=latex 2002.4.12)  22 MAY 2004 16:36
+**writeup
+(writeup.tex
+LaTeX2e <2000/06/01>
+Babel <v3.7h> and hyphenation patterns for american, french, german, ngerman, i
+talian, nohyphenation, loaded.
+(/usr/share/texmf/tex/latex/base/article.cls
+Document Class: article 2000/05/19 v1.4b Standard LaTeX document class
+(/usr/share/texmf/tex/latex/base/size10.clo
+File: size10.clo 2000/05/19 v1.4b Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+) (mathzmn.sty
+Package: mathzmn 
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/zmn/m/n on input line 3.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/zmn/m/it on input line 4.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/zmn/m/n on input line 5.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/zmn/m/n on input line 6.
+LaTeX Font Info:    Overwriting math alphabet `\mathcal' in version `normal'
+(Font)                  OMS/zmn/m/n --> OMS/zmn/m/n on input line 9.
+)
+(/home/c/d/cduan/texmf/tex/latex/personal/myarticle.sty
+Package: myarticle 2003/05/13 Customizations for articles
+
+(/home/c/d/cduan/texmf/tex/latex/personal/mytools.sty
+Package: mytools 2003/05/13 Basic package of my macros
+
+(/usr/share/texmf/tex/latex/tools/xspace.sty
+Package: xspace 1997/10/13 v1.06 Space after command names (DPC)
+)
+(/home/c/d/cduan/texmf/tex/latex/personal/linespace.sty
+Package: linespace 2004/03/30 Line space between paragraphs
+\linespaceskip=\skip43
+)
+(/home/c/d/cduan/texmf/tex/latex/personal/centerpg.sty
+Package: centerpg 2004/04/06 Optical centering of text on a page
+\@opticalcbox=\box26
+)
+\c@phrasewords=\count87
+
+Set \showoutput to show output)
+(/home/c/d/cduan/texmf/tex/latex/personal/roundflt.sty
+Package: roundflt 2004/12/19 v0.1 Rounded double floats
+\@dblstretch=\dimen103
+\rndfl@tempdim=\dimen104
+)
+(/usr/share/texmf/tex/latex/misc/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count88
+\float@exts=\toks14
+\float@box=\box27
+\@float@everytoks=\toks15
+\@floatcapt=\box28
+)
+(/usr/share/texmf/tex/latex/misc/subfigure.sty
+Package: subfigure 1995/03/06 v2.0 subfigure package
+
+Package: subfigure 1995/03/06 v2.0
+\c@subfigure=\count89
+\c@lofdepth=\count90
+\c@subtable=\count91
+\c@lotdepth=\count92
+)
+\@float@every@table=\toks16
+\@float@every@figure=\toks17
+\abstractwidth=\dimen105
+) (/home/c/d/cduan/texmf/tex/latex/personal/switcheml.sty
+Package: switcheml 2004/02/10 Obfuscate e-mail addresses
+)
+(/usr/share/texmf/tex/latex/mflogo/mflogo.sty
+Package: mflogo 1999/03/10 v2.0 LaTeX package for Metafont and MetaPost logos
+)
+(/usr/share/texmf/tex/generic/pstricks/pstricks.sty
+Package: pstricks 1997/03/25 package wrapper for PSTricks pstricks.tex
+
+(/home/c/d/cduan/texmf/tex/generic/pstricks/pstricks.tex
+`PSTricks' v97 patch 10  <1999/03/24> (tvz)
+\pst@dima=\dimen106
+\pst@dimb=\dimen107
+\pst@dimc=\dimen108
+\pst@dimd=\dimen109
+\pst@dimg=\dimen110
+\pst@dimh=\dimen111
+\pst@hbox=\box29
+\pst@boxg=\box30
+\pst@cnta=\count93
+\pst@cntb=\count94
+\pst@cntc=\count95
+\pst@cntd=\count96
+\pst@cntg=\count97
+\pst@cnth=\count98
+\pst@toks=\toks18
+(/usr/share/texmf/tex/generic/pstricks/pstricks.con)
+\psunit=\dimen112
+\psxunit=\dimen113
+\psyunit=\dimen114
+\pslinewidth=\dimen115
+\pst@customdefs=\toks19
+\pslinearc=\dimen116
+\everypsbox=\toks20
+\psframesep=\dimen117
+\pslabelsep=\dimen118
+\theoverlaybox=\box31
+))
+(/usr/share/texmf/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks21
+)
+(/usr/share/texmf/tex/latex/graphics/graphics.sty
+Package: graphics 1999/02/16 v1.0l Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/share/texmf/tex/latex/config/graphics.cfg)
+Package graphics Info: Driver file: dvips.def on input line 80.
+
+(/usr/share/texmf/tex/latex/graphics/dvips.def
+File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+))
+\Gin@req@height=\dimen119
+\Gin@req@width=\dimen120
+) (writeup.aux)
+\openout1 = `writeup.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Try loading font information for OT1+zmn on input line 14.
+ (ot1zmn.fd
+File: ot1zmn.fd 2004/05/09 Fontinst v1.801 font definitions for OT1/zmn.
+)
+LaTeX Font Info:    Try loading font information for OML+zmn on input line 14.
+
+(omlzmn.fd
+File: omlzmn.fd 2004/05/09 Fontinst v1.801 font definitions for OML/zmn.
+)
+LaTeX Font Info:    Try loading font information for OMS+zmn on input line 14.
+ (omszmn.fd
+File: omszmn.fd 2004/05/09 Fontinst v1.801 font definitions for OMS/zmn.
+)
+LaTeX Font Info:    Try loading font information for OMX+zmn on input line 14.
+ (omxzmn.fd
+File: omxzmn.fd 2004/05/09 Fontinst v1.801 font definitions for OMX/zmn.
+) (introduction.tex) (prevwork.tex
+LaTeX Font Info:    Try loading font information for U+logo on input line 4.
+
+(/usr/share/texmf/tex/latex/mflogo/ulogo.fd
+File: ulogo.fd 1999/03/10 v2.0 LaTeX font defs for Metafont and MetaPost logos
+)
+Underfull \vbox (badness 10000) has occurred while \output is active
+\vbox(550.19998+0.0)x229.87749
+.\glue(\topskip) 3.05556
+.\hbox(6.94444+1.94444)x229.87749, glue set 0.8196
+..\OT1/cmr/m/n/10 f
+..\OT1/cmr/m/n/10 o
+..\OT1/cmr/m/n/10 n
+..\kern-0.27779
+..\OT1/cmr/m/n/10 t
+..etc.
+.\glue(\baselineskip) 2.55556
+.\hbox(7.5+2.5)x229.87749, glue set 1.04185
+..\OT1/cmr/m/n/10 h
+..\OT1/cmr/m/n/10 e
+..\OT1/cmr/m/n/10 i
+..\OT1/cmr/m/n/10 g
+..\OT1/cmr/m/n/10 h
+..etc.
+.\glue(\baselineskip) 2.55556
+.etc.
+
+ [1
+
+
+]
+Underfull \hbox (badness 1009) in paragraph at lines 52--66
+[]\OT1/cmr/m/n/10 Second, even if the user is tech-ni-cally skilled
+
+\hbox(6.94444+1.94444)x229.87749, glue set 2.1633
+.\hbox(0.0+0.0)x10.00002
+.\OT1/cmr/m/n/10 S
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 o
+.etc.
+
+) (measure/intro.tex) (measure/libreqs.tex) (measure/libfunc.tex [2]
+Underfull \hbox (badness 1168) in paragraph at lines 25--28
+\OT1/cmr/m/n/10 ing, av-er-ag-ing, and oth-er-wise ma-nip-u-lat-ing two-
+
+\hbox(6.94444+1.94444)x229.87749, glue set 2.27193
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 g
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.etc.
+
+) (measure/letters.tex
+Underfull \vbox (badness 1014) has occurred while \output is active
+\vbox(646.0+0.0)x229.87749, glue set 2.16696
+.\vbox(215.66609+0.0)x229.87749
+..\rule(0.8+0.0)x*
+..\kern 2.0
+..\hbox(6.94444+1.94444)x229.87749, glue set 0.42769
+...\hbox(0.0+0.0)x0.0
+...\OT1/cmr/bx/n/10 F
+...\OT1/cmr/bx/n/10 i
+...\OT1/cmr/bx/n/10 g
+...\OT1/cmr/bx/n/10 u
+...etc.
+..\penalty 250
+..\glue(\baselineskip) 1.12764
+..etc.
+.\glue 12.0 plus 2.0 minus 2.0
+.\glue -12.0 plus -2.0 minus -2.0
+.\glue 20.0 plus 2.0 minus 4.0
+.\glue(\topskip) 3.05556
+.etc.
+
+ [3])
+(measure/assume.tex
+Overfull \hbox (10.00002pt too wide) in paragraph at lines 49--50
+[] [] 
+
+\hbox(2.98334+0.0)x229.87749
+.\hbox(0.0+0.0)x10.00002
+.\glue 0.0 plus 6.0
+.\hbox(2.98334+0.0)x229.87749
+..\hbox(0.4+0.0)x229.87749, glue set 76.62582fil, shifted -2.58334
+...\glue 0.0 plus 1.0fil
+...\leaders 0.0 plus 1.0fil
+....\rule(0.4+0.0)x*
+...\glue 0.0 plus 1.0fil
+.\penalty 10000
+.\glue(\parfillskip) 0.0 plus 1.0fil
+.etc.
+
+[4]) (changes/changes.tex) (changes/cmbugs.tex [5]) (changes/designs.tex
+[6]) (changes/loops.tex) (changes/squareends.tex
+Underfull \hbox (badness 1565) in paragraph at lines 3--6
+[]\OT1/cmr/m/n/10 The Com-puter Mod-ern fonts ter-mi-nate many
+
+\hbox(6.94444+1.94444)x229.87749, glue set 2.50194
+.\hbox(0.0+0.0)x10.00002
+.\OT1/cmr/m/n/10 T
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 e
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.etc.
+
+[7]) (changes/params.tex) (changes/bigzoom.tex
+Underfull \vbox (badness 10000) has occurred while \output is active
+\vbox(646.0+0.0)x229.87749, glue set 6.35684
+.\vbox(195.28633+0.0)x229.87749
+..\rule(0.8+0.0)x*
+..\kern 2.0
+..\hbox(6.94444+1.94444)x229.87749, glue set - 0.83943
+...\hbox(0.0+0.0)x0.0
+...\OT1/cmr/bx/n/10 F
+...\OT1/cmr/bx/n/10 i
+...\OT1/cmr/bx/n/10 g
+...\OT1/cmr/bx/n/10 u
+...etc.
+..\penalty 150
+..\glue(\baselineskip) 3.11111
+..etc.
+.\glue 12.0 plus 2.0 minus 2.0
+.\glue -12.0 plus -2.0 minus -2.0
+.\glue 20.0 plus 2.0 minus 4.0
+.\glue(\topskip) 3.05556
+.etc.
+
+ [8])
+(widths/intro.tex) (widths/widths.tex [9]) (widths/accents.tex)
+(params/intro.tex) (params/cmr.tex
+File: params/cmr.eps Graphic file (type eps)
+ <params/cmr.eps> [10] [11]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 24.
+
+(/usr/share/texmf/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 24.
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--31
+[]\OT1/cmr/m/n/10 The \OT1/cmr/m/it/10 cap[]serif[]fit \OT1/cmr/m/n/10 pa-ram-e
+-ter mea-sures the
+
+\hbox(6.94444+1.94444)x209.87746, glue set 4.61205
+.\hbox(4.44444+0.0)x0.0
+..\glue 0.0
+..\glue -15.00003
+..\glue -5.0
+..\hbox(4.44444+0.0)x15.00003, glue set 15.00003fil
+...\glue 0.0 plus 1.0fil minus 1.0fil
+...\hbox(4.44444+0.0)x0.0, glue set - 5.00002fil
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\OMS/cmsy/m/n/10 ^^O
+..\glue 5.0
+.\penalty 0
+.\OT1/cmr/m/n/10 T
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 e
+.etc.
+
+) (params/times.tex
+File: params/times.eps Graphic file (type eps)
+ <params/times.eps>) (status.tex) [12] [13]
+(analysis/cmr.tex
+Underfull \hbox (badness 3826) in paragraph at lines 13--22
+[]\OT1/cmr/m/n/10 Under \OT1/cmr/m/it/10 ex-tremely \OT1/cmr/m/n/10 care-ful in
+-spec-tion on high-
+
+\hbox(6.94444+1.94444)x229.87749, glue set 3.3725
+.\hbox(0.0+0.0)x10.00002
+.\OT1/cmr/m/n/10 U
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\OT1/cmr/m/n/10 e
+.etc.
+
+) (analysis/stdfonts.tex) (analysis/bookman.tex) (analysis/courier.tex)
+(analysis/didot.tex [14
+
+]) (analysis/garamond.tex
+Underfull \hbox (badness 4686) in paragraph at lines 21--1
+[]\OT1/cmr/m/n/10 The de-signer of Di-dot chose to make the
+
+\hbox(6.94444+1.94444)x229.87749, glue set 3.60855
+.\hbox(0.0+0.0)x10.00002
+.\OT1/cmr/m/n/10 T
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 e
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.etc.
+
+) (analysis/newcent.tex) (analysis/times.tex) (analysis/utopia.tex [15])
+(analysis/sansfonts.tex) (analysis/avantg.tex) (analysis/futura.tex)
+(analysis/helvetica.tex [16]) (analysis/optima.tex) (analysis/hardwood.tex)
+(analysis/semistdfonts.tex) (analysis/palatino.tex
+Underfull \hbox (badness 1043) in paragraph at lines 14--19
+[]\OT1/cmr/m/n/10 Many of Palatino's unique cal-li-graphic ef-fects,
+
+\hbox(6.94444+1.94444)x229.87749, glue set 2.18526
+.\hbox(0.0+0.0)x10.00002
+.\OT1/cmr/m/n/10 M
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\kern-0.27779
+.etc.
+
+[17]) (analysis/tekton.tex
+Underfull \hbox (badness 2717) in paragraph at lines 20--1
+[]\OT1/cmr/m/n/10 Palatino's math set was gen-er-ated with the
+
+\hbox(6.94444+1.94444)x229.87749, glue set 3.00996
+.\hbox(0.0+0.0)x10.00002
+.\OT1/cmr/m/n/10 P
+.\kern-0.27779
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 l
+.etc.
+
+) (analysis/tiffany.tex) (analysis/displayfonts.tex) (analysis/linotext.tex)
+(analysis/khaki.tex [18]) [19] (writeup.aux) ) 
+Here is how much of TeX's memory you used:
+ 1794 strings out of 20887
+ 20670 string characters out of 196274
+ 79384 words of memory out of 350001
+ 4650 multiletter control sequences out of 10000+15000
+ 15886 words of font info for 48 fonts, out of 400000 for 1000
+ 14 hyphenation exceptions out of 10000
+ 29i,11n,27p,443b,391s stack positions out of 3000i,100n,1500p,50000b,4000s
+
+Output written on writeup.dvi (19 pages, 118288 bytes).

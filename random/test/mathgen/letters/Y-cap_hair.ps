@@ -1,0 +1,10 @@
+%
+% Y-hair.ps
+%
+0.7 horizSplitLine pathLineIntc sortByX lastElt /YLeftOuter defPoint
+YLeftOuter YLeftOuter pathAngle pop perpThroughPoint
+pathLineIntc sortByX revArray 1 get /YLeftInner defPoint
+YLeftOuter pointbox YLeftInner pointbox
+
+YLeftOuter YLeftInner subPoint magnitude
+(Uppercase hair) exch stringOfText

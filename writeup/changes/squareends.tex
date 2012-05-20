@@ -1,0 +1,49 @@
+\section{Square Stroke Ends}\label{s:squareends}
+
+The Computer Modern fonts terminate many strokes with a circular cap. This does
+not match well with fonts like Helvetica, in which letters always are cut off
+squarely.
+
+For many of these letters, the circular cap is drawn by a routine named
+\emph{circ\_stroke}, so a first attempt at implementing square ends was to
+simply modify this routine. This worked reasonably well, but the exact
+positioning of the rounded end was often incorrect. In particular, rounded ends
+of vertical strokes would often ``overshoot'' the baseline or the character's
+intended height by a small amount to counteract the optical illusion that
+strokes with curved ends appear shorter than strokes with square ends. As a
+result, each stroke ending with a round end was manually repositioned and
+changed to a square end. The results of this transformation can be seen in the
+Palatino font as well as most of the sans serif fonts. For example, the vertical
+strokes of the $\kappa$ and $\mu$ letters are normally rounded; in square-end
+fonts the strokes are squared off and slightly lowered (in relation to the
+baseline and character height).
+
+More complicated were diagonal circular strokes, such as the shorter arm of the
+$\lambda$. In this case it was necessary to calculate the effective width of the
+stroke at a horizontal cutoff. If a stroke is to appear to have width $\omega$
+at an angle $\theta$ from the horizontal, then the horizontal cutoff width is:
+\[
+\omega_{\mathrm{horizontal}} = \frac{\omega}{|\sin\theta|}
+\]
+This formula was used for the diagonal strokes of $\lambda$ and $\pi$ as well as
+many of the math symbols.
+
+Other changes were made to the designs of the fonts. For example, loops on
+letters such as $\gamma$ and $\varepsilon$ were stylistically made square, as
+discussed in Section~\ref{s:loops}. Also, the hook of the delta was modified in
+certain cases to appear more square.
+
+Finally, many of the math symbols originally terminated in rounded ends (e.g.
+$+$, $\times$, $\approx$, $\in$). In particular, the equals and minus signs'
+strokes were rounded. This was problematic because symbols such as the long
+right arrows ($\longrightarrow$, $\Longrightarrow$) are made up of an equals
+sign and an arrow pulled closely together. If the strokes making up those
+symbols (defined by the \emph{rule\_thickness} parameter) was too large, then
+the diameter of the circular tip might have exceeded the overlap between the
+abutting symbols, and consequently the long arrows appeared to have small gaps.
+
+To resolve this problem, the equals and minus signs were redrawn with square
+ends. However, these two symbols then looked inconsistent compared to the other
+math symbols, so all of them were redrawn with square ends. At normal text
+sizes, this change is barely noticeable, but the change is significant at high
+resolutions or large sizes.

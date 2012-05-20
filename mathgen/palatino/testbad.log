@@ -1,0 +1,83 @@
+This is TeX, Version 3.14159 (Web2C 7.3.1) (format=latex 2002.4.12)  9 MAY 2004 16:25
+**testbad
+(testbad.tex
+LaTeX2e <2000/06/01>
+Babel <v3.7h> and hyphenation patterns for american, french, german, ngerman, i
+talian, nohyphenation, loaded.
+(/usr/share/texmf/tex/latex/base/article.cls
+Document Class: article 2000/05/19 v1.4b Standard LaTeX document class
+(/usr/share/texmf/tex/latex/base/size12.clo
+File: size12.clo 2000/05/19 v1.4b Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texmf/tex/latex/misc/fullpage.sty
+Style Option FULLPAGE Version 2 as of 15 Dec 1988
+) (/usr/share/texmf/tex/latex/psnfss/mathpple.sty
+Package: mathpple 2000/01/12 PSNFSS-v8.1 Palatino + math package (WaS) 
+) (../testbad.tex (testbad.aux)
+\openout1 = `testbad.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Try loading font information for OT1+ppl on input line 2.
+ (/usr/share/texmf/tex/latex/psnfss/ot1ppl.fd
+File: ot1ppl.fd 2000/01/12 PSNFSS-v8.1 font definitions for OT1/ppl.
+)
+\big@size=\dimen103
+LaTeX Font Info:    Try loading font information for OT1+zpple on input line 4.
+
+
+(/usr/share/texmf/tex/latex/psnfss/ot1zpple.fd
+File: ot1zpple.fd 1999/12/20 Fontinst v1.801 font definitions for OT1/zpple.
+)
+LaTeX Font Info:    Try loading font information for OML+zpple on input line 4.
+
+
+(/usr/share/texmf/tex/latex/psnfss/omlzpple.fd
+File: omlzpple.fd 1999/12/20 Fontinst v1.801 font definitions for OML/zpple.
+)
+LaTeX Font Info:    Try loading font information for OMS+zpple on input line 4.
+
+
+(/usr/share/texmf/tex/latex/psnfss/omszpple.fd
+File: omszpple.fd 1999/12/20 Fontinst v1.801 font definitions for OMS/zpple.
+)
+LaTeX Font Info:    Try loading font information for OMX+zpple on input line 4.
+
+
+(/usr/share/texmf/tex/latex/psnfss/omxzpple.fd
+File: omxzpple.fd 1999/12/20 Fontinst v1.801 font definitions for OMX/zpple.
+) [1
+
+] (testbad.aux) ) ) 
+Here is how much of TeX's memory you used:
+ 322 strings out of 20887
+ 3732 string characters out of 196274
+ 45713 words of memory out of 350001
+ 3313 multiletter control sequences out of 10000+15000
+ 8889 words of font info for 28 fonts, out of 400000 for 1000
+ 14 hyphenation exceptions out of 10000
+ 22i,4n,19p,139b,162s stack positions out of 3000i,100n,1500p,50000b,4000s
+
+Output written on testbad.dvi (1 page, 668 bytes).

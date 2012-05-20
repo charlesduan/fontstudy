@@ -1,0 +1,70 @@
+\sectionname{Previous Work}
+
+The original concept of an adjustable font was developed by Donald Knuth in his
+\MF\ program and the Computer Modern typefaces designed with
+it~\cite{mfbook,cte}. In those programs, the Computer Modern font was defined in
+terms of sixty-two changeable parameters, each of which specifies an attribute
+of the font, such as the thickness of letter stems and the height of lowercase
+letters (the x-height). In these fonts, Knuth implicitly makes two reasonable
+assertions. First, he asserts that all fonts carry a basic ``shape'': certain
+stems by convention will be thick and other stems thin, certain characters will
+be the same height as others, and so on. For example, in the letter ``M,'' the
+leftmost stem is always thinner than the rightmost stem. Second, the aspects of
+character shapes that can change will change in uniform ways: if the thickness
+of the stem of the lowercase letter ``l'' is increased, then the thickness of
+the stems of other letters such as ``m,'' ``q,'' and ``k'' should increase as
+well. 
+
+These two assertions are not merely true for the fonts that can be generated
+from the Computer Modern programs. In fact, observation of many text fonts
+reveals that, in most ways, text fonts (that is, those designed for high
+readability over long passages of text, as opposed to those designed to have
+some unusual or idiosyncratic appearance) adhere to the general character shapes
+and uniformities that those sixty-two parameters and the Computer Modern
+programs define.
+
+Because text fonts adhere to many of those general assumptions about character
+design encapsulated in the Computer Modern fonts, it should seem reasonable
+that, by measuring out the appropriate values for those sixty-two parameters,
+one could use the Computer Modern font programs to generate new sets of
+characters for any font. This idea was first put to use by Alan Hoenig in
+\emph{MathKit}~\cite{mathkit}. In MathKit, the user would measure each of the
+parameter values (by hand, with a ruler or on-screen calipers) and then execute
+a series of scripts that would generate the new math symbols and then combine
+them with italic letters to create a unified, compatible math font.
+
+MathKit's approach will in fact produce good-quality math fonts with the
+appropriate amount of work; in many situations the output of MathGen will be
+practically the same as that from MathKit. There are several substantial
+differences, though. First, MathKit requires the end user to perform the
+measurements by hand. This is a difficult task, not because of the difficulty of
+actually performing the measurements, but because the user does not know what to
+measure. Although MathKit advertises that the user need not know \MF, the
+meaning of the parameters is written only in the first chapter \emph{Computers
+\& Typesetting}, Vol.\ E, and even there the parameters are not fully defined.
+The only way to understand what exactly to measure is by reading through the
+\MF\ programs to understand how the values are used. This requires not only
+learning \MF\ but also spending many hours interpreting the programs, which, as
+Knuth observes, are ``actual `optimized' code'' rather than
+``straightforward\ldots textbook examples.'' It is the author's personal
+experience that this is an unreasonable demand.
+
+Second, even if the user is technically skilled enough and has sufficient time
+to perform the measurements by hand, there are some that are simply very
+difficult to actually perform. For instance, the \emph{beak\_darkness} parameter
+measures the ``thickness of beaks,'' or the amount of ink used in filling the
+portion between the horizontal arm and its terminal serif of letters like the
+capital ``E.'' Measuring this parameter requires a tricky construction of a
+triangle superimposed on the serif and then figuring out the fraction of the
+triangle filled by the serif's internal curvature. A computer can easily do the
+necessary construction, but it is fairly hard to do by hand. Even more difficult
+are the \emph{superness} and \emph{superpull} parameters, which measure the rate
+of curvature of circular letters. In MathKit the user is not even permitted to
+change these and other such values, although experimentation has shown that even
+small changes to these hard-to-measure numbers can produce substantially
+different results.
+
+For these reasons it seems that an \emph{automated} method of performing the
+necessary measurements is strongly preferable to measurement by hand. The
+question, then, becomes how to actually analyze a font's digitized form and
+produce an accurate and complete set of measurements.

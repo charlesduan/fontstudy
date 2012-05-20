@@ -1,0 +1,101 @@
+\sectionname{Changes to Character Designs}
+
+In addition to many overarching changes to the general implementation of the
+Computer Modern character programs, a few specific design changes were made.
+These changes allowed for better character appearance under different
+parameterizations or simply better appearance in the opinion of the author.
+
+Under the second category of changes, the left stem of the $\beta$ and the right
+upward stem of the $\gamma$ were thickened. In high-contrast fonts, these
+characters tended to appear too light in comparison with the rest of the text.
+Additionally, it seems that someone (probably the American Mathematical Society)
+decided to slightly thin even the thicker areas of the $\beta$ in the current
+programs; these areas were thickened to Knuth's original values in
+\emph{Computers~\& Typesetting}, Vol.~E\@. Also, the thickness of the $\phi$
+character was increased slightly. The $\phi$ should appear much like the letter
+``o,'' but the cross-stroke would make it look too dark. As a result, Knuth
+counteracted the excess darkness by widening the character and thinning the
+thicker edges. It is the author's opinion that only one of these changes is
+necessary, so the width of the character was left untouched but the extra
+thinning was undone.
+
+Three characters were changed to improve their robustness under parametrization.
+The simplest was the $\kappa$ character, whose upper diagonal was modified in
+two ways. First, in fonts with square ends (Section~\ref{s:squareends}), the
+upper diagonal was made straight without a flare at the end. Second, the stroke
+was programmed in such a way that when the diagonal was relatively thick, the
+middle of the stroke might become too thin. This error was fixed by defining the
+control points on that stroke more robustly.
+
+In the $\Upsilon$ character, the thickness of the two branches extending out of
+the central stem was originally defined as 3/5 the thickness of the central
+stem. For monowidth fonts such as Courier, where all of the strokes have the
+same thickness, this caused those two strokes to appear too thin compared to the
+rest of the text. This was fixed by redefining the branch width as 3/5 of the
+way between the font's thinnest stroke width and the central stem's width.
+
+\begin{figure}[b!]
+\linespace
+\begin{center}
+\begin{pspicture}(0,0)(5,5)
+\pscustom{
+\psline(4,5)(0,5)(3,2)
+\psarcn(1,0){2.8284271247}{45}{0}
+\moveto(0,0)
+\psbezier(0,0)(0,1.5)(1.5,2)(3,2)
+\stroke[linecolor=lightgray,linewidth=0.7cm]
+\newpath
+\psline(4,5)(0,5)(3,2)
+\pswedge(1,0){2.8284271247}{0}{45}
+}
+\qdisk(4,5){2pt}\uput[r](4,5){1}
+\qdisk(0,5){2pt}\uput[225](0,5){2, 3}
+\qdisk(3,2){2pt}\uput[45](3,2){4}
+\psline(2.7,2.3)(2.4,2)(2.7,1.7)
+\qdisk(3.8284271247,0){2pt}\uput[r](3.8284271247,0){5}
+\psarc(1,0){15pt}{0}{45}\uput{18pt}[22.5](1,0){$\theta$}
+\psarc(0,5){15pt}{-45}{0}\uput{18pt}[-22.5](0,5){$\phi=90^\circ-\theta$}
+\end{pspicture}
+\end{center}
+\caption{Construction of the $\delta$ character. Points 1, 2, 3, and 5 are
+fixed, and the $y$-coordinate of 4 is fixed. The $x$-coordinate of 4 is chosen
+such that $\phi+\theta=90^\circ$, so that the line from 3 to 4 is tangent to the
+circular arc between 4 and 5. The light gray line represents the outline of the
+character.}
+\label{f:delta}
+\end{figure}
+
+Finally, the $\delta$ character required significant revision. The upper hook of
+the character is defined by five points: the rightmost end of the hook (point
+1), the top of the hook (point 2), the leftmost point on the hook (where it is
+traveling downward: point 3), the point at which the hook intersects the top of
+the lower loop (point 4), and the vertical tangent point at the right side of
+the loop (point 5). If the stroke widths at points 1, 2, and 3 are all about
+equal, then the hook becomes too bulky and some of the curves are positioned
+incorrectly.
+
+Looking at other Greek fonts revealed that, for fonts with uniform stroke width,
+the upper hook was not drawn as a curve but rather as a straight horizontal
+stroke and then a diagonal line leading into the loop of the $\delta$. The
+program for generating the character was then modified so, if the stroke width
+at point 3 was close to that at point 1, the character would take this shape. In
+the case of a square-end font, the upper horizontal stroke was squared off;
+otherwise it curved toward the diagonal stroke.
+
+The next question, then, became how to ensure that the diagonal stroke entered
+into the loop. Experimentation showed that it was most aesthetically pleasing
+for the diagonal stroke of the hook to be perfectly straight, and it was also
+best for the part of the loop between points 4 and 5 to be as circular as
+possible. Points 3 and 5 were fixed by the character's design already. So the
+program was written to solve for the optimal location of point 4 such that, if a
+line were drawn from point 3 to point 4 and a circle through points 4 and 5, the
+angle of the line would be the same as the angle of the circle at point 4. The
+construction is shown in Figure~\ref{f:delta}.
+
+In general, this calculation chooses a point about 60\% of the way through the
+width of the character. In a font with very small x-height, such as Futura, this
+point is much closer to the right edge of the character; for a font with large
+x-height, such as Avant Garde, this point is closer to the center of the
+character's width. The generated $\delta$ characters for Futura and Avant Garde
+both look acceptable, showing that this placement calculation is robust for
+different parameterizations.

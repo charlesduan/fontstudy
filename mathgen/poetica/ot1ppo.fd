@@ -1,0 +1,18 @@
+%Filename: ot1ppo.fd
+%Created by: tex texput
+%Created using fontinst v1.801
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{ot1ppo.fd}
+   [2004/04/24 Fontinst v1.801 font definitions for OT1/ppo.]
+
+\DeclareFontFamily{OT1}{ppo}{}
+
+\DeclareFontShape{OT1}{ppo}{m}{it}{
+   <-> ppori7t
+}{}
+
+\DeclareFontShape{OT1}{ppo}{m}{sl}{<->ssub * ppo/m/it}{}
+
+\endinput
