@@ -1,0 +1,136 @@
+if unknown mgbase: input mgbase fi
+
+font_identifier := "zcxsy";
+font_size 10 pt#;
+u# :=    0.58375 pt#;
+width_adj# :=    0.00000 pt#;
+serif_fit# :=    0.00000 pt#;
+cap_serif_fit# :=    0.31355 pt#;
+letter_fit# :=    0.00000 pt#;
+body_height# :=    7.37014 pt#;
+asc_height# :=    7.36014 pt#;
+cap_height# :=    7.20013 pt#;
+fig_height# :=    6.98014 pt#;
+x_height# :=    4.78009 pt#;
+math_axis# :=    2.39004 pt#;
+bar_height# :=    2.45505 pt#;
+comma_depth# :=    2.00004 pt#;
+desc_depth# :=    2.20003 pt#;
+crisp# :=    0.00000 pt#;
+tiny# :=    0.00000 pt#;
+fine# :=    0.00000 pt#;
+thin_join# :=    0.28468 pt#;
+hair# :=    0.33763 pt#;
+stem# :=    0.80174 pt#;
+curve# :=    0.95801 pt#;
+ess# :=    0.89709 pt#;
+flare# :=    1.51695 pt#;
+dot_size# :=    1.35968 pt#;
+cap_hair# :=    0.38148 pt#;
+cap_stem# :=    0.97035 pt#;
+cap_curve# :=    1.16067 pt#;
+cap_ess# :=    1.08265 pt#;
+rule_thickness# :=    0.60000 pt#;
+dish# :=    0.00000 pt#;
+bracket# :=    1.27309 pt#;
+jut# :=    0.82980 pt#;
+cap_jut# :=    1.11402 pt#;
+beak_jut# :=    0.04999 pt#;
+beak# :=    2.18683 pt#;
+vair# :=    0.34006 pt#;
+notch_cut# :=   10.00000 pt#;
+bar# :=    0.42000 pt#;
+slab# :=    0.36321 pt#;
+cap_bar# :=    0.40668 pt#;
+cap_band# :=    0.40668 pt#;
+cap_notch_cut# :=   10.00000 pt#;
+serif_drop# :=    0.15002 pt#;
+stem_corr# :=    0.00028 pt#;
+vair_corr# :=    0.00000 pt#;
+apex_corr# :=    0.12237 pt#;
+o# :=    0.24001 pt#;
+apex_o# :=    0.13334 pt#;
+A_jut# :=    0.98577 pt#;
+A_jut_in# :=    1.24720 pt#;
+A_outer_bracket# :=    0.85036 pt#;
+F_jut# :=    1.20971 pt#;
+H_jut# :=    1.13974 pt#;
+arm_slab# :=    0.36137 pt#;
+slant := 0.286745;
+fudge := 1;
+math_spread := 0;
+superness := 0.7104965;
+superpull := 0.1555455;
+beak_darkness := 0.449691;
+ligs := 2;
+A_inner_dark := 0.49064;
+bigop_zoom := 0.4;
+bigdel_zoom := 0.25;
+O_superness := 0.70761475;
+miter_ratio := 2/3;
+square_dots := false;
+hefty := false;
+serifs := true;
+monospace := false;
+variant_g := true;
+low_asterisk := false;
+math_fitting := true;
+square_ends := false;
+% the following font parameters are explained in {\sl The \TeX book}, Appendix G
+subs:=7/10;  % subscripts to 10pt will normally be in 7pt type
+rth#:=.4pt#;  % assume that rules will come from cmex10
+fontdimen 8:  % parameters $\sigma_8$ through $\sigma_{22}$ will now be listed
+ math_axis#+3.51rth#+54/36pt#+subs*desc_depth#,      % num1
+ math_axis#+1.51rth#+30/36pt#,          % num2
+ math_axis#+1.51rth#+48/36pt#,          % num3
+ -(math_axis#-3.51rth#-subs*fig_height#-124/36pt#),    % denom1
+ -(math_axis#-1.51rth#-subs*fig_height#-30/36pt#),    % denom2
+ 8.99pt#-subs*asc_height#,          % sup1
+ 8.49pt#-subs*asc_height#,          % sup2
+ 104/36pt#,              % sup3
+ 54/36pt#,              % sub1
+ -(8.49pt#-2subs*asc_height#-3.1rth#),        % sub2
+ subs*asc_height#-36/36pt#,          % sup\_drop
+ 18/36pt#,              % sub\_drop
+ 23.9pt#,              % delim1
+ 10.1pt#,              % delim2
+ math_axis#;              % axis\_height
+
+%
+% The symbols must have quad width, otherwise they look funny.
+%
+if not monospace: u# := designsize / 18; define_pixels(u); fi
+
+
+% Computer Modern Symbols family (by D. E. Knuth, 1979--1985)
+
+font_coding_scheme:="TeX math symbols";
+mode_setup; font_setup;
+
+%autorounding:=hair;
+%input calu;  % upper case calligraphic alphabet
+%autorounding:=0;
+
+font_slant slant; font_x_height x_height#;
+font_quad 18u# if not monospace:+4letter_fit# fi;
+% (The spacing is zero so that \TeX\ will always add the italic correction.)
+% (The calling file should give the other math symbol font parameters.)
+
+slant:=mono_charic#:=0;  % the remaining characters will not be slanted
+currenttransform:=identity yscaled aspect_ratio scaled granularity;
+input mgsymbol;  % the symbols
+
+
+
+if not monospace:
+ skewchar=oct"060"; skew#=.5u#;
+ ligtable "I": "T": "V": skewchar kern skew#;
+ ligtable "K": skewchar kern 2skew#;
+ ligtable "D": "N": "P": "R": "U": "W": "Y": skewchar kern 3skew#;
+ ligtable "E": "F": "G": "H": "O": "Q": skewchar kern 4skew#;
+ ligtable "B": "C": "L": "M": "S": "X": "Z": skewchar kern 5skew#;
+ ligtable "J": skewchar kern 6skew#;
+ ligtable "A": skewchar kern 7skew#;
+fi;
+bye.
+

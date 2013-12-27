@@ -1,9 +1,8 @@
-output_prefix: zmn
-output_dir: times
-#font_file: none required
-optical_size:
-roman_name: Times-Roman
-italic_name: Times-Italic
+output_prefix: zcx
+font_file: CenturyExpandedLTStd.pfa
+font_file: CenturyExpandedLTStd-Italic.pfa
+roman_name: CenturyExpandedLTStd
+italic_name: CenturyExpandedLTStd-Italic
 roman_tfm: ptmr8t
 italic_tfm: ptmri8t
 sans_serif: no

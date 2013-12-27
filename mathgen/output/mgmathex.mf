@@ -1,0 +1,30 @@
+% The Computer Modern Math-Extension family (by D. E. Knuth, 1979--1985)
+% Modified by Charles Duan.
+
+% No slant.
+slant := 0;
+% Not monospace, ever.
+monospace := false;
+% And, they must have quad width.
+if not monospace: u# := designsize / 18; define_pixels(u); fi
+
+% the following font parameters are explained in {\sl The \TeX book}, Appendix G
+fontdimen 8:  % parameters $\xi_8$ through $\xi_{13}$ will now be listed
+ rule_thickness#,  % default\_rule\_thickness
+ 40/36pt#,    % big\_op\_spacing1
+ 60/36pt#,    % big\_op\_spacing2
+ 72/36pt#,    % big\_op\_spacing3
+ 216/36pt#,    % big\_op\_spacing4
+ 36/36pt#;    % big\_op\_spacing5
+
+font_coding_scheme:="TeX math extension";
+mode_setup; font_setup;
+
+input mgbigdel;  % large delimiters
+input mgbigop;  % large operators
+input bigacc;  % large accents
+
+font_x_height x_height#;
+font_quad 18u#+4letter_fit#;
+bye.
+

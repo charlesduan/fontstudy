@@ -6,9 +6,24 @@
 % Drawing stuff.
 %
 
+/DrawRefDict <<
+    /DrawRefNo 1
+>> def
+/showpointref {
+    gsave
+        rmoveto
+        /Helvetica findfont 20 scalefont setfont
+        DrawRefDict /DrawRefNo get 4 string cvs show
+        DrawRefDict /DrawRefNo 2 copy get 1 add put
+    grestore
+} bind def
+/resetpointref {
+    DrawRefDict /DrawRefNo 1 put
+} bind def
 /pointbox {
     gsave
 	newpath moveto
+        0 -32 showpointref
 	-10 -10 rlineto
 	20 0 rlineto
 	closepath fill
@@ -17,6 +32,7 @@
 /uppointbox {
     gsave
 	newpath moveto
+        0 15 showpointref
 	-10 10 rlineto
 	20 0 rlineto
 	closepath fill
@@ -25,6 +41,7 @@
 /rtpointbox {
     gsave
 	newpath moveto
+        15 -7 showpointref
 	10 -10 rlineto
 	0 20 rlineto
 	closepath fill
@@ -33,6 +50,7 @@
 /ltpointbox {
     gsave
 	newpath moveto
+        -30 -7 showpointref
 	-10 10 rlineto
 	0 -20 rlineto
 	closepath fill

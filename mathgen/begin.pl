@@ -30,11 +30,11 @@ unless (-f $TESTS_DONE_FLAG) {
     print "the programs I'm going to need. Please wait...\n";
 
     # Check for mftrace
-    $test = `mftrace -v`;
+    $test = `mftrace --version`;
     missing_program('mftrace') unless $? == 0 and $test =~ /mftrace/;
 
     # Check for potrace
-    $test = `potrace -v`;
+    $test = `potrace --version`;
     missing_program('potrace') unless $? == 0 and $test =~ /potrace/;
 
     # Check for GhostScript
@@ -119,6 +119,7 @@ unless (-f $TESTS_DONE_FLAG) {
 		     ."general this value need not be set unless you are\n"
 		     ."generating multiple math fonts simultaneously.\n",
 	'validator' => \&alphabetic_validator,
+    },
     'font_file' => {
 	'optional' => 1,
 	'type' => 'file',

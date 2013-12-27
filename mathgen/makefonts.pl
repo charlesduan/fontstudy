@@ -237,10 +237,9 @@ sub run_mf2pt1 {
 	print STDERR "chdir $OUTPUT_DIR: $!. Tracing aborted.\n";
 	return;
     }
-    unlink "$name.pfa" if -f "$name.pfa";
-    system "inimpost", "mgbase", "dump" unless -f "mgbase.mem";
-    system "../mf2pt1", $name;
-    die "$name.pfa not produced" unless -f "$name.pfa";
+    unlink "$name.pfb" if -f "$name.pfb";
+    system "mf2pt1", $name;
+    die "$name.pfb not produced" unless -f "$name.pfb";
     # Just for fun, let's make the PL file here too.
     system "tftopl", "$name", "$name.pl";
 

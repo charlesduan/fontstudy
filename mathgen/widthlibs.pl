@@ -56,7 +56,13 @@ writeDSC("BeginSetup");
 
 # Write the font
 writeOutput("\% THE FONT\n");
-writeOutput("/$ITAL_FONT_NAME findfont $DESIGN_SIZE scalefont setfont\n");
+writeOutput("/thefont {\n");
+writeOutput("    /$FONT_NAME findfont $DESIGN_SIZE scalefont setfont\n");
+writeOutput("} def\n");
+writeOutput("\% THE ITALIC FONT\n");
+writeOutput("/theitalicfont {\n");
+writeOutput("    /$ITAL_FONT_NAME findfont $DESIGN_SIZE scalefont setfont\n");
+writeOutput("} def\n");
 
 # Setup file, technically unnecessary
 if (-f $SETUP_FILE) {
@@ -122,7 +128,12 @@ for (@letters) {
     $pageno++;
     writeDSC("Page: $pageno $pageno");
     writeOutput("resetPage\n");
-    writeLetter($_);
+    writeRomanLetter($_);
+    writeOutput("showpage\n");
+    $pageno++;
+    writeDSC("Page: $pageno $pageno");
+    writeOutput("resetPage\n");
+    writeItalicLetter($_);
     writeOutput("showpage\n");
 }
 
@@ -176,10 +187,24 @@ sub writeLibrary {
     }
 }
 
-sub writeLetter {
-    my $letter = shift;
+sub writeRomanLetter {
+    $letter = shift;
     writeOutput(<<EOF);
 /CurrentLetter ($letter) def
+/CurrentDesc (roman-$letter) def
+thefont
+CurrentLetter letterPath
+LeftRightWidth
+
+EOF
+}
+
+sub writeItalicLetter {
+    $letter = shift;
+    writeOutput(<<EOF);
+/CurrentLetter ($letter) def
+/CurrentDesc (italic-$letter) def
+theitalicfont
 CurrentLetter letterPath
 LeftRightWidth
 

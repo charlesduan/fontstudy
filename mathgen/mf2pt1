@@ -335,7 +335,7 @@ ENDHEADER
 # parameters, too.
 sub get_bboxes
 {
-    my @mfargs = ("mpost", "&mgbase",
+    my @mfargs = ("mpost", "-ini",
 	    "\\mode:=localfont; mag:=$mag; input $filenoext");
     my $prettyargs = join (" ", map {/[\\ ]/ ? "'$_'" : $_} @mfargs);
     print "Invoking \"$prettyargs\"\n";

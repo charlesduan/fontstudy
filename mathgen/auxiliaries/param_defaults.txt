@@ -83,6 +83,7 @@ ratio bigop_zoom	= 0.4
 ratio bigdel_zoom	= 0.25
 ratio O_superness	= 1/sqrt 2
 ratio miter_ratio	= 2/3
+ratio beak_inangle      = 0
 
 # New booleans
 bool square_ends	= 0

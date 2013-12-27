@@ -1,0 +1,22 @@
+if unknown mgbase: input mgbase fi
+
+font_identifier := "cenexp";
+
+input params;
+slant := 0;
+math_fitting := false;
+
+
+% The Computer Modern Roman family of fonts (by D. E. Knuth, 1979--1985)
+
+font_coding_scheme:="TeX text";
+spanish_shriek=oct"074"; spanish_query=oct"076";
+
+mode_setup; font_setup;
+input mgromanu;  % Roman uppercase
+input mgromanl;  % Roman uppercase
+
+font_slant slant; font_x_height x_height#;
+font_quad 18u# if monospace: + 4letter_fit# fi;
+
+bye.

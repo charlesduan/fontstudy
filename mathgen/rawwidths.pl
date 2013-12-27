@@ -15,7 +15,7 @@ open OUTPUT, "> $RAW_WIDTH_FILE" or die "open $RAW_WIDTH_FILE: $!\n";
 open GS, "gs -dNODISPLAY -dBATCH -r50 $WIDTH_FILE |";
 
 while (<GS>) {
-    print unless /^\s*\S+\s*=\s*[+-]?\d+\s*(?:#.*)?$/;
+    print if /^\s*\S+\s*=\s*[+-]?\d+\s*(?:#.*)?$/;
     print OUTPUT;
 }
 

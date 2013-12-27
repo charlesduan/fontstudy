@@ -29,6 +29,14 @@ RightPoint rtpointbox
 LeftPoint xcoor /LeftEdge exch def
 RightPoint xcoor /RightEdge exch def
 
+% Some basic width metrics
+(left-sidebearing) setFileName
+(Left sidebearing) LeftEdge stringOfText
+(right-sidebearing) setFileName
+(Right sidebearing) rightSidebearing RightEdge sub stringOfText
+(glyph-width) setFileName
+(Width of glyph without sidebearings) RightEdge LeftEdge sub stringOfText
+
 0 XHeight SubscriptFraction mul horizLineThrough pathLineIntc
 sortByX dup firstElt /HalfwayLeft defPoint lastElt /HalfwayRight defPoint
 
@@ -185,9 +193,12 @@ doAccent (Accent point) exch AdjustScale round cvi stringOfText
 /UnmeasurableLetters [ (C) (E) (F) (G) (S) (Z) (a) (c) (e) (o) (r) (z) ] def
 
 % Helper functions in qualities of letters
-/doLeft { /CurrentFile { CurrentLetter (-left) append } def } def
-/doRight { /CurrentFile { CurrentLetter (-right) append } def } def
-/doSubscript { /CurrentFile { CurrentLetter (-subscript) append } def } def
-/doAccent { /CurrentFile { CurrentLetter (-accent) append } def } def
+/setFileName {
+    /CurrentFile CurrentDesc (-) 4 -1 roll append append def
+} def
+/doLeft { /CurrentFile { CurrentDesc (-left) append } def } def
+/doRight { /CurrentFile { CurrentDesc (-right) append } def } def
+/doSubscript { /CurrentFile { CurrentDesc (-subscript) append } def } def
+/doAccent { /CurrentFile { CurrentDesc (-accent) append } def } def
 /rightSidebearing { CurrentLetter stringwidth pop } def
 

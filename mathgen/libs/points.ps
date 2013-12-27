@@ -14,6 +14,18 @@
     3 -1 roll add 2 div 3 1 roll add 2 div exch
 } bind def
 
+% Given a pair of points and a scale, determines the point that is [scale] of
+% the way from the first point to the second point.
+% x1 y1 x2 y2 scale -- (x1*(1-scale)+x2*scale) (y1*(1-scale)+y2*scale)
+/interpPoint {
+    dup dup 5 2 roll % x1 y1 scale scale x2 y2 scale
+    mul 3 1 roll mul exch % x1 y1 scale x2*scale y2*scale
+    5 2 roll 1 exch sub % x2*scale y2*scale x1 y1 (1-scale)
+    dup 4 1 roll % x2*scale y2*scale scale x1 y1 scale
+    mul 3 1 roll mul % x2*scale y2*scale y2*(1-scale) x2*(1-scale)
+    4 -1 roll add 3 1 roll add
+} bind def
+
 % Given a pair of points and a tolerance, determine whether the second point is
 % within the tolerance range of the first point. Tolerance should be >= 0.
 % x1 y1 x2 y2 tol -- bool

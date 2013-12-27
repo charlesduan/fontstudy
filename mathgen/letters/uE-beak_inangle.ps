@@ -1,0 +1,28 @@
+%
+% uE-beak_inangle-serif.ps
+%
+flattenpath
+
+0.5 vertSplitLine pathLineIntc sortByY /EVertSplit exch def
+
+EVertSplit 4 2 getinterval loadArray
+/ETopTop defPoint /ETopBot defPoint
+ETopTop uppointbox ETopBot pointbox
+
+{ ETopBot startAtPoint ETopTop endAtPoint } traceSubpath
+{ pathExtremes } useSubpath sortByY firstElt /EBeakBot defPoint
+EBeakBot pointbox
+
+ETopBot EBeakBot 0.8 interpPoint
+horizLineThrough pathLineIntc sortByX revArray 1 get
+/EBeakInsideHi defPoint
+EBeakInsideHi ltpointbox
+
+ETopBot EBeakBot 0.85 interpPoint
+horizLineThrough pathLineIntc sortByX revArray 1 get
+/EBeakInsideLo defPoint
+EBeakInsideLo ltpointbox
+
+(Hair by beak thickness)
+EBeakInsideHi EBeakInsideLo subPoint div
+stringOfText

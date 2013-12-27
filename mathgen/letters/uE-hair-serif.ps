@@ -13,11 +13,25 @@ ETopTop uppointbox ETopBot pointbox
 { pathExtremes } useSubpath sortByY firstElt /EBeakBot defPoint
 EBeakBot pointbox
 
-ETopBot 0.2 scalePoint EBeakBot 0.8 scalePoint addPoint
+ETopBot EBeakBot 0.8 interpPoint
 horizLineThrough pathLineIntc sortByX revArray 0 2 getinterval loadArray
 /EBeakInside defPoint /EBeakOutside defPoint
 EBeakOutside rtpointbox EBeakInside ltpointbox
 
+ETopBot EBeakBot 0.85 interpPoint
+horizLineThrough pathLineIntc sortByX revArray 0 2 getinterval loadArray
+loadArray EBeakInside -6 interpPoint /EBeakInsideExt defPoint
+loadArray EBeakOutside -6 interpPoint /EBeakOutsideExt defPoint
+EBeakOutsideExt rtpointbox EBeakInsideExt ltpointbox
+
+EBeakOutside EBeakOutsideExt drawLine EBeakBot horizLineThrough intersect pop
+/OutIntersection defPoint
+
+EBeakInside EBeakInsideExt drawLine EBeakBot horizLineThrough intersect pop
+/InIntersection defPoint
+
+OutIntersection rtpointbox InIntersection ltpointbox
+
 (Hair by beak thickness)
-EBeakOutside xcoor EBeakInside xcoor sub
+OutIntersection xcoor InIntersection xcoor sub
 stringOfText
