@@ -15,7 +15,7 @@ BEGIN {
 	    $LETTERS_TO_KEEP %LETTERS_TO_KEEP $MF_PREFIX $AUX_DIR $ROMAN_TFM
 	    $ITALIC_TFM $FONTINST_FILE $OPTICAL_SIZE $SANS_SERIF $MATHGEN_BASE
 	    $METAFONT_PROG $SQUARE_ENDS %FORCED_PARAMS $WIDTH_FILE
-	    @FONT_AUXFILES $RAW_WIDTH_FILE $WIDTH_MTX $sortByLetter);
+	    @FONT_AUXFILES $RAW_WIDTH_FILE $WIDTH_MTX $WIDTH_MF $sortByLetter);
 
     %EXPORT_TAGS = ( 'all' => \@EXPORT_OK );
 
@@ -127,6 +127,9 @@ $AUX_DIR = "auxiliaries";
 
 # Directory for output files that may actually be of interest.
 $OUTPUT_DIR = "output" unless defined $OUTPUT_DIR;
+
+# FIle where the Metafont letter metrics file will be placed.
+$WIDTH_MF = "$OUTPUT_DIR/widths.mf";
 
 # File where the letter widths metrics file (mtx) will be placed (in the output
 # directory).

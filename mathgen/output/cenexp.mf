@@ -5,6 +5,7 @@ font_identifier := "cenexp";
 input params;
 slant := 0;
 math_fitting := false;
+input widths;
 
 
 % The Computer Modern Roman family of fonts (by D. E. Knuth, 1979--1985)

@@ -153,7 +153,7 @@ doAccent (Accent point) exch AdjustScale round cvi stringOfText
 % In the case of the letters i and j, output the resulting widths so that we can
 % calculate the values for the dotless j, even if it doesn't exist.
 (i) CurrentLetter eq (j) CurrentLetter eq or {
-    /CurrentFile CurrentLetter (-width) append def
+    (width) setFileName
     (Width) RightPosition LeftPosition sub AdjustScale round cvi stringOfText
 } if
 

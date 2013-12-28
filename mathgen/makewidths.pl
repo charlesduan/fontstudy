@@ -19,9 +19,10 @@ while (<RAW>) {
     s/#.*//;
     # Only allow integer values, so lines must look like:
     # Parameter-name = [+-]1234567890
-    next unless /^\s*(\S+)\s*=\s*([+-]?\d+)\s*$/;
+    next unless /^\s*(\S+)\s*=\s*([+-]?[\d.]+)\s*$/;
     $widths{$1} = $2;
-    ($ltr) = split /-/, $1;
+    ($font, $ltr) = split /-/, $1;
+    $ltr = "$font-$ltr";
     $letters{$ltr} = 1 if defined $widths{"$ltr-left"}
 	and defined $widths{"$ltr-right"}
 	and defined $widths{"$ltr-subscript"}
@@ -47,22 +48,42 @@ die "Found no widths to ouput; exiting.\n" unless scalar keys %letters > 0;
 # but we obviously can't measure the width of the dotless j, so we settle for
 # the next best thing: width(j) - width(i). That should be practically the same.
 #
-if (defined $widths{"j-left"}
-	and defined $widths{"dotlessi-right"}
-	and defined $widths{"dotlessi-subscript"}
+if (defined $widths{"italic-j-left"}
+	and defined $widths{"italic-dotlessi-right"}
+	and defined $widths{"italic-dotlessi-subscript"}
 	#and defined $widths{"j-width"}
 	#and defined $widths{"i-width"}
 	) {
-    $widths{"dotlessj-left"} = $widths{"j-left"};
-    $widths{"dotlessj-right"} = $widths{"dotlessi-right"};
-    $widths{"dotlessj-subscript"} = $widths{"dotlessi-subscript"};
-    $widths{"dotlessj-accent"} = $widths{"dotlessi-accent"}
-	+ int(($widths{"j-width"} - $widths{"i-width"}) / 2);
+    $widths{"italic-dotlessj-left"} = $widths{"italic-j-left"};
+    $widths{"italic-dotlessj-right"} = $widths{"italic-dotlessi-right"};
+    $widths{"italic-dotlessj-subscript"} = $widths{"italic-dotlessi-subscript"};
+    $widths{"italic-dotlessj-accent"} = $widths{"italic-dotlessi-accent"}
+	+ int(($widths{"italic-j-width"} - $widths{"italic-i-width"}) / 2);
     $letters{"dotlessj"} = 1;
 
 }
 
 mkdir $OUTPUT_DIR, 0777 unless -d $OUTPUT_DIR;
+
+open my $mf_fh, "> $WIDTH_MF" or die "open $WIDTH_MF: $!\n";
+print $mf_fh <<EOF;
+%
+% $WIDTH_MF
+%
+% Width metrics for characters
+%
+EOF
+
+print $mf_fh "if slant > 0:\n";
+print_chars('italic', $mf_fh);
+
+print $mf_fh "else:\n";
+print_chars('roman', $mf_fh);
+
+print $mf_fh "fi\n";
+
+close $mf_fh;
+
 open OUTPUT, "> $WIDTH_MTX" or die "open $WIDTH_MTX: $!\n";
 
 print OUTPUT <<EOF;
@@ -93,11 +114,13 @@ print OUTPUT <<EOF;
 EOF
 
 for (sort keys %letters) {
+    next unless /^italic-(.*)$/;
+    my $ltr = $1;
     $left = $widths{"$_-left"};
     $right = $widths{"$_-right"};
     $subsc = $widths{"$_-subscript"};
     $accent = $widths{"$_-accent"};
-    print OUTPUT "\\setglyphwidths{$_}{$left}{$right}{$subsc}{$accent}\n";
+    print OUTPUT "\\setglyphwidths{$ltr}{$left}{$right}{$subsc}{$accent}\n";
 }
 
 print OUTPUT "\\endmetrics\n";
@@ -105,3 +128,27 @@ print OUTPUT "\\endmetrics\n";
 close OUTPUT;
 
 print STDERR "Everything is ready; run ./makefonts.pl\n";
+
+
+########################################################################
+#
+# SUBROUTINES
+#
+########################################################################
+
+sub print_chars {
+    my ($font, $fh) = @_;
+    for my $char (sort keys %letters) {
+        next unless $char =~ /^\Q$font-\E/;
+        my $num = ord $';
+        for my $param (qw(glyph-width left-sidebearing right-sidebearing)) {
+            my $mf_param = $param; $mf_param =~ s/-/_/g;
+            if (exists $widths{"$char-$param"}) {
+                printf $fh "% 20s%d#:=% 10.5f pt#; %% %s\n",
+                    $mf_param, $num,
+                    $widths{"$char-$param"} * $OUT_DESIGN_SIZE / $DESIGN_SIZE,
+                    $char;
+            }
+        }
+    }
+}

@@ -12,7 +12,7 @@ mkdir $OUTPUT_DIR, 0777 unless -d $OUTPUT_DIR;
 
 open OUTPUT, "> $RAW_WIDTH_FILE" or die "open $RAW_WIDTH_FILE: $!\n";
 # For rawwidths.pl, resolution can be ridiculously small
-open GS, "gs -dNODISPLAY -dBATCH -r50 $WIDTH_FILE |";
+open GS, "gs -dNODISPLAY -dBATCH $WIDTH_FILE |";
 
 while (<GS>) {
     print if /^\s*\S+\s*=\s*[+-]?\d+\s*(?:#.*)?$/;

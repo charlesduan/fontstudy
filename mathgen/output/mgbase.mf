@@ -9,6 +9,41 @@ mgbase:=1; % when |mgbase| is known, this file has been input
 let cmchar=\; % `|cmchar|' should precede each character
 let generate=input; % `|generate|' should follow the parameters
 
+def beginchar(expr c,w_sharp,h_sharp,d_sharp) =
+ begingroup
+ charcode:=if known c: byte c else: 0 fi;
+ if known glyph_width[charcode]#:
+  charwd:=glyph_width[charcode]#;
+ else:
+  charwd:=w_sharp;
+ fi
+ charht:=h_sharp;       chardp:=d_sharp;
+ w:=charwd*pt; h:=charht*pt; d:=chardp*pt;
+ charic:=0; clearxy; clearit; clearpen; scantokens extra_beginchar;
+ if known bp_per_pixel:
+    def to_bp (expr num) = decimal (round (num*bp_per_pixel)) enddef;
+    special "% MF2PT1: glyph_dimensions 0 " & to_bp (-d) & " " & to_bp(w) & " " & to_bp(h);
+    special "% MF2PT1: font_size " & decimal designsize;
+    special "% MF2PT1: font_slant " & decimal font_slant_;
+    special "% MF2PT1: charwd " & decimal charwd;   % Must come after the |font_size| |special|
+    for fvar = "font_identifier", "font_coding_scheme", "font_version",
+      "font_comment", "font_family", "font_weight", "font_unique_id",
+      "font_name":
+      if known scantokens (fvar & "_"):
+        special "% MF2PT1: " & fvar & " " & scantokens (fvar & "_");
+      fi;
+    endfor;
+    for fvar = "font_underline_position", "font_underline_thickness":
+      if known scantokens (fvar & "_"):
+        special "% MF2PT1: " & fvar & " " &
+          scantokens ("decimal " & fvar & "_");
+      fi;
+    endfor;
+    special "% MF2PT1: font_fixed_pitch " &
+            (if font_fixed_pitch_: "1" else: "0" fi);
+  fi
+ enddef;
+
 % For fun
 % Turn on these two macros, and you get to see the outline of characters instead
 % of the filled-in versions.
@@ -1063,13 +1098,24 @@ def do_expansion(expr expansion_factor) =
 enddef;
 
 def normal_adjust_fit(expr left_adjustment,right_adjustment) =
- numeric charwd_in; charwd_in=charwd;
- l:=-hround(left_adjustment*hppp)-letter_fit;
- interim xoffset:=-l;
- charwd:=charwd+2letter_fit#+left_adjustment+right_adjustment;
- r:=l+hround(charwd*hppp)-shrink_fit;
- w:=r-hround(right_adjustment*hppp)-letter_fit;
- do_expansion(w/(charwd_in*hppp));
+ if known glyph_width[charcode]#:
+  numeric charwd_in; charwd_in=charwd;
+  l:=-hround(left_sidebearing[charcode]#*hppp)-letter_fit;
+  interim xoffset:=-l;
+  charwd:=charwd+2letter_fit#+left_sidebearing[charcode]#+
+    right_sidebearing[charcode]#;
+  r:=l+hround(charwd*hppp)-shrink_fit;
+  w:=r-hround(right_sidebearing[charcode]#*hppp)-letter_fit;
+  do_expansion(w/(charwd_in*hppp));
+ else:
+  numeric charwd_in; charwd_in=charwd;
+  l:=-hround(left_adjustment*hppp)-letter_fit;
+  interim xoffset:=-l;
+  charwd:=charwd+2letter_fit#+left_adjustment+right_adjustment;
+  r:=l+hround(charwd*hppp)-shrink_fit;
+  w:=r-hround(right_adjustment*hppp)-letter_fit;
+  do_expansion(w/(charwd_in*hppp));
+ fi
  enddef;
 
 def mono_adjust_fit(expr left_adjustment,right_adjustment) =
