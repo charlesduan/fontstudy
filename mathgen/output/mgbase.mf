@@ -449,9 +449,11 @@ else:
 fi
  enddef;
 
-vardef bulb_path(suffix $,$$,$$$) =
+%
+% taildir is the direction the bulb tail travels toward the bulb.
+vardef bulb_path(suffix $,$$,$$$)(expr taildir) =
  z$$$r=z$$r;
- save perp,parl; pair perp,parl; perp=z$r-z$l; parl=z$$$r-z$$$l;
+ save perp,parl; pair perp,parl; perp=taildir rotated 90; parl=z$$$r-z$$$l;
  if square_ends:
   same_pos($$$',$$$);
   z$$$'=z$$$+(0,if y$$$r<y$r: -1 * fi length(z$$$r-z$$$));
@@ -487,6 +489,14 @@ def dot(suffix $,$$) =
    --(x$r,y$$r)--(x$l,y$$r)--cycle  % squarish dot
   else: z$l...z$$l...z$r...z$$r...cycle  fi % roundish dot
  enddef;
+
+def dot_path(suffix $,$$) =
+ if square_dots:
+    fill pen_end(up,(x$r,y$$r),tiny,(x$l,y$$r),down)--
+        pen_end(down,(x$l,y$$l),tiny,(x$r,y$$l),up)--cycle;
+ else:
+    fill z$l...z$$l...z$r...z$$r...cycle  fi % roundish dot
+enddef;
 
 def fulldot(suffix $,$$) =
   fill z$l...z$$l...z$r...z$$r...cycle  % roundish dot
@@ -816,6 +826,29 @@ def h_stroke(suffix $,@,@@,$$) =
   &{{interim superness:=hein_super; super_arc.e(@1,@@')}};  % arch
  pickup tiny.nib; filldraw stroke z@@e--z$$e;  % right stem
  labels(@0); penlabels(@1); enddef;
+
+%
+% h-stroke starting from left vertical stem at z$, through right vertical stem
+% at z@@, terminating at z$$.
+%
+vardef h_stroke_path@#(suffix $,@,@@,$$) =
+ penpos$$(x@@r-x@@l,0); x$$=x@@; y$$=0;
+ y@@=1/3[bar_height,x_height];
+ % This seems to do something only when the pens are nonzero. I can't tell what.
+ penpos$''(x$r-x$l,0); x$''=x$; y$''=1/8[bar_height,x_height];
+ %filldraw stroke z$''e--z$e;  % thicken the lower left stem
+ %
+ % z@0 is the start of the arc.
+ penpos@0(min(x$r-x$l,thin_join)-fine,180);
+ x@0l=x$r; y@0=y$'';
+ pos@1(vair,90); pos@@'(x@@r-x@@l+tiny,0); z@@'=z@@;
+ % z@1 is the top of the arc.
+ x@1=.5[x@0l,x@@'r]; y@1r=x_height+oo;
+ (x@,y@1l)=whatever[z@1r,z@0l]; x@1l:=x@;
+ make_paths@#(rev.r) z@0e{up}...{right}z@1e
+  &{{interim superness:=hein_super; super_arc.e(@1,@@')}};  % arch
+ labels(@0); penlabels(@1);
+enddef;
 
 def hook_out(suffix $,$$,$$$)suffix modifier= % |x$| and |x$$$| (only) are known
  pos$(stem,0); pos$$(vair,90);

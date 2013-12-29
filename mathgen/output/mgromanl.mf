@@ -295,19 +295,21 @@ beginchar("i",5u#,min(asc_height#,10/7x_height#+.5dot_diam#),0);
 define_whole_blacker_pixels(dot_diam);
 italcorr h#*slant-serif_fit# + .5dot_diam# -2u#;
 adjust_fit(serif_fit#+stem_shift# if monospace:+.25u#fi,serif_fit#-stem_shift#);
-pickup tiny.nib; pos1(stem',0); pos2(stem',0);
-if odd(w-stem'): change_width; fi
-lft x1l=jut; x1=x2;
-top y1=x_height if serifs: +min(oo,serif_drop) fi; bot y2=0;
-filldraw stroke z1e--z2e;  % stem
+pos1(stem',0); pos2(stem',0);
+x1l=jut; x1=x2;
+y1=x_height if serifs: +min(oo,serif_drop) fi; y2=0;
 pos3(dot_diam,0); pos4(dot_diam,90);
 if serifs: x3r=max(x1r,hround(x1+.5dot_diam-.2jut)-.5tiny)
 else: x3=x1-.5 fi;
-top y4r=h+1;
-if bot y4l-top y1<slab: y4l:=min(y4r-eps,y1+tiny+slab); fi
-x3=x4; y3=.5[y4l,y4r]; dot(3,4);  % dot
-if serifs: sloped_serif.l(1,2,a,1/3,.95jut,serif_drop);  % upper serif
- dish_serif(2,1,b,1/3,lft x2l,c,1/3,w-rt x2r); fi  % lower serif
+y4r=h+1;
+if y4l-y1<slab: y4l:=min(y4r-eps,y1+tiny+slab); fi
+x3=x4; y3=.5[y4l,y4r]; dot_path(3,4);  % dot
+if serifs:
+    fill sloped_serif_path.l(1,2,a,1/3,.95jut,serif_drop)--
+        dish_serif_path(2,1,b,1/3,x2l,c,1/3,w-x2r)--cycle;
+else:
+    fill pen_rlend1(up,tiny,down)--pen_lrend(down,tiny,up)--cycle;
+fi
 penlabels(1,2,3,4); endchar;
 
 cmchar "The letter j";
@@ -317,26 +319,29 @@ define_whole_blacker_pixels(dot_diam);
 italcorr h#*slant-serif_fit#+.5stem#-2u#;
 adjust_fit(serif_fit#+2stem_shift# if monospace:+\\.5u# fi,
  serif_fit#-2stem_shift# if monospace:-.5u# fi);
-pickup tiny.nib; pos1(stem',0); pos2(stem',0);
-rt x1r=w; x1=x2;
-top y1=x_height if serifs: +min(oo,serif_drop) fi; bot y2=-1/3d;
-filldraw stroke z1e--z2e;  % stem
+pos1(stem',0); pos2(stem',0);
+x1r=w; x1=x2;
+y1=x_height if serifs: +min(oo,serif_drop) fi; y2=-1/3d;
 pos3(dot_diam,0); pos4(dot_diam,90);
-x3r=x1r; top y4r=h+1;
-if bot y4l-top y1<slab: y4l:=min(y4r-eps,y1+tiny+slab); fi
-x3=x4; y3=.5[y4l,y4r]; dot(3,4);  % dot
-if serifs: sloped_serif.l(1,2,a,1/3,1.1jut,serif_drop);  % upper serif
- pickup tiny.nib; pos5(vair,-90); pos6(hair,-180); pos7(flare,-180);
- x5=.5[x2,x6r]; bot y5r=-d-oo; y6-.5flare=-.88d;
- if monospace: lft x6r=0 else: z6r=z7r; lft x7r=0 fi;
+x3r=x1r; y4r=h+1;
+if y4l-y1<slab: y4l:=min(y4r-eps,y1+tiny+slab); fi
+x3=x4; y3=.5[y4l,y4r]; dot_path(3,4);  % dot
+if serifs:
+ pos5(vair,-90); pos6(hair,-180); pos7(flare,-180);
+ x5=.5[x2,x6r]; y5r=-d-oo; y6-.5flare=-.88d;
+ if monospace: x6r=0 else: z6r=z7r; x7r=0 fi;
  (x,y5r)=whatever[z5l,z2l]; x5r:=max(x,.5[x6r,x5]);
- filldraw stroke z2e{down}...z5e{left};  bulb(5,6,7); % arc and bulb
-else: pickup fine.nib; pos2'(stem',0); z2'=z2;
+ make_paths1(rev.r) z2e{down}...z5e{left};
+ fill sloped_serif_path.l(1,2,a,1/3,1.1jut,serif_drop)--
+     lpath1 & bulb_path(5,6,7,left) & rpath1--cycle;
+else:
+ filldraw stroke z1e--z2e;  % stem
+ pickup fine.nib; pos2'(stem',0); z2'=z2;
  pos6(.2[vair,stem'],-90); pos7(vair,-90);
- lft x7r=hround -.75u; bot y7r=vround 5/6(-d-oo);
+ x7r=hround -.75u; y7r=vround 5/6(-d-oo);
  (x,y7l)=whatever[z7r,z3]; x7l:=x;
  z5r=z2'r; (x2'l,y5l)=whatever[z7l,z5r]; x5l=x2'l; y5=y5r;
- x6r=.5[x7r,x5r]; x6l:=.5[x7l,x5l]; bot y6r=-d-oo;
+ x6r=.5[x7r,x5r]; x6l:=.5[x7l,x5l]; y6r=-d-oo;
  filldraw stroke z2'e..{down}z5e & super_arc.e(5,6)
   & z6e{left}..z7e; fi  % arc and terminal
 penlabels(1,2,3,4,5,6,7); endchar;
@@ -383,12 +388,14 @@ cmchar "The letter l";
 beginchar("l",5u#,asc_height#,0); l_width#:=5u#+2serif_fit#;
 italcorr asc_height#*slant-serif_fit#+.5stem#-2u#;
 adjust_fit(serif_fit#+stem_shift#,serif_fit#-stem_shift#);
-pickup tiny.nib; pos1(stem',0); pos2(stem',0);
-if odd(w-stem'): change_width; fi
-lft x1l=hround(.5w-.5stem'); x1=x2; top y1=h; bot y2=0;
-filldraw stroke z1e--z2e;  % stem
-if serifs: sloped_serif.l(1,2,a,1/3,lft x1l,serif_drop);  % upper serif
- dish_serif(2,1,b,1/3,lft x2l,c,1/3,w-rt x2r); fi  % lower serif
+pos1(stem',0); pos2(stem',0);
+x1l=hround(.5w-.5stem'); x1=x2; y1=h; y2=0;
+if serifs:
+    fill sloped_serif_path.l(1,2,a,1/3,x1l,serif_drop)--
+        dish_serif_path(2,1,b,1/3,x2l,c,1/3,w-x2r)--cycle;
+else:
+    fill pen_rlend1(up,tiny,down)--pen_lrend(down,tiny,up)--cycle;
+fi
 penlabels(1,2); endchar;
 
 cmchar "The letter m";
@@ -418,19 +425,26 @@ cmchar "The letter n";
 beginchar("n",10u#,x_height#,0);
 italcorr .5[bar_height#,x_height#]*slant-serif_fit#+.5stem#-2u#;
 adjust_fit(serif_fit#+stem_shift#,serif_fit#-stem_shift#);
-pickup tiny.nib; pos1(stem,0); pos2(stem,0);
+path p[];
+pos1(stem,0); pos2(stem,0);
 numeric shaved_stem; shaved_stem=hround(stem-2stem_corr);
 pos1'(shaved_stem,0); pos2'(shaved_stem,0); pos3(stem,0);
-lft x1l=jut; x1l=x1'l=x2l=x2'l; rt x3r=w-jut;
-top y1=h+min(oo,serif_drop); bot y2=0; y1=y1'; y2=y2';
-filldraw stroke z1'e--z2'e;  % left stem
-h_stroke(2,a,3,4);  % arch and right stem
-if serifs: sloped_serif.l(1',2',b,1/3,jut,serif_drop); % upper left serif
- numeric inner_jut; pickup tiny.nib;
- if rt x2r+jut+.5u+1<=lft x4l-jut: inner_jut=jut;
- else: rt x2r+jut+.5u+1=lft x4l-inner_jut; fi
- dish_serif(2,1,c,1/3,jut,d,1/3,jut); % lower left serif
- dish_serif(4,3,e,1/3,inner_jut,f,1/3,jut); fi % lower right serif
+x1l=jut; x1l=x1'l=x2l=x2'l; x3r=w-jut;
+y1=h+min(oo,serif_drop); y2=0; y1=y1'; y2=y2';
+h_stroke_path1(2,a,3,4);
+if serifs:
+ numeric inner_jut;
+ if x2r+jut+.5u+1<=x4l-jut: inner_jut=jut;
+ else: x2r+jut+.5u+1=x4l-inner_jut; fi
+ p1=dish_serif_path(2,1,c,1/3,jut,d,1/3,jut)--z1r; % lower left serif
+ p2=z2r--sloped_serif_path.l(1',2',b,1/3,jut,serif_drop);
+ p3=dish_serif_path(4,3,e,1/3,inner_jut,f,1/3,jut); % lower right serif
+else:
+ p1=pen_lrend(down,tiny,up)--z1r;
+ p2=z2r--pen_rlend(up,tiny,down);
+ p3=pen_lrend(down,tiny,up);
+fi
+fill combine(p1,lpath1) -- p3 -- combine(rpath1,p2) -- cycle;
 penlabels(1,2,3,4); endchar;
 
 cmchar "The letter o";
@@ -439,11 +453,13 @@ italcorr .7x_height#*slant;
 adjust_fit(if monospace: .5u#,.5u# else: 0,0 fi);
 penpos1(vair,90); penpos3(vair',-90);
 penpos2(curve,180); penpos4(curve,0);
-lft x2r=0;
+x2r=0;
 x4r=w-x2r; x1=x3=.5w; y1r=h+vround 1.5oo; y3r=-oo;
 y2=y4=.5h-vair_corr; y2l:=y4l:=.52h;
-penstroke pulled_arc.e(1,2) & pulled_arc.e(2,3)
+make_paths1(rev.l) pulled_arc.e(1,2) & pulled_arc.e(2,3)
  & pulled_arc.e(3,4) & pulled_arc.e(4,1) & cycle;  % bowl
+fill lpath1;
+unfill rpath1;
 penlabels(1,2,3,4); endchar;
 
 cmchar "The letter p";
@@ -512,23 +528,37 @@ define_whole_blacker_pixels(r_flare);
 beginchar("r",if serifs:max(7u#,5.5u#+r_flare#) else:6.5u# fi,x_height#,0);
 italcorr x_height#*slant if not serifs: +.25u# fi;
 adjust_fit(serif_fit#,0);
-pickup fine.nib; top y4r=h+oo;
+path p[];
+% pickup fine.nib;
+y4r=h+oo;
 if serifs: pos4(vair,90); pos5(hair,0);
  x4=w-max(1.75u,.25u+r_flare);
- rt x5r=w; y5+.5r_flare=.9[bar_height,h]+oo;
- pos6(r_flare,0); bulb(4,5,6);  % bulb
-else: pos4(r_flare,90); rt x4=hround(w-.25u); fi
-pos3(thin_join,180); x3l+fine=x2r+tiny; top y3=bar_height;
-pickup tiny.nib; pos0(stem',0); pos2(stem',0);
-pos1(hround(stem-3stem_corr),0); top y1=h+min(oo,serif_drop);
+ x5r=w; y5+.5r_flare=.9[bar_height,h]+oo;
+ pos6(r_flare,0);
+ % bulb(4,5,6);  % bulb
+else:
+ pos4(r_flare,90); x4=hround(w-.25u);
+fi
+pos3(thin_join,180); x3l+fine=x2r+tiny; y3=bar_height;
+% pickup tiny.nib;
+pos0(stem',0); pos2(stem',0);
+pos1(hround(stem-3stem_corr),0); y1=h+min(oo,serif_drop);
 pos0'(hround(stem-3stem_corr),0); y0=y0'=y3; x1l=x0l=x0'l=x2l;
-lft x1l=jut; bot y2=0;
-pickup fine.nib;
-filldraw stroke z3e{up}...{right}z4e;  % arc
-pickup tiny.nib;
-filldraw stroke z1e--z0'e--z0e--z2e;  % stem
-if serifs: sloped_serif.l(1,0',a,1/3,jut,serif_drop);  % upper serif
- dish_serif(2,0,b,1/3,jut,c,1/3,1.25jut); fi  % lower serif
+x1l=jut; y2=0;
+%pickup fine.nib;
+make_paths1(rev.r) z3e{up}...{right}z4e;  % arc
+%pickup tiny.nib;
+if serifs:
+ p1=z2r--sloped_serif_path.l(1,0',a,1/3,jut,serif_drop);  % upper serif
+ p2=dish_serif_path(2,0,b,1/3,jut,c,1/3,1.25jut)--z1r; % lower serif
+ p3=bulb_path(4,5,6,right);
+else:
+ p1=z2r--pen_rlend1(up,tiny,down);
+ p2=pen_lrend2(down,tiny,up)--z1r;
+ p3=z4l--z4r; % FIXME: should use stroke_end or something
+fi
+fill combine(p2, lpath1) & p3 &
+    combine(rpath1, p1) -- cycle;
 penlabels(1,2,3,4,5,6); endchar;
 
 cmchar "The letter s";
