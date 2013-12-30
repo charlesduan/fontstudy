@@ -191,6 +191,7 @@ vardef sloped_serif_path.l(suffix $,$$,@)(expr darkness,jut,drop) =
  x@0=x$l; z@1=z$r;
  x@2=x@0-jut; y@2r=y@1-drop;
  y@0=y@2l-bracket-eps;
+ labels(@0,@1,@2);
  pen_end(up,z@1,crisp,z@2r,down)--pen_angle(down,z@2l,crisp,right){right}
   ...darkness[(x@0,y@2l),.5[z@2l,z@0] ]{z@0-z@2l}...{down}z@0  % sloped serif
 enddef;
@@ -206,6 +207,20 @@ if drop>0: erase fill z@1--bot z@1
   ...darkness[(x@0,y@2l),.5[z@2l,z@0] ]{z@0-z@2l}
   ...{up}z@0--(x@1,y@0)--cycle;  % sloped serif
  labels(@0,@1,@2); enddef;
+
+vardef sloped_serif_path.r(suffix $,$$,@)(expr darkness,jut,drop) =
+ pos@2(slab,-90);
+ x@0=x$r; x@1=x$l; y@1=y$l;
+ x@2=x@0+jut; y@2r=y@1+drop;
+ y@0=y@2l+bracket+eps;
+ filldraw z@1--z@2r--z@2l{left}
+  ...darkness[(x@0,y@2l),.5[z@2l,z@0] ]{z@0-z@2l}
+  ...{up}z@0--(x@1,y@0)--cycle;  % sloped serif
+ labels(@0,@1,@2);
+ pen_end(down,z@1,crisp,z@2r,up)--pen_angle(up,z@2l,crisp,left){left}
+  ...darkness[(x@0,y@2l),.5[z@2l,z@0] ]{z@0-z@2l}
+  ...{up}z@0
+ enddef;
 
 vardef term.l(suffix $,$$)(expr d,t,s)= % ``robust'' sans-serif terminal
  path p_; p_=z$l{d}..tension t..z$$l;
