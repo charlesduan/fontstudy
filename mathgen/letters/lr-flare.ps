@@ -36,19 +36,20 @@ mark
 rArcLeft
 rArcRight rArcLeft sub 20 div
 /rFlare 0 def
+/rFlarePoints {} def
 rArcRight {
     0 vertLineThrough pathLineIntc sortByY lastElt /rTopPt defPoint
     rFlareBBox rTopPt rTopPt pathAngle pop 90 add boundedLine
     pathLineIntc sortByY revArray
     dup length 2 ge {
 	0 2 getinterval loadArray /pt1 defPoint /pt2 defPoint
-	    pt1 pointbox pt2 pointbox
 	pt1 pt2 subPoint magnitude
 	dup rFlare gt {
 	    /rFlare exch def
+	    /rFlarePoints { pt1 pointbox pt2 pointbox } def
 	} if
     } if
 } for
 cleartomark
-
+rFlarePoints
 (Flare of tip) rFlare stringOfText

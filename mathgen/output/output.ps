@@ -1661,6 +1661,14 @@ RightPoint rtpointbox
 LeftPoint xcoor /LeftEdge exch def
 RightPoint xcoor /RightEdge exch def
 
+% Some basic width metrics
+(left-sidebearing) setFileName
+(Left sidebearing) LeftEdge stringOfText
+(right-sidebearing) setFileName
+(Right sidebearing) rightSidebearing RightEdge sub stringOfText
+(glyph-width) setFileName
+(Width of glyph without sidebearings) RightEdge LeftEdge sub stringOfText
+
 0 XHeight SubscriptFraction mul horizLineThrough pathLineIntc
 sortByX dup firstElt /HalfwayLeft defPoint lastElt /HalfwayRight defPoint
 
@@ -1777,7 +1785,7 @@ doAccent (Accent point) exch AdjustScale round cvi stringOfText
 % In the case of the letters i and j, output the resulting widths so that we can
 % calculate the values for the dotless j, even if it doesn't exist.
 (i) CurrentLetter eq (j) CurrentLetter eq or {
-    /CurrentFile CurrentLetter (-width) append def
+    (width) setFileName
     (Width) RightPosition LeftPosition sub AdjustScale round cvi stringOfText
 } if
 
@@ -1817,10 +1825,13 @@ doAccent (Accent point) exch AdjustScale round cvi stringOfText
 /UnmeasurableLetters [ (C) (E) (F) (G) (S) (Z) (a) (c) (e) (o) (r) (z) ] def
 
 % Helper functions in qualities of letters
-/doLeft { /CurrentFile { CurrentLetter (-left) append } def } def
-/doRight { /CurrentFile { CurrentLetter (-right) append } def } def
-/doSubscript { /CurrentFile { CurrentLetter (-subscript) append } def } def
-/doAccent { /CurrentFile { CurrentLetter (-accent) append } def } def
+/setFileName {
+    /CurrentFile CurrentDesc (-) 4 -1 roll append append def
+} def
+/doLeft { /CurrentFile { CurrentDesc (-left) append } def } def
+/doRight { /CurrentFile { CurrentDesc (-right) append } def } def
+/doSubscript { /CurrentFile { CurrentDesc (-subscript) append } def } def
+/doAccent { /CurrentFile { CurrentDesc (-accent) append } def } def
 /rightSidebearing { CurrentLetter stringwidth pop } def
 
 %%EndResource
@@ -4389,21 +4400,22 @@ mark
 rArcLeft
 rArcRight rArcLeft sub 20 div
 /rFlare 0 def
+/rFlarePoints {} def
 rArcRight {
     0 vertLineThrough pathLineIntc sortByY lastElt /rTopPt defPoint
     rFlareBBox rTopPt rTopPt pathAngle pop 90 add boundedLine
     pathLineIntc sortByY revArray
     dup length 2 ge {
 	0 2 getinterval loadArray /pt1 defPoint /pt2 defPoint
-	    pt1 pointbox pt2 pointbox
 	pt1 pt2 subPoint magnitude
 	dup rFlare gt {
 	    /rFlare exch def
+	    /rFlarePoints { pt1 pointbox pt2 pointbox } def
 	} if
     } if
 } for
 cleartomark
-
+rFlarePoints
 (Flare of tip) rFlare stringOfText
 count 0 gt { (There's stuff on the stack!) == } if
 end grestore
