@@ -22,6 +22,10 @@ ess_ratio=4.5;
 lc_apex_corr#=0.0pt#;
 lc_apex_o#=0.15pt#;
 beak_jut_big#=0.16pt#;
+A_jut#:=.9pt#;
+A_bar_height_ratio=.36;
+thick_cap_band#=.5pt#;
+w_mid_corr#=.45pt#;
 input widths;
 
 
