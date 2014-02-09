@@ -89,22 +89,22 @@ pos0'(stem',0); pos0(stem,0); z0l=z0'l; x0'=x1; x0=x2;
 x1l=jut; y1=h;
 numeric edge; edge=x2r;
 pos3(thick_hair,180);
-pos4(vair,90); pos5(curve,0); pos6(vair,-90); penpos7(x3l-x3r,-180);
+pos4(thick_vair,90); pos5(curve,0);
+pos6(.3[vair,thick_vair],-90); penpos7(x3l-x3r,-180);
 x3l=bowl_join[x2r,x2l-(x3l-x3r)];
 y3=arc_join[0,x_height];
-x4l=.55[x3l,x5l]; y4r=x_height+oo;
+x4l=.58[x3l,x5l]; y4r=x_height+oo;
 x5r=w; y5=.5x_height;
 x6l=.57[x3l,x5l]; y6r=-oo;
 x7=x3; y7=.4[x_height,0];
-(x,y4r)=whatever[z3l,z4l]; x4r:=min(x,.5[x4,x5r]);
-(x',y6r)=whatever[z7l,z6l]; x6r:=min(x',.5[x6,x5r]);
-make_paths1(rev.r) z3e{up} arctensed pulled_arc.e(4,5); % bowl top
-make_paths2(rev.r) pulled_arc.e(5,6) arctensed {up}z7e; % bowl bottom
+%(x,y4r)=whatever[z3l,z4l]; x4r:=min(x,.5[x4,x5r]);
+%(x',y6r)=whatever[z7l,z6l]; x6r:=min(x',.5[x6,x5r]);
+make_paths1(rev.r) z3e{up} ... pulled_arc.e(4,5); % bowl top
+make_paths2(rev.r) pulled_arc.e(5,6) ... {up}z7e; % bowl bottom
 y0=ypart(((edge,h)--(edge,0))intersectionpoint(z3l{up}...{right}z4l));
 y2=ypart(((edge,h)--(edge,0))intersectionpoint(z6l{left}...{up}z7l));
-pos8(hair,0);
-x8l=x2l; bot y8=0;
-p1=pen_lrend8(down,crisp,z2r-z8r)--z2r;
+pos8(.8hair,0);
+p1=lc_spur8(0,2);
 if serifs:
  p2=sloped_serif_path.l(1,0',a,sloped_serif_dark,jut,serif_drop); % upper serif
 else:
@@ -201,34 +201,40 @@ cmchar "The letter e";
 beginchar("e",7.25u#+max(.75u#,.5curve#),x_height#,0);
 italcorr .5[bar_height#,x_height#]*slant+.5min(curve#-1.5u#,0);
 adjust_fit(if monospace: .25u#,.5u# else: 0,0 fi);
-numeric left_curve,right_curve;
+numeric left_curve,right_curve,e_bar_width;
 left_curve=right_curve+6stem_corr=curve if not serifs: -3stem_corr fi;
+e_bar_width=vround .5[vair,thick_vair];
 if right_curve<tiny.breadth: right_curve:=tiny.breadth; fi
 if left_curve<tiny.breadth: left_curve:=tiny.breadth; fi
-pickup tiny.nib; pos1(right_curve,0);
+pos1(right_curve,0);
 pos2(vair,90); pos3(left_curve,180);
-y1=good.y bar_height; top y2r=h+vround 1.5oo; y0l=bot y1;
-rt x1r=hround min(w,w-.5u+.5right_curve);
-lft x3r=0; x2=.5w+.25u;
+y1=good.y bar_height-.4e_bar_width; y2r=h+vround 1.5oo;
+x1r=hround min(w,w-.5u+.5right_curve);
+x3r=0; x2=.5[x3r,x1r];
+x2l:=.53[x3l,x1l];
 {{interim superness:=more_super;
- filldraw stroke super_arc.e(1,2)}};  % right bowl
-y3=.5[y2,y4]; bot y4r=-oo; x4=x2+.25u;
-if serifs: pos4(vair',270); pos5(hair,360);
+ make_paths1(rev.l) super_arc.e(1,2)}};  % right bowl
+y3=.55[y2,y4]; y4r=-oo;
+if serifs: pos4(thick_vair,270); pos5(hair,330);
  y5=max(good.y(.5bar_height-.9),y4l+vair); x5r=x1r;
- (x,y4l)=whatever[z4r,z5]; x4l:=min(x,x4l+.5u);
- filldraw stroke pulled_arc.e(2,3) & pulled_arc.e(3,4)
-  ...{x5-x4,5(y5-y4)}z5e; % left bowl, arc, and terminal
+ x4=.53[x3r,x1r];
+ x4l:=.5[x3l,w-hair];
+ %(x,y4l)=whatever[z4r,z5]; x4l:=min(x,x4l+.5u);
+ make_paths2(rev.l) pulled_arc.e(2,3);
+ pair d_; d_=(z5-z4) yscaled 5;
+ make_paths3(rev.l) super_arc.e(3,4)...stroke_end.e(d_,tiny,5);
 else: pos4(vair,270);
- filldraw stroke super_arc.e(2,3) & super_arc.e(3,4);  % left bowl and arc
+ filldraw stroke super_arc.e(2,3) & pulled_arc.e(3,4);  % left bowl and arc
  pickup fine.nib; pos4'(vair,270); z4=z4';
  pos5(.5[vair,flare],275); rt x5r=w;
  y5r=good.y(y5r+1/3bar_height-y5); y5l:=good.y y5l; x5l:=good.x x5l;
  filldraw stroke term.e(4',5,right,1,4); fi  % terminal
 path testpath; testpath=super_arc.r(2,3) & super_arc.r(3,4);
-y1'r=y0r=y0l+.6[thin_join,vair]; y1'l=y0l; x1'l=x1'r=x1;
-forsuffixes $=l,r:
- x0$=xpart(((0,y0$)--(x1,y0$)) intersectionpoint testpath); endfor
-fill stroke z0e--z1'e;  % crossbar
+pos0(e_bar_width,90); pos1'(e_bar_width,90);
+z1'l=z1r; y0l=y1'l; x0l=x3r;
+pickup pencircle scaled .1pt;
+fill rpath1 & rpath2 & rpath3--combine(lpath3 & lpath2,z0l--z1r) & cycle;
+unfill var_combine(combine(lpath1,z1'r--z0r),lpath2) & cycle;
 penlabels(0,1,2,3,4,5); endchar;
 
 cmchar "The letter f";
@@ -594,8 +600,8 @@ x7r=x3r; y7=arc_join[x_height,0];
 (x,y4r)=whatever[z3l,z4l]; x4r:=min(x,.5[x5r,x4]);
 (x',y6r)=whatever[z7l,z6l]; x6r:=min(x',.5[x5r,x6]);
 make_paths1(rev.r) z3e{up}
-    ..tension atleast arc_tension..{right}z4e&super_arc.e(4,5);
-make_paths2(rev.r) super_arc.e(5,6)&z6e{left}
+    ..tension atleast arc_tension..{right}z4e&pulled_arc.e(4,5);
+make_paths2(rev.r) pulled_arc.e(5,6)&z6e{left}
     ..tension atleast arc_tension..{up}z7e;  % bowl
 y0=y1;
 y0'=y2;
@@ -641,16 +647,16 @@ x7l=min(x7l-(x7r-x2r),1/3[x2,edge]);
 y1=ypart(((edge,h)--(edge,0))intersectionpoint(z3l{up}...{left}z4l));
 y0=ypart(((edge,h)--(edge,0))intersectionpoint(z6l{right}...{up}z7l));
 y2=-d;
-pos8(hround(hair-stem_corr),0); pos7'(stem',0);
-z7'=z1; x8r=x7'r; y8=h+oo;
+pos8(.8hair,0); pos7'(stem',0);
+z7'=z1;
 if serifs:
  p1=dish_serif_path(2,0,b,1/3,jut,c,1/3,multi_jut);
 else:
  p1=pen_lrend2(down,tiny,up);
 fi  % lower serif
-make_paths1(rev.l) z3e{up} arctensed {left}z4e&super_arc.e(4,5);   % bowl top
-make_paths2(rev.l) super_arc.e(5,6)&z6e{right} arctensed {up}z7e;  % bowl bottom
-p3=pen_rlend8(up,crisp,z7'l-z8l)--z7'l;
+make_paths1(rev.l) z3e{up} .. {left}z4e&pulled_arc.e(4,5);   % bowl top
+make_paths2(rev.l) pulled_arc.e(5,6)&z6e{right} arctensed {up}z7e;  % bottom
+p3=lc_spur8(h-.5oo,0);
 fill combine(rpath2,z0l--p1)--combine(p3,rpath1) & cycle;
 if x3l<=x1l:
  unfill lpath2 & lpath1 & cycle;
@@ -857,7 +863,7 @@ alpha=diag_ratio(2,right_stem,y1-y2,x4r-x1l-apex_corr);
 penpos1(alpha*left_stem,0); penpos2(alpha*left_stem,0);
 penpos3(alpha*right_stem,0); penpos4(alpha*right_stem,0);
 z0=whatever[z1r,z2r]=whatever[z3l,z4l];
-p1=notch_cut_path(0, aa,4l,0,1r);
+p1=notch_cut_path(0,notch_cut, aa,4l,0,1r);
 if serifs: numeric inner_jut_l,inner_jut_r;
  (inner_jut_l,inner_jut_r)=serif_inner_juts(0,1/3, 1,2,4,3);
  p2=dish_serif_path(1,2,a,1/3,outer_jut_l,b,acute_darkness,inner_jut_l);  % left serif
@@ -893,9 +899,9 @@ x5r+mid_corr=x4r;
 z23=whatever[z1r,z2r]=whatever[z3l,z4l];
 z45=whatever[z3r,z4r]=whatever[z5l,z6l];
 z67=whatever[z5r,z6r]=whatever[z7l,z8l];
-p23=notch_cut_path(0,aa,4l,23,1r);
-p45=notch_cut_path(upper_notch,aa,3r,45,6l);
-p67=notch_cut_path(0,aa,5r,67,8l);
+p23=notch_cut_path(0,notch_cut,aa,4l,23,1r);
+p45=notch_cut_path(upper_notch,notch_cut,aa,3r,45,6l);
+p67=notch_cut_path(0,notch_cut,aa,5r,67,8l);
 if x4r>x5r: z0=whatever[z5l,z6l]=whatever[z3l,z4l]; fi
 if serifs: numeric inner_jut[];
  numeric less_dark; less_dark=.5[acute_darkness,.5];
@@ -915,10 +921,6 @@ fi
 fill p1--pen_pointend(1l,2l,tiny,3r,45)--p45
  --pen_pointend(45,6l,tiny,7r,8r)--p8--p67--p4--p23--cycle;
 penlabels(0,1,2,3,4,5,6,7,8,23,45,67); endchar;
-
-vardef x_intersection@#(suffix $,$$)=
- z@#=whatever[z1$,z4$]=whatever[z2$$,z3$$]
-enddef;
 
 cmchar "The letter x";
 beginchar("x",if serifs:9.5u# else:9u# fi,x_height#,0);
@@ -1036,20 +1038,21 @@ lc_beak_darkness=beak_darkness**(x_height/cap_height);
 if hefty: arm_thickness1=Vround(vair-vair_corr); arm_thickness2=vair;
  z_stem=.6[vair,stem];
 else: arm_thickness1=vair; arm_thickness2=vair'; z_stem=.9[vair,stem]; fi
-pickup tiny.nib; rt x1r=rt x2r=w-hround(.05u); lft x3l=lft x4l=0;
-top y1=h; y2=min(y1,h-2/3arm_thickness1);
-bot y4=0; y3=max(y4,2/3arm_thickness2);
+x1r=x2r=w-hround(.05u); x3l=x4l=0;
+y1=h; y2=min(y1,h-2/3arm_thickness1);
+y4=0; y3=max(y4,arm_thickness2);
 numeric alpha; alpha=diag_ratio(1,z_stem-tiny,y2-y3,x2r-x3l-slant*(y2-y3));
-penpos1(alpha*(z_stem-tiny),0); penpos2(alpha*(z_stem-tiny),0);
-penpos3(alpha*(z_stem-tiny),0); penpos4(alpha*(z_stem-tiny),0);
-pair delta; delta=penoffset z3-z2 of currentpen;
-fill top lft z1l--z2l+delta---z3l+delta..lft z3l---lft z4l..bot z4l
- ---bot rt z4r--z3r-delta---z2r-delta..rt z2r---rt z1r..top z1r
- ---cycle;  % diagonal
-pickup crisp.nib; pos5(arm_thickness1,90); pos6(hair,180);
-top y5r=h; x5=x1; x6r=x3l+hround(.4u); y6=good.y(y5l-lc_beak)-eps;
-arm(5,6,a,lc_beak_darkness,-lc_beak_jut_big);  % upper arm and beak
+penpos1(alpha*(z_stem),0); penpos2(alpha*(z_stem),0);
+penpos3(alpha*(z_stem),0); penpos4(alpha*(z_stem),0);
+pos5(arm_thickness1,90); pos6(hair,180);
+y5r=h; x5=x1; x6r=x3l+hround(.4u); y6=good.y(y5l-lc_beak)-eps;
+p6=arm_path(5,6,a,lc_beak_darkness,-lc_beak_jut_big);  % upper arm and beak
 pos7(arm_thickness2,-90); pos8(.8hair,0);
-bot y7r=0; x7=x4; rt x8r=w; y8=good.y(y7l+1.2lc_beak)+eps;
-arm(7,8,b,lc_beak_darkness,lc_beak_jut_big);  % lower arm and beak
+y7r=0; x7=x4; x8r=w; y8=good.y(y7l+1.2lc_beak)+eps;
+p8=arm_path(7,8,b,lc_beak_darkness,lc_beak_jut_big);  % lower arm and beak
+z2'l=whatever[z2l,z3l]; y2'l=y5l;
+z3'r=whatever[z2r,z3r]; y3'r=y7l;
+p1=pen_pointend(3'r,2r,tiny,1r,1l);
+p4=pen_pointend(2'l,3l,tiny,4l,4r);
+fill p6--z2'l--p4--p8--z3'r--p1--cycle;
 penlabels(1,2,3,4,5,6,7,8); endchar;

@@ -25,7 +25,9 @@ beak_jut_big#=0.16pt#;
 A_jut#:=.9pt#;
 A_bar_height_ratio=.36;
 thick_cap_band#=.5pt#;
+thin_cap_band#=.36pt#;
 w_mid_corr#=.45pt#;
+E_mid_darkness=.45;
 input widths;
 
 
@@ -37,6 +39,7 @@ spanish_shriek=oct"074"; spanish_query=oct"076";
 mode_setup; font_setup;
 input mgromanu;  % Roman uppercase
 input mgromanl;  % Roman uppercase
+input mgromand;  % Arabic numbers
 
 font_slant slant; font_x_height x_height#;
 font_quad 18u# if monospace: + 4letter_fit# fi;

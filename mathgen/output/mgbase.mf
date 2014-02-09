@@ -93,23 +93,26 @@ vardef serif_inner_juts(expr bias,gap)(suffix $,@,$$,@@) =
  special_serif_inner_juts(bias,gap,$,@,$$,@@,$$)
 enddef;
 vardef special_serif_inner_juts(expr bias,gap)(suffix $,@,$$,@@,$$$) =
- save p_; pair p_, p_.offset[];
- % p_ is the intersection point between the two strokes
- % We use p_.jut=(left jut, right jut), computed as follows:
- % First, the gap between the juts should be centered with respect to p_.
- bias[.5[x$,x$$$], .5[x$r,x$$$l]]=.5[x$r+xpart p_,x$$l-ypart p_];
- % Next, the gap between the juts should be 1/3 of the space between the
- % strokes.
- ypart(p_)+xpart(p_)=(1-gap) * (x$$l-x$r);
- show (x$$l-x$r)/u, p_/u;
- p_.offset1=whatever * (z@r-z$r);
- p_.offset2=whatever * (z@@l-z$$l);
- if y$r>y@r:
-  ypart(p_.offset1)=ypart(p_.offset2)=-slab;
+ if serifs:
+  save p_; pair p_, p_.offset[];
+  % p_ is the intersection point between the two strokes
+  % We use p_.jut=(left jut, right jut), computed as follows:
+  % First, the gap between the juts should be centered with respect to p_.
+  bias[.5[x$,x$$$], .5[x$r,x$$$l]]=.5[x$r+xpart p_,x$$l-ypart p_];
+  % Next, the gap between the juts should be 1/3 of the space between the
+  % strokes.
+  ypart(p_)+xpart(p_)=(1-gap) * (x$$l-x$r);
+  p_.offset1=whatever * (z@r-z$r);
+  p_.offset2=whatever * (z@@l-z$$l);
+  if y$r>y@r:
+   ypart(p_.offset1)=ypart(p_.offset2)=-slab;
+  else:
+   ypart(p_.offset1)=ypart(p_.offset2)=slab;
+  fi
+  (xpart p_-xpart p_.offset1, ypart p_+xpart p_.offset2)
  else:
-  ypart(p_.offset1)=ypart(p_.offset2)=slab;
+  (0,0)
  fi
- (xpart p_-xpart p_.offset1, ypart p_+xpart p_.offset2)
 enddef;
 
 vardef serif(suffix $,$$,@)  % serif at |z$| for stroke from |z$$|
@@ -159,16 +162,25 @@ def serif_points_(suffix $,$$,@)(expr jut) suffix modifier =
 enddef;
 
 vardef internal_serif_path(suffix $,$$,$$$,@)(expr darkness,jut)suffix modifier=
- save vertical,bracket_height; pair vertical;
- vertical=unitvector(0,y$$-y$);
- bracket_height=min(.4abs(y$$-y$),max(slab,if dark.modifier: 1.5 fi bracket));
- y@0=y$; z@1=(x@0,y$$$); y@3=y@1; y@2=y@0+bracket_height*ypart vertical;
- if jut>0: z@2=whatever[z$r,z$$r]; z@3=whatever[z$r,z$$r]; x@0=max(x$r,x@3)+jut;
- else: z@2=whatever[z$l,z$$l]; z@3=whatever[z$l,z$$l]; x@0=min(x$l,x@3)+jut; fi
- labels(@1,@2);
- if (z$$-z$) rightof (jut,0): reverse fi
-  (if (darkness=0) or (y@1=y@2): z@1--z@3--z@2
-  else: z@1{z@3-z@1}...darkness[z@3,.5[z@1,z@2] ]{z@2-z@1}...{z@2-z@3}z@2 fi)
+ if serifs:
+  save vertical,bracket_height; pair vertical;
+  vertical=unitvector(0,y$$-y$);
+  bracket_height=min(.4abs(y$$-y$),max(slab,if dark.modifier: 1.5 fi bracket));
+  y@0=y$; z@1=(x@0,y$$$); y@3=y@1; y@2=y@0+bracket_height*ypart vertical;
+  if jut>0:
+   z@2=whatever[z$r,z$$r]; z@3=whatever[z$r,z$$r]; x@0=max(x$r,x@3)+jut;
+  else:
+   z@2=whatever[z$l,z$$l]; z@3=whatever[z$l,z$$l]; x@0=min(x$l,x@3)+jut;
+  fi
+  labels(@1,@2);
+  if (z$$-z$) rightof (jut,0): reverse fi
+   (if (darkness=0) or (y@1=y@2): z@1--z@3--z@2
+   else: z@1{z@3-z@1}...darkness[z@3,.5[z@1,z@2] ]{z@2-z@1}...{z@2-z@3}z@2 fi)
+ else:
+  z@3=whatever[z$r,z$$r]; y@3=y$$$;
+  labels(@3);
+  z@3
+ fi
 enddef;
 
 vardef serif_path_(suffix $,$$,@)  % serif at |z$| for stroke from |z$$|
@@ -197,7 +209,7 @@ vardef dish_serif_path(suffix $,$$,@)(expr ld,lj)
  if serifs:
   dish_serif_path_($,$$,@,ld,lj,@@,rd,rj)modifier
  else: if (z$$-z$) rightof right: reverse fi
-  (pen_lrend$(z$l-z$$l,tiny,z$r-z$$r)) fi
+  (pen_lrend$(z$l-z$$l,tiny,z$$r-z$r)) fi
 enddef;
 
 vardef dish_serif_path_(suffix $,$$,@)(expr left_darkness,left_jut)
@@ -278,15 +290,23 @@ vardef term.r(suffix $,$$)(expr d,t,s)=
  p_ enddef;
 def rterm=reverse term enddef;
 
-vardef arm(suffix $,$$,@)(expr darkness,jut) =  % arm from |z$| to |z$$|
+def arm_set_points(suffix $,$$,@)(expr jut) =
  x@0=good.x(x$$r-jut); y@0=y$r;
- if serifs: y@1=y$l;
+ if serifs:
   if (x$ > x$$) <> (y$ > y$$):
    z@1=z$$l+whatever*(beak_inangle,1);
   else:
    z@1=z$$l+whatever*(beak_inangle,-1);
   fi
+  y@1=y$l;
   z@2=.5[z$l,z@1];
+ fi
+ penlabels(@0,@1,@2)
+enddef;
+
+vardef arm(suffix $,$$,@)(expr darkness,jut) =  % arm from |z$| to |z$$|
+ arm_set_points($,$$,@,jut);
+ if serifs:
   path p_; p_= z$$l{z@1-z$$l}...darkness[z@1,.5[z@2,z$$l] ]...z@2
     ---z$l--z$r--z@0--z$$r--cycle;
   if (y$$>y$) <> (ypart precontrol 1 of p_ > ypart postcontrol 1 of p_):
@@ -294,18 +314,42 @@ vardef arm(suffix $,$$,@)(expr darkness,jut) =  % arm from |z$| to |z$$|
      ---z$l--z$r--z@0--z$$r--cycle; fi
   filldraw p_; % arm and beak
  else: filldraw z$l--z$r--z@0--z$$r--cycle; fi  % sans-serif arm
- penlabels(@0,@1,@2); enddef;
+enddef;
 
 vardef arm_path(suffix $,$$,@)(expr darkness,jut) =
- path p_; x@0=x$$r-jut; y@0=y$r;
- if serifs: y@1=y$l; z@1=z$$l+whatever*(z$$r-z@0);
-  z@2=.5[z$l,z@1];
+ path p_;
+ arm_set_points($,$$,@,jut);
+ if serifs:
   p_= pen_angle(z@0-z$r,z@0,crisp,z$$r-z@0)
     --pen_rlend$$(z$$r-z@0,crisp,z@1-z$$l){z@1-z$$l}
     ...darkness[z@1,.5[z@2,z$$l] ]...{z$l-z@2}z@2;
- else: p_=z@0--z$$r; fi
- if (z$$r-z$$l) rightof (z$r-z$l): p_:=reverse p_; fi p_
+ else:
+  p_=pen_pointend($r,@0,crisp,$$r,$l);
+ fi
+ if (z$$r-z$$l) rightof (z$r-z$l): p_:=reverse p_; fi
+ p_
 enddef;
+
+vardef two_arm_path(suffix $,$$,@,$$$,$$$$,@@)(expr darkness) =
+ path p_[];
+ arm_set_points($,$$,@,0);
+ arm_set_points($$$,$$$$,@@,0);
+ if serifs:
+  p_1=pen_rlend$$(z$$r-z@0,crisp,z@1-z$$l){z@1-z$$l}
+    ...darkness[z@1,.5[z@2,z$$l] ]...{z$l-z@2}z@2;
+  p_2=pen_rlend$$$$(z$$$$r-z@@0,crisp,z@@1-z$$$$l){z@@1-z$$$$l}
+    ...darkness[z@@1,.5[z@@2,z$$$$l] ]...{z$$$l-z@@2}z@@2;
+ else:
+  p_1=pen_angle(z$$r-z$$$$r,z$$r,crisp,z$r-z$$r);
+  p_2=pen_angle(z$$$$r-z$$r,z$$$$r,crisp,z$$$r-z$$$$r);
+ fi
+ if (z$$r-z$$l) rightof (z$r-z$l):
+  reverse(p_1)--p_2
+ else:
+  reverse(p_2)--p_1
+ fi
+enddef;
+ 
 
 def angled_pos(suffix $)(expr out_dir)(suffix @)(expr in_dir)(suffix $$) =
  forsuffixes e=l,r:
@@ -320,13 +364,13 @@ enddef;
 
 %
 % Draws a notch cut at $$, for a stroke originating from $ and ending at $$$.
-vardef notch_cut_path(expr diff)(suffix @,$,$$,$$$)=
+vardef notch_cut_path(expr diff,nc)(suffix @,$,$$,$$$)=
  save d_; pair d_[];
  d_1=(z$$$-z$) scaled 1/abs(z$$$-z$);
  d_2=if diff>y$$: up else: down fi;
- if abs(y$$-diff)>cap_notch_cut:
+ if abs(y$$-diff)>nc:
   z@a=whatever[z$,z$$]; z@b=whatever[z$$,z$$$];
-  y@=(diff-cap_notch_cut) * ypart d_2; x@=x$$;
+  y@=(diff-nc) * ypart d_2; x@=x$$;
   y@a=y@b=2[y@,y$$];
   labels(@,@a,@b);
   z@a{z$$-z$}...{d_2}z@-.5d_1--z@+.5d_1{-d_2}...z@b{z$$$-z$$}
@@ -406,7 +450,6 @@ enddef;
 
 vardef trunc_path_start(expr p, t, startpt) =
  save p_; path p_; p_ = subpath (t,infinity) of p;
- save t_; t_ = floor t+1;
  startpt .. controls (postcontrol 0 of p_) and (precontrol 1 of p_)
     .. (subpath(1, infinity) of p_)
 enddef;
@@ -777,6 +820,11 @@ vardef pen_rlstem@#(expr diam)(suffix $) =
 vardef pen_pointend(suffix from_pt,in_pt)(expr diam)(suffix out_pt,to_pt)=
  pen_end(z.in_pt-z.from_pt,z.in_pt,diam,z.out_pt,z.to_pt-z.out_pt)
 enddef;
+
+% Version of pen_angle that uses points rather than directions.
+vardef pen_point(suffix from_pt,in_pt)(expr diam)(suffix to_pt) =
+ pen_angle(z.in_pt-z.from_pt,z.in_pt,diam,z.to_pt-z.in_pt)
+enddef;
 %
 % Terminates a stroke end with a given pen. FIXME: Should actually use the pen
 %
@@ -798,12 +846,12 @@ enddef;
 % half_pen_stroke should be used with a stroke containing only stroke_end.
 % full_pen_stroke should be used with a stroke containing stroke_start too.
 %
-vardef stroke_end.l(expr in_dir)(suffix $) =
+vardef stroke_end.l(expr in_dir,diam)(suffix $) =
  if diam>0:
   save stroke_in, stroke_edge, p; pair stroke_edge, stroke_in, p[];
   stroke_edge=unitvector(z$r-z$l);
   stroke_in=stroke_edge rotated if in_dir rightof stroke_edge: 90 else: -90 fi;
-  p1=z$l+.5cur_diam_*stroke_in+whatever*stroke_edge=in_pt+whatever*in_dir;
+  p1=z$l+.5diam*stroke_in+whatever*stroke_edge=in_pt+whatever*in_dir;
   p2=z$l+length(z$l-p1)*stroke_edge;
   % We round short of halfway, because the corners crossing is disastrous
   if 1.9*length(z$l-p2)>length(z$l-z$r): p2:=.5[z$r,z$l]; fi
@@ -814,17 +862,17 @@ enddef;
 vardef stroke_start.l(expr in_dir)(suffix $) =
 reverse stroke_end.l(-in_dir,$) enddef;
 
-vardef stroke_end.r(expr in_dir)(suffix $) =
- if cur_diam_>0:
+vardef stroke_end.r(expr in_dir,diam)(suffix $) =
+ if diam>0:
   save stroke_in, stroke_edge, p; pair stroke_edge, stroke_in, p[];
   stroke_edge=unitvector(z$l-z$r);
   stroke_in=stroke_edge rotated if in_dir rightof stroke_edge: 90 else: -90 fi;
-  p1=z$r+.5cur_diam_*stroke_in+whatever*stroke_edge=in_pt+whatever*in_dir;
+  p1=z$r+.5diam*stroke_in+whatever*stroke_edge=in_pt+whatever*in_dir;
   p2=z$r+length(z$r-p1)*stroke_edge;
   % We round short of halfway, because the corners crossing is disastrous
   if 1.9*length(z$r-p2)>length(z$l-z$r): p2:=.5[z$r,z$l]; fi
   p1{in_dir}...p2{stroke_edge}
- else: z$l fi
+ else: z$r fi
 enddef;
 
 vardef stroke_start.r(expr in_dir)(suffix $) =
@@ -935,7 +983,6 @@ vardef better_f_stroke_path(suffix $,$$,@)=
  pos@3(.6abs(x$r-x$l),0);
  set_bulb_points(vair,.75,1,@1,@2,@3,$$);
  penlabels(@0,@1,@2);
- show z@0, z@1, z@2;
  {{interim superness:=more_super;
  super_arc.l(@1,@2) & bulb_path(@2,@3,$$,right) & super_arc.r(@2,@1) }}
 enddef;
@@ -1376,7 +1423,7 @@ def font_setup =
   small_flare,i_dot_size,
   dot_size,cap_hair,cap_stem,cap_curve,arm_slab);
  define_whole_vertical_blacker_pixels(vair,bar,slab,cap_bar,cap_band,
-  thick_cap_band,thick_vair);
+  thin_cap_band,thick_cap_band,thick_vair);
  define_corrected_pixels(o,apex_o,lc_apex_o);
  forsuffixes $=hair,stem,cap_stem:
   fudged$.#:=fudge*$.#; fudged$:=hround(fudged$.#*hppp+blacker);
@@ -1391,7 +1438,7 @@ def font_setup =
  lowres_fix(stem,curve) 1.2;
  lowres_fix(cap_stem,cap_curve) 1.2;
  lowres_fix(hair,cap_hair) 1.2;
- lowres_fix(cap_band,thick_cap_band,cap_bar,bar,slab) 1.2;
+ lowres_fix(cap_band,thin_cap_band,thick_cap_band,cap_bar,bar,slab) 1.2;
  stem':=hround(stem-stem_corr); cap_stem':=hround(cap_stem-stem_corr);
  vair':=vround(vair+vair_corr);
  vstem:=vround .8[vair,stem]; cap_vstem:=vround .8[vair,cap_stem];
@@ -1418,8 +1465,8 @@ def font_setup =
  min_Vround:=max(fine.breadth,crisp.breadth,tiny.breadth);
  if min_Vround<vround min_Vround: min_Vround:=vround min_Vround; fi
  if flare<vround flare: flare:=vround flare; fi
- forsuffixes $=vair,bar,slab,cap_bar,cap_band,thick_cap_band,vair',
-   vstem,cap_vstem,bold:
+ forsuffixes $=vair,bar,slab,cap_bar,cap_band,thin_cap_band,thick_cap_band,
+   vair',vstem,cap_vstem,bold:
   if $<min_Vround: $:=min_Vround; fi endfor
  pickup pencircle scaled rule_thickness; rule.nib:=savepen;
  math_axis:=good.y(math_axis#*hppp);
@@ -1547,10 +1594,35 @@ def force_point(suffix $, $$) =
  forsuffixes e = r,,l: x$e:=x$$e; y$e:=y$$e; endfor
 enddef;
 
+vardef lineintersection(suffix $,$$,$$$,$$$$) =
+ pair p_; p_=whatever[z$,z$$]=whatever[z$$$,z$$$$]; p_
+enddef;
+
 def same_pos(suffix @, @@) =
  penpos@(length(z@@r-z@@l), if z@@r=z@@l: 0 else: angle(z@@r-z@@l) fi)
 enddef;
 vardef rev_pos@#(suffix $) = z@#r=z$l; z@#l=z$r; z@#=z$ enddef;
+
+vardef x_intersection@#(suffix $,$$)=
+ z@#=whatever[z1$,z4$]=whatever[z2$$,z3$$]
+enddef;
+
+vardef lc_spur@#(expr pos)(suffix $) =
+ numeric n_;
+ if pos<y$: % spur goes down and left
+  n_=-1;
+  x@#=x$l-.3hair;
+ else: % spur goes up and right
+  n_=1;
+  x@#=x$r+.3hair;
+ fi
+ y@#=pos+n_*.5[oo,o];
+ if n_=1: reverse
+ (z$l{(0,n_)}..tension 2..z@#l--z@#r...{(0,-n_)}z$r) % TODO: should use pen_end
+ else:
+ (z$l{(0,n_)}...z@#l--z@#r..tension 2..{(0,-n_)}z$r) % TODO: should use pen_end
+ fi
+enddef;
 
 vardef ic# = charic enddef;
 vardef h# = charht enddef;
