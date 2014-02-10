@@ -577,7 +577,7 @@ x7=x2r; y7l=vround(.52h+.5vair); x6=.2[x7,x5l];
 if serifs: x4=.5w-.5u; x5r=hround(w-.75[hair,stem]);
 else: x4=.5w+.5u; x5r=hround(w-u); fi
 x4l:=x6l:=x4-.125cap_curve;
-if x4l-x1r<cap_jut: x4l:=x1r+cap_jut;
+if x4l-x1r<cap_jut: x4l:=x1r+cap_jut; fi
 {{
  interim superness:=hein_super;
 make_paths1(rev.r) pulled_arc.e(4,5) & pulled_arc.e(5,6)  % lobe

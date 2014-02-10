@@ -120,7 +120,7 @@ if ($DESIGN_SIZE == 1000) {
 
 writeDSC("EndSetup");
 
-@letters = ('a' .. 'z', 'A' .. 'Z');
+@letters = ('a' .. 'z', 'A' .. 'Z', '0'..'9');
 
 
 $pageno = 0;

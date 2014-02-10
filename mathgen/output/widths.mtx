@@ -22,6 +22,16 @@
     \fi
 }
 
+\setglyphwidths{0}{15}{29}{-221}{71}
+\setglyphwidths{1}{-14}{-77}{-124}{151}
+\setglyphwidths{2}{5}{13}{-190}{77}
+\setglyphwidths{3}{16}{5}{-245}{95}
+\setglyphwidths{4}{32}{-45}{-180}{92}
+\setglyphwidths{5}{2}{-1}{-251}{87}
+\setglyphwidths{6}{-8}{5}{-239}{114}
+\setglyphwidths{7}{-72}{37}{-213}{42}
+\setglyphwidths{8}{10}{5}{-237}{86}
+\setglyphwidths{9}{-9}{6}{-244}{59}
 \setglyphwidths{A}{18}{5}{-4}{156}
 \setglyphwidths{B}{-4}{20}{-230}{120}
 \setglyphwidths{C}{-28}{19}{-231}{124}
