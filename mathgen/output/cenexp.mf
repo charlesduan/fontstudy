@@ -28,6 +28,7 @@ thick_cap_band#=.5pt#;
 thin_cap_band#=.36pt#;
 w_mid_corr#=.45pt#;
 E_mid_darkness=.45;
+dot_o#=.75o#;
 input widths;
 
 
@@ -40,6 +41,8 @@ mode_setup; font_setup;
 input mgromanu;  % Roman uppercase
 input mgromanl;  % Roman uppercase
 input mgromand;  % Arabic numbers
+input mgromanp;
+input mgpunct;
 
 font_slant slant; font_x_height x_height#;
 font_quad 18u# if monospace: + 4letter_fit# fi;

@@ -120,7 +120,11 @@ if ($DESIGN_SIZE == 1000) {
 
 writeDSC("EndSetup");
 
-@letters = ('a' .. 'z', 'A' .. 'Z', '0'..'9');
+@letters = ();
+push @letters, qw($ & ?);
+push @letters, qw<! % \( \) * + . / : ; = @ [ ]>;
+push @letters, '#', ',';
+push @letters, ('a' .. 'z', 'A' .. 'Z', '0'..'9');
 
 
 $pageno = 0;
@@ -188,7 +192,7 @@ sub writeLibrary {
 }
 
 sub writeRomanLetter {
-    $letter = shift;
+    my $letter = shift;
     writeOutput(<<EOF);
 /CurrentLetter ($letter) def
 /CurrentDesc (roman-$letter) def
@@ -200,7 +204,7 @@ EOF
 }
 
 sub writeItalicLetter {
-    $letter = shift;
+    my $letter = shift;
     writeOutput(<<EOF);
 /CurrentLetter ($letter) def
 /CurrentDesc (italic-$letter) def

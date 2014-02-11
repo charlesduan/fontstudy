@@ -16,7 +16,7 @@ open RAW, $RAW_WIDTH_FILE or die "open $RAW_WIDTH_FILE: $!\n";
 %widths = ();
 while (<RAW>) {
     chop;
-    s/#.*//;
+    s/# .*//;
     # Only allow integer values, so lines must look like:
     # Parameter-name = [+-]1234567890
     next unless /^\s*(\S+)\s*=\s*([+-]?[\d.]+)\s*$/;

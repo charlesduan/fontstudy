@@ -37,7 +37,9 @@ RightPoint xcoor /RightEdge exch def
 (glyph-width) setFileName
 (Width of glyph without sidebearings) RightEdge LeftEdge sub stringOfText
 
-0 XHeight SubscriptFraction mul horizLineThrough pathLineIntc
+0 BotPoint ycoor dup TopPoint ycoor exch sub .1 mul add
+%0 XHeight SubscriptFraction mul
+horizLineThrough pathLineIntc
 sortByX dup firstElt /HalfwayLeft defPoint lastElt /HalfwayRight defPoint
 
 gsave flattenpath
