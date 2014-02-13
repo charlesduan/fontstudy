@@ -106,11 +106,13 @@ stroke grestore
 doRight (Right) exch rightSidebearing sub AdjustScale round cvi stringOfText
 
 LowerRightEdge ForcedWidth add
-1 1 SubPoints length 2 div MaxSubscriptUnits min {
-    dup 1 sub SubPoints exch get exch
-    MaxSubscriptUnits div WidthUnit mul add
-    max
-} for
+/SubPoints where { pop
+    1 1 SubPoints length 2 div MaxSubscriptUnits min {
+        dup 1 sub SubPoints exch get exch
+        MaxSubscriptUnits div WidthUnit mul add
+        max
+    } for
+} if
 
 % The subscript cannot extend past the superscript, and it cannot extend beyond
 % the specified subscript indentation limit.

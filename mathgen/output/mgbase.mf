@@ -655,20 +655,18 @@ def comma(suffix $,@)(expr dot_size,jut,depth) =
   pos@2(comma_bot_,0); y@0=y$; y@1=y$l; y@2=y@1-depth;
   x@0r=x@1r=x$'r; rt x@2r=good.x(x$-eps);
   filldraw stroke z@0e--z@1e..z@2e;  % tail
- else: pos@1(vair,90); pos@2(thick_vair,0); pos@3(vair,-33);
+ else: pos@1(vair,90); pos@2(thick_vair,0); pos@3(vair,-36);
   z@1r=z$r; x@2r=hround(x$+.5dot_size+jut)+2eps; x@3=x$-1.3u;
   y@2=.5[y$,y$l]; y@3r=vround(y$-.5dot_size-depth);
-  y_:=ypart((z@1{right}...z@2{down}...z@3)
-   intersectiontimes (z$l{right}..{left}z$r)); if y_<0: y_:=1; fi
   pos@4(y$r-y$l,0); z@4=z$;
-  fill z@3r{curl .5}..tension 1.5..z@2r{up}..z@1r{left}..z@4l{down}
+  fill z@3r{curl .1}..tension 1.1..z@2r{up}..z@1r{left}..z@4l{down}
    & combine(z@4l{down}..z$l{right}..{up}z@4r,
-    z@1l{right}...z@2l{down}..tension 1.5..{curl .5}z@3l)--cycle;
+    z@1l{right}...z@2l{down}..tension 1.1..{curl .1}z@3l)--cycle;
  fi 
  penlabels(@1,@2,@3); enddef;
 
 def ammoc(suffix $,@)(expr dot_size,jut,depth) = % reversed comma
- pickup fine.nib; pos$(dot_size,90);
+ pos$(dot_size,90);
  if square_dots: pos$'(dot_size,0); z$'=z$; dot($',$);  % squarish dot
   comma_join_:=max(fine.breadth,floor .7dot_size);
   comma_top_:=max(fine.breadth,floor .5dot_size);
@@ -676,13 +674,14 @@ def ammoc(suffix $,@)(expr dot_size,jut,depth) = % reversed comma
   pos@2(comma_top_,0); y@0=y$; y@1=y$r; y@2=y@1+depth;
   x@0l=x@1l=x$'l; lft x@2l=good.x(x$+eps);
   filldraw stroke z@0e--z@1e..z@2e;  % tail
- else: pos@1(vair,90); pos@2(vair,0); pos@3(vair,-45);
-  z@1l=z$l; lft x@2l=hround(x$-.5dot_size-jut)-2eps; x@3=x$+.5u;
-  y@2=1/3[y@1,y@3]; top y@3l=vround(y$+.5dot_size+depth);
-  y_:=ypart((z@1{left}...z@2{up}...z@3)
-   intersectiontimes (z$r{left}..{right}z$l)); if y_<0: y_:=1; fi
-  filldraw z$l{right}..subpath (0,y_) of (z$r{left}..{right}z$l)--cycle; % dot
-  filldraw stroke z@1e{left}...z@2e{up}...z@3e; fi  % tail
+ else: pos@1(vair,90); pos@2(thick_vair,0); pos@3(vair,-36);
+  z@1l=z$l; x@2l=hround(x$-.5dot_size-jut)-2eps; x@3=x$+1.3u;
+  y@2=.5[y$,y$r]; y@3l=vround(y$+.5dot_size+depth);
+  pos@4(y$r-y$l,0); z@4=z$;
+  fill z@3l{curl .1}..tension 1.1..z@2l{down}..z@1l{right}..z@4r{up}
+   & combine(z@4r{up}..z$r{left}..{down}z@4l,
+    z@1r{left}...z@2r{up}..tension 1.1..{curl .1}z@3r)--cycle;
+ fi
  penlabels(@1,@2,@3); enddef;
 
 %%% @ from to %%%% temporary formatting change
@@ -1561,6 +1560,30 @@ vardef super_arc.l(suffix $,$$) = % inside of super-ellipse
  pair center,corner;
  if y$=y$r: center=(x$$l,y$l); corner=(x$l,y$$l);
  else: center=(x$l,y$$l); corner=(x$$l,y$l); fi
+ z$l{corner-z$l}...superness[center,corner]{z$$l-z$l}
+  ...{z$$l-corner}z$$l enddef;
+
+vardef angled_super_arc.r(suffix $,$$)(expr slant_dir) =
+ pair center,corner;
+ if y$=y$r:
+  center=z$$r+whatever*slant_dir; ypart center=y$r;
+  corner=z$r+whatever*slant_dir; ypart corner=y$$r;
+ else:
+  center=z$r+whatever*slant_dir; ypart center=y$$r;
+  corner=z$$r+whatever*slant_dir; ypart corner=y$r;
+ fi
+ z$.r{corner-z$.r}...superness[center,corner]{z$$.r-z$.r}
+  ...{z$$.r-corner}z$$.r enddef;
+
+vardef angled_super_arc.l(suffix $,$$)(expr slant_dir) =
+ pair center,corner;
+ if y$=y$r:
+  center=z$$l+whatever*slant_dir; ypart center=y$l;
+  corner=z$l+whatever*slant_dir; ypart corner=y$$l;
+ else:
+  center=z$l+whatever*slant_dir; ypart center=y$$l;
+  corner=z$$l+whatever*slant_dir; ypart corner=y$l;
+ fi
  z$l{corner-z$l}...superness[center,corner]{z$$l-z$l}
   ...{z$$l-corner}z$$l enddef;
 

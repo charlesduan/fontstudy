@@ -80,41 +80,53 @@ cmchar "Per cent sign";
 beginchar("%",9u#+max(6u#,2fudge*(hair#+stem#)),
   body_height#,body_height#-asc_height#);
 italcorr if hefty: .4asc_height#*slant-.5u# else: h#*slant-u# fi;
-adjust_fit(0,0); pickup fine.nib;
-numeric left_curve,right_curve;
-left_curve=hround 5/6[fudged.hair,fudged.stem];
-right_curve=max(fine.breadth,hround(fudged.hair if hefty:-2stem_corr fi));
-pos1(vair,90); pos2(left_curve,180); pos3(vair,270); pos4(right_curve,360);
-y1r=h; x2r=hround u; x4r=hround(.5w-1.5u);
-y3r=floor(if monospace: .7 else: .5 fi\\ asc_height);
-x1=x3=.5[x2,x4]; y2=y4=.5[y1,y3];
-filldraw stroke pulled_super_arc.e(1,2)(superpull)
- & pulled_super_arc.e(2,3)(superpull);  % left half of upper bowl
-filldraw stroke super_arc.e(3,4) & super_arc.e(4,1); % right half of upper bowl
-pos5(vair,90); pos6(left_curve,180); pos7(vair,270); pos8(right_curve,360);
-bot y7r=-d; rt x8r=hround(w-u); lft x6r=hround(.5w+1.5u);
-top y5r=vround(if monospace: .3 else: .5 fi\\ asc_height);
-x5=x7=.5[x6,x8]; y6=y8=.5[y5,y7];
-filldraw stroke pulled_super_arc.e(5,6)(superpull)
- & pulled_super_arc.e(6,7)(superpull);  % left half of lower bowl
-filldraw stroke super_arc.e(7,8) & super_arc.e(8,5); % right half of lower bowl
-pickup rule.nib; top y9=h; bot y10=-d;
+adjust_fit(0,0);
+y9=h-o; y10=-oo;
 if hefty: x9=good.x(x5-eps); x10=good.x(x1+eps);
  draw z9--z10;  % diagonal
-else: rt x9=hround(w-2.5u); lft x10=hround 2.5u; draw z9--z10;  % diagonal
- pickup fine.nib; pos9(rule_thickness,angle(z9-z10)+90);
- pos11(vair,angle(z1r-z4r)-90); pos12(vair,angle(z9-z10)+90);
- path p; p=super_arc.r(1,4); z11r=point 2/3 of p; z12r=z9r;
- filldraw stroke z11e{direction 2/3 of p}...{z9-z10}z12e; fi  % link
+else:
+pos9(.8rule_thickness,0); pos10(.8rule_thickness,0);
+x9r=hround(w-2.4u); x10l=hround 2.5u;
+fi
+numeric left_curve,right_curve;
+left_curve=stem;
+pair ital_dir; ital_dir=(z9-z10) xscaled .5;
+right_curve=max(fine.breadth,hround(fudged.hair if hefty:-2stem_corr fi));
+pos1(vair,angle ital_dir); pos2(left_curve,180);
+pos3(vair,180+angle ital_dir); pos4(right_curve,360);
+y1r=h-thick_vair; x2r=hround .25u; x4r=hround(.5w-.7u);
+y3r=floor(if monospace: .7 else: .42 fi\\ asc_height);
+.5[x1,x3]=.5[x2,x4]; y2=y4=.5[y1,y3]; z1=z3+whatever*ital_dir;
+make_paths1(rev.l) angled_super_arc.e(1,2,ital_dir)
+ & angled_super_arc.e(2,3,ital_dir);  % left half of upper bowl
+make_paths2(rev.l) angled_super_arc.e(3,4,ital_dir)
+ & angled_super_arc.e(4,1,ital_dir); % right half of upper bowl
+pos5(vair,angle ital_dir); pos6(left_curve,180);
+pos7(vair,180+angle ital_dir); pos8(right_curve,360);
+z5-z6=z1-z2; z5-z7=z1-z3; z5-z8=z1-z4;
+y7r=-d; x8r=w-hround .15u;
+make_paths3(rev.l) angled_super_arc.e(5,6,ital_dir)
+ & angled_super_arc.e(6,7,ital_dir)
+ & angled_super_arc.e(7,8,ital_dir) & angled_super_arc.e(8,5,ital_dir);
+pos9'(hair,180); z9'r=z9l;
+pos11(hair,angle ital_dir); x11=.4[x1,x9]; y11r=y1r-2.5hair;
+make_paths4(rev.r) z1e..{right}z11e;
+fill rpath3 & cycle;
+unfill lpath3 & cycle;
+fill pen_pointend(10r,9r,fine,9l,10l){z10l-z9l}..combine(rpath4,rpath2)
+ & rpath1 & combine(rpath2,lpath4)
+ & combine(z11l{right}..{z9r-z10r}z9r, z9l--pen_pointend(9l,10l,fine,10r,9r))
+ --cycle;
+unfill combine(lpath4,subpath(.1,infinity) of lpath2) & lpath1 & cycle;
 penlabels(1,2,3,4,5,6,7,8,9,10,11,12); endchar;
 
 cmchar "Apostrophe";
 beginchar("'",5u#,asc_height#,0);
 italcorr asc_height#*slant+.5dot_size#-2u#;
 adjust_fit(0,0);
-x1-.5dot_size=hround(.5w-.5dot_size); y1+.5dot_size=h;
-if monospace: comma(1,a,dot_size,.28u,vround 1.5comma_depth);  % large comma
-else: comma(1,a,dot_size,.25u,comma_depth); fi  % comma with increased jut
+x1-.5dot_size=hround(.57w-.5dot_size); y1+.5dot_size=h;
+if monospace: comma(1,a,dot_size,.28u,vround 1.5comma_depth,1);  % large comma
+else: comma(1,a,dot_size,0,.88comma_depth); fi  % comma with increased jut
 penlabels(1); endchar;
 
 cmchar "Left parenthesis";
@@ -123,7 +135,7 @@ italcorr body_height#*slant-.5u#;
 adjust_fit(0,0);
 pos1(vair,-90); pos2(stem,0); pos3(vair,90);
 x1r=x3r=w; x2l=0;
-y1l=h; y2=.5[y1,y3]=math_axis;
+y1l=h; y2=.5[y1,y3]; y3l=-.7desc_depth;
 fill stroke z1e{3(x2e-x1e),y2-y1}...z2e
  ...{3(x3e-x2e),y3-y2}z3e;  % arc
 penlabels(1,2,3); endchar;
@@ -134,7 +146,7 @@ italcorr math_axis#*slant-.5u#;
 adjust_fit(0,0);
 pos1(vair,90); pos2(stem,0); pos3(vair,-90);
 x1l=x3l=0; x2r=w;
-y1r=h; y2=.5[y1,y3]=math_axis;
+y1r=h; y2=.5[y1,y3]; y3r=-.7desc_depth;
 fill stroke z1e{3(x2e-x1e),y2-y1}...z2e
  ...{3(x3e-x2e),y3-y2}z3e;  % arc
 penlabels(1,2,3); endchar;
@@ -240,34 +252,41 @@ beginchar("@",14u#,asc_height#,0);
 italcorr .7asc_height#*slant-.5u#;
 numeric ital_slant; ital_slant=.286745;
 adjust_fit(0,if hefty or monospace:-2u# else: 0 fi);
-pos0(fudged.hair,0); pos1(vair,angle (ital_slant,1));
-pos2(fudged.stem,180); pos3(vair,180+angle (ital_slant,1));
+pos0(fudged.hair,0); pos1(thick_vair,angle (ital_slant,1));
+pos2(fudged.stem,180); pos3(thick_vair,180+angle (ital_slant,1));
 pos4(fudged.stem,-180); pos5(fudged.stem,-180);
 pos6(vair,-90); pos7(thick_hair,0);
 pos8(.8vair,90); pos9(curve,180);
 pos10(vair,270); pos11(vair,-60);
-.5[x1,x3]=.5[x0,x2]; y0=y2=.5[y1,y3];
+.5[x1,x3]=.55[x2,x0]; y0=y2=.5[y1,y3];
 x1-x3=ital_slant*(y1-y3);
+x1l:=.55[x2l,x0l]+ital_slant*(y1l-y2l);
+x3l:=.55[x2l,x0l]+ital_slant*(y3l-y2l);
 x8=.5[x9l,x7l]; x10=.5w; y7=.5[y6l,y8l]; y9=.5[y8,y10];
 x9r=0; x7r=w; y8r=h; y10r=-o;
 y4=.76[y10l,y8l];
 y6=.23[y10l,y8l];
 y1r=y4+oo; y3r=y6r;
 x6l=1/3[x5l,x7l]; y11=good.y(.1[y10,y8]-.5);
-x4-x0=ital_slant*(y4-y0);
+x4r-x0l=ital_slant*(y4r-y0l);
 if hefty or monospace: lft x2r=hround(5u-.5fudged.stem);
  rt x0r=hround(w-3u); x11r=x0r;
-else: lft x2r=hround 3.4u; x0=w-x2; x11r=x6r; fi
-y5=2/3[y7,y6]; z5=whatever[z4,z0];
-filldraw stroke super_arc.e(1,2) & super_arc.e(2,3);  % left inner bowl
-filldraw stroke super_arc.e(3,0) & super_arc.e(0,1);  % right inner bowl
-filldraw stroke super_arc.e(8,9) & super_arc.e(9,10)
+else: x2r=hround 4u; x0=w-4.6u; x11r=x6r; fi
+y5=2/3[y7,y6]; z5r=whatever[z4r,z0l];
+make_paths1(rev.l) angled_super_arc.e(0,1,(ital_slant,1))
+ & angled_super_arc.e(1,2,(ital_slant,1));
+make_paths2(rev.l) angled_super_arc.e(2,3,(ital_slant,1))
+ & angled_super_arc.e(3,0,(ital_slant,1));
+make_paths3(rev.l) super_arc.e(8,9) & super_arc.e(9,10)
  & term.e(10,11,right,1,4);  % left outer bowl and terminal
 if hefty or monospace: {{interim superness:=hein_super;
   filldraw stroke super_arc.e(0,8)}};  % link
 else: (x,y6r)=whatever[z6l,z7l]; x6r:=x;
- filldraw stroke z4e---z5e...z6e{right}...{up}z7e
+ make_paths4(rev.l) z5e...z6e{right}...{up}z7e
   & super_arc.e(7,8); fi % stem and link
+fill combine(pen_pointend(5l,4l,fine,4r,5r)--z5r,rpath1)
+ & combine(rpath2,z4r--rpath4) & rpath3--lpath3 & lpath4--cycle;
+ unfill lpath1 & lpath2 & cycle;
 penlabels(0,1,2,3,4,5,6,7,8,9,10,11); endchar;
 
 cmchar "Left bracket";
@@ -280,13 +299,12 @@ if hefty: top_thickness=vair;
  side_thickness=max(crisp.breadth,stem-2stem_corr);
 else: top_thickness=vair; side_thickness=stem; fi;
 pos1(side_thickness,0); pos2(side_thickness,0);
-y1=h; y2=-d; x1l=x2l=0;
-filldraw stroke z1e--z2e;  % stem
+y1=h-.5top_thickness; y2=-.7desc_depth+.5top_thickness; x1l=x2l=0;
 pos3(top_thickness,90); pos4(top_thickness,90);
 pos5(top_thickness,90); pos6(top_thickness,90);
 x3=x5=x1l; x4=x6=w; y3r=y4r=y1; y5l=y6l=y2;
-filldraw stroke z3e--z4e;  % upper bar
-filldraw stroke z5e--z6e;  % lower bar
+fill pen_lrend4(right,crisp,left)--pen_pointend(4r,1l,crisp,2l,6l)
+ --pen_lrend6(right,crisp,left)--(x2r,y6r)--(x1r,y4l)--cycle;
 penlabels(1,2,3,4,5,6); endchar;
 
 cmchar "Right bracket";
@@ -299,20 +317,19 @@ if hefty: top_thickness=vair;
  side_thickness=max(crisp.breadth,stem-2stem_corr);
 else: top_thickness=vair; side_thickness=stem; fi;
 pos1(side_thickness,0); pos2(side_thickness,0);
-y1=h; y2=-d; x1r=x2r=w;
-filldraw stroke z1e--z2e;  % stem
+y1=h-.5top_thickness; y2=-.7desc_depth+.5top_thickness; x1r=x2r=w;
 pos3(top_thickness,90); pos4(top_thickness,90);
 pos5(top_thickness,90); pos6(top_thickness,90);
 x3=x5=x1r; x4=x6=0; y3r=y4r=y1; y5l=y6l=y2;
-filldraw stroke z3e--z4e;  % upper bar
-filldraw stroke z5e--z6e;  % lower bar
+fill pen_rlend6(left,crisp,right)--pen_pointend(6r,2r,crisp,1r,4l)
+ --pen_rlend4(left,crisp,right)--(x1l,y4l)--(x2l,y6r)--cycle;
 penlabels(1,2,3,4,5,6); endchar;
 
 cmchar "Reverse apostrophe";
 beginchar("`",5u#,asc_height#,0);
 italcorr asc_height#*slant+.5dot_size#-2u#;
 adjust_fit(0,0);
-x1-.5dot_size=hround(.5w-.5dot_size); y1+.5dot_size=h-comma_depth;
+x1-.5dot_size=hround(.43w-.5dot_size); y1+.5dot_size=h-comma_depth+o;
 if monospace: ammoc(1,a,dot_size,.28u,vround 1.5comma_depth);  % large ammoc
-else: ammoc(1,a,dot_size,.25u,comma_depth); fi  % normal ammoc
+else: ammoc(1,a,dot_size,0,.88comma_depth); fi  % normal ammoc
 penlabels(1); endchar;

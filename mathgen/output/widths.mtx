@@ -27,6 +27,7 @@
 \setglyphwidths{$}{10}{19}{-231}{97}
 \setglyphwidths{%}{-24}{9}{-158}{-21}
 \setglyphwidths{&}{-20}{8}{-62}{109}
+\setglyphwidths{'}{-80}{70}{-53}{13}
 \setglyphwidths{(}{-33}{62}{-149}{108}
 \setglyphwidths{)}{70}{-33}{-244}{111}
 \setglyphwidths{*}{-101}{18}{-143}{12}
@@ -77,6 +78,7 @@
 \setglyphwidths{Z}{-17}{4}{-141}{104}
 \setglyphwidths{[}{-36}{69}{-141}{44}
 \setglyphwidths{]}{70}{-38}{-218}{187}
+\setglyphwidths{`}{-68}{55}{14}{61}
 \setglyphwidths{a}{19}{-3}{-69}{87}
 \setglyphwidths{b}{-22}{7}{-126}{-16}
 \setglyphwidths{c}{8}{-5}{-113}{80}
@@ -85,7 +87,7 @@
 \setglyphwidths{f}{163}{164}{-86}{216}
 \setglyphwidths{g}{33}{2}{-141}{91}
 \setglyphwidths{h}{-15}{2}{-54}{-29}
-\setglyphwidths{i}{3}{13}{-49}{63}
+\setglyphwidths{i}{3}{-3}{-68}{5}
 \setglyphwidths{j}{126}{13}{-145}{240}
 \setglyphwidths{k}{-10}{-9}{-95}{-24}
 \setglyphwidths{l}{-20}{-4}{-71}{80}

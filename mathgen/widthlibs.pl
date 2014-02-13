@@ -55,14 +55,17 @@ writeDSC("EndProlog");
 writeDSC("BeginSetup");
 
 # Write the font
-writeOutput("\% THE FONT\n");
-writeOutput("/thefont {\n");
-writeOutput("    /$FONT_NAME findfont $DESIGN_SIZE scalefont setfont\n");
-writeOutput("} def\n");
-writeOutput("\% THE ITALIC FONT\n");
-writeOutput("/theitalicfont {\n");
-writeOutput("    /$ITAL_FONT_NAME findfont $DESIGN_SIZE scalefont setfont\n");
-writeOutput("} def\n");
+writeOutput(<<EOF);
+% THE FONT
+/$FONT_NAME findfont $DESIGN_SIZE scalefont
+0 dict copy dup /Encoding StandardEncoding put
+/therealfont exch definefont pop
+/$ITAL_FONT_NAME findfont $DESIGN_SIZE scalefont
+0 dict copy dup /Encoding StandardEncoding put
+/therealitalicfont exch definefont pop
+/thefont { /therealfont findfont setfont } bind def
+/theitalicfont { /therealitalicfont findfont setfont } bind def
+EOF
 
 # Setup file, technically unnecessary
 if (-f $SETUP_FILE) {
@@ -126,8 +129,24 @@ push @letters, qw<! % \( \) * + . / : ; = @ [ ]>;
 push @letters, '#', ',';
 push @letters, ('a' .. 'z', 'A' .. 'Z', '0'..'9');
 
+%named_letters = (
+    "`" => "\\140",
+    "'" => "\\047"
+);
 
 $pageno = 0;
+for (keys %named_letters) {
+    $pageno++;
+    writeDSC("Page: $pageno $pageno");
+    writeOutput("resetPage\n");
+    writeRomanLetter($_, $named_letters{$_});
+    writeOutput("showpage\n");
+    $pageno++;
+    writeDSC("Page: $pageno $pageno");
+    writeOutput("resetPage\n");
+    writeItalicLetter($_, $named_letters{$_});
+    writeOutput("showpage\n");
+}
 for (@letters) {
     $pageno++;
     writeDSC("Page: $pageno $pageno");
@@ -192,9 +211,10 @@ sub writeLibrary {
 }
 
 sub writeRomanLetter {
-    my $letter = shift;
+    my ($letter, $charcode) = @_;
+    $charcode ||= $letter;
     writeOutput(<<EOF);
-/CurrentLetter ($letter) def
+/CurrentLetter ($charcode) def
 /CurrentDesc (roman-$letter) def
 thefont
 CurrentLetter letterPath
@@ -204,9 +224,10 @@ EOF
 }
 
 sub writeItalicLetter {
-    my $letter = shift;
+    my ($letter, $charcode) = @_;
+    $charcode ||= $letter;
     writeOutput(<<EOF);
-/CurrentLetter ($letter) def
+/CurrentLetter ($charcode) def
 /CurrentDesc (italic-$letter) def
 theitalicfont
 CurrentLetter letterPath

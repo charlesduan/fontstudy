@@ -19,6 +19,9 @@ if slant > 0:
          glyph_width38#:=   7.09332 pt#; % italic-&
     left_sidebearing38#:=   0.59974 pt#; % italic-&
    right_sidebearing38#:=   0.08688 pt#; % italic-&
+         glyph_width39#:=   1.59948 pt#; % italic-'
+    left_sidebearing39#:=   0.99974 pt#; % italic-'
+   right_sidebearing39#:=  -0.37923 pt#; % italic-'
          glyph_width40#:=   3.56927 pt#; % italic-(
     left_sidebearing40#:=   0.82969 pt#; % italic-(
    right_sidebearing40#:=  -0.50898 pt#; % italic-(
@@ -169,6 +172,9 @@ if slant > 0:
          glyph_width93#:=   4.49896 pt#; % italic-]
     left_sidebearing93#:=  -0.57995 pt#; % italic-]
    right_sidebearing93#:=   0.52096 pt#; % italic-]
+         glyph_width96#:=   1.59948 pt#; % italic-`
+    left_sidebearing96#:=   0.99974 pt#; % italic-`
+   right_sidebearing96#:=  -0.37923 pt#; % italic-`
          glyph_width97#:=   5.17865 pt#; % italic-a
     left_sidebearing97#:=   0.23984 pt#; % italic-a
    right_sidebearing97#:=   0.14147 pt#; % italic-a
@@ -263,6 +269,9 @@ else:
          glyph_width38#:=   6.51823 pt#; % roman-&
     left_sidebearing38#:=   0.58984 pt#; % roman-&
    right_sidebearing38#:=   0.67188 pt#; % roman-&
+         glyph_width39#:=   1.57969 pt#; % roman-'
+    left_sidebearing39#:=   0.23984 pt#; % roman-'
+   right_sidebearing39#:=   0.45046 pt#; % roman-'
          glyph_width40#:=   2.49948 pt#; % roman-(
     left_sidebearing40#:=   0.48984 pt#; % roman-(
    right_sidebearing40#:=   0.34063 pt#; % roman-(
@@ -413,6 +422,9 @@ else:
          glyph_width93#:=   2.35938 pt#; % roman-]
     left_sidebearing93#:=   0.33984 pt#; % roman-]
    right_sidebearing93#:=   0.63073 pt#; % roman-]
+         glyph_width96#:=   1.57943 pt#; % roman-`
+    left_sidebearing96#:=   0.45000 pt#; % roman-`
+   right_sidebearing96#:=   0.24056 pt#; % roman-`
          glyph_width97#:=   4.56901 pt#; % roman-a
     left_sidebearing97#:=   0.28984 pt#; % roman-a
    right_sidebearing97#:=   0.14115 pt#; % roman-a
