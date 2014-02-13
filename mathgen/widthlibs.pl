@@ -58,6 +58,10 @@ writeDSC("BeginSetup");
 writeOutput(<<EOF);
 % THE FONT
 /$FONT_NAME findfont $DESIGN_SIZE scalefont
+/reencodefont {
+ currentfont 0 dict copy dup /Encoding 4 -1 roll put
+ /newfont exch definefont setfont
+} def
 0 dict copy dup /Encoding StandardEncoding put
 /therealfont exch definefont pop
 /$ITAL_FONT_NAME findfont $DESIGN_SIZE scalefont
@@ -124,27 +128,39 @@ if ($DESIGN_SIZE == 1000) {
 writeDSC("EndSetup");
 
 @letters = ();
-push @letters, qw($ & ?);
-push @letters, qw<! % \( \) * + . / : ; = @ [ ]>;
+push @letters, qw(! " $ % & < >);
+push @letters, qw<\( \) * + . / : ; = ? @ [ \\\\ ] ^ _ { | } ~>;
 push @letters, '#', ',';
 push @letters, ('a' .. 'z', 'A' .. 'Z', '0'..'9');
 
 %named_letters = (
     "`" => "\\140",
-    "'" => "\\047"
+    "'" => "\\047",
+    "055" => "\\055 StandardEncoding",
+    "230" => "\\272 StandardEncoding", # quotedblright
+    "225" => "\\252 StandardEncoding", # quotedblleft
+    "222" => "\\261 StandardEncoding", # endash
+    "233" => "\\320 StandardEncoding", # emdash
+    "247" => "\\247", # section symbol
+    "266" => "\\266", # paragraph symbol
+    "231" => "\\256 StandardEncoding", # fi
+    "234" => "\\257 StandardEncoding", # fl
+    "200" => "\\000 [ /ff ]",
+    "201" => "\\000 [ /ffi ]",
+    "202" => "\\000 [ /ffl ]",
 );
 
 $pageno = 0;
-for (keys %named_letters) {
+for (sort keys %named_letters) {
     $pageno++;
     writeDSC("Page: $pageno $pageno");
     writeOutput("resetPage\n");
-    writeRomanLetter($_, $named_letters{$_});
+    writeRomanLetter($_, split / /, $named_letters{$_}, 2);
     writeOutput("showpage\n");
     $pageno++;
     writeDSC("Page: $pageno $pageno");
     writeOutput("resetPage\n");
-    writeItalicLetter($_, $named_letters{$_});
+    writeItalicLetter($_, split / /, $named_letters{$_}, 2);
     writeOutput("showpage\n");
 }
 for (@letters) {
@@ -211,12 +227,14 @@ sub writeLibrary {
 }
 
 sub writeRomanLetter {
-    my ($letter, $charcode) = @_;
+    my ($letter, $charcode, $encoding) = @_;
+    my $encline = $encoding ? "$encoding reencodefont" : "";
     $charcode ||= $letter;
     writeOutput(<<EOF);
 /CurrentLetter ($charcode) def
 /CurrentDesc (roman-$letter) def
 thefont
+$encline
 CurrentLetter letterPath
 LeftRightWidth
 
@@ -224,12 +242,14 @@ EOF
 }
 
 sub writeItalicLetter {
-    my ($letter, $charcode) = @_;
+    my ($letter, $charcode, $encoding) = @_;
     $charcode ||= $letter;
+    my $encline = $encoding ? "$encoding reencodefont" : "";
     writeOutput(<<EOF);
 /CurrentLetter ($charcode) def
 /CurrentDesc (italic-$letter) def
 theitalicfont
+$encline
 CurrentLetter letterPath
 LeftRightWidth
 

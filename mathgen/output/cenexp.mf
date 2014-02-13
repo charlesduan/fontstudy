@@ -34,8 +34,8 @@ input widths;
 
 % The Computer Modern Roman family of fonts (by D. E. Knuth, 1979--1985)
 
-font_coding_scheme:="TeX text";
-spanish_shriek=oct"074"; spanish_query=oct"076";
+%font_coding_scheme:="TeX text";
+%spanish_shriek=oct"074"; spanish_query=oct"076";
 
 mode_setup; font_setup;
 input mgromanu;  % Roman uppercase
@@ -43,6 +43,8 @@ input mgromanl;  % Roman uppercase
 input mgromand;  % Arabic numbers
 input mgromanp;
 input mgpunct;
+input mgcomlig;
+input mgromlig;
 
 font_slant slant; font_x_height x_height#;
 font_quad 18u# if monospace: + 4letter_fit# fi;

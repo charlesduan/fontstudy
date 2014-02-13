@@ -140,7 +140,8 @@ sub print_chars {
     my ($font, $fh) = @_;
     for my $char (sort keys %letters) {
         next unless $char =~ /^\Q$font-\E/;
-        my $num = ord $';
+        my $letter = $';
+        my $num = $letter =~ /^\d\d\d$/ ? oct $letter : ord $letter;
         for my $param (qw(glyph-width left-sidebearing right-sidebearing)) {
             my $mf_param = $param; $mf_param =~ s/-/_/g;
             if (exists $widths{"$char-$param"}) {

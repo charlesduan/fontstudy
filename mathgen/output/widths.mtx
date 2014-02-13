@@ -23,6 +23,7 @@
 }
 
 \setglyphwidths{!}{-87}{-40}{-209}{99}
+\setglyphwidths{"}{-82}{57}{-123}{9}
 \setglyphwidths{#}{-6}{-8}{-155}{62}
 \setglyphwidths{$}{10}{19}{-231}{97}
 \setglyphwidths{%}{-24}{9}{-158}{-21}
@@ -36,8 +37,20 @@
 \setglyphwidths{.}{-28}{-72}{-100}{3}
 \setglyphwidths{/}{26}{66}{-184}{138}
 \setglyphwidths{0}{15}{29}{-155}{71}
+\setglyphwidths{055}{-39}{-26}{-39}{9}
 \setglyphwidths{1}{-14}{-77}{-115}{151}
 \setglyphwidths{2}{5}{13}{-112}{77}
+\setglyphwidths{200}{-45}{55}{11}{20}
+\setglyphwidths{201}{-45}{55}{11}{20}
+\setglyphwidths{202}{-45}{55}{11}{20}
+\setglyphwidths{222}{20}{20}{20}{9}
+\setglyphwidths{225}{-68}{35}{35}{62}
+\setglyphwidths{230}{-83}{52}{52}{11}
+\setglyphwidths{231}{172}{9}{-241}{205}
+\setglyphwidths{233}{20}{20}{4}{9}
+\setglyphwidths{234}{172}{32}{-218}{204}
+\setglyphwidths{247}{-33}{-13}{-156}{90}
+\setglyphwidths{266}{-90}{63}{-82}{20}
 \setglyphwidths{3}{16}{5}{-147}{95}
 \setglyphwidths{4}{32}{-45}{-180}{92}
 \setglyphwidths{5}{2}{-1}{-154}{87}
@@ -47,7 +60,9 @@
 \setglyphwidths{9}{-9}{6}{-200}{59}
 \setglyphwidths{:}{-2}{8}{-101}{64}
 \setglyphwidths{;}{19}{7}{-81}{80}
+\setglyphwidths{<}{-30}{9}{-35}{188}
 \setglyphwidths{=}{-20}{-20}{-49}{7}
+\setglyphwidths{>}{10}{-30}{-280}{-160}
 \setglyphwidths{?}{-101}{-20}{-251}{36}
 \setglyphwidths{@}{-9}{64}{-87}{41}
 \setglyphwidths{A}{18}{5}{5}{156}
@@ -77,8 +92,11 @@
 \setglyphwidths{Y}{-91}{77}{-173}{29}
 \setglyphwidths{Z}{-17}{4}{-141}{104}
 \setglyphwidths{[}{-36}{69}{-141}{44}
+\setglyphwidths{\}{32}{32}{32}{-84}
 \setglyphwidths{]}{70}{-38}{-218}{187}
-\setglyphwidths{`}{-68}{55}{14}{61}
+\setglyphwidths{^}{-80}{-80}{-80}{10}
+\setglyphwidths{_}{16}{16}{11}{1}
+\setglyphwidths{`}{-68}{55}{55}{61}
 \setglyphwidths{a}{19}{-3}{-69}{87}
 \setglyphwidths{b}{-22}{7}{-126}{-16}
 \setglyphwidths{c}{8}{-5}{-113}{80}
@@ -105,4 +123,8 @@
 \setglyphwidths{x}{10}{1}{-120}{56}
 \setglyphwidths{y}{6}{-15}{-154}{44}
 \setglyphwidths{z}{-1}{-2}{-96}{67}
+\setglyphwidths{{}{-36}{69}{-171}{87}
+\setglyphwidths{|}{-27}{-27}{-27}{29}
+\setglyphwidths{}}{71}{-36}{-242}{167}
+\setglyphwidths{~}{-58}{-58}{-138}{29}
 \endmetrics

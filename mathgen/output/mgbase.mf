@@ -684,6 +684,12 @@ def ammoc(suffix $,@)(expr dot_size,jut,depth) = % reversed comma
  fi
  penlabels(@1,@2,@3); enddef;
 
+vardef comma_jut=
+ save x, y;
+ z$=origin; pos@3(vair,-36); x@3=x$+1.3u;
+ x@3r-x$
+enddef;
+
 %%% @ from to %%%% temporary formatting change
 vardef diag_in(suffix from,$)(expr sharpness)(suffix $$) =
  pickup tiny.nib; save from_x,y_;
@@ -985,13 +991,13 @@ vardef f_stroke_path(suffix $,$$,@)=
  fi
  enddef;
 
-vardef better_f_stroke_path(suffix $,$$,@)=
+vardef better_f_stroke_path(suffix $,$$,@)(expr frac,flat)=
  y$=0;
  penpos@0(x$r-x$l,0); x@0l=x$l; y@0=x_height;
  penpos@1(x$r-x$l,180); x@1=x$; y@1=arc_join[x_height,h-.5vair];
  y@2r=h;
  pos@3(.6abs(x$r-x$l),0);
- set_bulb_points(vair,.75,1,@1,@2,@3,$$);
+ set_bulb_points(vair,frac,flat,@1,@2,@3,$$);
  penlabels(@0,@1,@2);
  {{interim superness:=more_super;
  super_arc.l(@1,@2) & bulb_path(@2,@3,$$,right) & super_arc.r(@2,@1) }}

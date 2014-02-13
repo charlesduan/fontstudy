@@ -124,7 +124,7 @@ cmchar "Apostrophe";
 beginchar("'",5u#,asc_height#,0);
 italcorr asc_height#*slant+.5dot_size#-2u#;
 adjust_fit(0,0);
-x1-.5dot_size=hround(.57w-.5dot_size); y1+.5dot_size=h;
+x1+.5dot_size=w; y1+.5dot_size=h;
 if monospace: comma(1,a,dot_size,.28u,vround 1.5comma_depth,1);  % large comma
 else: comma(1,a,dot_size,0,.88comma_depth); fi  % comma with increased jut
 penlabels(1); endchar;
@@ -329,7 +329,7 @@ cmchar "Reverse apostrophe";
 beginchar("`",5u#,asc_height#,0);
 italcorr asc_height#*slant+.5dot_size#-2u#;
 adjust_fit(0,0);
-x1-.5dot_size=hround(.43w-.5dot_size); y1+.5dot_size=h-comma_depth+o;
+x1=.5dot_size; y1+.5dot_size=h-comma_depth+o;
 if monospace: ammoc(1,a,dot_size,.28u,vround 1.5comma_depth);  % large ammoc
 else: ammoc(1,a,dot_size,0,.88comma_depth); fi  % normal ammoc
 penlabels(1); endchar;
