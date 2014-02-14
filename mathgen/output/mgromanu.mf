@@ -28,9 +28,9 @@ y6=y5; y5r-y5l=y6r-y6l=thick_cap_band;
 p1=notch_cut_path(h,cap_notch_cut,aa,5r,0,6r);
 if serifs: numeric inner_jut[];
  save bracket; bracket=A_outer_bracket;
- (inner_jut1,inner_jut2)=serif_inner_juts(1,1/3, 1,2,4,3);
+ (inner_jut1,inner_jut2)=serif_inner_juts(.47,.35, 1,2,4,3);
  p2=dish_serif_path(1,2,a,1/2,outer_jut,b,A_inner_dark,inner_jut1)(dark);  % left serif
- p3=dish_serif_path(4,3,c,A_inner_dark,inner_jut1,d,.4,outer_jut); % right serif
+ p3=dish_serif_path(4,3,c,A_inner_dark,inner_jut2,d,.4,outer_jut); % right serif
 else:
  p2=cap_lrend1(z1l-z2l,tiny,z2r-z1r);
  p3=cap_lrend4(z4l-z3l,tiny,z3r-z4r);
@@ -67,8 +67,8 @@ x6l:=x6l-.5u; x11l:=x11l-.5u;
 make_paths1(rev.r) pulled_arc.e(4,5) & pulled_arc.e(5,6)..z7e;  % upper lobe
 make_paths2(rev.r) z8e..pulled_arc.e(9,10) & pulled_arc.e(10,11);  % lower lobe
 if serifs:
- p1=serif_path(1,2,a,.25,cap_jut,left);  % upper serif
- p2=serif_path(2,1,c,.37,cap_jut,left); % lower serif
+ p1=serif_path(1,2,a,1/3,cap_jut,left);  % upper serif
+ p2=serif_path(2,1,c,1/3,cap_jut,left); % lower serif
  p3=internal_serif_path(1,2,3l,b,1/3,jut);
  p4=internal_serif_path(2,1,12l,d,1/3,jut);
 else:
@@ -102,7 +102,7 @@ if serifs: beginchar("C",13u#,cap_height#,0);
  x2=.5[x3,x1]; x4=.53[x3,x1];
  y2r=h+o; y4r=-o; y3=.5[y2,y4];
  y1=min(vround max(.6h,x_height-.5vair),y2l-eps);
- y5=max(good.y 1.05(h-y1),y4l+eps);
+ y5=max(min(good.y 1.05(h-y1),vround(y1-1.9stem)),y4l+eps);
  (x2l',y2l)=whatever[z2r,z1l]; x2l:=min(.5[x2l,x2l'],x2l+.5u);
  (x4l',y4l)=whatever[z4r,z5l]; x4l:=min(.5[x4l,x4l'],x4l+.5u);
  make_paths1(rev.l) pulled_arc.e(2,3) & pulled_arc.e(3,4); % arc
@@ -163,6 +163,7 @@ cmchar "The letter E";
 beginchar("E",12u#-width_adj#,cap_height#,0);
 italcorr cap_height#*slant-beak_jut#-.5u#;
 adjust_fit(cap_serif_fit#,0);
+numeric E_jut;
 h:=vround(h-stem_corr);
 E_jut=1/2[cap_jut,F_jut];
 pos1(cap_stem,0); pos2(cap_stem,0);
@@ -220,6 +221,7 @@ math_fit(0,ic#-2.5u#); penlabels(0,1,2,3,4,5,6,7); endchar;
 
 cmchar "The letter G";
 if serifs: beginchar("G",14u#,cap_height#,0);
+ numeric G_outer_jut;
  G_outer_jut=.8cap_jut;
  italcorr cap_height#*slant-1.5u#-.5cap_serif_fit#;
  adjust_fit(0,.5cap_serif_fit#);
@@ -303,6 +305,7 @@ cmchar "The letter I";
 beginchar("I",max(6u#,4u#+cap_stem#),cap_height#,0);
 italcorr cap_height#*slant-.25u#;
 adjust_fit(cap_serif_fit#,cap_serif_fit#);
+numeric I_jut;
 I_jut=1/2(w-cap_stem);
 pos1(cap_stem,0); pos2(cap_stem,0);
 x1=x2=1/2w; y1=h; y2=0;
@@ -316,6 +319,7 @@ math_fit(0,.5ic#); penlabels(1,2); endchar;
 
 cmchar "The letter J";
 beginchar("J",9u#,cap_height#,0);
+numeric J_outer_jut;
 J_outer_jut=cap_jut;
 italcorr cap_height#*slant-cap_serif_fit#
  +.75cap_jut#-2.5u#+min(.5cap_stem#,u#);
@@ -343,7 +347,7 @@ beginchar("K",13.5u#,cap_height#,0);
 italcorr cap_height#*slant-.5u#;
 adjust_fit(cap_serif_fit#,cap_serif_fit#);
 numeric right_jut,stem[],alpha[];
-if serifs: right_jut=hround(.65cap_jut);
+if serifs: right_jut=angled_jut(cap_jut,(w,h));
 else: right_jut=hround(.4tiny); fi
 pos1(fudged.cap_stem,0); pos2(fudged.cap_stem,0);
 penpos1'(abs(z1r-z1l),0);
@@ -371,10 +375,13 @@ z24=lineintersection(1r,2r,3r,4r);
 z46=lineintersection(3r,4r,5l,6l);
 z36=lineintersection(5r,6r,3r,4r);
 if serifs:
- p1=dish_serif_path(1,2,a,1/3,cap_jut,b,1/3,cap_jut); % upper stem serif
- p2=dish_serif_path(2,1,c,1/3,cap_jut,d,1/3,cap_jut);  % lower stem serif
- p3=dish_serif_path(3,4,e,.45,1.4cap_jut,f,1/3,.7right_jut)(dark); % upper diag
- p6=dish_serif_path(6,5,g,.28,1.1cap_jut,h,1/3,right_jut)(dark); % lower diag
+ numeric inner_jut[];
+ (inner_jut1,inner_jut2) = serif_inner_juts(.46,.23, 1,2,3,4);
+ (inner_jut3,inner_jut4) = serif_inner_juts(.47,1/4, 2,1,6,5);
+ p1=dish_serif_path(1,2,a,1/3,cap_jut,b,1/3,inner_jut1); % upper stem serif
+ p2=dish_serif_path(2,1,c,1/3,cap_jut,d,1/3,inner_jut3);  % lower stem serif
+ p3=dish_serif_path(3,4,e,.45,inner_jut2,f,1/3,.7right_jut)(dark); % upper diag
+ p6=dish_serif_path(6,5,g,.28,inner_jut4,h,1/3,right_jut)(dark); % lower diag
 else:
  p1=pen_rlstem1(tiny,2);
  p2=pen_lrstem2(tiny,1);
@@ -391,7 +398,7 @@ pos1(cap_stem,0); pos2(cap_stem,0);
 x1l=x2l=cap_jut; y1=h; y2=0;
 pos3(slab,-90); pos4(hair,0);
 y3r=0; x3=x2; y4=y3l+7/6beak+eps; x4r=w;
-p4=arm_path(3,4,e,1.2beak_darkness,3beak_jut);  % lower arm and beak
+p4=arm_path(3,4,e,1.2beak_darkness,beak_jut_big);  % lower arm and beak
 p1=dish_serif_path(1,2,a,1/3,cap_jut,b,1/3,1.15cap_jut);  % upper serif
 p2=serif_path(2,1,c,1/3,cap_jut,left);
 p3=internal_serif_path(2,1,3l,d,1/3,cap_jut);
@@ -621,7 +628,7 @@ ellipse_set(7l,6l,5l,0l); ellipse_set(7r,6r,5r,0r); y6=y6r;
 make_paths1(rev.r) super_arc.e(2,3) & z3e{down}
  ..z4e---z5e..z6e{down} & super_arc.e(6,7);  % main stroke
 if serifs: pos1(hair,180); pos8(hair,180);
- x1l=x6r-hround(.8u); x8r=0;
+ x1l=x6r-hround(sqrt(inset_factor)*.8u); x8r=0;
  y1=vround .63h; y8=.39h;
  pos10(hair,0); pos9(hair,0);
  x10r=x1l; y10=y2l; x9l=x8r; y9=y7r;
@@ -690,7 +697,7 @@ adjust_fit(cap_serif_fit#,cap_serif_fit#);
 numeric left_stem,right_stem,outer_jut,alpha;
 left_stem=cap_stem-stem_corr;
 right_stem=min(cap_hair if hefty:-2stem_corr fi,left_stem);
-outer_jut=.75cap_jut; x1l=w-x4r=outer_jut; y1=y4=h;
+outer_jut=angled_jut(cap_jut,(.5w,h)); x1l=w-x4r=outer_jut; y1=y4=h;
 x2-x1=x4-x3; x2l=x3l; y2=y3=-apex_o;
 alpha=diag_ratio(2,right_stem,y1-y2,x4r-x1l-apex_corr);
 penpos1(alpha*left_stem,0); penpos2(alpha*left_stem,0);
@@ -698,7 +705,7 @@ penpos3(alpha*right_stem,0); penpos4(alpha*right_stem,0);
 z0=whatever[z1r,z2r]=whatever[z3l,z4l];
 p1=notch_cut_path(0,cap_notch_cut, aa,4l,0,1r);
 if serifs: numeric inner_jut_l,inner_jut_r;
- (inner_jut_l,inner_jut_r)=serif_inner_juts(1,1/3, 1,2,4,3);
+ (inner_jut_l,inner_jut_r)=serif_inner_juts(.53,1/3, 1,2,4,3);
  p2=dish_serif_path(1,2,a,1/3,outer_jut,b,.3,inner_jut_l);  % left serif
  p3=dish_serif_path(4,3,c,.4,inner_jut_r,d,.4,outer_jut)(dark); % right serif
 else:
@@ -713,7 +720,7 @@ beginchar("W",18u#,cap_height#,0);
 italcorr cap_height#*slant+.25u#;
 adjust_fit(cap_serif_fit#,cap_serif_fit#);
 numeric stem[],outer_jut,upper_notch,alpha,mid_corr;
-outer_jut=.7cap_jut; x1l=w-x8r=outer_jut;
+outer_jut=angled_jut(.8cap_jut,(1/2w,h)); x1l=w-x8r=outer_jut;
 stem1=fudged.cap_stem-stem_corr;
 stem4=min(cap_hair if hefty:-2stem_corr fi,stem1);
 stem2=stem4 if hefty:-2stem_corr fi;
@@ -739,8 +746,8 @@ if serifs: numeric inner_jut[];
  if monospace: inner_jut1=inner_jut4=1.5cap_jut;
  elseif hefty: inner_jut1=inner_jut4=cap_jut;
  else:
-  (inner_jut1,inner_jut2)=special_serif_inner_juts(-.2,1/3,1,2,5,6,4);
-  (inner_jut3,inner_jut4)=serif_inner_juts(1.5,1/3,5,6,8,7);
+  (inner_jut1,inner_jut2)=special_serif_inner_juts(.48,.38,1,2,5,6,4);
+  (inner_jut3,inner_jut4)=serif_inner_juts(.55,1/3,5,6,8,7);
   p4=dish_serif_path(5,6,e,1/3,inner_jut2,f,1/4,
    inner_jut3); % middle serif
   if known z0: p4:=p4--z0; fi
@@ -760,8 +767,8 @@ italcorr cap_height#*slant-.25u#;
 adjust_fit(cap_serif_fit#,cap_serif_fit#);
 numeric stem[],outer_jut,xjut,alpha[];
 stem1=cap_stem-2stem_corr; stem2=min(cap_hair,stem1);
-outer_jut=.6cap_jut;
-xjut= if serifs: .44(stem1-stem2) else: 0 fi;
+outer_jut=angled_jut(.9cap_jut,(w,h));
+xjut= if serifs: inset_factor*.44u else: 0 fi;
 %x1l=x3l-xjut+.5u; x2r=x4r-.75u;
 x3l=w-x4r=outer_jut;
 x2r-x1l+2xjut=x4r-x3l;
@@ -785,8 +792,8 @@ fi
 numeric inner_jut[];
 if serifs:
  z0l=z13; z0r=z24;
- (inner_jut1,inner_jut2)=serif_inner_juts(0,.22, 1,4,2,3);
- (inner_jut3,inner_jut4)=serif_inner_juts(0,1/4, 3,2,4,1);
+ (inner_jut1,inner_jut2)=serif_inner_juts(.5,.22, 1,4,2,3);
+ (inner_jut3,inner_jut4)=serif_inner_juts(.5,1/4, 3,2,4,1);
 else:
  inner_jut1=inner_jut2=inner_jut3=inner_jut4=0;
 fi
@@ -795,9 +802,9 @@ p1=dish_serif_path(1,0,a,1/3,outer_jut+.7xjut,
 p4=dish_serif_path(4,0,c,1/3,inner_jut4,
  d,1/3,outer_jut);  % lower right serif
 p2=dish_serif_path(2,0,e,.48,inner_jut2,
- f,.4,outer_jut)(dark);  % upper right serif
+ f,.4,outer_jut);  % upper right serif
 p3=dish_serif_path(3,0,g,.35,outer_jut,
- h,1/2,inner_jut3)(dark); % lower left serif
+ h,1/2,inner_jut3); % lower left serif
 fill z12--p1--z13--p3--z34--p4--z24--p2--cycle;
 math_fit(0,.5ic#); penlabels(0,1,2,3,4,12,13,24,34); endchar;
 
@@ -809,7 +816,7 @@ numeric left_stem,right_stem,outer_jut,dy,alpha;
 numeric Y_shift; Y_shift=.05cap_stem;
 left_stem=cap_stem-stem_corr;
 right_stem=min(cap_hair if hefty:-2stem_corr fi,left_stem);
-outer_jut=.75cap_jut; w-x4r=outer_jut; x1l=outer_jut-2Y_shift;
+outer_jut=angled_jut(cap_jut,(w,h)); w-x4r=outer_jut; x1l=outer_jut-2Y_shift;
 x2l=x5l=hround(.5w+Y_shift-.5left_stem); x3r=x5r; y1=y4=h; y2=y3=y5=.42h;
 dy=y1-y2; alpha=((x2l-x1l)++dy)/dy;
 penpos1(alpha*left_stem,0); penpos2(alpha*left_stem,0);
@@ -818,11 +825,11 @@ penpos5(left_stem,0); penpos6(left_stem,0); x5=x6; y6=0;
 z0=whatever[z1r,z2r]=whatever[z3l,z4l];
 p0=notch_cut_path(y2,cap_notch_cut, aa,4l,0,1r);
 numeric inner_jut_l,inner_jut_r;
-(inner_jut_l,inner_jut_r)=serif_inner_juts(1.1,.315, 1,2,4,3);
+(inner_jut_l,inner_jut_r)=serif_inner_juts(.54,.315, 1,2,4,3);
 p1=dish_serif_path(1,2,a,.4,x1l,b,.25,
  inner_jut_l);  % left serif
-p4=dish_serif_path(4,3,c,.42,inner_jut_r,d,.45,
- outer_jut)(dark); % right serif
+p4=dish_serif_path(4,3,c,.5,inner_jut_r,d,.45,
+ outer_jut); % right serif
 p6=dish_serif_path(6,5,e,1/3,1.2cap_jut+.5Y_shift,f,1/3,
  1.2cap_jut-.5Y_shift); % lower serif
 fill p6--z5r--p4--p0--p1--z5l--cycle;
@@ -845,7 +852,7 @@ numeric alpha; alpha=diag_ratio(1,z_stem-tiny,y2-y3,x2r-x3l);
 penpos1(alpha*(z_stem),0); penpos2(alpha*(z_stem),0);
 penpos3(alpha*(z_stem),0); penpos4(alpha*(z_stem),0);
 pos5(arm_thickness1,90); pos6(.8hair,180);
-y5r=h; x5=x1; x6r=x3l+.82u; y6=good.y(y5l-1.03beak)-eps;
+y5r=h; x5=x1; x6r=x3l+.82u*inset_factor; y6=good.y(y5l-1.03beak)-eps;
 pos7(arm_thickness2,-90); pos8(hair,0);
 y7r=0; x7=x4; x8r=w-x3l; y8=good.y(y7l+1.1beak)+eps;
 p6=arm_path(5,6,a,beak_darkness,-1.5beak_jut);  % upper arm and beak

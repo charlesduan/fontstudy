@@ -4,6 +4,9 @@ nodisplays;
 
 font_identifier := "cenexp";
 
+boolean small_caps;
+small_caps = false;
+
 input params;
 slant := 0;
 math_fitting := false;
@@ -29,6 +32,8 @@ thin_cap_band#=.36pt#;
 w_mid_corr#=.45pt#;
 E_mid_darkness=.45;
 dot_o#=.75o#;
+angle_jut_power:=1;
+inset_factor:=1;
 input widths;
 
 
@@ -45,6 +50,45 @@ input mgromanp;
 input mgpunct;
 input mgcomlig;
 input mgromlig;
+input mgascii;
+
+%
+% Small caps
+%
+small_caps:=true;
+input scparams;
+slant := 0;
+math_fitting := false;
+arc_join := .2;
+bowl_join := .1;
+arc_tension := 1.2;
+multi_jut_ratio := .75;
+acute_darkness:=.2;
+thick_hair#:=0.4pt#;
+thick_vair#:=0.45pt#;
+small_flare#:=1.2pt#;
+t_jut#:=1.25u#;
+sloped_serif_dark:=1/4;
+i_dot_size#:=1.25pt#;
+ess_ratio:=4.5;
+lc_apex_corr#:=0.0pt#;
+lc_apex_o#:=0.15pt#;
+beak_jut_big#:=0.16pt#;
+A_jut#:=.5pt#;
+A_bar_height_ratio:=.36;
+thick_cap_band#:=.35pt#;
+thin_cap_band#:=.36pt#;
+w_mid_corr#:=.45pt#;
+E_mid_darkness:=.45;
+dot_o#:=.75o#;
+angle_jut_power:=2;
+inset_factor:=.3;
+input widths;
+extra_endchar:=extra_endchar&"charcode:=charcode+code_offset;";
+code_offset:=-oct"100";
+
+font_setup;
+input mgromanu;
 
 font_slant slant; font_x_height x_height#;
 font_quad 18u# if monospace: + 4letter_fit# fi;

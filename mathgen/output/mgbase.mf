@@ -96,7 +96,7 @@ vardef special_serif_inner_juts(expr bias,gap)(suffix $,@,$$,@@,$$$) =
   % p_ is the intersection point between the two strokes
   % We use p_.jut=(left jut, right jut), computed as follows:
   % First, the gap between the juts should be centered with respect to p_.
-  bias[.5[x$,x$$$], .5[x$r,x$$$l]]=.5[x$r+xpart p_,x$$l-ypart p_];
+  bias[x$,x$$$]=.5[x$r+xpart p_,x$$l-ypart p_];
   % Next, the gap between the juts should be 1/3 of the space between the
   % strokes.
   ypart(p_)+xpart(p_)=(1-gap) * (x$$l-x$r);
@@ -1649,6 +1649,10 @@ vardef rev_pos@#(suffix $) = z@#r=z$l; z@#l=z$r; z@#=z$ enddef;
 
 vardef x_intersection@#(suffix $,$$)=
  z@#=whatever[z1$,z4$]=whatever[z2$$,z3$$]
+enddef;
+
+vardef angled_jut(expr jut,stem_dir)=
+ hround(jut*((abs cosd(angle(w,h)))**angle_jut_power))
 enddef;
 
 vardef lc_spur@#(expr pos)(suffix $) =

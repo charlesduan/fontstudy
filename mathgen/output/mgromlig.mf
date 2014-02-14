@@ -38,7 +38,7 @@ forsuffixes $=r,,l:
  y5$=y3r; y6$=y3l;
 endfor
 numeric inner_jut[];
-(inner_jut1,inner_jut2)=serif_inner_juts(0,.28, 1,5,11,15);
+(inner_jut1,inner_jut2)=serif_inner_juts(.5,.28, 1,5,11,15);
 p1=dish_serif_path(1,5,b,1/3,left_jut,c,1/3,inner_jut1);
 p11=dish_serif_path(11,15,e,1/3,inner_jut2,f,1/3,right_jut);
 if hefty: pos3'(bar,90); x3'-x1=x4-x11; y3'=y3;
@@ -79,7 +79,7 @@ forsuffixes $=r,,l:
 endfor
 p1=better_f_stroke_path(1,2,a,.66,.8);
 numeric inner_jut[];
-(inner_jut1,inner_jut2)=serif_inner_juts(0,.28, 1,5,12,11);
+(inner_jut1,inner_jut2)=serif_inner_juts(.5,.28, 1,5,12,11);
 if serifs: x4=x11;  % bar will overlap upper right serif
 else: rt x4= hround 5.3u; fi
 p12=dish_serif_path(12,11,e,1/3,inner_jut2,f,1/3,left_jut);  % lower right serif
@@ -112,7 +112,7 @@ pos3(bar,90); pos4(bar,90);
 if serifs: x4=x12l;
 else: rt x4= hround 5.3u; fi
 numeric inner_jut[];
-(inner_jut1,inner_jut2)=serif_inner_juts(0,.28, 1,5,12,11);
+(inner_jut1,inner_jut2)=serif_inner_juts(.5,.28, 1,5,12,11);
 p1=dish_serif_path(1,5,b,1/3,left_jut,c,1/3,inner_jut1);
 p12=dish_serif_path(12,11,e,1/3,inner_jut2,f,1/3,right_jut);  % lower right
 fill p1--z6r--z4l--p12
@@ -162,7 +162,7 @@ forsuffixes $=r,,l:
  y5$=y3r; y6$=y3l;
 endfor
 numeric inner_jut[];
-(inner_jut1,inner_jut2)=serif_inner_juts(0,.28, 1,5,11,15);
+(inner_jut1,inner_jut2)=serif_inner_juts(.5,.28, 1,5,11,15);
 p1=dish_serif_path(1,5,b,1/3,left_jut,c,1/3,inner_jut1);
 p11=dish_serif_path(11,15,e,1/3,inner_jut2,f,1/3,inner_jut1);
 p22=dish_serif_path(22,21,h,1/3,inner_jut2,i,1/3,right_jut); % lower right serif
@@ -200,7 +200,7 @@ else: rt x4=hround(.5w+2.8u); fi
 if hefty: pos3'(bar,90); x3'-x1=x4-x11; y3'=y3;
  pos4'(bar,90); x4'=x11; y4'=y4;
  filldraw stroke z3e--z3'e; filldraw stroke z4'e--z4e;  % bars
-else: filldraw stroke z3e--z4e; fi  % bar
+fi
 forsuffixes $=r,,l:
  x15$=x16$=x11$;
  y15$=y3r; y16$=y3l;
@@ -208,7 +208,7 @@ forsuffixes $=r,,l:
  y5$=y3r; y6$=y3l;
 endfor
 numeric inner_jut[];
-(inner_jut1,inner_jut2)=serif_inner_juts(0,.28, 1,5,11,15);
+(inner_jut1,inner_jut2)=serif_inner_juts(.5,.28, 1,5,11,15);
 p1=dish_serif_path(1,5,b,1/3,left_jut,c,1/3,inner_jut1);
 p11=dish_serif_path(11,15,e,1/3,inner_jut2,f,1/3,inner_jut1);
 p22=dish_serif_path(22,21,h,1/3,inner_jut2,i,1/3,right_jut); % lower right serif

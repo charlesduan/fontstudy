@@ -77,6 +77,9 @@ EOF
 print $mf_fh "if slant > 0:\n";
 print_chars('italic', $mf_fh);
 
+print $mf_fh "elseif small_caps:\n";
+print_chars('sc', $mf_fh);
+
 print $mf_fh "else:\n";
 print_chars('roman', $mf_fh);
 
@@ -142,6 +145,7 @@ sub print_chars {
         next unless $char =~ /^\Q$font-\E/;
         my $letter = $';
         my $num = $letter =~ /^\d\d\d$/ ? oct $letter : ord $letter;
+        $num -= 32 if $font eq 'sc';
         for my $param (qw(glyph-width left-sidebearing right-sidebearing)) {
             my $mf_param = $param; $mf_param =~ s/-/_/g;
             if (exists $widths{"$char-$param"}) {

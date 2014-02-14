@@ -1,0 +1,258 @@
+/cdisolatin1enc [
+/.notdef        % 0 / 0
+/a.sc
+/b.sc
+/c.sc
+/d.sc
+/e.sc
+/f.sc
+/g.sc
+/h.sc           % 8 / 10
+/i.sc
+/j.sc
+/k.sc
+/l.sc
+/m.sc
+/n.sc
+/o.sc
+/p.sc           % 16 / 20
+/q.sc
+/r.sc
+/s.sc
+/t.sc
+/u.sc
+/v.sc
+/w.sc
+/x.sc           % 24 / 30
+/y.sc
+/z.sc
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/space          % 32 / 40
+/exclam
+/quotedbl
+/numbersign
+/dollar
+/percent
+/ampersand
+/quoteright
+/parenleft      % 40 / 50
+/parenright
+/asterisk
+/plus
+/comma
+/hyphen
+/period
+/slash
+/zero           % 48 / 60
+/one
+/two
+/three
+/four
+/five
+/six
+/seven
+/eight          % 56 / 70
+/nine
+/colon
+/semicolon
+/less
+/equal
+/greater
+/question
+/at             % 64 / 100
+/A
+/B
+/C
+/D
+/E
+/F
+/G
+/H              % 72 / 110
+/I
+/J
+/K
+/L
+/M
+/N
+/O
+/P              % 80 / 120
+/Q
+/R
+/S
+/T
+/U
+/V
+/W
+/X              % 88 / 130
+/Y
+/Z
+/bracketleft
+/backslash
+/bracketright
+/asciicircum
+/underscore
+/quoteleft      % 96 / 140
+/a
+/b
+/c
+/d
+/e
+/f
+/g
+/h              % 104 / 150
+/i
+/j
+/k
+/l
+/m
+/n
+/o
+/p              % 112 / 160
+/q
+/r
+/s
+/t
+/u
+/v
+/w
+/x              % 120 / 170
+/y
+/z
+/braceleft
+/bar
+/braceright
+/asciitilde
+/.notdef
+/ff             % 128 / 200
+/ffi
+/ffl
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef        % 136 / 210
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/.notdef
+/dotlessi       % 144 / 220
+/grave
+/endash
+/circumflex
+/tilde
+/quotedblleft
+/breve
+/dotaccent
+/quotedblright  % 152 / 230
+/fi
+/ring
+/emdash
+/fl
+/hungarumlaut
+/ogonek
+/caron
+/space          % 160 / 240
+/exclamdown
+/cent
+/sterling
+/currency
+/yen
+/brokenbar
+/section
+/dieresis       % 168 / 250
+/copyright
+/ordfeminine
+/guillemotleft
+/logicalnot
+/hyphen
+/registered
+/macron
+/degree         % 176 / 260
+/plusminus
+/twosuperior
+/threesuperior
+/acute
+/mu
+/paragraph
+/periodcentered
+/cedilla        % 184 / 270
+/onesuperior
+/ordmasculine
+/guillemotright
+/onequarter
+/onehalf
+/threequarters
+/questiondown
+/Agrave         % 192 / 300
+/Aacute
+/Acircumflex
+/Atilde
+/Adieresis
+/Aring
+/AE
+/Ccedilla
+/Egrave         % 200 / 310
+/Eacute
+/Ecircumflex
+/Edieresis
+/Igrave
+/Iacute
+/Icircumflex
+/Idieresis
+/Eth            % 208 / 320
+/Ntilde
+/Ograve
+/Oacute
+/Ocircumflex
+/Otilde
+/Odieresis
+/multiply
+/Oslash         % 216 / 330
+/Ugrave
+/Uacute
+/Ucircumflex
+/Udieresis
+/Yacute
+/Thorn
+/germandbls
+/agrave         % 224 / 340
+/aacute
+/acircumflex
+/atilde
+/adieresis
+/aring
+/ae
+/ccedilla
+/egrave         % 232 / 350
+/eacute
+/ecircumflex
+/edieresis
+/igrave
+/iacute
+/icircumflex
+/idieresis
+/eth            % 240 / 360
+/ntilde
+/ograve
+/oacute
+/ocircumflex
+/otilde
+/odieresis
+/divide
+/oslash         % 248 / 370
+/ugrave
+/uacute
+/ucircumflex
+/udieresis
+/yacute
+/thorn
+/ydieresis
+] def

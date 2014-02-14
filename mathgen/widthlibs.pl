@@ -150,6 +150,15 @@ push @letters, ('a' .. 'z', 'A' .. 'Z', '0'..'9');
     "202" => "\\000 [ /ffl ]",
 );
 
+@sc_letters = ('a' .. 'z');
+for (@sc_letters) {
+    $pageno++;
+    writeDSC("Page: $pageno $pageno");
+    writeOutput("resetPage\n");
+    writeScLetter($_, "\\000", "[ /$_.sc ]");
+    writeOutput("showpage\n");
+}
+
 $pageno = 0;
 for (sort keys %named_letters) {
     $pageno++;
@@ -224,6 +233,21 @@ sub writeLibrary {
     } else {
 	print STDERR "open $LIB_DIR/$file: $!\n";
     }
+}
+
+sub writeScLetter {
+    my ($letter, $charcode, $encoding) = @_;
+    my $encline = $encoding ? "$encoding reencodefont" : "";
+    $charcode ||= $letter;
+    writeOutput(<<EOF);
+/CurrentLetter ($charcode) def
+/CurrentDesc (sc-$letter) def
+thefont
+$encline
+CurrentLetter letterPath
+LeftRightWidth
+
+EOF
 }
 
 sub writeRomanLetter {

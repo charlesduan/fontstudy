@@ -870,7 +870,7 @@ penpos3(alpha*right_stem,0); penpos4(alpha*right_stem,0);
 z0=whatever[z1r,z2r]=whatever[z3l,z4l];
 p1=notch_cut_path(0,notch_cut, aa,4l,0,1r);
 if serifs: numeric inner_jut_l,inner_jut_r;
- (inner_jut_l,inner_jut_r)=serif_inner_juts(0,1/3, 1,2,4,3);
+ (inner_jut_l,inner_jut_r)=serif_inner_juts(.49,.32, 1,2,4,3);
  p2=dish_serif_path(1,2,a,1/3,outer_jut_l,b,acute_darkness,inner_jut_l);  % left serif
  p3=dish_serif_path(4,3,c,.5[acute_darkness,1/2],inner_jut_r,d,1/3,outer_jut_r)(dark); % right serif
 else:
@@ -913,8 +913,8 @@ if serifs: numeric inner_jut[];
  if monospace: inner_jut1=inner_jut4=1.5jut;
  elseif hefty: inner_jut1=inner_jut4=jut;
  else:
-  (inner_jut1,inner_jut2)=special_serif_inner_juts(-.5,.4,1,2,5,6,4);
-  (inner_jut3,inner_jut4)=serif_inner_juts(.2,.22,5,6,8,7);
+  (inner_jut1,inner_jut2)=special_serif_inner_juts(.48,.4,1,2,5,6,4);
+  (inner_jut3,inner_jut4)=serif_inner_juts(.5,.22,5,6,8,7);
   p4=dish_serif_path(5,6,e,1/4,inner_jut2,f,less_dark,
    inner_jut3); % middle serif
   if known z0: p4:=p4--z0; fi
@@ -959,16 +959,16 @@ else:
 fi
 if serifs: numeric inner_jut[];
  z0l=z13; z0r=z24;
- (inner_jut1,inner_jut2)=serif_inner_juts(.3,1/4, 1,4,2,3);
- (inner_jut3,inner_jut4)=serif_inner_juts(-.3,1/3, 3,2,4,1);
+ (inner_jut1,inner_jut2)=serif_inner_juts(.5,1/4, 1,4,2,3);
+ (inner_jut3,inner_jut4)=serif_inner_juts(.5,1/3, 3,2,4,1);
  p1=dish_serif_path(1,0,a,1/3,outer_jut1,
   b,1/2,inner_jut1); % upper left serif
  p4=dish_serif_path(4,0,c,1/3,inner_jut4,
   d,1/3,outer_jut4);  % lower right serif
  p2=dish_serif_path(2,0,e,1/2,inner_jut2,
-  f,1/4,outer_jut2)(dark);  % upper right serif
+  f,1/4,outer_jut2);  % upper right serif
  p3=dish_serif_path(3,0,g,1/4,outer_jut3,
-  h,1/2,inner_jut3)(dark); % lower left serif
+  h,1/2,inner_jut3); % lower left serif
 else:
  p1=pen_rlend1(z1r-z24,tiny,z13-z1l);
  p4=pen_lrend4(z4l-z34,tiny,z24-z4r);
@@ -1009,11 +1009,11 @@ if serifs:
  make_paths1(rev.r) z3e---z5e...{left}z6e; % arc and bulb
  p1=bulb_path(6,7,8,left);
  numeric inner_jut[];
- (inner_jut1,inner_jut4)=serif_inner_juts(-.5,1/3, 1,2,4,3);
+ (inner_jut1,inner_jut4)=serif_inner_juts(.49,1/3, 1,2,4,3);
  p2=dish_serif_path(1,2,a,1/3,outer_jut_l,
   b,1/3,inner_jut1);  % left serif
- p3=dish_serif_path(4,3,c,.5[acute_darkness,.6],inner_jut4,
-  d,1/3,outer_jut_r)(dark);  % right serif
+ p3=dish_serif_path(4,3,c,.5,inner_jut4,
+  d,1/3,outer_jut_r);  % right serif
 else:
  penpos6(bot_vair,-90); x6=2.5u; y6r=-d-oo;
  make_paths1(rev.r) stroke z3e---z5e...{left}z6e;  % arc
