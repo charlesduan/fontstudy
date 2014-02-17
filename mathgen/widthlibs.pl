@@ -69,6 +69,7 @@ writeOutput(<<EOF);
 /therealitalicfont exch definefont pop
 /thefont { /therealfont findfont setfont } bind def
 /theitalicfont { /therealitalicfont findfont setfont } bind def
+/complexMetrics false def
 EOF
 
 # Setup file, technically unnecessary
@@ -242,6 +243,7 @@ sub writeScLetter {
     writeOutput(<<EOF);
 /CurrentLetter ($charcode) def
 /CurrentDesc (sc-$letter) def
+/ItalicSlant 0 def
 thefont
 $encline
 CurrentLetter letterPath
@@ -257,6 +259,7 @@ sub writeRomanLetter {
     writeOutput(<<EOF);
 /CurrentLetter ($charcode) def
 /CurrentDesc (roman-$letter) def
+/ItalicSlant 0 def
 thefont
 $encline
 CurrentLetter letterPath
@@ -272,6 +275,7 @@ sub writeItalicLetter {
     writeOutput(<<EOF);
 /CurrentLetter ($charcode) def
 /CurrentDesc (italic-$letter) def
+/ItalicSlant 0.27 def
 theitalicfont
 $encline
 CurrentLetter letterPath

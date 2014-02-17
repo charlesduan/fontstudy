@@ -23,14 +23,15 @@ while (<RAW>) {
     $widths{$1} = $2;
     ($font, $ltr) = split /-/, $1;
     $ltr = "$font-$ltr";
-    $letters{$ltr} = 1 if defined $widths{"$ltr-left"}
-	and defined $widths{"$ltr-right"}
-	and defined $widths{"$ltr-subscript"}
-	and defined $widths{"$ltr-accent"};
+    $letters{$ltr} = 1;
+        #if defined $widths{"$ltr-left"}
+        #and defined $widths{"$ltr-right"}
+        #and defined $widths{"$ltr-subscript"}
+        #and defined $widths{"$ltr-accent"};
 }
 close RAW;
 
-die "Found no widths to ouput; exiting.\n" unless scalar keys %letters > 0;
+die "Found no widths to output; exiting.\n" unless scalar keys %letters > 0;
 
 # Calculate the values for dotless j, using the values for dotless i, regular i,
 # and regular j. Here are the calculations:
@@ -123,6 +124,10 @@ for (sort keys %letters) {
     $right = $widths{"$_-right"};
     $subsc = $widths{"$_-subscript"};
     $accent = $widths{"$_-accent"};
+    next unless defined $widths{"$ltr-left"}
+        and defined $widths{"$ltr-right"}
+        and defined $widths{"$ltr-subscript"}
+        and defined $widths{"$ltr-accent"};
     print OUTPUT "\\setglyphwidths{$ltr}{$left}{$right}{$subsc}{$accent}\n";
 }
 

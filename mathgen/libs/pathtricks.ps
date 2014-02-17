@@ -108,6 +108,15 @@ end
     ExtremesDict /pointList get
 } def
 
+% Determine the extremes, with a slope applied to the horizontal extremes.
+/slantedPathExtremes {
+    gsave
+        [ 1 0
+        4 -1 roll 1
+        0 0 ] concat
+        pathExtremes
+    grestore
+} def
 
 % Direction of fill
 %

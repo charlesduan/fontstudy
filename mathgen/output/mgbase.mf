@@ -610,7 +610,7 @@ def v_bulb(suffix $,$$)= % |pos$| is known
  enddef;
 
 vardef v_bulb_path(suffix $,$$)= % |pos$| is known
- y$$+.5curve=x_height+oo; x$$+.5curve=w-u;
+ y$$+.5curve=x_height+oo; x$$+.5curve=w-.5u;
  numeric theta; theta=angle(4(x$-x$$),y$-y$$); penpos$$(curve,theta+90);
  z$r{up}...{-dir theta}z$$r..z$$l{dir theta}..tension atleast 1 and 1..{down}z$l
  enddef;
@@ -1082,19 +1082,22 @@ def hook_out(suffix $,$$,$$$)suffix modifier= % |x$| and |x$$$| (only) are known
    ...{x$$$-(x$+2.5u),x_height}z$$$e; fi enddef;  % hook
 
 def hook_out_points(suffix $,$$,$$$)suffix modifier =
- penpos$(stem,0); penpos$$(vair,90);
- x$$$:=hround(x$$$+.5hair-eps)-.5hair; penpos$$$(hair,180);
- y$=1/4x_height; y$$l=-oo; y$$$=1/3x_height;
+ if not known (z$r-z$l): penpos$(stem,0); fi
+ penpos$$(vair,90);
+ if not known (z$$$r-z$$$l): penpos$$$(hair,166); fi
+ y$=1/2x_height-eps; y$$l=-oo;
+ if not known z$$$: y$$$=.39x_height; fi
  if skewed.modifier: x$$=x$+1.25u; else: x$$=x$+1.5u; fi
 enddef;
 
 vardef hook_out_path(expr diam)(suffix $,$$,$$$)suffix modifier =
+ save dir_; pair dir_; dir_=(x$$$-(x$+2.5u),x_height);
  if skewed.modifier:
-  z$l{-u,-x_height}...z$$l{right}...pen_end(up,z$$$l,diam,z$$$r,down)
+  z$l{-u,-x_height}...z$$l{right}
+    ...{curl 0}pen_end(dir_,z$$$l,diam,z$$$r,-dir_){curl 0}
     ...z$$r{left}...{u,x_height}z$r
  else:
-  save dir_; pair dir_; dir_=(x$$$-(x$+2.5u),x_height);
-  z$l{down}...z$$l{right}...pen_end(dir_,z$$$l,diam,z$$$r,-dir_)
+  z$l{down}...z$$l{right}...{dir_}pen_end(dir_,z$$$l,diam,z$$$r,-dir_){-dir_}
     ...z$$r{left}...{up}z$r
  fi
 enddef;
@@ -1110,15 +1113,22 @@ def hook_in(suffix $,$$,$$$)suffix modifier= % |x$| and |x$$$| (only) are known
    ...z$$e{right}...{down}z$$$e; fi enddef;  % hook
 
 def hook_in_points(suffix $,$$,$$$)suffix modifier=
- x$:=hround(x$-.5hair)+.5hair; penpos$(hair,180);
- penpos$$(vair,90); penpos$$$(stem,0);
- y$=2/3x_height; top y$$r=x_height+oo; y$$$=3/4x_height;
+ if not known (z$r-z$l): penpos$(hair,155); fi
+ penpos$$(vair,90);
+ if not known (z$$$r-z$$$l): penpos$$$(stem,0); fi
+ if not known y$: y$=.68x_height; fi
+ y$$r=x_height+oo;
+ if not known y$$$: y$$$=1/2x_height+eps; fi
+ save pt_,frac_; numeric pt_,frac_;
+ x$$r-x$r=frac_*(y$$r-y$r); pt_-x$l=frac_*(y$$l-y$l); x$$l:=pt_;
  if skewed.modifier: x$$=x$$$-1.25u; else: x$$=x$$$-1.5u; fi
 enddef;
 
 vardef hook_in_path(expr diam)(suffix $,$$,$$$)suffix modifier=
  if skewed.modifier:
-  z$$$r{u,x_height}...z$$r{left}...pen_end(down, z$r, diam, z$l, up)
+  save dir_; pair dir_; dir_=(x$$$-.5u-x$,x_height);
+  z$$$r{u,x_height}...z$$r{left}
+    ...{-dir_}pen_end(-dir_, z$r, diam, z$l, dir_){dir_}
     ...z$$l{right}...z$$$l{-u,-x_height}
  else:
   save dir_; pair dir_; dir_=(x$$$-2.5u-x$,x_height);
@@ -1127,19 +1137,34 @@ vardef hook_in_path(expr diam)(suffix $,$$,$$$)suffix modifier=
 enddef;
 
 def ital_arch(suffix $,$$,$$$) = % |z$| and |z$$$| (only) are known
- pos$'(hair,180); z$'=z$;
+ pos$'(hair,180); z$'l=z$r;
  pos$$(vair,90); pos$$$(stem,0);
- {{interim superness := more_super; x$$=.6[x$,x$$$];
+ penlabels($');
+ {{interim superness := more_super; x$$=.76[x$,x$$$];
  top y$$r=x_height+oo; y$$$=.65x_height;
  filldraw stroke z$'e{up}...super_arc.e($$,$$$);}} enddef;  % stroke
 
-vardef ital_arch_paths@#(suffix $,$$,$$$) = % |z$| and |z$$$| (only) are known
+vardef ital_arch_paths@#(suffix $,$$,$$$)suffix modifier =
+ % |z$| and |z$$$| (only) are known
  % Extra offset keeps the path from intersecting too low.
- penpos$'(hair,180); z$'=z$+.5fine*up;
- penpos$$(vair,90); penpos$$$(stem,0);
- x$$=.6[x$,x$$$]; y$$r=x_height+oo; y$$$=.65x_height;
+ numeric d_; d_=(x$$$-x$)/abs(x$$$-x$);
+ penpos$'(hair,angle(-d_,0)); z$'l=if d_>0: z$r else: z$l fi;
+ penpos$$(vair,d_*90);
+ if not known (z$$$r-z$$$l): penpos$$$(stem,angle(d_,0)); fi
+ if not known z$$$: y$$$=.65x_height; fi
+ y$$r=if d_>0: x_height+oo else: -oo fi;
+ if skewed.modifier:
+  x$$=.76[x$,x$$$];
+  x$$l:=.85[x$l,x$$$l];
+ else:
+  x$$=.66[x$,x$$$];
+  x$$l:=.75[x$l,x$$$l];
+ fi
  interim superness:=more_super;
- make_paths@#(rev.r) z$'e{up}...super_arc.e($$,$$$);  % stroke
+ %make_paths@#(rev.r) z$'e{up}...super_arc.e($$,$$$);  % stroke
+ penlabels($');
+ make_paths@#(rev.r) z$'e{(.5u,x_height)*d_}...z$$e{d_,0}
+  ..tension 1..{d_*if skewed.modifier: -u else: 0 fi,d_*-x_height}z$$$e;
 enddef;
  
 
@@ -1670,6 +1695,24 @@ vardef lc_spur@#(expr pos)(suffix $) =
  else:
  (z$l{(0,n_)}...z@#l--z@#r..tension 2..{(0,-n_)}z$r) % TODO: should use pen_end
  fi
+enddef;
+
+def disable_transforms_around(expr p) =
+ if slant>0:
+  transform new_transform; new_transform=currenttransform slanted -slant;
+  pair p_; p_=(p.t_) - (p transformed new_transform);
+  save currenttransform;
+  transform currenttransform;
+  currenttransform=new_transform shifted p_
+ fi
+enddef;
+
+adjust_slant=0;
+adjust_slant.less=.5;
+adjust_slant.more=-.3;
+adjust_slant.back=1.7;
+vardef slant_adjusted_jut(expr jut)suffix amount =
+ max(eps,slant[jut,adjust_slant.amount*jut])
 enddef;
 
 vardef ic# = charic enddef;

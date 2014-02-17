@@ -20,22 +20,36 @@ rightSidebearing 0 moveto 0 200 rlineto stroke
 grestore
 
 /Extremes pathExtremes def
+ItalicSlant 0 eq {
+    /SlantedExtremes Extremes def
+} {
+    /SlantedExtremes ItalicSlant slantedPathExtremes def
+} ifelse
 Extremes sortByX firstElt /LeftPoint defPoint
 Extremes sortByX lastElt /RightPoint defPoint
+SlantedExtremes sortByX firstElt /SlantedLeftPoint defPoint
+SlantedExtremes sortByX lastElt /SlantedRightPoint defPoint
 Extremes sortByY firstElt /BotPoint defPoint
 Extremes sortByY lastElt /TopPoint defPoint
-LeftPoint ltpointbox
-RightPoint rtpointbox
+SlantedLeftPoint [ 1 0 ItalicSlant 1 0 0 ] transform
+ltpointbox
+SlantedRightPoint [ 1 0 ItalicSlant 1 0 0 ] transform
+rtpointbox
 LeftPoint xcoor /LeftEdge exch def
 RightPoint xcoor /RightEdge exch def
 
 % Some basic width metrics
 (left-sidebearing) setFileName
-(Left sidebearing) LeftEdge stringOfText
+(Left sidebearing) SlantedLeftPoint xcoor stringOfText
 (right-sidebearing) setFileName
-(Right sidebearing) rightSidebearing RightEdge sub stringOfText
+(Right sidebearing) rightSidebearing SlantedRightPoint xcoor sub stringOfText
 (glyph-width) setFileName
-(Width of glyph without sidebearings) RightEdge LeftEdge sub stringOfText
+(Width of glyph without sidebearings)
+SlantedRightPoint xcoor SlantedLeftPoint xcoor sub stringOfText
+
+% The remaining metrics will only be calculated if desired, because they take
+% longer to compute.
+complexMetrics {
 
 0 BotPoint ycoor dup TopPoint ycoor exch sub .1 mul add
 %0 XHeight SubscriptFraction mul
@@ -179,6 +193,8 @@ doAccent (Accent point) exch AdjustScale round cvi stringOfText
 	    } ifelse
 	} for
     end grestore
+} if
+
 } if
 
 } def

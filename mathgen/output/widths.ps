@@ -975,6 +975,15 @@ end
     ExtremesDict /pointList get
 } def
 
+% Determine the extremes, with a slope applied to the horizontal extremes.
+/slantedPathExtremes {
+    gsave
+        [ 1 0
+        4 -1 roll 1
+        0 0 ] concat
+        pathExtremes
+    grestore
+} def
 
 % Direction of fill
 %
@@ -1652,22 +1661,36 @@ rightSidebearing 0 moveto 0 200 rlineto stroke
 grestore
 
 /Extremes pathExtremes def
+ItalicSlant 0 eq {
+    /SlantedExtremes Extremes def
+} {
+    /SlantedExtremes ItalicSlant slantedPathExtremes def
+} ifelse
 Extremes sortByX firstElt /LeftPoint defPoint
 Extremes sortByX lastElt /RightPoint defPoint
+SlantedExtremes sortByX firstElt /SlantedLeftPoint defPoint
+SlantedExtremes sortByX lastElt /SlantedRightPoint defPoint
 Extremes sortByY firstElt /BotPoint defPoint
 Extremes sortByY lastElt /TopPoint defPoint
-LeftPoint ltpointbox
-RightPoint rtpointbox
+SlantedLeftPoint [ 1 0 ItalicSlant 1 0 0 ] transform
+ltpointbox
+SlantedRightPoint [ 1 0 ItalicSlant 1 0 0 ] transform
+rtpointbox
 LeftPoint xcoor /LeftEdge exch def
 RightPoint xcoor /RightEdge exch def
 
 % Some basic width metrics
 (left-sidebearing) setFileName
-(Left sidebearing) LeftEdge stringOfText
+(Left sidebearing) SlantedLeftPoint xcoor stringOfText
 (right-sidebearing) setFileName
-(Right sidebearing) rightSidebearing RightEdge sub stringOfText
+(Right sidebearing) rightSidebearing SlantedRightPoint xcoor sub stringOfText
 (glyph-width) setFileName
-(Width of glyph without sidebearings) RightEdge LeftEdge sub stringOfText
+(Width of glyph without sidebearings)
+SlantedRightPoint xcoor SlantedLeftPoint xcoor sub stringOfText
+
+% The remaining metrics will only be calculated if desired, because they take
+% longer to compute.
+complexMetrics {
 
 0 BotPoint ycoor dup TopPoint ycoor exch sub .1 mul add
 %0 XHeight SubscriptFraction mul
@@ -1811,6 +1834,8 @@ doAccent (Accent point) exch AdjustScale round cvi stringOfText
 	    } ifelse
 	} for
     end grestore
+} if
+
 } if
 
 } def
@@ -3699,6 +3724,7 @@ cleartomark
 /therealitalicfont exch definefont pop
 /thefont { /therealfont findfont setfont } bind def
 /theitalicfont { /therealitalicfont findfont setfont } bind def
+/complexMetrics false def
 /doTranslation {
     50 200 translate
     0.6 0.6 scale
@@ -3734,6 +3760,7 @@ grestore
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-a) def
+/ItalicSlant 0 def
 thefont
 [ /a.sc ] reencodefont
 CurrentLetter letterPath
@@ -3744,6 +3771,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-b) def
+/ItalicSlant 0 def
 thefont
 [ /b.sc ] reencodefont
 CurrentLetter letterPath
@@ -3754,6 +3782,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-c) def
+/ItalicSlant 0 def
 thefont
 [ /c.sc ] reencodefont
 CurrentLetter letterPath
@@ -3764,6 +3793,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-d) def
+/ItalicSlant 0 def
 thefont
 [ /d.sc ] reencodefont
 CurrentLetter letterPath
@@ -3774,6 +3804,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-e) def
+/ItalicSlant 0 def
 thefont
 [ /e.sc ] reencodefont
 CurrentLetter letterPath
@@ -3784,6 +3815,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-f) def
+/ItalicSlant 0 def
 thefont
 [ /f.sc ] reencodefont
 CurrentLetter letterPath
@@ -3794,6 +3826,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-g) def
+/ItalicSlant 0 def
 thefont
 [ /g.sc ] reencodefont
 CurrentLetter letterPath
@@ -3804,6 +3837,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-h) def
+/ItalicSlant 0 def
 thefont
 [ /h.sc ] reencodefont
 CurrentLetter letterPath
@@ -3814,6 +3848,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-i) def
+/ItalicSlant 0 def
 thefont
 [ /i.sc ] reencodefont
 CurrentLetter letterPath
@@ -3824,6 +3859,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-j) def
+/ItalicSlant 0 def
 thefont
 [ /j.sc ] reencodefont
 CurrentLetter letterPath
@@ -3834,6 +3870,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-k) def
+/ItalicSlant 0 def
 thefont
 [ /k.sc ] reencodefont
 CurrentLetter letterPath
@@ -3844,6 +3881,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-l) def
+/ItalicSlant 0 def
 thefont
 [ /l.sc ] reencodefont
 CurrentLetter letterPath
@@ -3854,6 +3892,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-m) def
+/ItalicSlant 0 def
 thefont
 [ /m.sc ] reencodefont
 CurrentLetter letterPath
@@ -3864,6 +3903,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-n) def
+/ItalicSlant 0 def
 thefont
 [ /n.sc ] reencodefont
 CurrentLetter letterPath
@@ -3874,6 +3914,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-o) def
+/ItalicSlant 0 def
 thefont
 [ /o.sc ] reencodefont
 CurrentLetter letterPath
@@ -3884,6 +3925,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-p) def
+/ItalicSlant 0 def
 thefont
 [ /p.sc ] reencodefont
 CurrentLetter letterPath
@@ -3894,6 +3936,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-q) def
+/ItalicSlant 0 def
 thefont
 [ /q.sc ] reencodefont
 CurrentLetter letterPath
@@ -3904,6 +3947,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-r) def
+/ItalicSlant 0 def
 thefont
 [ /r.sc ] reencodefont
 CurrentLetter letterPath
@@ -3914,6 +3958,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-s) def
+/ItalicSlant 0 def
 thefont
 [ /s.sc ] reencodefont
 CurrentLetter letterPath
@@ -3924,6 +3969,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-t) def
+/ItalicSlant 0 def
 thefont
 [ /t.sc ] reencodefont
 CurrentLetter letterPath
@@ -3934,6 +3980,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-u) def
+/ItalicSlant 0 def
 thefont
 [ /u.sc ] reencodefont
 CurrentLetter letterPath
@@ -3944,6 +3991,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-v) def
+/ItalicSlant 0 def
 thefont
 [ /v.sc ] reencodefont
 CurrentLetter letterPath
@@ -3954,6 +4002,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-w) def
+/ItalicSlant 0 def
 thefont
 [ /w.sc ] reencodefont
 CurrentLetter letterPath
@@ -3964,6 +4013,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-x) def
+/ItalicSlant 0 def
 thefont
 [ /x.sc ] reencodefont
 CurrentLetter letterPath
@@ -3974,6 +4024,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-y) def
+/ItalicSlant 0 def
 thefont
 [ /y.sc ] reencodefont
 CurrentLetter letterPath
@@ -3984,6 +4035,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-z) def
+/ItalicSlant 0 def
 thefont
 [ /z.sc ] reencodefont
 CurrentLetter letterPath
@@ -3994,6 +4046,7 @@ showpage
 resetPage
 /CurrentLetter (\047) def
 /CurrentDesc (roman-') def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4004,6 +4057,7 @@ showpage
 resetPage
 /CurrentLetter (\047) def
 /CurrentDesc (italic-') def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4014,6 +4068,7 @@ showpage
 resetPage
 /CurrentLetter (\055) def
 /CurrentDesc (roman-055) def
+/ItalicSlant 0 def
 thefont
 StandardEncoding reencodefont
 CurrentLetter letterPath
@@ -4024,6 +4079,7 @@ showpage
 resetPage
 /CurrentLetter (\055) def
 /CurrentDesc (italic-055) def
+/ItalicSlant 0.27 def
 theitalicfont
 StandardEncoding reencodefont
 CurrentLetter letterPath
@@ -4034,6 +4090,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (roman-200) def
+/ItalicSlant 0 def
 thefont
 [ /ff ] reencodefont
 CurrentLetter letterPath
@@ -4044,6 +4101,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (italic-200) def
+/ItalicSlant 0.27 def
 theitalicfont
 [ /ff ] reencodefont
 CurrentLetter letterPath
@@ -4054,6 +4112,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (roman-201) def
+/ItalicSlant 0 def
 thefont
 [ /ffi ] reencodefont
 CurrentLetter letterPath
@@ -4064,6 +4123,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (italic-201) def
+/ItalicSlant 0.27 def
 theitalicfont
 [ /ffi ] reencodefont
 CurrentLetter letterPath
@@ -4074,6 +4134,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (roman-202) def
+/ItalicSlant 0 def
 thefont
 [ /ffl ] reencodefont
 CurrentLetter letterPath
@@ -4084,6 +4145,7 @@ showpage
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (italic-202) def
+/ItalicSlant 0.27 def
 theitalicfont
 [ /ffl ] reencodefont
 CurrentLetter letterPath
@@ -4094,6 +4156,7 @@ showpage
 resetPage
 /CurrentLetter (\261) def
 /CurrentDesc (roman-222) def
+/ItalicSlant 0 def
 thefont
 StandardEncoding reencodefont
 CurrentLetter letterPath
@@ -4104,6 +4167,7 @@ showpage
 resetPage
 /CurrentLetter (\261) def
 /CurrentDesc (italic-222) def
+/ItalicSlant 0.27 def
 theitalicfont
 StandardEncoding reencodefont
 CurrentLetter letterPath
@@ -4114,6 +4178,7 @@ showpage
 resetPage
 /CurrentLetter (\252) def
 /CurrentDesc (roman-225) def
+/ItalicSlant 0 def
 thefont
 StandardEncoding reencodefont
 CurrentLetter letterPath
@@ -4124,6 +4189,7 @@ showpage
 resetPage
 /CurrentLetter (\252) def
 /CurrentDesc (italic-225) def
+/ItalicSlant 0.27 def
 theitalicfont
 StandardEncoding reencodefont
 CurrentLetter letterPath
@@ -4134,6 +4200,7 @@ showpage
 resetPage
 /CurrentLetter (\272) def
 /CurrentDesc (roman-230) def
+/ItalicSlant 0 def
 thefont
 StandardEncoding reencodefont
 CurrentLetter letterPath
@@ -4144,6 +4211,7 @@ showpage
 resetPage
 /CurrentLetter (\272) def
 /CurrentDesc (italic-230) def
+/ItalicSlant 0.27 def
 theitalicfont
 StandardEncoding reencodefont
 CurrentLetter letterPath
@@ -4154,6 +4222,7 @@ showpage
 resetPage
 /CurrentLetter (\256) def
 /CurrentDesc (roman-231) def
+/ItalicSlant 0 def
 thefont
 StandardEncoding reencodefont
 CurrentLetter letterPath
@@ -4164,6 +4233,7 @@ showpage
 resetPage
 /CurrentLetter (\256) def
 /CurrentDesc (italic-231) def
+/ItalicSlant 0.27 def
 theitalicfont
 StandardEncoding reencodefont
 CurrentLetter letterPath
@@ -4174,6 +4244,7 @@ showpage
 resetPage
 /CurrentLetter (\320) def
 /CurrentDesc (roman-233) def
+/ItalicSlant 0 def
 thefont
 StandardEncoding reencodefont
 CurrentLetter letterPath
@@ -4184,6 +4255,7 @@ showpage
 resetPage
 /CurrentLetter (\320) def
 /CurrentDesc (italic-233) def
+/ItalicSlant 0.27 def
 theitalicfont
 StandardEncoding reencodefont
 CurrentLetter letterPath
@@ -4194,6 +4266,7 @@ showpage
 resetPage
 /CurrentLetter (\257) def
 /CurrentDesc (roman-234) def
+/ItalicSlant 0 def
 thefont
 StandardEncoding reencodefont
 CurrentLetter letterPath
@@ -4204,6 +4277,7 @@ showpage
 resetPage
 /CurrentLetter (\257) def
 /CurrentDesc (italic-234) def
+/ItalicSlant 0.27 def
 theitalicfont
 StandardEncoding reencodefont
 CurrentLetter letterPath
@@ -4214,6 +4288,7 @@ showpage
 resetPage
 /CurrentLetter (\247) def
 /CurrentDesc (roman-247) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4224,6 +4299,7 @@ showpage
 resetPage
 /CurrentLetter (\247) def
 /CurrentDesc (italic-247) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4234,6 +4310,7 @@ showpage
 resetPage
 /CurrentLetter (\266) def
 /CurrentDesc (roman-266) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4244,6 +4321,7 @@ showpage
 resetPage
 /CurrentLetter (\266) def
 /CurrentDesc (italic-266) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4254,6 +4332,7 @@ showpage
 resetPage
 /CurrentLetter (\140) def
 /CurrentDesc (roman-`) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4264,6 +4343,7 @@ showpage
 resetPage
 /CurrentLetter (\140) def
 /CurrentDesc (italic-`) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4274,6 +4354,7 @@ showpage
 resetPage
 /CurrentLetter (!) def
 /CurrentDesc (roman-!) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4284,6 +4365,7 @@ showpage
 resetPage
 /CurrentLetter (!) def
 /CurrentDesc (italic-!) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4294,6 +4376,7 @@ showpage
 resetPage
 /CurrentLetter (") def
 /CurrentDesc (roman-") def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4304,6 +4387,7 @@ showpage
 resetPage
 /CurrentLetter (") def
 /CurrentDesc (italic-") def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4314,6 +4398,7 @@ showpage
 resetPage
 /CurrentLetter ($) def
 /CurrentDesc (roman-$) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4324,6 +4409,7 @@ showpage
 resetPage
 /CurrentLetter ($) def
 /CurrentDesc (italic-$) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4334,6 +4420,7 @@ showpage
 resetPage
 /CurrentLetter (%) def
 /CurrentDesc (roman-%) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4344,6 +4431,7 @@ showpage
 resetPage
 /CurrentLetter (%) def
 /CurrentDesc (italic-%) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4354,6 +4442,7 @@ showpage
 resetPage
 /CurrentLetter (&) def
 /CurrentDesc (roman-&) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4364,6 +4453,7 @@ showpage
 resetPage
 /CurrentLetter (&) def
 /CurrentDesc (italic-&) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4374,6 +4464,7 @@ showpage
 resetPage
 /CurrentLetter (<) def
 /CurrentDesc (roman-<) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4384,6 +4475,7 @@ showpage
 resetPage
 /CurrentLetter (<) def
 /CurrentDesc (italic-<) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4394,6 +4486,7 @@ showpage
 resetPage
 /CurrentLetter (>) def
 /CurrentDesc (roman->) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4404,6 +4497,7 @@ showpage
 resetPage
 /CurrentLetter (>) def
 /CurrentDesc (italic->) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4414,6 +4508,7 @@ showpage
 resetPage
 /CurrentLetter (\() def
 /CurrentDesc (roman-\() def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4424,6 +4519,7 @@ showpage
 resetPage
 /CurrentLetter (\() def
 /CurrentDesc (italic-\() def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4434,6 +4530,7 @@ showpage
 resetPage
 /CurrentLetter (\)) def
 /CurrentDesc (roman-\)) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4444,6 +4541,7 @@ showpage
 resetPage
 /CurrentLetter (\)) def
 /CurrentDesc (italic-\)) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4454,6 +4552,7 @@ showpage
 resetPage
 /CurrentLetter (*) def
 /CurrentDesc (roman-*) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4464,6 +4563,7 @@ showpage
 resetPage
 /CurrentLetter (*) def
 /CurrentDesc (italic-*) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4474,6 +4574,7 @@ showpage
 resetPage
 /CurrentLetter (+) def
 /CurrentDesc (roman-+) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4484,6 +4585,7 @@ showpage
 resetPage
 /CurrentLetter (+) def
 /CurrentDesc (italic-+) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4494,6 +4596,7 @@ showpage
 resetPage
 /CurrentLetter (.) def
 /CurrentDesc (roman-.) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4504,6 +4607,7 @@ showpage
 resetPage
 /CurrentLetter (.) def
 /CurrentDesc (italic-.) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4514,6 +4618,7 @@ showpage
 resetPage
 /CurrentLetter (/) def
 /CurrentDesc (roman-/) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4524,6 +4629,7 @@ showpage
 resetPage
 /CurrentLetter (/) def
 /CurrentDesc (italic-/) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4534,6 +4640,7 @@ showpage
 resetPage
 /CurrentLetter (:) def
 /CurrentDesc (roman-:) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4544,6 +4651,7 @@ showpage
 resetPage
 /CurrentLetter (:) def
 /CurrentDesc (italic-:) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4554,6 +4662,7 @@ showpage
 resetPage
 /CurrentLetter (;) def
 /CurrentDesc (roman-;) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4564,6 +4673,7 @@ showpage
 resetPage
 /CurrentLetter (;) def
 /CurrentDesc (italic-;) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4574,6 +4684,7 @@ showpage
 resetPage
 /CurrentLetter (=) def
 /CurrentDesc (roman-=) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4584,6 +4695,7 @@ showpage
 resetPage
 /CurrentLetter (=) def
 /CurrentDesc (italic-=) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4594,6 +4706,7 @@ showpage
 resetPage
 /CurrentLetter (?) def
 /CurrentDesc (roman-?) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4604,6 +4717,7 @@ showpage
 resetPage
 /CurrentLetter (?) def
 /CurrentDesc (italic-?) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4614,6 +4728,7 @@ showpage
 resetPage
 /CurrentLetter (@) def
 /CurrentDesc (roman-@) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4624,6 +4739,7 @@ showpage
 resetPage
 /CurrentLetter (@) def
 /CurrentDesc (italic-@) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4634,6 +4750,7 @@ showpage
 resetPage
 /CurrentLetter ([) def
 /CurrentDesc (roman-[) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4644,6 +4761,7 @@ showpage
 resetPage
 /CurrentLetter ([) def
 /CurrentDesc (italic-[) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4654,6 +4772,7 @@ showpage
 resetPage
 /CurrentLetter (\\) def
 /CurrentDesc (roman-\\) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4664,6 +4783,7 @@ showpage
 resetPage
 /CurrentLetter (\\) def
 /CurrentDesc (italic-\\) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4674,6 +4794,7 @@ showpage
 resetPage
 /CurrentLetter (]) def
 /CurrentDesc (roman-]) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4684,6 +4805,7 @@ showpage
 resetPage
 /CurrentLetter (]) def
 /CurrentDesc (italic-]) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4694,6 +4816,7 @@ showpage
 resetPage
 /CurrentLetter (^) def
 /CurrentDesc (roman-^) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4704,6 +4827,7 @@ showpage
 resetPage
 /CurrentLetter (^) def
 /CurrentDesc (italic-^) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4714,6 +4838,7 @@ showpage
 resetPage
 /CurrentLetter (_) def
 /CurrentDesc (roman-_) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4724,6 +4849,7 @@ showpage
 resetPage
 /CurrentLetter (_) def
 /CurrentDesc (italic-_) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4734,6 +4860,7 @@ showpage
 resetPage
 /CurrentLetter ({) def
 /CurrentDesc (roman-{) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4744,6 +4871,7 @@ showpage
 resetPage
 /CurrentLetter ({) def
 /CurrentDesc (italic-{) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4754,6 +4882,7 @@ showpage
 resetPage
 /CurrentLetter (|) def
 /CurrentDesc (roman-|) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4764,6 +4893,7 @@ showpage
 resetPage
 /CurrentLetter (|) def
 /CurrentDesc (italic-|) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4774,6 +4904,7 @@ showpage
 resetPage
 /CurrentLetter (}) def
 /CurrentDesc (roman-}) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4784,6 +4915,7 @@ showpage
 resetPage
 /CurrentLetter (}) def
 /CurrentDesc (italic-}) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4794,6 +4926,7 @@ showpage
 resetPage
 /CurrentLetter (~) def
 /CurrentDesc (roman-~) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4804,6 +4937,7 @@ showpage
 resetPage
 /CurrentLetter (~) def
 /CurrentDesc (italic-~) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4814,6 +4948,7 @@ showpage
 resetPage
 /CurrentLetter (#) def
 /CurrentDesc (roman-#) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4824,6 +4959,7 @@ showpage
 resetPage
 /CurrentLetter (#) def
 /CurrentDesc (italic-#) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4834,6 +4970,7 @@ showpage
 resetPage
 /CurrentLetter (,) def
 /CurrentDesc (roman-,) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4844,6 +4981,7 @@ showpage
 resetPage
 /CurrentLetter (,) def
 /CurrentDesc (italic-,) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4854,6 +4992,7 @@ showpage
 resetPage
 /CurrentLetter (a) def
 /CurrentDesc (roman-a) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4864,6 +5003,7 @@ showpage
 resetPage
 /CurrentLetter (a) def
 /CurrentDesc (italic-a) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4874,6 +5014,7 @@ showpage
 resetPage
 /CurrentLetter (b) def
 /CurrentDesc (roman-b) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4884,6 +5025,7 @@ showpage
 resetPage
 /CurrentLetter (b) def
 /CurrentDesc (italic-b) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4894,6 +5036,7 @@ showpage
 resetPage
 /CurrentLetter (c) def
 /CurrentDesc (roman-c) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4904,6 +5047,7 @@ showpage
 resetPage
 /CurrentLetter (c) def
 /CurrentDesc (italic-c) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4914,6 +5058,7 @@ showpage
 resetPage
 /CurrentLetter (d) def
 /CurrentDesc (roman-d) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4924,6 +5069,7 @@ showpage
 resetPage
 /CurrentLetter (d) def
 /CurrentDesc (italic-d) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4934,6 +5080,7 @@ showpage
 resetPage
 /CurrentLetter (e) def
 /CurrentDesc (roman-e) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4944,6 +5091,7 @@ showpage
 resetPage
 /CurrentLetter (e) def
 /CurrentDesc (italic-e) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4954,6 +5102,7 @@ showpage
 resetPage
 /CurrentLetter (f) def
 /CurrentDesc (roman-f) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4964,6 +5113,7 @@ showpage
 resetPage
 /CurrentLetter (f) def
 /CurrentDesc (italic-f) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4974,6 +5124,7 @@ showpage
 resetPage
 /CurrentLetter (g) def
 /CurrentDesc (roman-g) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -4984,6 +5135,7 @@ showpage
 resetPage
 /CurrentLetter (g) def
 /CurrentDesc (italic-g) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -4994,6 +5146,7 @@ showpage
 resetPage
 /CurrentLetter (h) def
 /CurrentDesc (roman-h) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5004,6 +5157,7 @@ showpage
 resetPage
 /CurrentLetter (h) def
 /CurrentDesc (italic-h) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5014,6 +5168,7 @@ showpage
 resetPage
 /CurrentLetter (i) def
 /CurrentDesc (roman-i) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5024,6 +5179,7 @@ showpage
 resetPage
 /CurrentLetter (i) def
 /CurrentDesc (italic-i) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5034,6 +5190,7 @@ showpage
 resetPage
 /CurrentLetter (j) def
 /CurrentDesc (roman-j) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5044,6 +5201,7 @@ showpage
 resetPage
 /CurrentLetter (j) def
 /CurrentDesc (italic-j) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5054,6 +5212,7 @@ showpage
 resetPage
 /CurrentLetter (k) def
 /CurrentDesc (roman-k) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5064,6 +5223,7 @@ showpage
 resetPage
 /CurrentLetter (k) def
 /CurrentDesc (italic-k) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5074,6 +5234,7 @@ showpage
 resetPage
 /CurrentLetter (l) def
 /CurrentDesc (roman-l) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5084,6 +5245,7 @@ showpage
 resetPage
 /CurrentLetter (l) def
 /CurrentDesc (italic-l) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5094,6 +5256,7 @@ showpage
 resetPage
 /CurrentLetter (m) def
 /CurrentDesc (roman-m) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5104,6 +5267,7 @@ showpage
 resetPage
 /CurrentLetter (m) def
 /CurrentDesc (italic-m) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5114,6 +5278,7 @@ showpage
 resetPage
 /CurrentLetter (n) def
 /CurrentDesc (roman-n) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5124,6 +5289,7 @@ showpage
 resetPage
 /CurrentLetter (n) def
 /CurrentDesc (italic-n) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5134,6 +5300,7 @@ showpage
 resetPage
 /CurrentLetter (o) def
 /CurrentDesc (roman-o) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5144,6 +5311,7 @@ showpage
 resetPage
 /CurrentLetter (o) def
 /CurrentDesc (italic-o) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5154,6 +5322,7 @@ showpage
 resetPage
 /CurrentLetter (p) def
 /CurrentDesc (roman-p) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5164,6 +5333,7 @@ showpage
 resetPage
 /CurrentLetter (p) def
 /CurrentDesc (italic-p) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5174,6 +5344,7 @@ showpage
 resetPage
 /CurrentLetter (q) def
 /CurrentDesc (roman-q) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5184,6 +5355,7 @@ showpage
 resetPage
 /CurrentLetter (q) def
 /CurrentDesc (italic-q) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5194,6 +5366,7 @@ showpage
 resetPage
 /CurrentLetter (r) def
 /CurrentDesc (roman-r) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5204,6 +5377,7 @@ showpage
 resetPage
 /CurrentLetter (r) def
 /CurrentDesc (italic-r) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5214,6 +5388,7 @@ showpage
 resetPage
 /CurrentLetter (s) def
 /CurrentDesc (roman-s) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5224,6 +5399,7 @@ showpage
 resetPage
 /CurrentLetter (s) def
 /CurrentDesc (italic-s) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5234,6 +5410,7 @@ showpage
 resetPage
 /CurrentLetter (t) def
 /CurrentDesc (roman-t) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5244,6 +5421,7 @@ showpage
 resetPage
 /CurrentLetter (t) def
 /CurrentDesc (italic-t) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5254,6 +5432,7 @@ showpage
 resetPage
 /CurrentLetter (u) def
 /CurrentDesc (roman-u) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5264,6 +5443,7 @@ showpage
 resetPage
 /CurrentLetter (u) def
 /CurrentDesc (italic-u) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5274,6 +5454,7 @@ showpage
 resetPage
 /CurrentLetter (v) def
 /CurrentDesc (roman-v) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5284,6 +5465,7 @@ showpage
 resetPage
 /CurrentLetter (v) def
 /CurrentDesc (italic-v) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5294,6 +5476,7 @@ showpage
 resetPage
 /CurrentLetter (w) def
 /CurrentDesc (roman-w) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5304,6 +5487,7 @@ showpage
 resetPage
 /CurrentLetter (w) def
 /CurrentDesc (italic-w) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5314,6 +5498,7 @@ showpage
 resetPage
 /CurrentLetter (x) def
 /CurrentDesc (roman-x) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5324,6 +5509,7 @@ showpage
 resetPage
 /CurrentLetter (x) def
 /CurrentDesc (italic-x) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5334,6 +5520,7 @@ showpage
 resetPage
 /CurrentLetter (y) def
 /CurrentDesc (roman-y) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5344,6 +5531,7 @@ showpage
 resetPage
 /CurrentLetter (y) def
 /CurrentDesc (italic-y) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5354,6 +5542,7 @@ showpage
 resetPage
 /CurrentLetter (z) def
 /CurrentDesc (roman-z) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5364,6 +5553,7 @@ showpage
 resetPage
 /CurrentLetter (z) def
 /CurrentDesc (italic-z) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5374,6 +5564,7 @@ showpage
 resetPage
 /CurrentLetter (A) def
 /CurrentDesc (roman-A) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5384,6 +5575,7 @@ showpage
 resetPage
 /CurrentLetter (A) def
 /CurrentDesc (italic-A) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5394,6 +5586,7 @@ showpage
 resetPage
 /CurrentLetter (B) def
 /CurrentDesc (roman-B) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5404,6 +5597,7 @@ showpage
 resetPage
 /CurrentLetter (B) def
 /CurrentDesc (italic-B) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5414,6 +5608,7 @@ showpage
 resetPage
 /CurrentLetter (C) def
 /CurrentDesc (roman-C) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5424,6 +5619,7 @@ showpage
 resetPage
 /CurrentLetter (C) def
 /CurrentDesc (italic-C) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5434,6 +5630,7 @@ showpage
 resetPage
 /CurrentLetter (D) def
 /CurrentDesc (roman-D) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5444,6 +5641,7 @@ showpage
 resetPage
 /CurrentLetter (D) def
 /CurrentDesc (italic-D) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5454,6 +5652,7 @@ showpage
 resetPage
 /CurrentLetter (E) def
 /CurrentDesc (roman-E) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5464,6 +5663,7 @@ showpage
 resetPage
 /CurrentLetter (E) def
 /CurrentDesc (italic-E) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5474,6 +5674,7 @@ showpage
 resetPage
 /CurrentLetter (F) def
 /CurrentDesc (roman-F) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5484,6 +5685,7 @@ showpage
 resetPage
 /CurrentLetter (F) def
 /CurrentDesc (italic-F) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5494,6 +5696,7 @@ showpage
 resetPage
 /CurrentLetter (G) def
 /CurrentDesc (roman-G) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5504,6 +5707,7 @@ showpage
 resetPage
 /CurrentLetter (G) def
 /CurrentDesc (italic-G) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5514,6 +5718,7 @@ showpage
 resetPage
 /CurrentLetter (H) def
 /CurrentDesc (roman-H) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5524,6 +5729,7 @@ showpage
 resetPage
 /CurrentLetter (H) def
 /CurrentDesc (italic-H) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5534,6 +5740,7 @@ showpage
 resetPage
 /CurrentLetter (I) def
 /CurrentDesc (roman-I) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5544,6 +5751,7 @@ showpage
 resetPage
 /CurrentLetter (I) def
 /CurrentDesc (italic-I) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5554,6 +5762,7 @@ showpage
 resetPage
 /CurrentLetter (J) def
 /CurrentDesc (roman-J) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5564,6 +5773,7 @@ showpage
 resetPage
 /CurrentLetter (J) def
 /CurrentDesc (italic-J) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5574,6 +5784,7 @@ showpage
 resetPage
 /CurrentLetter (K) def
 /CurrentDesc (roman-K) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5584,6 +5795,7 @@ showpage
 resetPage
 /CurrentLetter (K) def
 /CurrentDesc (italic-K) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5594,6 +5806,7 @@ showpage
 resetPage
 /CurrentLetter (L) def
 /CurrentDesc (roman-L) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5604,6 +5817,7 @@ showpage
 resetPage
 /CurrentLetter (L) def
 /CurrentDesc (italic-L) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5614,6 +5828,7 @@ showpage
 resetPage
 /CurrentLetter (M) def
 /CurrentDesc (roman-M) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5624,6 +5839,7 @@ showpage
 resetPage
 /CurrentLetter (M) def
 /CurrentDesc (italic-M) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5634,6 +5850,7 @@ showpage
 resetPage
 /CurrentLetter (N) def
 /CurrentDesc (roman-N) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5644,6 +5861,7 @@ showpage
 resetPage
 /CurrentLetter (N) def
 /CurrentDesc (italic-N) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5654,6 +5872,7 @@ showpage
 resetPage
 /CurrentLetter (O) def
 /CurrentDesc (roman-O) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5664,6 +5883,7 @@ showpage
 resetPage
 /CurrentLetter (O) def
 /CurrentDesc (italic-O) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5674,6 +5894,7 @@ showpage
 resetPage
 /CurrentLetter (P) def
 /CurrentDesc (roman-P) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5684,6 +5905,7 @@ showpage
 resetPage
 /CurrentLetter (P) def
 /CurrentDesc (italic-P) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5694,6 +5916,7 @@ showpage
 resetPage
 /CurrentLetter (Q) def
 /CurrentDesc (roman-Q) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5704,6 +5927,7 @@ showpage
 resetPage
 /CurrentLetter (Q) def
 /CurrentDesc (italic-Q) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5714,6 +5938,7 @@ showpage
 resetPage
 /CurrentLetter (R) def
 /CurrentDesc (roman-R) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5724,6 +5949,7 @@ showpage
 resetPage
 /CurrentLetter (R) def
 /CurrentDesc (italic-R) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5734,6 +5960,7 @@ showpage
 resetPage
 /CurrentLetter (S) def
 /CurrentDesc (roman-S) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5744,6 +5971,7 @@ showpage
 resetPage
 /CurrentLetter (S) def
 /CurrentDesc (italic-S) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5754,6 +5982,7 @@ showpage
 resetPage
 /CurrentLetter (T) def
 /CurrentDesc (roman-T) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5764,6 +5993,7 @@ showpage
 resetPage
 /CurrentLetter (T) def
 /CurrentDesc (italic-T) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5774,6 +6004,7 @@ showpage
 resetPage
 /CurrentLetter (U) def
 /CurrentDesc (roman-U) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5784,6 +6015,7 @@ showpage
 resetPage
 /CurrentLetter (U) def
 /CurrentDesc (italic-U) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5794,6 +6026,7 @@ showpage
 resetPage
 /CurrentLetter (V) def
 /CurrentDesc (roman-V) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5804,6 +6037,7 @@ showpage
 resetPage
 /CurrentLetter (V) def
 /CurrentDesc (italic-V) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5814,6 +6048,7 @@ showpage
 resetPage
 /CurrentLetter (W) def
 /CurrentDesc (roman-W) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5824,6 +6059,7 @@ showpage
 resetPage
 /CurrentLetter (W) def
 /CurrentDesc (italic-W) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5834,6 +6070,7 @@ showpage
 resetPage
 /CurrentLetter (X) def
 /CurrentDesc (roman-X) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5844,6 +6081,7 @@ showpage
 resetPage
 /CurrentLetter (X) def
 /CurrentDesc (italic-X) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5854,6 +6092,7 @@ showpage
 resetPage
 /CurrentLetter (Y) def
 /CurrentDesc (roman-Y) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5864,6 +6103,7 @@ showpage
 resetPage
 /CurrentLetter (Y) def
 /CurrentDesc (italic-Y) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5874,6 +6114,7 @@ showpage
 resetPage
 /CurrentLetter (Z) def
 /CurrentDesc (roman-Z) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5884,6 +6125,7 @@ showpage
 resetPage
 /CurrentLetter (Z) def
 /CurrentDesc (italic-Z) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5894,6 +6136,7 @@ showpage
 resetPage
 /CurrentLetter (0) def
 /CurrentDesc (roman-0) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5904,6 +6147,7 @@ showpage
 resetPage
 /CurrentLetter (0) def
 /CurrentDesc (italic-0) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5914,6 +6158,7 @@ showpage
 resetPage
 /CurrentLetter (1) def
 /CurrentDesc (roman-1) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5924,6 +6169,7 @@ showpage
 resetPage
 /CurrentLetter (1) def
 /CurrentDesc (italic-1) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5934,6 +6180,7 @@ showpage
 resetPage
 /CurrentLetter (2) def
 /CurrentDesc (roman-2) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5944,6 +6191,7 @@ showpage
 resetPage
 /CurrentLetter (2) def
 /CurrentDesc (italic-2) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5954,6 +6202,7 @@ showpage
 resetPage
 /CurrentLetter (3) def
 /CurrentDesc (roman-3) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5964,6 +6213,7 @@ showpage
 resetPage
 /CurrentLetter (3) def
 /CurrentDesc (italic-3) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5974,6 +6224,7 @@ showpage
 resetPage
 /CurrentLetter (4) def
 /CurrentDesc (roman-4) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -5984,6 +6235,7 @@ showpage
 resetPage
 /CurrentLetter (4) def
 /CurrentDesc (italic-4) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -5994,6 +6246,7 @@ showpage
 resetPage
 /CurrentLetter (5) def
 /CurrentDesc (roman-5) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -6004,6 +6257,7 @@ showpage
 resetPage
 /CurrentLetter (5) def
 /CurrentDesc (italic-5) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -6014,6 +6268,7 @@ showpage
 resetPage
 /CurrentLetter (6) def
 /CurrentDesc (roman-6) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -6024,6 +6279,7 @@ showpage
 resetPage
 /CurrentLetter (6) def
 /CurrentDesc (italic-6) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -6034,6 +6290,7 @@ showpage
 resetPage
 /CurrentLetter (7) def
 /CurrentDesc (roman-7) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -6044,6 +6301,7 @@ showpage
 resetPage
 /CurrentLetter (7) def
 /CurrentDesc (italic-7) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -6054,6 +6312,7 @@ showpage
 resetPage
 /CurrentLetter (8) def
 /CurrentDesc (roman-8) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -6064,6 +6323,7 @@ showpage
 resetPage
 /CurrentLetter (8) def
 /CurrentDesc (italic-8) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath
@@ -6074,6 +6334,7 @@ showpage
 resetPage
 /CurrentLetter (9) def
 /CurrentDesc (roman-9) def
+/ItalicSlant 0 def
 thefont
 
 CurrentLetter letterPath
@@ -6084,6 +6345,7 @@ showpage
 resetPage
 /CurrentLetter (9) def
 /CurrentDesc (italic-9) def
+/ItalicSlant 0.27 def
 theitalicfont
 
 CurrentLetter letterPath

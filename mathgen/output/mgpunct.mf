@@ -54,6 +54,7 @@ else: compute_spread(.45x_height#,.55x_height#); fi
 beginchar("#",15u#,.97cap_height#,asc_depth#);
 italcorr (math_axis#+.5(spread#+rule_thickness#))*slant-.5u#;
 adjust_fit(0,0);
+disable_transforms_around(.5(w,h));
 numeric alpha.body,alpha.ends; alpha.body=82; alpha.ends=88;
 pos1(rule_thickness,alpha.ends); pos2(rule_thickness,alpha.ends);
 pos3(rule_thickness,alpha.ends); pos4(rule_thickness,alpha.ends);
@@ -81,6 +82,7 @@ beginchar("%",9u#+max(6u#,2fudge*(hair#+stem#)),
   body_height#,body_height#-asc_height#);
 italcorr if hefty: .4asc_height#*slant-.5u# else: h#*slant-u# fi;
 adjust_fit(0,0);
+disable_transforms_around(.5(w,h));
 y9=h-o; y10=-oo;
 if hefty: x9=good.x(x5-eps); x10=good.x(x1+eps);
  draw z9--z10;  % diagonal
@@ -196,6 +198,7 @@ cmchar "Period";
 numeric dot_diam#; dot_diam#=if monospace: 5/4 fi\\ dot_size#;
 define_whole_blacker_pixels(dot_diam);
 beginchar(".",5u#,dot_diam#,0);
+disable_transforms_around((.5w,.5h));
 adjust_fit(0,0); pickup fine.nib;
 pos1(dot_diam,0); pos2(dot_diam,90);
 x1l=hround(.5w-.5dot_diam); y2l=-dot_o; z1=z2; dot(1,2);  % dot

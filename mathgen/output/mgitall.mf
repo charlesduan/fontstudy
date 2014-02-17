@@ -1,0 +1,600 @@
+% THIS IS THE OFFICIAL COMPUTER MODERN SOURCE FILE itall.mf BY D E KNUTH.
+% IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!
+
+% Computer Modern Italic lower case:
+% This lowercase italic alphabet was prepared by D. E. Knuth in December, 1979,
+% inspired by the Monotype faces used in {\sl The Art of Computer Programming}.
+% The programs were revised for the new \MF\ conventions in 1985.
+
+% Character codes \0141 through \0172 are generated.
+
+cmchar "Italic letter a";
+beginchar("a",9u#,x_height#,0);
+italcorr 1/3x_height#*slant+.5hair#+.5u#;
+adjust_fit(0,0);
+pos0(hair,0); pos1(vair,90); pos2(curve,180); pos3(vair,270);
+pos4(stem,0); x4l=x0l; y4=h;
+x2r=0;
+x1r=.5[x2r,x0r];
+x3r=.5[x2r,x0r]+3u*slant;
+x4r=hround(w-3.2u+.5stem);
+y1r=h+oo; y3r=-oo; y0=y2=.5[y1,y3];
+x1l:=.5[x1l,.5[x2l,x0l]];
+make_paths1(rev.l) super_arc.e(0,1) & pulled_arc.e(1,2);
+make_paths2(rev.l) pulled_arc.e(2,3) & super_arc.e(3,0);  % bowl
+x5=x4; x7l=w;
+hook_out_points(5,6,7);  % closing hook
+p1=hook_out_path(fine,5,6,7);
+fill var_combine(pen_rlend4(up,fine,down)--z5l,rpath1)
+ & combine(rpath2,z4l--p1)--cycle;
+unfill lpath1 & lpath2 & cycle;
+math_fit(-.3x_height#*slant+.5curve#-u#,ic#);
+penlabels(0,1,2,3,4,5,6,7); endchar;
+
+cmchar "Italic letter b";
+beginchar("b",8u#,asc_height#,0);
+italcorr .7x_height#*slant+.5curve#-u# if math_fitting:-.5u# fi;
+adjust_fit(0,0);
+pos1(stem,0); pos2(stem,0); x1=x2;
+x1l=jut; y1=h; y2=.5x_height;
+p1=sloped_serif_path.l(1,2,a,1/3,jut,serif_drop);  % serif
+pos2'(stem,-180); pos3(vair,-90);
+pos4(curve,0); pos5(vair,90); pos0(hair,180);
+z2=z2'; z0l=z2r; x5=.5[x2,x4]; x3=.5[x2,x4]+u*slant; x4r=w;
+y3r=-oo; y5r=x_height+oo; y4=y2-.3x_height*slant;
+x3l:=.5[x2'l,x4l]+u*slant;
+make_paths1(rev.l) pulled_arc.e(2',3) & pulled_arc.e(3,4);
+make_paths2(rev.l) pulled_arc.e(4,5) & super_arc.e(5,0);  % bowl
+fill rpath1 & combine(rpath2,z2r--p1)--cycle;
+unfill lpath1 & lpath2 & cycle;
+math_fit(-.3x_height#*slant+.5curve#-u#,ic#);
+penlabels(0,1,2,3,4,5); endchar;
+
+cmchar "Italic letter c";
+beginchar("c",8u#,x_height#,0);
+italcorr if math_fitting:1/3x_height#*slant else:x_height#*slant-u# fi;
+adjust_fit(0,0);
+pos0(small_flare,0); pos1(hair,0);
+pos3(curve,180); pos4(vair,270); pos5(hair,335);
+x4=.5(w+1.5u); x0r=hround(w-.8u)+eps;
+x3r=0; x5r=good.x(w-eps); x6=x5;
+y2r=h+oo; y4r=-oo; y3=.43[y2r,y4r];
+set_bulb_points(vair,.6,.9, 3,2,1,0);  % bulb
+p0=bulb_path(2,1,0,right);
+y5l=vround .7bar_height; y6=bar_height;
+path p; p=z4{right}..z5..z6;
+make_paths1(rev.l) pulled_arc.e(2,3)
+ & pulled_arc.e(3,4)...{direction 1 of p}z5e;  % arc
+fill p0 & rpath1--lpath1 & cycle;
+math_fit(-.3x_height#*slant+.5curve#-u#,ic#);
+penlabels(0,1,2,3,4,5,6); endchar;
+
+cmchar "Italic letter d";
+beginchar("d",9u#,asc_height#,0);
+italcorr max(1/3x_height#*slant+.5hair#+.5u#,
+  h#*slant+.5stem#-2u#) if math_fitting:-.5u# fi;
+adjust_fit(0,0);
+pos0(hair,0); pos1(vair,90); pos2(curve,180); pos3(vair,270);
+pos4(stem,0);
+x0l=x4l=x5l; .5[x1,x3]=.5[x4,x2]; x3-x1=3u*slant; x2r=0;
+x4+.5stem=hround(w-3.2u+.5stem);
+y1r=x_height+oo; y3r=-oo; y2=.45[y1,y3];
+y0=.5[y3r,y1r];
+x7l=w;
+make_paths1(rev.l) super_arc.e(0,1) & pulled_arc.e(1,2);
+make_paths2(rev.l) pulled_arc.e(2,3) & super_arc.e(3,0);  % bowl
+hook_out_points(5,6,7);  % closing hook
+p7=hook_out_path(fine,5,6,7);
+y4=h;
+p4=sloped_serif_path.l(4,5',a,1/3,
+ slant_adjusted_jut(jut)back,serif_drop);  % serif
+fill var_combine(p4--z5l,rpath1) & combine(rpath2,z4l--p7)--cycle;
+unfill lpath1 & lpath2 & cycle;
+math_fit(-.3x_height#*slant+.5curve#-u#,ic#);
+penlabels(0,1,2,3,4,5,6,7); endchar;
+
+cmchar "Italic letter e";
+beginchar("e",8u#,x_height#,0);
+italcorr max(1/3x_height#*slant,x_height#*slant+.5(.2[hair#,stem#])-u#);
+adjust_fit(0,0);
+numeric heavy_hair; heavy_hair=hround .5[thick_hair,stem];
+pos0(vair,-90); pos1(heavy_hair,0); pos2(vair,90);
+pos3(curve,180); pos4(vair,270); pos5(.3[hair,thick_hair],333);
+x0=x3; x1r=hround(w-.85u); x2=x4=.5(w+u);
+x3r=0; x5r=good.x(w-eps); x6=x5;
+y3=y6=bar_height; y0=.75bar_height; y1=.55[y3,y2]; y2r=h+oo; y4r=-oo;
+y5l=vround .8bar_height; path p; p=z4{right}..z5..z6;
+make_paths1(rev.l) z0e{dir 15}...z1e{up}...{left}z2e;
+make_paths2(rev.l) pulled_arc.e(2,3) & pulled_arc.e(3,4)...{curl 0}z5e;  % arc
+fill combine(lpath2,rpath1) & rpath2--cycle;
+unfill combine(lpath1,lpath2) & cycle;
+math_fit(-.3x_height#*slant+.5curve#-u#,ic#);
+penlabels(0,1,2,3,4,5,6); endchar;
+
+cmchar "Italic letter f";
+beginchar("f",max(1.5u#,stem#)+max(3.5u#,2flare#),asc_height#,desc_depth#);
+italcorr asc_height#*slant+.75u#;
+adjust_fit(if monospace:u#,u# else: 0,0 fi);
+numeric theta; z88=(.5w-.7u,h); z89=(.5w+.2u,-d); theta=angle(z88-z89);
+numeric f_flare; f_flare=.8small_flare;
+pos0(f_flare,0); pos1(hair,0);
+pos3(.5[hair,stem],180); pos4(stem,180);
+pos5(stem,0); pos6(.5[hair,stem],0);
+pos8(hair,-180); pos9(f_flare,-180);
+x0r=w; x9r=0;
+y2r=h; y7r=-d;
+y4=x_height; y5=.5x_height;
+z4=whatever[z88,z89]; z5=whatever[z88,z89];
+x3=.8[x2+x4-x88,x88]; x6=.8[x7+x5-x89,x89]; y3=.8[y4,y2]; y6=.8[y5,y7];
+set_bulb_points(vair,.55,.75, 4,2,1,0);
+p0=bulb_path(2,1,0,right);
+set_bulb_points(.8vair,.55,.75, 5,7,8,9);
+p9=bulb_path(7,8,9,left);
+make_paths2(rev.l) z2e{left}...{z89-z88}z4e;  % upper arc
+numeric f_lower_tension.l,f_lower_tension.r;
+make_paths5(rev.r) z5e{z89-z88}...{left}z7e;  % lower arc
+pos20(bar,90); pos21(bar,90);
+y20r=y21r=x_height;
+x20=x4r-.5stem-1.1u; x21=x4l+.5stem+1.3u;
+pos4'(x4l-x4r,180);
+z4'=whatever[z4,z5]; y4'=y20l;
+fill pen_lrend21(right,crisp,left)--lpath2 & p0 & rpath2
+ --pen_rlend20(left,crisp,right)--z4'r--lpath5 & p9 & rpath5--z4'l--cycle;
+math_fit(desc_depth#*slant+u#,x_height#*slant);
+penlabels(0,1,2,3,4,4',5,6,7,8,9,20,21,88,89); endchar;
+
+cmchar "Italic letter g";
+beginchar("g",8u#,x_height#,desc_depth#);
+italcorr x_height#*slant+.5stem#-u#;
+adjust_fit(0,0);
+pos0(hair,0); pos1(vair,90); pos2(curve,180); pos3(vair,270);
+pos4(stem,0); pos5(stem,0);
+x0l=x4l; .5[x1,x3]=.5[x0,x2]; x3-x1=2u*slant; x2r=0;
+x4r=w;
+y1r=h+oo; y3r=-oo; y0=y2=.5[y1,y3];
+make_paths1(rev.l) super_arc.e(0,1) & pulled_arc.e(1,2);
+make_paths2(rev.l) pulled_arc.e(2,3) & super_arc.e(3,0);  % bowl
+y4=h;
+x5=x4; y5=.1x_height;
+pos7(hair,-180); pos8(.85small_flare,-180);
+y6r=-d;
+x8r=.7u;
+set_bulb_points(vair,.47,.7, 5,6,7,8);  % bulb
+p8=bulb_path(6,7,8,left);
+make_paths5(rev.r) z5e{down}...{left}z6e;  % stem and arc
+fill var_combine(pen_rlend4(up,fine,down)--z5l,rpath1)
+ & combine(rpath2,z4l--lpath5) & p8 & rpath5--cycle;
+unfill lpath1 & lpath2 & cycle;
+math_fit(-min(.3x_height#*slant+.5curve#-u#,1.5u#-desc_depth#*slant),
+ ic#-1/3x_height#*slant); penlabels(0,1,2,3,4,5,6,7,8); endchar;
+
+cmchar "Italic letter h";
+beginchar("h",9u#,asc_height#,0);
+italcorr 1/3x_height#*slant+.5hair#+.5u#;
+adjust_fit(0,0);
+pos1(stem,0); pos2(stem,0); x1=x2;
+x1l=jut; y1=h; y2=0;
+p1=sloped_serif_path.l(1,2,a,1/3,jut,serif_drop);  % serif
+x4+.5stem=hround(w-3.2u+.5stem);
+x5=x4;
+pos5(.5[stem,curve],0);
+x7l=w; hook_out_points(5,6,7)(skewed);  % closing hook
+p7=hook_out_path(fine,5,6,7)skewed;
+ital_arch_paths1(2,3,5)skewed;  % arch
+fill pen_point(1l,2l,tiny,3l)--lpath1--p7--combine(rpath1,z2r--p1)--cycle;
+fill rpath1--lpath1--cycle;
+fill p7--cycle;
+%filldraw stroke z4e{down}..{-u,-x_height}z5e;  % right stem
+math_fit(0,ic#); penlabels(1,2,3,4,5,6,7); endchar;
+
+cmchar "Italic letter i";
+beginchar("i",5u#,min(asc_height#,10/7x_height#+.5flare#),0);
+italcorr max(1/3x_height#*slant+.5hair#+.5u#,h#*slant+.5flare#-2u#);
+adjust_fit(if monospace:u#,u# else: 0,0 fi);
+x0r=0; y0r=.7x_height; x5l=w; x2=.5w; x3=.5w;
+hook_in_points(0,1,2)(skewed);
+p0=hook_in_path(fine,0,1,2)(skewed);
+pos5(.9hair,155);
+y5r=.32x_height;
+hook_out_points(3,4,5)(skewed);  % hooks
+p5=hook_out_path(fine,3,4,5)(skewed);
+fill p0--p5--cycle;
+pos8(flare,0); pos9(flare,90);
+x8=.5w if not monospace:-.4(h-x_height)*slant fi; top y9r=h+1;
+if bot y9l-top y1<slab: y9l:=min(y9r-eps,y1+fine+slab); fi
+x8=x9; y8=.5[y9l,y9r];
+z8'=z8; z9'=z9;
+numeric i_dot_flare; i_dot_flare=.9small_flare;
+begingroup
+ disable_transforms_around(z8);
+ pos8'(i_dot_flare,0); pos9'(i_dot_flare,90);
+ dot(8',9')
+endgroup;
+math_fit(-2/3x_height#*slant+.5hair#+.5u#,ic#);
+penlabels(0,1,2,3,4,5,8,9); endchar;
+
+cmchar "Italic letter j";
+beginchar("j",5u#,min(asc_height#,10/7x_height#+.5flare#),desc_depth#);
+italcorr h#*slant+.5stem#-u#;
+adjust_fit(if monospace:2u#,.5u# else: 0,0 fi);
+x0r=w-4u; x2=x3; pos3(stem,0); x3r=w;
+y0r=.62x_height;
+x8r=x2r if not monospace:-.3(h-x_height)*slant fi; y9r=h+1;
+hook_in_points(0,1,2);  % opening hook
+p1=hook_in_path(fine,0,1,2);
+pos5(hair,-180); pos6(.8small_flare,-180);
+y3=0; y4r=-d; x6r=0;
+set_bulb_points(.8vair,.5,.8, 3,4,5,6);  % bulb
+p6=bulb_path(4,5,6,left);
+make_paths1(rev.r) z3e{down}...{left}z4e;  % stem and arc
+fill p1--lpath1 & p6 & rpath1--cycle;
+pos8(flare,0); pos9(flare,90);
+if bot y9l-top y1<slab: y9l:=min(y9r-eps,y1+fine+slab); fi
+x8=x9; y8=.5[y9l,y9r];
+z8'=z8; z9'=z9;
+begingroup
+ disable_transforms_around(z8);
+ pos8'(i_dot_flare,0); pos9'(i_dot_flare,90);
+ dot(8',9')
+endgroup;
+math_fit(desc_depth#*slant,x_height#*slant+.5stem#-u#);
+penlabels(0,1,2,3,4,5,6,8,9); endchar;
+
+cmchar "Italic letter k";
+beginchar("k",8u#,asc_height#,0);
+italcorr x_height#*slant;
+adjust_fit(0,0);
+pos1(stem,0); pos2(stem,0); x1=x2;
+x1l=jut; y1=h; y2=0;
+p1=sloped_serif_path.l(1,2,a,1/3,jut,serif_drop);  % serif
+pos3(vair,90); x3=x1r; y3=.09[bar_height,x_height];
+y4r=x_height+oo;
+pos5(hair,0); pos6(.85small_flare,0);
+x6r=hround(w-u);
+pos7(.5[stem,curve],0); pos8(.7[vair,stem],90); pos9(hair,160);
+x9l=w; y9=.4x_height;
+x7=hround(w-3.3u); y7=1/2y3; x8=w-2.2u; bot y8l=-oo;
+x8r:=x8r+.3u;
+penpos3'(y3r-y3l,90); penpos3''(y3r-y3l,170);
+x3'=.55[x3,x7]; y3'=.9[y7,y3];
+x3''=.45[x3,x6r]; y3''=.35[y3,y4r];
+show z3'';
+set_bulb_points(vair,.5,.75, 3'',4,5,6);
+p6=bulb_path(4,5,6,right);
+make_paths4(rev.r) z3e{right}..z3''e{dir 80}..{right}z4e;  % upper diagonal
+make_paths9(rev.r) z3e{right}...z3'e...z7e{dir -85}
+ ...z8e{right}...{curl 0}z9e;  % lower diagonal
+fill pen_lrend2(down,tiny,0)--lpath9
+ --combine(rpath9,lpath4) & p6 & rpath4--p1--cycle;
+math_fit(0,1/3x_height#*slant+.5hair#+.5u#);
+penlabels(1,2,3,3',3'',4,5,6,7,8,9); endchar;
+
+cmchar "Italic letter l";
+beginchar("l",4u#,asc_height#,0); l_width#:=4u#;
+italcorr max(1/3x_height#*slant+.5hair#+.5u#,
+ asc_height#*slant+.5stem#-2u#) if math_fitting:+.5u# fi;
+adjust_fit(if monospace:u#,u# else: 0,0 fi);
+x2l=jut; x4l=w; hook_out_points(2,3,4);
+p4=hook_out_path(fine,2,3,4);  % closing hook
+pos1(stem,0);
+y1=h; x1=x2;
+p1=sloped_serif_path.l(1,2,a,1/3,jut,serif_drop);  % serif
+fill p1--p4--cycle;
+math_fit(-.5u#,1/3x_height#*slant+.5hair#+u#); penlabels(1,2,3,4); endchar;
+
+cmchar "Italic letter m";
+beginchar("m",15u#,x_height#,0);
+italcorr 1/3x_height#*slant+.5hair#+.5u#;
+adjust_fit(if monospace:-1.5u#,-2u# else: 0,0 fi); pickup fine.nib;
+numeric shaved_stem; shaved_stem=mfudged.stem;
+save stem; stem=shaved_stem;
+pos2(stem,0); x1=x2;
+if monospace: pos1(stem,0); lft x1l=hround(2.5u-.5stem); top y1=h;
+else:
+ pos0(.9hair,170);
+ x0r=0; y0r=.6x_height; x2l=hround(3.2u-.5stem);
+ hook_in_points(0,a,1);
+ p0=hook_in_path(fine,0,a,1);
+fi  % opening hook
+y2=0;
+x4+.5stem=hround(.5w+.5stem);
+pos5(stem,0); y5=y2; x5=x4;
+x8+.5stem=hround(w-3.2u+.5stem);
+if monospace: pos9(vair,90); x9=good.x .5[x8,w]; bot y9l=0; y8=1/3h;
+ pos8(stem,0); filldraw stroke z8e{-u,-x_height}...{right}z9e; % terminal
+else: x9l=w;
+hook_out_points(8,b,9)(skewed); fi  % closing hook
+p9=hook_out_path(fine,8,b,9)skewed;
+ital_arch_paths8(5,6,8)skewed;  % right arch
+y4=y8;
+ital_arch_paths4(2,3,4);  % right arch
+fill pen_point(1l,2l,fine,2r)--lpath4
+ --pen_point(4l,5l,fine,5r)--lpath8 & p9
+ & combine(combine(rpath8,z5r--rpath4),z2r--p0)--cycle;
+math_fit(-2/3x_height#*slant+.5hair#+.5u#,ic#);
+penlabels(0,a,1,2,3,4,5,6,7,8,b,9); endchar;
+
+cmchar "Italic letter n";
+beginchar("n",10u#,x_height#,0);
+italcorr 1/3x_height#*slant+.5hair#+.5u#;
+adjust_fit(0,0); pickup fine.nib;
+pos2(stem,0); x1=x2;
+pos0(.9hair,170);
+x0r=0; y0r=.6x_height; x2l=hround(3.2u-.5stem); y2=0;
+hook_in_points(0,a,1);
+p0=hook_in_path(fine,0,a,1);
+pos5(.5[stem,curve],0);
+x5=hround(w-3.2u);
+x7l=w; hook_out_points(5,6,7)(skewed);  % closing hook
+p7=hook_out_path(fine,5,6,7)skewed;
+ital_arch_paths5(2,3,5)skewed;
+fill pen_point(1l,2l,fine,2r)--lpath5 & p7 & combine(rpath5,z2r--p0)--cycle;
+math_fit(-2/3x_height#*slant+.5hair#+.5u#,ic#);
+penlabels(0,a,1,2,3,4,5,6,7); endchar;
+
+cmchar "Italic letter o";
+beginchar("o",9u#,x_height#,0);
+italcorr .7x_height#*slant+.5curve#-u# if math_fitting:-.5u# fi;
+adjust_fit(0,0);
+pos1(vair,90); pos2(curve,180); pos3(vair,270); pos4(curve,360);
+x1+x3=w; x2r=0; x4r=w; x3-x1=3u*slant;
+y1r=h+oo; .5[y2,y4]=.5[y1,y3]; y2-y4=.7h*slant; y3r=-oo;
+make_paths1(rev.l) pulled_arc.e(1,2) & pulled_arc.e(2,3)
+ & pulled_arc.e(3,4) & pulled_arc.e(4,1); % bowl
+fill rpath1 & cycle;
+unfill lpath1 & cycle;
+math_fit(-.3x_height#*slant+.5curve#-u#,ic#); penlabels(1,2,3,4); endchar;
+
+cmchar "Italic letter p";
+beginchar("p",9u#,x_height#,desc_depth#);
+italcorr .7x_height#*slant+.5curve#-u# if math_fitting:-.5u# fi;
+adjust_fit(0,0);
+pos0(hair,164);
+x0r=0; y0r=.62x_height;
+x2-.5stem=hround(3.2u-.5stem);
+hook_in_points(0,1,2);  % opening hook
+p0=hook_in_path(fine,0,1,2);
+pos4(hair,-180); pos5(vair,-90); pos6(curve,0); pos7(vair,90);
+x4l=x2r; x6r=w; .5[x5,x7]=.5[x4,x6]; x5-x7=3u*slant;
+y5r=-oo; y7r=h+oo; y4=.5[y5,y7]; y6=(.5-.4slant)[y5,y7];
+z=whatever[z5r,z4l]; y=y5l; x5l:=x;
+make_paths1(rev.l) super_arc.e(4,5) & pulled_arc.e(5,6);
+make_paths2(rev.l) pulled_arc.e(6,7) & super_arc.e(7,4);  % bowl
+pos3(stem,0);
+x3=x2; y3=-d;
+p3=dish_serif_path(3,2,a,1/3,slant_adjusted_jut(.75jut),
+ b,1/3,slant_adjusted_jut(jut)less);  % serif
+fill var_combine(p3--z2r,rpath1) & combine(rpath2,z3r--p0)--cycle;
+unfill lpath1 & lpath2 & cycle;
+math_fit(-min(2/3x_height#*slant-.5hair#-.5u#,
+ 2u#-.5stem#-desc_depth#*slant),ic#);
+penlabels(0,1,2,3,4,5,6,7); endchar;
+
+cmchar "Italic letter q";
+beginchar("q",8u#,x_height#,desc_depth#);
+italcorr x_height#*slant+.5stem#-u#;
+adjust_fit(0,0);
+numeric right_jut; right_jut=slant_adjusted_jut(jut)less;
+pos0(hair,0); pos1(vair,90); pos2(curve,180); pos3(vair,270);
+pos4(stem,0); pos5(stem,0);
+x0l=x4l; x1=.5[x4,x2]; x3=.45[x4,x2]; x2r=0;
+x4r=w-right_jut;
+y1r=h+oo; y3r=-oo; y0=.5[y1,y3]; y2=.55[y3,y1];
+make_paths1(rev.l) super_arc.e(0,1) & pulled_arc.e(1,2);
+make_paths2(rev.l) pulled_arc.e(2,3) & super_arc.e(3,0);  % bowl
+pos6(hair,0);
+x4=x5; x6r=x5r; y6=h+oo; y4=-d;
+y5=.8x_height;
+p4=dish_serif_path(4,5,a,1/3,slant_adjusted_jut(jut),b,1/3,right_jut);  % serif
+pickup pencircle scaled .1pt;
+fill var_combine(pen_pointend(4r,6r,fine,6l,5l)--z5l--z4l,rpath1)
+ & combine(rpath2,z5l--p4)--cycle;
+unfill lpath1 & lpath2 & cycle;
+math_fit(-.3x_height#*slant+.5curve#-u#,ic#-1/3x_height#*slant);
+penlabels(0,1,2,3,4,5,6,7,8); endchar;
+
+cmchar "Italic letter r";
+beginchar("r",5.5u#+max(1.75u#,flare#),x_height#,0);
+italcorr x_height#*slant;
+adjust_fit(if monospace:.25u#,.5u# else: 0,0 fi);
+pos0(hair,180);
+x0r=0; y0r=.64x_height;
+x2=x3; pos3(stem,0); x3l=hround(3.4u-.5stem); y3=0;
+y2=.1x_height;
+hook_in_points(0,1,2);  % opening hook
+p0=hook_in_path(fine,0,1,2);
+pos3'(hair,180); z3'l=z3r; pos5(hair,0); pos6(.9small_flare,0);
+x6r=w; y4r=h+oo;
+set_bulb_points(vair,.7,1, 3',4,5,6);
+p6=bulb_path(4,5,6,right);
+fill pen_lrend3(down,fine,(.5u,x_height)){.5u,x_height}
+ ...{right}z4l & p6
+ & combine(z4r{left}...{-.5u,-x_height}z3'r,z3r--p0)--cycle;
+math_fit(-2/3x_height#*slant+.5hair#+.5u#,ic#-.5u#);
+penlabels(0,1,2,3,3',4,5,6); endchar;
+
+cmchar "Italic letter s";
+beginchar("s",5.25u#+max(1.75u#,flare#),x_height#,0);
+italcorr x_height#*slant-.5u#;
+adjust_fit(0,0);
+numeric theta; theta=90-angle(ess_ratio*w,h); slope:=-h/(ess_ratio*w);
+pos2(vair,-90); pos0(max(fine.breadth,ess),theta); pos7(vair,-90);
+x0=.5w; .5[x2,x7]=x0; x7-x2=4u*slant; y2l=h+oo; y7r=-oo;
+y0-.5ess=y7l+.52(y2r-y7l-ess);
+x3l=0; x6r=w;
+x3r-x3l=x6r-x6l=hround .5[vair,ess]-fine;
+ellipse_set(2l,3l,4l,0l); ellipse_set(2r,3r,4r,0r); y3=y3r;
+ellipse_set(7l,6l,5l,0l); ellipse_set(7r,6r,5r,0r); y6=y6r;
+interim superness:=more_super;
+make_paths0(rev.r) z3e{down} ..z0e{z5e-z4e}..z6e{down};
+pos1(hair,0); pos10(hround .75[hair,flare],0);
+y2'r=y2l;
+x10r=hround(w-.6u)+2eps;
+z3'l=z3r; z3'r=z3'=z3l;
+set_bulb_points(vair,.4,.7, 3',2',1,10);
+p10=bulb_path(2',1,10,right);
+pos8(hair,-180); pos9(small_flare,-180);
+y7'r=y7r; x9r=.1u;
+set_bulb_points(vair,.4,.7, 6,7',8,9);
+p9=bulb_path(7',8,9,left);
+make_paths2(rev.l) super_arc.e(2',3');
+make_paths6(rev.r) super_arc.e(6,7');
+fill p10 & rpath2 & lpath0 & lpath6 & p9 & rpath6 & rpath0 & lpath2 & cycle;
+math_fit(0,ic#); penlabels(0,1,2,3,4,5,6,7,8,9,10); endchar;
+
+cmchar "Italic letter t";
+beginchar("t",5.5u#,min(asc_height#,1.4x_height#),0);
+italcorr max(1/3x_height#*slant+.5hair#+.5u#,x_height#*slant-.25u#);
+adjust_fit(if monospace:u#,u# else:0,0 fi); pickup fine.nib;
+pos1(stem,0); x1r=hround(w-3.1u); y1=h;
+x2=x1; x4l=w;
+hook_out_points(2,3,4);  % closing hook
+p4=hook_out_path(fine,2,3,4);
+pos5(bar,90); pos6(bar,90);
+x5=0; x6=hround(w-1.3u); y5r=y6r=x_height;
+fill pen_rlend5(left,crisp,right)--(x1l,y5l)--p4--(x2r,y6l)
+ --pen_lrend6(right,crisp,left)--(x1r,y6r)--pen_rlend1(up,tiny,down)
+ --(x1l,y5r)--cycle;
+math_fit(1.25u#-x_height#*slant,ic#); penlabels(1,2,3,4,5,6); endchar;
+
+cmchar "Italic letter u";
+beginchar("u",9.5u#,x_height#,0);
+italcorr 1/3x_height#*slant+.5hair#+.5u#;
+adjust_fit(0,0); interim superness:=more_super;
+x0r=0; y0r=.62x_height;
+pos2(.5[stem,curve],0); x2=hround(3.2u);
+hook_in_points(0,1,2)(skewed);  % opening hook
+p0=hook_in_path(fine,0,1,2)skewed;
+z2'=z2; z2'r=z2l; z2'l=z2r;
+pos5(hair,0);
+pos6(stem,0); x6r=hround(w-3.2u+.5stem);
+x6=x7; x9l=w; hook_out_points(7,8,9);  % closing hook
+p9=hook_out_path(fine,7,8,9);
+y6=h;
+ital_arch_paths2(6,4,2')skewed;
+fill pen_point(7r,6r,fine,6l)--lpath2 & p0
+ & combine(rpath2,z6l--p9)--cycle;
+math_fit(-2/3x_height#*slant+.5hair#+.5u#,ic#);
+penlabels(0,1,2,3,4,5,6,7,8,9); endchar;
+
+cmchar "Italic letter v";
+beginchar("v",8u#,x_height#,0);
+italcorr x_height#*slant;
+adjust_fit(0,0); interim superness:=more_super;
+pos0(hair,165);
+y0l=.63x_height;
+x0r=0; pos3(.5[stem,curve],-180); x3=hround(3.2u);
+z2=z3; z2r=z3l; z2l=z3r;
+hook_in_points(0,1,2)(skewed);  % opening hook
+p0=hook_in_path(fine,0,1,2)skewed;
+pos4(vair,-90); pos5(hair,0);
+x4=.5w+1.2u; x5r=w; y4r=-oo; y5=.57h;
+make_paths1(rev.l) z3e{-u,-x_height}...{right}z4e
+ ..tension atleast 1.05..{up}z5e; % left stem and arc
+p6=v_bulb_path(5,6);  % closing bulb
+math_fit(-2/3x_height#*slant+.5hair#+.5u#,2/3ic#);
+fill p0 & rpath1 & p6 & lpath1 & cycle;
+penlabels(0,1,2,3,4,5,6); endchar;
+
+cmchar "Italic letter w";
+beginchar("w",12u#,x_height#,0);
+italcorr x_height#*slant;
+adjust_fit(if monospace:-1.5u#,-u# else: 0,0 fi);
+interim superness:=more_super; begingroup
+forsuffixes $=hair,stem: shaved$:=mfudged$; save $; $=shaved$; endfor
+pos0(hair,165);
+y0l=.63x_height;
+x0r=0; z2=z3; z2r=z3l; z2l=z3r;
+pos3(.5[stem,curve],-180); x3=hround(3.2u);
+if monospace: pos1(vair,90); x1=good.x .5[x0,x2]; top y1r=h; y2=2/3h;
+ pos2(stem,0); filldraw stroke z1e{right}...{-u,-x_height}z2e;
+else:
+ hook_in_points(0,1,2)(skewed);
+ p0=hook_in_path(fine,0,1,2)skewed;
+fi  % opening hook
+pos5(hair,0);
+x6=x7; pos6(stem,0); pos7(stem,-180);
+x6=.5[x2l,w]; y6=h; y7=y6;
+ital_arch_paths3(6,4,3)skewed;
+pos8(vair,-90); pos9(thick_hair,0);
+x8=w-2.5u; x9r=w; y8r=-oo; y9=.57h;
+%filldraw circ_stroke z6e..super_arc.e(7,8)...{up}z9e;  % middle stem and arc
+make_paths7(rev.l) z7e{down}...{right}z8e..tension atleast 1.05..{up}z9e;
+p10=v_bulb_path(9,10);  % closing bulb
+fill lpath3 & p0 & combine(rpath3,rpath7) & p10 & lpath7--cycle;
+endgroup; math_fit(-2/3x_height#*slant+.5hair#+.5u#,3/4ic#);
+penlabels(0,1,2,3,4,5,6,7,8,9,10); endchar;
+
+cmchar "Italic letter x";
+beginchar("x",6.5u#+max(1.5u#,flare#),x_height#,0);
+italcorr max(1/3x_height#*slant+.5hair#+.5u#,x_height#*slant+.25u#);
+adjust_fit(0,0);
+pos0(hair,170); pos1(vair,90); pos2(.85stem,0);
+pos3(.85stem,-180); pos4(vair,-90); pos5(hair,-25);
+y0=.6h; y2=y3=.5h; y5=.4h; y1r=h+oo; y4r=-oo;
+.5[x2,x3]=.5w; x3l-x2l=stem;
+x0r=0; x5r=w;
+x1=.4[x0,x2]; x4=.55[x3,x5];
+make_paths0(rev.r) z0e{dir 80}...pulled_arc.e(1,2); % opening hook
+make_paths5(rev.l) pulled_arc.e(3,4)...{dir 78}z5e;  % closing hook
+pos3'(hair,180);
+pos8(hair,0); pos9(.9small_flare,0);
+x3'l=x3l; y3'=y3; y7r=h+oo;
+x9r=w-.6u;
+set_bulb_points(vair,.55,1, 3',7,8,9);
+make_paths3(rev.r) z3'e{up}...{right}z7e;
+p9=bulb_path(7,8,9,right);  % upper link and bulb
+pos2'(hair,0);
+pos18(hair,-180); pos19(.9small_flare,-180);
+x2'l=x2l; y2'=y2; y17r=-oo;
+x19r=.8u;
+set_bulb_points(vair,.55,1.1, 2',17,18,19);
+make_paths2(rev.r) z2'e{down}...{left}z17e;
+p19=bulb_path(17,18,19,left);
+fill lpath0 & lpath2 & p19 & combine(rpath2,rpath5)--lpath5 & lpath3
+ & p9 & combine(rpath3,rpath0)--cycle;
+math_fit(0,ic#); penlabels(0,1,2,3,4,5,6,7,8,9,16,17,18,19); endchar;
+
+cmchar "Italic letter y";
+beginchar("y",8.5u#,x_height#,desc_depth#);
+italcorr x_height#*slant+.5stem#-u#;
+adjust_fit(0,0); interim superness:=more_super;
+pos0(hair,165);
+y0l=.63x_height;
+x0r=0; pos3(.5[stem,curve],-180); x3r=hround(3.2u-.5stem);
+z2=z3; z2r=z3l; z2l=z3r;
+hook_in_points(0,1,2)(skewed);  % opening hook
+p0=hook_in_path(fine,0,1,2)skewed;
+pos2'(stem,-180); z2'=z2;
+pos5(hair,0); x4=.5[x3,x5];
+pos6(stem,0); x6r=w;
+pos7(stem,0);
+y6=h;
+ital_arch_paths3(6,4,3)skewed;
+y7=0; y8r=-d; x6=x7;
+pos9(hair,-180); pos10(.9small_flare,-180);
+x10r=2.5u;
+set_bulb_points(vair,.5,.7, 7,8,9,10);
+p10=bulb_path(8,9,10,left);  % bulb
+make_paths7(rev.r) super_arc.e(7,8);
+fill pen_point(7r,6r,fine,6l)--lpath3 & p0 & combine(rpath3,z6l--lpath7)
+ & p10 & rpath7--cycle;
+math_fit(-2/3x_height#*slant+.5hair#+.5u#,ic#-1/3x_height#*slant);
+penlabels(0,1,2,3,4,5,6,7,8,9,10); endchar;
+
+cmchar "Italic letter z";
+beginchar("z",5.5u#+max(1.5u#,stem#),x_height#,0);
+italcorr x_height#*slant+.5hair#;
+adjust_fit(if monospace:.5u#,.5u# else: 0,0 fi); pickup fine.nib;
+pos1(hair,0); pos2(stem,-90); pos3(vair,-90); pos4(hair,0);
+lft x1l=hround(u-.5hair); x2=2.5u; x3=w-2u; rt x4r=hround(w-.5u);
+top y1=.78h; top y2l=top y4=h+oo; y3=.825h;
+pos5(hair,0); pos6(vair,-90); pos7(stem,-90); pos8(hair,0);
+x5=x1; x6=2.5u; x7=w-2u; x8+.5hair=hround(w+.5hair-eps);
+bot y5=bot y7r=-oo; y6=.175h; bot y8=.31h;
+pair p; p=(z4-z5) yscaled 2;
+filldraw stroke z1e{up}...z2e{right}..z3e{right}...{p}z4e;  % upper bar
+filldraw stroke z5e{p}...z6e{right}..{right}z7e...{up}z8e;  % lower bar
+filldraw stroke z5e{p}..{p}z4e;  % diagonal
+math_fit(0,1/3x_height#*slant+.5hair#+.5u#);
+penlabels(1,2,3,4,5,6,7,8); endchar;
