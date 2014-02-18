@@ -725,7 +725,7 @@ ellipse_set(2l,3l,4l,0l); ellipse_set(2r,3r,4r,0r); y3=y3r;
 ellipse_set(7l,6l,5l,0l); ellipse_set(7r,6r,5r,0r); y6=y6r;
 interim superness:=more_super;
 make_paths1(rev.r) super_arc.e(2,3) & z3e{down}
- ..z4e---z5e..z6e{down} & super_arc.e(6,7);  % main stroke
+ ..{z5e-z4e}z0e..z6e{down} & super_arc.e(6,7);  % main stroke
 if serifs: pos1(hair,180); pos8(hair,180);
  x1l=x6r-hround(.6u); x8r=0;
  y1=min(y2r,vround 1/5[y5r,h]);

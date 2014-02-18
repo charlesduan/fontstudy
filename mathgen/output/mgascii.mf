@@ -8,9 +8,10 @@ beginchar(">",5u#,x_height#,0);
 italcorr 0;
 adjust_fit(0,0);
 numeric thickness; thickness=rule_thickness;
+disable_transforms_around((0,math_axis));
 pos1(thickness,90); pos2(thickness,90); pos3(thickness,90);
-x1=x3=0; x2=w;
 y1r=h+oo; y2=math_axis=.5[y1,y3];
+x1=x3=.5slant*y1r; x2=w;
 z=whatever[z1l,z2l]=whatever[z2r,z3r];
 fill pen_pointend(2r,1r,fine,1l,2l)--z--pen_pointend(2r,3r,fine,3l,2l)
  --pen_pointend(3l,2l,fine,2r,1r)--cycle;
@@ -23,8 +24,9 @@ beginchar("<",5u#,x_height#,0);
 italcorr 0;
 adjust_fit(0,0);
 numeric thickness; thickness=rule_thickness;
+disable_transforms_around((0,math_axis));
 pos1(thickness,90); pos2(thickness,90); pos3(thickness,90);
-x1=x3=w; x2=0;
+x1=x3=w-.5slant*y1r; x2=0;
 y1r=h+oo; y2=math_axis=.5[y1,y3];
 z=whatever[z1l,z2l]=whatever[z2r,z3r];
 fill reverse (pen_pointend(2r,1r,fine,1l,2l)--z--pen_pointend(2r,3r,fine,3l,2l)
@@ -41,6 +43,7 @@ pos1(thickness,180); pos2(thickness,180); pos3(thickness,180);
 y1=y3=.7x_height; y2=h+oo;
 x1r=0; x3l=w; x2=.5[x1,x3];
 z=whatever[z1l,z2l]=whatever[z2r,z3r];
+disable_transforms_around((0,.9y1));
 fill pen_pointend(2r,1r,fine,1l,2l)--z--pen_pointend(2r,3r,fine,3l,2l)
  --pen_pointend(3l,2l,fine,2r,1r)--cycle;
 penlabels(1,2,3);

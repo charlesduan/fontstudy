@@ -51,7 +51,7 @@ enddef;
 cmchar "Hash mark (number sign)";
 if monospace: compute_spread(.6x_height#,.7x_height#);
 else: compute_spread(.45x_height#,.55x_height#); fi
-beginchar("#",15u#,.97cap_height#,asc_depth#);
+beginchar("#",15u#,fig_height#,asc_depth#);
 italcorr (math_axis#+.5(spread#+rule_thickness#))*slant-.5u#;
 adjust_fit(0,0);
 disable_transforms_around(.5(w,h));
@@ -127,6 +127,7 @@ beginchar("'",5u#,asc_height#,0);
 italcorr asc_height#*slant+.5dot_size#-2u#;
 adjust_fit(0,0);
 x1+.5dot_size=w; y1+.5dot_size=h;
+disable_transforms_around((0,h-.5comma_depth));
 if monospace: comma(1,a,dot_size,.28u,vround 1.5comma_depth,1);  % large comma
 else: comma(1,a,dot_size,0,.88comma_depth); fi  % comma with increased jut
 penlabels(1); endchar;
@@ -160,9 +161,10 @@ italcorr h#*slant-.75u#;
 adjust_fit(0,0);
 numeric ast_flare; ast_flare=hround .9[thin_join,stem];
 numeric mid_flare; mid_flare=hround .6[thin_join,stem];
-x0=.5w; y0=h-.57w;
+x0=.5w; y0=h-(.57-.3slant)*w;
+disable_transforms_around(z0);
 for d=30 step 60 until 330:
- z[d]=z0+dir d scaled .57w;
+ z[d]=z0+dir d scaled (.57-.3slant)*w;
  z[d]mid=.4[z0,z[d]];
  numeric theta; theta=angle(z[d]-z0);
  fill
@@ -179,6 +181,7 @@ beginarithchar("+");
 pos1(rule_thickness,0); pos2(rule_thickness,0);
 pos3(rule_thickness,90); pos4(rule_thickness,90);
 x1=x2=good.x .5w; .5[y1,y2]=math_axis;
+disable_transforms_around(.5[z1,z2]);
 x3=0; x4=w; y3=y4=math_axis;
 y1-y2=x4-x3;
 fill z1r--z1l--hash_intc(1,l,3,r)--z3r--z3l--hash_intc(1,l,3,l)
@@ -191,6 +194,7 @@ define_whole_blacker_pixels(dot_diam);
 beginchar(",",5u#,dot_diam#,comma_depth#);
 adjust_fit(0,0);
 x1-.5dot_diam=hround(w-dot_diam); y1-.5dot_diam=-dot_o;
+disable_transforms_around((.5w,0));
 comma(1,a,dot_diam,0,comma_depth-dot_o);  % dot and tail
 penlabels(1); endchar;
 
@@ -198,7 +202,6 @@ cmchar "Period";
 numeric dot_diam#; dot_diam#=if monospace: 5/4 fi\\ dot_size#;
 define_whole_blacker_pixels(dot_diam);
 beginchar(".",5u#,dot_diam#,0);
-disable_transforms_around((.5w,.5h));
 adjust_fit(0,0); pickup fine.nib;
 pos1(dot_diam,0); pos2(dot_diam,90);
 x1l=hround(.5w-.5dot_diam); y2l=-dot_o; z1=z2; dot(1,2);  % dot
@@ -235,7 +238,10 @@ adjust_fit(0,0);
 pos1(dot_diam,0); pos2(dot_diam,90);
 x1r=w; y2r=h+oo; z1=z2; dot(1,2);  % upper dot
 x3=x1; y3-.5dot_diam=-dot_o;
-comma(3,a,dot_diam,0,comma_depth-dot_o);  % lower dot and tail
+begingroup
+ disable_transforms_around((.5w,0));
+ comma(3,a,dot_diam,0,comma_depth-dot_o)  % lower dot and tail
+endgroup;
 penlabels(1,2,3); endchar;
 
 cmchar "Equals sign";
@@ -246,6 +252,7 @@ adjust_fit(0,0);
 forsuffixes $=1,2,3,4: pos$(rule_thickness,90); endfor
 x1=0; x3=x1; x2=x4=w;
 y1=y2; y3=y4; y1-y3=.9spread; .5[y1,y3]=math_axis;
+disable_transforms_around((.5w,math_axis));
 fill stroke z1e--z2e;
 fill stroke z3e--z4e;
 labels(1,2,3,4); endchar;
@@ -254,6 +261,7 @@ cmchar "At sign";
 beginchar("@",14u#,asc_height#,0);
 italcorr .7asc_height#*slant-.5u#;
 numeric ital_slant; ital_slant=.286745;
+disable_transforms_around((.5w,.5h));
 adjust_fit(0,if hefty or monospace:-2u# else: 0 fi);
 pos0(fudged.hair,0); pos1(thick_vair,angle (ital_slant,1));
 pos2(fudged.stem,180); pos3(thick_vair,180+angle (ital_slant,1));
@@ -332,6 +340,7 @@ cmchar "Reverse apostrophe";
 beginchar("`",5u#,asc_height#,0);
 italcorr asc_height#*slant+.5dot_size#-2u#;
 adjust_fit(0,0);
+disable_transforms_around((0,h-comma_depth));
 x1=.5dot_size; y1+.5dot_size=h-comma_depth+o;
 if monospace: ammoc(1,a,dot_size,.28u,vround 1.5comma_depth);  % large ammoc
 else: ammoc(1,a,dot_size,0,.88comma_depth); fi  % normal ammoc

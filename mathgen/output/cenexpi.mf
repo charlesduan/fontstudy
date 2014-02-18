@@ -48,8 +48,10 @@ flare# :=    1.35 pt#;
 ess_ratio:=3;
 cap_ess#:=.9pt#;
 superness := 0.70;
+fig_height# :=    6.45pt#;
 mode_setup; font_setup;
 input mgromanu;  % Roman uppercase
+input mgitald;
 
 jut#:=1pt#;
 stem#:=.75pt#;
@@ -60,9 +62,11 @@ dot_size#:=1.25pt#;
 dot_o#:=.6o#;
 ess# :=    0.75pt#;
 font_setup;
-input mgitall;  % Roman uppercase
+input mgitall;
+input mgitalp;
 input mgpunct;
 input mgcomlig;
+input mgitalig;
 input mgascii;
 
 %

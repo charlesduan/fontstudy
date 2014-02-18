@@ -129,9 +129,9 @@ if ($DESIGN_SIZE == 1000) {
 writeDSC("EndSetup");
 
 @letters = ();
+push @letters, '#', ',';
 push @letters, qw(! " $ % & < >);
 push @letters, qw<\( \) * + . / : ; = ? @ [ \\\\ ] ^ _ { | } ~>;
-push @letters, '#', ',';
 push @letters, ('a' .. 'z', 'A' .. 'Z', '0'..'9');
 
 %named_letters = (
@@ -151,6 +151,18 @@ push @letters, ('a' .. 'z', 'A' .. 'Z', '0'..'9');
     "202" => "\\000 [ /ffl ]",
 );
 
+for (@letters) {
+    $pageno++;
+    writeDSC("Page: $pageno $pageno");
+    writeOutput("resetPage\n");
+    writeRomanLetter($_);
+    writeOutput("showpage\n");
+    $pageno++;
+    writeDSC("Page: $pageno $pageno");
+    writeOutput("resetPage\n");
+    writeItalicLetter($_);
+    writeOutput("showpage\n");
+}
 @sc_letters = ('a' .. 'z');
 for (@sc_letters) {
     $pageno++;
@@ -171,18 +183,6 @@ for (sort keys %named_letters) {
     writeDSC("Page: $pageno $pageno");
     writeOutput("resetPage\n");
     writeItalicLetter($_, split / /, $named_letters{$_}, 2);
-    writeOutput("showpage\n");
-}
-for (@letters) {
-    $pageno++;
-    writeDSC("Page: $pageno $pageno");
-    writeOutput("resetPage\n");
-    writeRomanLetter($_);
-    writeOutput("showpage\n");
-    $pageno++;
-    writeDSC("Page: $pageno $pageno");
-    writeOutput("resetPage\n");
-    writeItalicLetter($_);
     writeOutput("showpage\n");
 }
 

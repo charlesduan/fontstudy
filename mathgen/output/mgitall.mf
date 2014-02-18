@@ -131,7 +131,6 @@ p0=bulb_path(2,1,0,right);
 set_bulb_points(.8vair,.55,.75, 5,7,8,9);
 p9=bulb_path(7,8,9,left);
 make_paths2(rev.l) z2e{left}...{z89-z88}z4e;  % upper arc
-numeric f_lower_tension.l,f_lower_tension.r;
 make_paths5(rev.r) z5e{z89-z88}...{left}z7e;  % lower arc
 pos20(bar,90); pos21(bar,90);
 y20r=y21r=x_height;

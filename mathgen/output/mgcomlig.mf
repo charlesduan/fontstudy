@@ -16,6 +16,7 @@ cmchar "Closing quotes";
 beginchar(oct"230",7u#+max(2u#,dot_size#),asc_height#,0);
 italcorr asc_height#*slant+dot_size#-4.1u#;
 adjust_fit(0,0);
+disable_transforms_around((w,h-.5comma_depth));
 x1=comma_jut; y2+.5dot_size=h;
 x2=w-.5dot_size; y2=y1;
 comma(1,a,dot_size,0,.88comma_depth); % left dot and tail
@@ -37,6 +38,7 @@ cmchar "Opening quotes";
 beginchar(oct"225",7u#+max(2u#,dot_size#),asc_height#,0);
 italcorr asc_height#*slant-.1u#;
 adjust_fit(0,0);
+disable_transforms_around((0,h-comma_depth));
 x2+comma_jut=w; y1+.5dot_size=h-comma_depth+o;
 x1=.5dot_size; y2=y1;
 ammoc(1,a,dot_size,0,.88comma_depth); % left dot and tail

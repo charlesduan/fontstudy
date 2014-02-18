@@ -618,7 +618,9 @@ vardef v_bulb_path(suffix $,$$)= % |pos$| is known
 def dot(suffix $,$$) =
  fill if square_dots: (x$l,y$$l)--(x$r,y$$l)
    --(x$r,y$$r)--(x$l,y$$r)--cycle  % squarish dot
-  else: z$l...z$$l...z$r...z$$r...cycle  fi % roundish dot
+  else:
+   invert_transforms_around(z$,z$l...z$$l...z$r...z$$r...cycle)
+  fi % roundish dot
  enddef;
 
 def dot_path(suffix $,$$) =
