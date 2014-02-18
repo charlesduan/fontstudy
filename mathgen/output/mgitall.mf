@@ -585,16 +585,31 @@ penlabels(0,1,2,3,4,5,6,7,8,9,10); endchar;
 cmchar "Italic letter z";
 beginchar("z",5.5u#+max(1.5u#,stem#),x_height#,0);
 italcorr x_height#*slant+.5hair#;
-adjust_fit(if monospace:.5u#,.5u# else: 0,0 fi); pickup fine.nib;
-pos1(hair,0); pos2(stem,-90); pos3(vair,-90); pos4(hair,0);
-lft x1l=hround(u-.5hair); x2=2.5u; x3=w-2u; rt x4r=hround(w-.5u);
-top y1=.78h; top y2l=top y4=h+oo; y3=.825h;
-pos5(hair,0); pos6(vair,-90); pos7(stem,-90); pos8(hair,0);
-x5=x1; x6=2.5u; x7=w-2u; x8+.5hair=hround(w+.5hair-eps);
-bot y5=bot y7r=-oo; y6=.175h; bot y8=.31h;
+adjust_fit(if monospace:.5u#,.5u# else: 0,0 fi);
+numeric z_stroke,z_flare; z_stroke=vround(.5[stem,curve]);
+z_flare=.7[hair,stem];
+pos1(hair,-20); pos2(whatever,-105); pos3(whatever,-95); pos4(z_flare,0);
+y2l-y2r=z_stroke;
+y3l-y3r=.9vair;
+x1l=0; x2l=2.25u; x3=w-2.2u; x4r=hround(w-1.15u);
+y1r=.62h; y2l=h+oo; y4=h-.4z_flare; y3=.55[h,y1];
+pos5(z_flare,0); pos6(whatever,-90); pos7(whatever,-95); pos8(.9hair,-30);
+y7l-y7r=curve;
+y6l-y6r=vair;
+x5=1.62u; x6r=2.2u; x7r=w-1.7u; x8r=w;
+y5=.4z_flare; y7r=-oo; y6=.6y8; y8r=.39h;
 pair p; p=(z4-z5) yscaled 2;
-filldraw stroke z1e{up}...z2e{right}..z3e{right}...{p}z4e;  % upper bar
-filldraw stroke z5e{p}...z6e{right}..{right}z7e...{up}z8e;  % lower bar
-filldraw stroke z5e{p}..{p}z4e;  % diagonal
+z9=z8+whatever*(1.2u,x_height); y9=.6x_height;
+pos9(.5hair,-30);
+y4'=h+oo; x4'=x4;
+y5'=-oo; x5'=x5;
+make_paths1(rev.l) z1e{2u,x_height}...z2e{right}..z3e{right};
+make_paths6(rev.l) z6e{right}....{right}z7e...{z9e-z8e}z8e;  % lower bar
+p4=invert_transforms_around(z4, z4r{up}..z4'{left}..{down}z4l);
+p5=invert_transforms_around(z5, z5l{down}..z5'{right}..{up}z5r);
+z0=.5[z3,z6]; pos0(thick_vair,angle(z3-z6)-90);
+p405=z4{direction infinity of p4}..tension 1 and 1.5..z0l..tension 1.5..p5;
+p504=z5{direction infinity of p5}..tension 1 and 1.5..z0r..tension 1.5..p4;
+fill combine(rpath1..p4,p405)..rpath6--combine(lpath6..p5,p504)..lpath1--cycle;
 math_fit(0,1/3x_height#*slant+.5hair#+.5u#);
-penlabels(1,2,3,4,5,6,7,8); endchar;
+penlabels(1,2,3,4,4',5,6,7,8,9,0); endchar;

@@ -1707,6 +1707,13 @@ def disable_transforms_around(expr p) =
  fi
 enddef;
 
+vardef invert_transforms_around(expr p,val) =
+ if slant>0:
+  val shifted -p slanted -slant shifted p
+ else: val
+ fi
+enddef;
+
 adjust_slant=0;
 adjust_slant.less=.5;
 adjust_slant.more=-.3;
