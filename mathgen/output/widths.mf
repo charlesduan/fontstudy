@@ -49,6 +49,9 @@ if slant > 0:
          glyph_width48#:=   4.31102 pt#; % italic-0
     left_sidebearing48#:=  -0.46869 pt#; % italic-0
    right_sidebearing48#:=   1.15766 pt#; % italic-0
+         glyph_width32#:=   2.50000 pt#; % italic-040
+    left_sidebearing32#:=   0.00000 pt#; % italic-040
+   right_sidebearing32#:=  -0.00000 pt#; % italic-040
          glyph_width45#:=   2.32324 pt#; % italic-055
     left_sidebearing45#:=  -0.07004 pt#; % italic-055
    right_sidebearing45#:=   1.07674 pt#; % italic-055
@@ -444,6 +447,9 @@ else:
          glyph_width48#:=   4.42891 pt#; % roman-0
     left_sidebearing48#:=   0.25000 pt#; % roman-0
    right_sidebearing48#:=   0.32109 pt#; % roman-0
+         glyph_width32#:=   2.50000 pt#; % roman-040
+    left_sidebearing32#:=   0.00000 pt#; % roman-040
+   right_sidebearing32#:=   0.00000 pt#; % roman-040
          glyph_width45#:=   2.67917 pt#; % roman-055
     left_sidebearing45#:=   0.27995 pt#; % roman-055
    right_sidebearing45#:=   0.37083 pt#; % roman-055

@@ -19,8 +19,8 @@ while (<RAW>) {
     s/# .*//;
     # Only allow integer values, so lines must look like:
     # Parameter-name = [+-]1234567890
-    next unless /^\s*(\S+)\s*=\s*([+-]?[\d.]+)\s*$/;
-    $widths{$1} = $2;
+    next unless (/^\s*(\S+)\s*=\s*([+-]?[\d.]+(?:e[+-]?\d+)?+)\s*$/);
+    $widths{$1} = 0+$2;
     ($font, $ltr) = split /-/, $1;
     $ltr = "$font-$ltr";
     $letters{$ltr} = 1;

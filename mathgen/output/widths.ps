@@ -1653,6 +1653,12 @@ end
 
 /LeftRightWidth {
 
+CurrentLetter ( ) eq {
+    newpath 0 0 moveto rightSidebearing 0 lineto closepath
+    gsave stroke grestore
+} if
+
+
 % Draw some reference lines
 gsave
 newpath 0 0 moveto 0 200 lineto stroke
@@ -3656,28 +3662,6 @@ LeftRightWidth
 showpage
 %%Page: 5 5
 resetPage
-/CurrentLetter ( ) def
-/CurrentDesc (roman- ) def
-/ItalicSlant 0 def
-thefont
-
-CurrentLetter letterPath
-LeftRightWidth
-
-showpage
-%%Page: 6 6
-resetPage
-/CurrentLetter ( ) def
-/CurrentDesc (italic- ) def
-/ItalicSlant 0.27 def
-theitalicfont
-
-CurrentLetter letterPath
-LeftRightWidth
-
-showpage
-%%Page: 7 7
-resetPage
 /CurrentLetter (!) def
 /CurrentDesc (roman-!) def
 /ItalicSlant 0 def
@@ -3687,7 +3671,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 8 8
+%%Page: 6 6
 resetPage
 /CurrentLetter (!) def
 /CurrentDesc (italic-!) def
@@ -3698,7 +3682,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 9 9
+%%Page: 7 7
 resetPage
 /CurrentLetter (") def
 /CurrentDesc (roman-") def
@@ -3709,7 +3693,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 10 10
+%%Page: 8 8
 resetPage
 /CurrentLetter (") def
 /CurrentDesc (italic-") def
@@ -3720,7 +3704,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 11 11
+%%Page: 9 9
 resetPage
 /CurrentLetter ($) def
 /CurrentDesc (roman-$) def
@@ -3731,7 +3715,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 12 12
+%%Page: 10 10
 resetPage
 /CurrentLetter ($) def
 /CurrentDesc (italic-$) def
@@ -3742,7 +3726,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 13 13
+%%Page: 11 11
 resetPage
 /CurrentLetter (%) def
 /CurrentDesc (roman-%) def
@@ -3753,7 +3737,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 14 14
+%%Page: 12 12
 resetPage
 /CurrentLetter (%) def
 /CurrentDesc (italic-%) def
@@ -3764,7 +3748,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 15 15
+%%Page: 13 13
 resetPage
 /CurrentLetter (&) def
 /CurrentDesc (roman-&) def
@@ -3775,7 +3759,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 16 16
+%%Page: 14 14
 resetPage
 /CurrentLetter (&) def
 /CurrentDesc (italic-&) def
@@ -3786,7 +3770,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 17 17
+%%Page: 15 15
 resetPage
 /CurrentLetter (<) def
 /CurrentDesc (roman-<) def
@@ -3797,7 +3781,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 18 18
+%%Page: 16 16
 resetPage
 /CurrentLetter (<) def
 /CurrentDesc (italic-<) def
@@ -3808,7 +3792,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 19 19
+%%Page: 17 17
 resetPage
 /CurrentLetter (>) def
 /CurrentDesc (roman->) def
@@ -3819,7 +3803,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 20 20
+%%Page: 18 18
 resetPage
 /CurrentLetter (>) def
 /CurrentDesc (italic->) def
@@ -3830,7 +3814,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 21 21
+%%Page: 19 19
 resetPage
 /CurrentLetter (\() def
 /CurrentDesc (roman-\() def
@@ -3841,7 +3825,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 22 22
+%%Page: 20 20
 resetPage
 /CurrentLetter (\() def
 /CurrentDesc (italic-\() def
@@ -3852,7 +3836,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 23 23
+%%Page: 21 21
 resetPage
 /CurrentLetter (\)) def
 /CurrentDesc (roman-\)) def
@@ -3863,7 +3847,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 24 24
+%%Page: 22 22
 resetPage
 /CurrentLetter (\)) def
 /CurrentDesc (italic-\)) def
@@ -3874,7 +3858,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 25 25
+%%Page: 23 23
 resetPage
 /CurrentLetter (*) def
 /CurrentDesc (roman-*) def
@@ -3885,7 +3869,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 26 26
+%%Page: 24 24
 resetPage
 /CurrentLetter (*) def
 /CurrentDesc (italic-*) def
@@ -3896,7 +3880,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 27 27
+%%Page: 25 25
 resetPage
 /CurrentLetter (+) def
 /CurrentDesc (roman-+) def
@@ -3907,7 +3891,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 28 28
+%%Page: 26 26
 resetPage
 /CurrentLetter (+) def
 /CurrentDesc (italic-+) def
@@ -3918,7 +3902,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 29 29
+%%Page: 27 27
 resetPage
 /CurrentLetter (.) def
 /CurrentDesc (roman-.) def
@@ -3929,7 +3913,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 30 30
+%%Page: 28 28
 resetPage
 /CurrentLetter (.) def
 /CurrentDesc (italic-.) def
@@ -3940,7 +3924,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 31 31
+%%Page: 29 29
 resetPage
 /CurrentLetter (/) def
 /CurrentDesc (roman-/) def
@@ -3951,7 +3935,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 32 32
+%%Page: 30 30
 resetPage
 /CurrentLetter (/) def
 /CurrentDesc (italic-/) def
@@ -3962,7 +3946,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 33 33
+%%Page: 31 31
 resetPage
 /CurrentLetter (:) def
 /CurrentDesc (roman-:) def
@@ -3973,7 +3957,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 34 34
+%%Page: 32 32
 resetPage
 /CurrentLetter (:) def
 /CurrentDesc (italic-:) def
@@ -3984,7 +3968,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 35 35
+%%Page: 33 33
 resetPage
 /CurrentLetter (;) def
 /CurrentDesc (roman-;) def
@@ -3995,7 +3979,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 36 36
+%%Page: 34 34
 resetPage
 /CurrentLetter (;) def
 /CurrentDesc (italic-;) def
@@ -4006,7 +3990,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 37 37
+%%Page: 35 35
 resetPage
 /CurrentLetter (=) def
 /CurrentDesc (roman-=) def
@@ -4017,7 +4001,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 38 38
+%%Page: 36 36
 resetPage
 /CurrentLetter (=) def
 /CurrentDesc (italic-=) def
@@ -4028,7 +4012,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 39 39
+%%Page: 37 37
 resetPage
 /CurrentLetter (?) def
 /CurrentDesc (roman-?) def
@@ -4039,7 +4023,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 40 40
+%%Page: 38 38
 resetPage
 /CurrentLetter (?) def
 /CurrentDesc (italic-?) def
@@ -4050,7 +4034,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 41 41
+%%Page: 39 39
 resetPage
 /CurrentLetter (@) def
 /CurrentDesc (roman-@) def
@@ -4061,7 +4045,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 42 42
+%%Page: 40 40
 resetPage
 /CurrentLetter (@) def
 /CurrentDesc (italic-@) def
@@ -4072,7 +4056,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 43 43
+%%Page: 41 41
 resetPage
 /CurrentLetter ([) def
 /CurrentDesc (roman-[) def
@@ -4083,7 +4067,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 44 44
+%%Page: 42 42
 resetPage
 /CurrentLetter ([) def
 /CurrentDesc (italic-[) def
@@ -4094,7 +4078,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 45 45
+%%Page: 43 43
 resetPage
 /CurrentLetter (\\) def
 /CurrentDesc (roman-\\) def
@@ -4105,7 +4089,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 46 46
+%%Page: 44 44
 resetPage
 /CurrentLetter (\\) def
 /CurrentDesc (italic-\\) def
@@ -4116,7 +4100,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 47 47
+%%Page: 45 45
 resetPage
 /CurrentLetter (]) def
 /CurrentDesc (roman-]) def
@@ -4127,7 +4111,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 48 48
+%%Page: 46 46
 resetPage
 /CurrentLetter (]) def
 /CurrentDesc (italic-]) def
@@ -4138,7 +4122,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 49 49
+%%Page: 47 47
 resetPage
 /CurrentLetter (^) def
 /CurrentDesc (roman-^) def
@@ -4149,7 +4133,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 50 50
+%%Page: 48 48
 resetPage
 /CurrentLetter (^) def
 /CurrentDesc (italic-^) def
@@ -4160,7 +4144,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 51 51
+%%Page: 49 49
 resetPage
 /CurrentLetter (_) def
 /CurrentDesc (roman-_) def
@@ -4171,7 +4155,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 52 52
+%%Page: 50 50
 resetPage
 /CurrentLetter (_) def
 /CurrentDesc (italic-_) def
@@ -4182,7 +4166,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 53 53
+%%Page: 51 51
 resetPage
 /CurrentLetter ({) def
 /CurrentDesc (roman-{) def
@@ -4193,7 +4177,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 54 54
+%%Page: 52 52
 resetPage
 /CurrentLetter ({) def
 /CurrentDesc (italic-{) def
@@ -4204,7 +4188,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 55 55
+%%Page: 53 53
 resetPage
 /CurrentLetter (|) def
 /CurrentDesc (roman-|) def
@@ -4215,7 +4199,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 56 56
+%%Page: 54 54
 resetPage
 /CurrentLetter (|) def
 /CurrentDesc (italic-|) def
@@ -4226,7 +4210,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 57 57
+%%Page: 55 55
 resetPage
 /CurrentLetter (}) def
 /CurrentDesc (roman-}) def
@@ -4237,7 +4221,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 58 58
+%%Page: 56 56
 resetPage
 /CurrentLetter (}) def
 /CurrentDesc (italic-}) def
@@ -4248,7 +4232,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 59 59
+%%Page: 57 57
 resetPage
 /CurrentLetter (~) def
 /CurrentDesc (roman-~) def
@@ -4259,7 +4243,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 60 60
+%%Page: 58 58
 resetPage
 /CurrentLetter (~) def
 /CurrentDesc (italic-~) def
@@ -4270,7 +4254,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 61 61
+%%Page: 59 59
 resetPage
 /CurrentLetter (a) def
 /CurrentDesc (roman-a) def
@@ -4281,7 +4265,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 62 62
+%%Page: 60 60
 resetPage
 /CurrentLetter (a) def
 /CurrentDesc (italic-a) def
@@ -4292,7 +4276,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 63 63
+%%Page: 61 61
 resetPage
 /CurrentLetter (b) def
 /CurrentDesc (roman-b) def
@@ -4303,7 +4287,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 64 64
+%%Page: 62 62
 resetPage
 /CurrentLetter (b) def
 /CurrentDesc (italic-b) def
@@ -4314,7 +4298,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 65 65
+%%Page: 63 63
 resetPage
 /CurrentLetter (c) def
 /CurrentDesc (roman-c) def
@@ -4325,7 +4309,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 66 66
+%%Page: 64 64
 resetPage
 /CurrentLetter (c) def
 /CurrentDesc (italic-c) def
@@ -4336,7 +4320,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 67 67
+%%Page: 65 65
 resetPage
 /CurrentLetter (d) def
 /CurrentDesc (roman-d) def
@@ -4347,7 +4331,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 68 68
+%%Page: 66 66
 resetPage
 /CurrentLetter (d) def
 /CurrentDesc (italic-d) def
@@ -4358,7 +4342,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 69 69
+%%Page: 67 67
 resetPage
 /CurrentLetter (e) def
 /CurrentDesc (roman-e) def
@@ -4369,7 +4353,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 70 70
+%%Page: 68 68
 resetPage
 /CurrentLetter (e) def
 /CurrentDesc (italic-e) def
@@ -4380,7 +4364,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 71 71
+%%Page: 69 69
 resetPage
 /CurrentLetter (f) def
 /CurrentDesc (roman-f) def
@@ -4391,7 +4375,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 72 72
+%%Page: 70 70
 resetPage
 /CurrentLetter (f) def
 /CurrentDesc (italic-f) def
@@ -4402,7 +4386,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 73 73
+%%Page: 71 71
 resetPage
 /CurrentLetter (g) def
 /CurrentDesc (roman-g) def
@@ -4413,7 +4397,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 74 74
+%%Page: 72 72
 resetPage
 /CurrentLetter (g) def
 /CurrentDesc (italic-g) def
@@ -4424,7 +4408,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 75 75
+%%Page: 73 73
 resetPage
 /CurrentLetter (h) def
 /CurrentDesc (roman-h) def
@@ -4435,7 +4419,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 76 76
+%%Page: 74 74
 resetPage
 /CurrentLetter (h) def
 /CurrentDesc (italic-h) def
@@ -4446,7 +4430,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 77 77
+%%Page: 75 75
 resetPage
 /CurrentLetter (i) def
 /CurrentDesc (roman-i) def
@@ -4457,7 +4441,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 78 78
+%%Page: 76 76
 resetPage
 /CurrentLetter (i) def
 /CurrentDesc (italic-i) def
@@ -4468,7 +4452,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 79 79
+%%Page: 77 77
 resetPage
 /CurrentLetter (j) def
 /CurrentDesc (roman-j) def
@@ -4479,7 +4463,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 80 80
+%%Page: 78 78
 resetPage
 /CurrentLetter (j) def
 /CurrentDesc (italic-j) def
@@ -4490,7 +4474,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 81 81
+%%Page: 79 79
 resetPage
 /CurrentLetter (k) def
 /CurrentDesc (roman-k) def
@@ -4501,7 +4485,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 82 82
+%%Page: 80 80
 resetPage
 /CurrentLetter (k) def
 /CurrentDesc (italic-k) def
@@ -4512,7 +4496,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 83 83
+%%Page: 81 81
 resetPage
 /CurrentLetter (l) def
 /CurrentDesc (roman-l) def
@@ -4523,7 +4507,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 84 84
+%%Page: 82 82
 resetPage
 /CurrentLetter (l) def
 /CurrentDesc (italic-l) def
@@ -4534,7 +4518,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 85 85
+%%Page: 83 83
 resetPage
 /CurrentLetter (m) def
 /CurrentDesc (roman-m) def
@@ -4545,7 +4529,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 86 86
+%%Page: 84 84
 resetPage
 /CurrentLetter (m) def
 /CurrentDesc (italic-m) def
@@ -4556,7 +4540,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 87 87
+%%Page: 85 85
 resetPage
 /CurrentLetter (n) def
 /CurrentDesc (roman-n) def
@@ -4567,7 +4551,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 88 88
+%%Page: 86 86
 resetPage
 /CurrentLetter (n) def
 /CurrentDesc (italic-n) def
@@ -4578,7 +4562,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 89 89
+%%Page: 87 87
 resetPage
 /CurrentLetter (o) def
 /CurrentDesc (roman-o) def
@@ -4589,7 +4573,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 90 90
+%%Page: 88 88
 resetPage
 /CurrentLetter (o) def
 /CurrentDesc (italic-o) def
@@ -4600,7 +4584,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 91 91
+%%Page: 89 89
 resetPage
 /CurrentLetter (p) def
 /CurrentDesc (roman-p) def
@@ -4611,7 +4595,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 92 92
+%%Page: 90 90
 resetPage
 /CurrentLetter (p) def
 /CurrentDesc (italic-p) def
@@ -4622,7 +4606,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 93 93
+%%Page: 91 91
 resetPage
 /CurrentLetter (q) def
 /CurrentDesc (roman-q) def
@@ -4633,7 +4617,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 94 94
+%%Page: 92 92
 resetPage
 /CurrentLetter (q) def
 /CurrentDesc (italic-q) def
@@ -4644,7 +4628,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 95 95
+%%Page: 93 93
 resetPage
 /CurrentLetter (r) def
 /CurrentDesc (roman-r) def
@@ -4655,7 +4639,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 96 96
+%%Page: 94 94
 resetPage
 /CurrentLetter (r) def
 /CurrentDesc (italic-r) def
@@ -4666,7 +4650,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 97 97
+%%Page: 95 95
 resetPage
 /CurrentLetter (s) def
 /CurrentDesc (roman-s) def
@@ -4677,7 +4661,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 98 98
+%%Page: 96 96
 resetPage
 /CurrentLetter (s) def
 /CurrentDesc (italic-s) def
@@ -4688,7 +4672,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 99 99
+%%Page: 97 97
 resetPage
 /CurrentLetter (t) def
 /CurrentDesc (roman-t) def
@@ -4699,7 +4683,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 100 100
+%%Page: 98 98
 resetPage
 /CurrentLetter (t) def
 /CurrentDesc (italic-t) def
@@ -4710,7 +4694,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 101 101
+%%Page: 99 99
 resetPage
 /CurrentLetter (u) def
 /CurrentDesc (roman-u) def
@@ -4721,7 +4705,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 102 102
+%%Page: 100 100
 resetPage
 /CurrentLetter (u) def
 /CurrentDesc (italic-u) def
@@ -4732,7 +4716,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 103 103
+%%Page: 101 101
 resetPage
 /CurrentLetter (v) def
 /CurrentDesc (roman-v) def
@@ -4743,7 +4727,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 104 104
+%%Page: 102 102
 resetPage
 /CurrentLetter (v) def
 /CurrentDesc (italic-v) def
@@ -4754,7 +4738,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 105 105
+%%Page: 103 103
 resetPage
 /CurrentLetter (w) def
 /CurrentDesc (roman-w) def
@@ -4765,7 +4749,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 106 106
+%%Page: 104 104
 resetPage
 /CurrentLetter (w) def
 /CurrentDesc (italic-w) def
@@ -4776,7 +4760,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 107 107
+%%Page: 105 105
 resetPage
 /CurrentLetter (x) def
 /CurrentDesc (roman-x) def
@@ -4787,7 +4771,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 108 108
+%%Page: 106 106
 resetPage
 /CurrentLetter (x) def
 /CurrentDesc (italic-x) def
@@ -4798,7 +4782,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 109 109
+%%Page: 107 107
 resetPage
 /CurrentLetter (y) def
 /CurrentDesc (roman-y) def
@@ -4809,7 +4793,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 110 110
+%%Page: 108 108
 resetPage
 /CurrentLetter (y) def
 /CurrentDesc (italic-y) def
@@ -4820,7 +4804,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 111 111
+%%Page: 109 109
 resetPage
 /CurrentLetter (z) def
 /CurrentDesc (roman-z) def
@@ -4831,7 +4815,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 112 112
+%%Page: 110 110
 resetPage
 /CurrentLetter (z) def
 /CurrentDesc (italic-z) def
@@ -4842,7 +4826,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 113 113
+%%Page: 111 111
 resetPage
 /CurrentLetter (A) def
 /CurrentDesc (roman-A) def
@@ -4853,7 +4837,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 114 114
+%%Page: 112 112
 resetPage
 /CurrentLetter (A) def
 /CurrentDesc (italic-A) def
@@ -4864,7 +4848,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 115 115
+%%Page: 113 113
 resetPage
 /CurrentLetter (B) def
 /CurrentDesc (roman-B) def
@@ -4875,7 +4859,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 116 116
+%%Page: 114 114
 resetPage
 /CurrentLetter (B) def
 /CurrentDesc (italic-B) def
@@ -4886,7 +4870,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 117 117
+%%Page: 115 115
 resetPage
 /CurrentLetter (C) def
 /CurrentDesc (roman-C) def
@@ -4897,7 +4881,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 118 118
+%%Page: 116 116
 resetPage
 /CurrentLetter (C) def
 /CurrentDesc (italic-C) def
@@ -4908,7 +4892,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 119 119
+%%Page: 117 117
 resetPage
 /CurrentLetter (D) def
 /CurrentDesc (roman-D) def
@@ -4919,7 +4903,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 120 120
+%%Page: 118 118
 resetPage
 /CurrentLetter (D) def
 /CurrentDesc (italic-D) def
@@ -4930,7 +4914,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 121 121
+%%Page: 119 119
 resetPage
 /CurrentLetter (E) def
 /CurrentDesc (roman-E) def
@@ -4941,7 +4925,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 122 122
+%%Page: 120 120
 resetPage
 /CurrentLetter (E) def
 /CurrentDesc (italic-E) def
@@ -4952,7 +4936,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 123 123
+%%Page: 121 121
 resetPage
 /CurrentLetter (F) def
 /CurrentDesc (roman-F) def
@@ -4963,7 +4947,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 124 124
+%%Page: 122 122
 resetPage
 /CurrentLetter (F) def
 /CurrentDesc (italic-F) def
@@ -4974,7 +4958,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 125 125
+%%Page: 123 123
 resetPage
 /CurrentLetter (G) def
 /CurrentDesc (roman-G) def
@@ -4985,7 +4969,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 126 126
+%%Page: 124 124
 resetPage
 /CurrentLetter (G) def
 /CurrentDesc (italic-G) def
@@ -4996,7 +4980,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 127 127
+%%Page: 125 125
 resetPage
 /CurrentLetter (H) def
 /CurrentDesc (roman-H) def
@@ -5007,7 +4991,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 128 128
+%%Page: 126 126
 resetPage
 /CurrentLetter (H) def
 /CurrentDesc (italic-H) def
@@ -5018,7 +5002,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 129 129
+%%Page: 127 127
 resetPage
 /CurrentLetter (I) def
 /CurrentDesc (roman-I) def
@@ -5029,7 +5013,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 130 130
+%%Page: 128 128
 resetPage
 /CurrentLetter (I) def
 /CurrentDesc (italic-I) def
@@ -5040,7 +5024,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 131 131
+%%Page: 129 129
 resetPage
 /CurrentLetter (J) def
 /CurrentDesc (roman-J) def
@@ -5051,7 +5035,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 132 132
+%%Page: 130 130
 resetPage
 /CurrentLetter (J) def
 /CurrentDesc (italic-J) def
@@ -5062,7 +5046,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 133 133
+%%Page: 131 131
 resetPage
 /CurrentLetter (K) def
 /CurrentDesc (roman-K) def
@@ -5073,7 +5057,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 134 134
+%%Page: 132 132
 resetPage
 /CurrentLetter (K) def
 /CurrentDesc (italic-K) def
@@ -5084,7 +5068,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 135 135
+%%Page: 133 133
 resetPage
 /CurrentLetter (L) def
 /CurrentDesc (roman-L) def
@@ -5095,7 +5079,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 136 136
+%%Page: 134 134
 resetPage
 /CurrentLetter (L) def
 /CurrentDesc (italic-L) def
@@ -5106,7 +5090,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 137 137
+%%Page: 135 135
 resetPage
 /CurrentLetter (M) def
 /CurrentDesc (roman-M) def
@@ -5117,7 +5101,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 138 138
+%%Page: 136 136
 resetPage
 /CurrentLetter (M) def
 /CurrentDesc (italic-M) def
@@ -5128,7 +5112,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 139 139
+%%Page: 137 137
 resetPage
 /CurrentLetter (N) def
 /CurrentDesc (roman-N) def
@@ -5139,7 +5123,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 140 140
+%%Page: 138 138
 resetPage
 /CurrentLetter (N) def
 /CurrentDesc (italic-N) def
@@ -5150,7 +5134,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 141 141
+%%Page: 139 139
 resetPage
 /CurrentLetter (O) def
 /CurrentDesc (roman-O) def
@@ -5161,7 +5145,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 142 142
+%%Page: 140 140
 resetPage
 /CurrentLetter (O) def
 /CurrentDesc (italic-O) def
@@ -5172,7 +5156,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 143 143
+%%Page: 141 141
 resetPage
 /CurrentLetter (P) def
 /CurrentDesc (roman-P) def
@@ -5183,7 +5167,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 144 144
+%%Page: 142 142
 resetPage
 /CurrentLetter (P) def
 /CurrentDesc (italic-P) def
@@ -5194,7 +5178,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 145 145
+%%Page: 143 143
 resetPage
 /CurrentLetter (Q) def
 /CurrentDesc (roman-Q) def
@@ -5205,7 +5189,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 146 146
+%%Page: 144 144
 resetPage
 /CurrentLetter (Q) def
 /CurrentDesc (italic-Q) def
@@ -5216,7 +5200,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 147 147
+%%Page: 145 145
 resetPage
 /CurrentLetter (R) def
 /CurrentDesc (roman-R) def
@@ -5227,7 +5211,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 148 148
+%%Page: 146 146
 resetPage
 /CurrentLetter (R) def
 /CurrentDesc (italic-R) def
@@ -5238,7 +5222,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 149 149
+%%Page: 147 147
 resetPage
 /CurrentLetter (S) def
 /CurrentDesc (roman-S) def
@@ -5249,7 +5233,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 150 150
+%%Page: 148 148
 resetPage
 /CurrentLetter (S) def
 /CurrentDesc (italic-S) def
@@ -5260,7 +5244,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 151 151
+%%Page: 149 149
 resetPage
 /CurrentLetter (T) def
 /CurrentDesc (roman-T) def
@@ -5271,7 +5255,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 152 152
+%%Page: 150 150
 resetPage
 /CurrentLetter (T) def
 /CurrentDesc (italic-T) def
@@ -5282,7 +5266,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 153 153
+%%Page: 151 151
 resetPage
 /CurrentLetter (U) def
 /CurrentDesc (roman-U) def
@@ -5293,7 +5277,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 154 154
+%%Page: 152 152
 resetPage
 /CurrentLetter (U) def
 /CurrentDesc (italic-U) def
@@ -5304,7 +5288,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 155 155
+%%Page: 153 153
 resetPage
 /CurrentLetter (V) def
 /CurrentDesc (roman-V) def
@@ -5315,7 +5299,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 156 156
+%%Page: 154 154
 resetPage
 /CurrentLetter (V) def
 /CurrentDesc (italic-V) def
@@ -5326,7 +5310,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 157 157
+%%Page: 155 155
 resetPage
 /CurrentLetter (W) def
 /CurrentDesc (roman-W) def
@@ -5337,7 +5321,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 158 158
+%%Page: 156 156
 resetPage
 /CurrentLetter (W) def
 /CurrentDesc (italic-W) def
@@ -5348,7 +5332,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 159 159
+%%Page: 157 157
 resetPage
 /CurrentLetter (X) def
 /CurrentDesc (roman-X) def
@@ -5359,7 +5343,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 160 160
+%%Page: 158 158
 resetPage
 /CurrentLetter (X) def
 /CurrentDesc (italic-X) def
@@ -5370,7 +5354,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 161 161
+%%Page: 159 159
 resetPage
 /CurrentLetter (Y) def
 /CurrentDesc (roman-Y) def
@@ -5381,7 +5365,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 162 162
+%%Page: 160 160
 resetPage
 /CurrentLetter (Y) def
 /CurrentDesc (italic-Y) def
@@ -5392,7 +5376,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 163 163
+%%Page: 161 161
 resetPage
 /CurrentLetter (Z) def
 /CurrentDesc (roman-Z) def
@@ -5403,7 +5387,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 164 164
+%%Page: 162 162
 resetPage
 /CurrentLetter (Z) def
 /CurrentDesc (italic-Z) def
@@ -5414,7 +5398,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 165 165
+%%Page: 163 163
 resetPage
 /CurrentLetter (0) def
 /CurrentDesc (roman-0) def
@@ -5425,7 +5409,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 166 166
+%%Page: 164 164
 resetPage
 /CurrentLetter (0) def
 /CurrentDesc (italic-0) def
@@ -5436,7 +5420,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 167 167
+%%Page: 165 165
 resetPage
 /CurrentLetter (1) def
 /CurrentDesc (roman-1) def
@@ -5447,7 +5431,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 168 168
+%%Page: 166 166
 resetPage
 /CurrentLetter (1) def
 /CurrentDesc (italic-1) def
@@ -5458,7 +5442,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 169 169
+%%Page: 167 167
 resetPage
 /CurrentLetter (2) def
 /CurrentDesc (roman-2) def
@@ -5469,7 +5453,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 170 170
+%%Page: 168 168
 resetPage
 /CurrentLetter (2) def
 /CurrentDesc (italic-2) def
@@ -5480,7 +5464,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 171 171
+%%Page: 169 169
 resetPage
 /CurrentLetter (3) def
 /CurrentDesc (roman-3) def
@@ -5491,7 +5475,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 172 172
+%%Page: 170 170
 resetPage
 /CurrentLetter (3) def
 /CurrentDesc (italic-3) def
@@ -5502,7 +5486,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 173 173
+%%Page: 171 171
 resetPage
 /CurrentLetter (4) def
 /CurrentDesc (roman-4) def
@@ -5513,7 +5497,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 174 174
+%%Page: 172 172
 resetPage
 /CurrentLetter (4) def
 /CurrentDesc (italic-4) def
@@ -5524,7 +5508,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 175 175
+%%Page: 173 173
 resetPage
 /CurrentLetter (5) def
 /CurrentDesc (roman-5) def
@@ -5535,7 +5519,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 176 176
+%%Page: 174 174
 resetPage
 /CurrentLetter (5) def
 /CurrentDesc (italic-5) def
@@ -5546,7 +5530,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 177 177
+%%Page: 175 175
 resetPage
 /CurrentLetter (6) def
 /CurrentDesc (roman-6) def
@@ -5557,7 +5541,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 178 178
+%%Page: 176 176
 resetPage
 /CurrentLetter (6) def
 /CurrentDesc (italic-6) def
@@ -5568,7 +5552,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 179 179
+%%Page: 177 177
 resetPage
 /CurrentLetter (7) def
 /CurrentDesc (roman-7) def
@@ -5579,7 +5563,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 180 180
+%%Page: 178 178
 resetPage
 /CurrentLetter (7) def
 /CurrentDesc (italic-7) def
@@ -5590,7 +5574,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 181 181
+%%Page: 179 179
 resetPage
 /CurrentLetter (8) def
 /CurrentDesc (roman-8) def
@@ -5601,7 +5585,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 182 182
+%%Page: 180 180
 resetPage
 /CurrentLetter (8) def
 /CurrentDesc (italic-8) def
@@ -5612,7 +5596,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 183 183
+%%Page: 181 181
 resetPage
 /CurrentLetter (9) def
 /CurrentDesc (roman-9) def
@@ -5623,7 +5607,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 184 184
+%%Page: 182 182
 resetPage
 /CurrentLetter (9) def
 /CurrentDesc (italic-9) def
@@ -5634,7 +5618,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 185 185
+%%Page: 183 183
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-a) def
@@ -5645,7 +5629,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 186 186
+%%Page: 184 184
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-b) def
@@ -5656,7 +5640,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 187 187
+%%Page: 185 185
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-c) def
@@ -5667,7 +5651,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 188 188
+%%Page: 186 186
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-d) def
@@ -5678,7 +5662,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 189 189
+%%Page: 187 187
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-e) def
@@ -5689,7 +5673,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 190 190
+%%Page: 188 188
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-f) def
@@ -5700,7 +5684,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 191 191
+%%Page: 189 189
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-g) def
@@ -5711,7 +5695,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 192 192
+%%Page: 190 190
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-h) def
@@ -5722,7 +5706,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 193 193
+%%Page: 191 191
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-i) def
@@ -5733,7 +5717,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 194 194
+%%Page: 192 192
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-j) def
@@ -5744,7 +5728,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 195 195
+%%Page: 193 193
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-k) def
@@ -5755,7 +5739,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 196 196
+%%Page: 194 194
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-l) def
@@ -5766,7 +5750,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 197 197
+%%Page: 195 195
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-m) def
@@ -5777,7 +5761,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 198 198
+%%Page: 196 196
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-n) def
@@ -5788,7 +5772,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 199 199
+%%Page: 197 197
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-o) def
@@ -5799,7 +5783,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 200 200
+%%Page: 198 198
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-p) def
@@ -5810,7 +5794,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 201 201
+%%Page: 199 199
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-q) def
@@ -5821,7 +5805,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 202 202
+%%Page: 200 200
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-r) def
@@ -5832,7 +5816,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 203 203
+%%Page: 201 201
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-s) def
@@ -5843,7 +5827,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 204 204
+%%Page: 202 202
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-t) def
@@ -5854,7 +5838,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 205 205
+%%Page: 203 203
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-u) def
@@ -5865,7 +5849,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 206 206
+%%Page: 204 204
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-v) def
@@ -5876,7 +5860,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 207 207
+%%Page: 205 205
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-w) def
@@ -5887,7 +5871,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 208 208
+%%Page: 206 206
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-x) def
@@ -5898,7 +5882,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 209 209
+%%Page: 207 207
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-y) def
@@ -5909,7 +5893,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 210 210
+%%Page: 208 208
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (sc-z) def
@@ -5944,6 +5928,28 @@ LeftRightWidth
 showpage
 %%Page: 3 3
 resetPage
+/CurrentLetter (\040) def
+/CurrentDesc (roman-040) def
+/ItalicSlant 0 def
+thefont
+
+CurrentLetter letterPath
+LeftRightWidth
+
+showpage
+%%Page: 4 4
+resetPage
+/CurrentLetter (\040) def
+/CurrentDesc (italic-040) def
+/ItalicSlant 0.27 def
+theitalicfont
+
+CurrentLetter letterPath
+LeftRightWidth
+
+showpage
+%%Page: 5 5
+resetPage
 /CurrentLetter (\055) def
 /CurrentDesc (roman-055) def
 /ItalicSlant 0 def
@@ -5953,7 +5959,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 4 4
+%%Page: 6 6
 resetPage
 /CurrentLetter (\055) def
 /CurrentDesc (italic-055) def
@@ -5964,7 +5970,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 5 5
+%%Page: 7 7
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (roman-200) def
@@ -5975,7 +5981,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 6 6
+%%Page: 8 8
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (italic-200) def
@@ -5986,7 +5992,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 7 7
+%%Page: 9 9
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (roman-201) def
@@ -5997,7 +6003,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 8 8
+%%Page: 10 10
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (italic-201) def
@@ -6008,7 +6014,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 9 9
+%%Page: 11 11
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (roman-202) def
@@ -6019,7 +6025,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 10 10
+%%Page: 12 12
 resetPage
 /CurrentLetter (\000) def
 /CurrentDesc (italic-202) def
@@ -6030,7 +6036,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 11 11
+%%Page: 13 13
 resetPage
 /CurrentLetter (\261) def
 /CurrentDesc (roman-222) def
@@ -6041,7 +6047,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 12 12
+%%Page: 14 14
 resetPage
 /CurrentLetter (\261) def
 /CurrentDesc (italic-222) def
@@ -6052,7 +6058,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 13 13
+%%Page: 15 15
 resetPage
 /CurrentLetter (\252) def
 /CurrentDesc (roman-225) def
@@ -6063,7 +6069,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 14 14
+%%Page: 16 16
 resetPage
 /CurrentLetter (\252) def
 /CurrentDesc (italic-225) def
@@ -6074,7 +6080,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 15 15
+%%Page: 17 17
 resetPage
 /CurrentLetter (\272) def
 /CurrentDesc (roman-230) def
@@ -6085,7 +6091,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 16 16
+%%Page: 18 18
 resetPage
 /CurrentLetter (\272) def
 /CurrentDesc (italic-230) def
@@ -6096,7 +6102,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 17 17
+%%Page: 19 19
 resetPage
 /CurrentLetter (\256) def
 /CurrentDesc (roman-231) def
@@ -6107,7 +6113,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 18 18
+%%Page: 20 20
 resetPage
 /CurrentLetter (\256) def
 /CurrentDesc (italic-231) def
@@ -6118,7 +6124,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 19 19
+%%Page: 21 21
 resetPage
 /CurrentLetter (\320) def
 /CurrentDesc (roman-233) def
@@ -6129,7 +6135,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 20 20
+%%Page: 22 22
 resetPage
 /CurrentLetter (\320) def
 /CurrentDesc (italic-233) def
@@ -6140,7 +6146,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 21 21
+%%Page: 23 23
 resetPage
 /CurrentLetter (\257) def
 /CurrentDesc (roman-234) def
@@ -6151,7 +6157,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 22 22
+%%Page: 24 24
 resetPage
 /CurrentLetter (\257) def
 /CurrentDesc (italic-234) def
@@ -6162,7 +6168,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 23 23
+%%Page: 25 25
 resetPage
 /CurrentLetter (\247) def
 /CurrentDesc (roman-247) def
@@ -6173,7 +6179,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 24 24
+%%Page: 26 26
 resetPage
 /CurrentLetter (\247) def
 /CurrentDesc (italic-247) def
@@ -6184,7 +6190,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 25 25
+%%Page: 27 27
 resetPage
 /CurrentLetter (\266) def
 /CurrentDesc (roman-266) def
@@ -6195,7 +6201,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 26 26
+%%Page: 28 28
 resetPage
 /CurrentLetter (\266) def
 /CurrentDesc (italic-266) def
@@ -6206,7 +6212,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 27 27
+%%Page: 29 29
 resetPage
 /CurrentLetter (\140) def
 /CurrentDesc (roman-`) def
@@ -6217,7 +6223,7 @@ CurrentLetter letterPath
 LeftRightWidth
 
 showpage
-%%Page: 28 28
+%%Page: 30 30
 resetPage
 /CurrentLetter (\140) def
 /CurrentDesc (italic-`) def
@@ -6229,5 +6235,5 @@ LeftRightWidth
 
 showpage
 %%Trailer
-%%Pages: 28
+%%Pages: 30
 %%EOF

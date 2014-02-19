@@ -12,6 +12,12 @@
 
 /LeftRightWidth {
 
+CurrentLetter ( ) eq {
+    newpath 0 0 moveto rightSidebearing 0 lineto closepath
+    gsave stroke grestore
+} if
+
+
 % Draw some reference lines
 gsave
 newpath 0 0 moveto 0 200 lineto stroke
