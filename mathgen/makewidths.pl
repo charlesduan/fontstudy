@@ -75,16 +75,11 @@ print $mf_fh <<EOF;
 %
 EOF
 
-print $mf_fh "if slant > 0:\n";
-print_chars('italic', $mf_fh);
-
-print $mf_fh "elseif small_caps:\n";
 print_chars('sc', $mf_fh);
 
-print $mf_fh "else:\n";
-print_chars('roman', $mf_fh);
+print_chars('italic', $mf_fh);
 
-print $mf_fh "fi\n";
+print_chars('roman', $mf_fh);
 
 close $mf_fh;
 
@@ -154,8 +149,8 @@ sub print_chars {
         for my $param (qw(glyph-width left-sidebearing right-sidebearing)) {
             my $mf_param = $param; $mf_param =~ s/-/_/g;
             if (exists $widths{"$char-$param"}) {
-                printf $fh "% 20s%d#:=% 10.5f pt#; %% %s\n",
-                    $mf_param, $num,
+                printf $fh "% 20s%d%s#:=% 10.5f pt#; %% %s\n",
+                    $mf_param, $num, $font,
                     $widths{"$char-$param"} * $OUT_DESIGN_SIZE / $DESIGN_SIZE,
                     $char;
             }

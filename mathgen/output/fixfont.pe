@@ -1,0 +1,33 @@
+#!/usr/local/bin/fontforge
+
+Open($1)
+
+
+AddLookup("Ligatures", "gsub_ligature", 0, [["liga", [["latn", ["dflt"]]]]]);
+AddLookupSubtable("Ligatures", "Ligatures 0");
+Select("ffi"); AddPosSub("Ligatures 0", "f f i");
+               AddPosSub("Ligatures 0", "ff i");
+               AddPosSub("Ligatures 0", "f fi");
+Select("ffl"); AddPosSub("Ligatures 0", "f f l");
+               AddPosSub("Ligatures 0", "ff l");
+               AddPosSub("Ligatures 0", "f fl");
+Select("ff");  AddPosSub("Ligatures 0", "f f");
+Select("fi");  AddPosSub("Ligatures 0", "f i");
+Select("fl");  AddPosSub("Ligatures 0", "f l");
+
+AddLookup("Caps to Small Caps", "gsub_single", 0, \
+    [["c2sc", [["latn", ["dflt"]]]]]);
+AddLookupSubtable("Caps to Small Caps", "Caps to Small Caps 0");
+AddLookup("Small Caps", "gsub_single", 0, [["smcp", [["latn", ["dflt"]]]]]);
+AddLookupSubtable("Small Caps", "Small Caps 0");
+
+i=Ord('A',0);
+while (i<=Ord('Z',0))
+    Select(i);
+    AddPosSub("Caps to Small Caps 0", Chr(i+32) + ".sc");
+    Select(i+32);
+    AddPosSub("Small Caps 0", Chr(i+32) + ".sc");
+    ++i;
+endloop
+
+Generate($1:r + ".otf")

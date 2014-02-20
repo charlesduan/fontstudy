@@ -73,6 +73,7 @@ input mgascii;
 % Small caps
 %
 small_caps:=true;
+orig_cap_height#:=cap_height#;
 input scparams;
 math_fitting := false;
 arc_join := .2;

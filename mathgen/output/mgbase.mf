@@ -9,11 +9,28 @@ mgbase:=1; % when |mgbase| is known, this file has been input
 let cmchar=\; % `|cmchar|' should precede each character
 let generate=input; % `|generate|' should follow the parameters
 
+vardef sc_ital.glyph_width = glyph_width[charcode]sc# enddef;
+vardef sc_ital.left_sidebearing =
+    left_sidebearing[charcode]italic# * cap_height# / orig_cap_height#
+enddef;
+vardef sc_ital.right_sidebearing =
+    right_sidebearing[charcode]italic# * cap_height# / orig_cap_height#
+enddef;
+vardef get_metric@#=
+ if small_caps:
+    if slant>0: sc_ital@# else: @#[charcode]sc# fi
+ elseif slant>0:
+    @#[charcode]italic#
+ else:
+    @#[charcode]roman#
+ fi
+enddef;
+
 def beginchar(expr c,w_sharp,h_sharp,d_sharp) =
  begingroup
  charcode:=if known c: byte c else: 0 fi;
- if known glyph_width[charcode]#:
-  charwd:=glyph_width[charcode]#;
+ if known get_metric.glyph_width:
+  charwd:=get_metric.glyph_width;
  else:
   charwd:=w_sharp;
  fi
@@ -1379,14 +1396,14 @@ def do_expansion(expr expansion_factor) =
 enddef;
 
 def normal_adjust_fit(expr left_adjustment,right_adjustment) =
- if known glyph_width[charcode]#:
+ if known get_metric.glyph_width:
   numeric charwd_in; charwd_in=charwd;
-  l:=-hround(left_sidebearing[charcode]#*hppp)-letter_fit;
+  l:=-hround(get_metric.left_sidebearing*hppp)-letter_fit;
   interim xoffset:=-l;
-  charwd:=charwd+2letter_fit#+left_sidebearing[charcode]#+
-    right_sidebearing[charcode]#;
+  charwd:=charwd+2letter_fit#+get_metric.left_sidebearing+
+    get_metric.right_sidebearing;
   r:=l+hround(charwd*hppp)-shrink_fit;
-  w:=r-hround(right_sidebearing[charcode]#*hppp)-letter_fit;
+  w:=r-hround(get_metric.right_sidebearing*hppp)-letter_fit;
   do_expansion(w/(charwd_in*hppp));
  else:
   numeric charwd_in; charwd_in=charwd;
