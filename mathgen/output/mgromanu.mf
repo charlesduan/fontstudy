@@ -492,7 +492,7 @@ else: penpos5(whatever,0); penpos6(whatever,90);
  p1=serif_path(5,6,a,1/3,x5l,left);
  p5=pen_point(5r,5r,tiny,1l);
  p6=pen_pointend(5l,6l,tiny,4r,3r);
- fill p3--z6r--p5--combine(p1,z1l--point 0 of p2)
+ fill p3--z6r--p5--combine(p1--p6,z1l--point 0 of p2)
   & var_combine(p2--z1r,p1--p6)--cycle;
 fi
 math_fit(0,max(.5ic#-.5u#,0)); penlabels(1,1',2,3,4,4',5,6,7); endchar;
@@ -537,7 +537,7 @@ make_paths1(rev.r) pulled_arc.e(4,5) &
 p1=serif_path(1,0,a,1/3,cap_jut,left);
 p2=dish_serif_path(2,0',c,1/3,slant_adjusted_jut(cap_jut),
  d,1/3,1.1cap_jut); % lower serif
-p3=internal_serif_path(1,0,3l,b,1/3,cap_jut);
+p3=internal_serif_path(1,0,3l,b,1/3,min(cap_jut,x4l-x1r-eps));
 fill p2--z0'r--rpath1--p1--cycle;
 unfill p3--lpath1--z0r--cycle;
 math_fit(0,ic#-2.5u#); penlabels(0,0',1,2,3,4,5,6,7); endchar;
@@ -569,6 +569,7 @@ else:
  x6=x3+.1u-slant*(y6-y3); y6r=vround(d+oo+.5vair);
  z5=z3+whatever*(-1,1)=z6+whatever*(1,1);
  y7l=-d; x7l=.58[x6l,x8l]-y7l*slant; y8=-tiny; x8l=w;
+ if y7r>y8-thick_vair: y7r:=y8-thick_vair; y7:=.5[y7r,y7l]; fi
  z7'r-z8r=whatever*(z7l-z8l); y7'r=y7r; x7r:=x7'r;
  pos9(.7[hair,stem],0); z9=.5[z6,z7];
  make_paths3(rev.r) z3e{left}...z5e{up}...{right}z6e;
@@ -605,11 +606,13 @@ make_paths1(rev.r) pulled_arc.e(4,5) & pulled_arc.e(5,6)  % lobe
 if serifs: pos6'(.6vair,-90);
  pos8(cap_band,220); pos9(.85cap_curve,-115); pos10(hair,0);
  pos8'(.85cap_curve,200);
+ x10r=w; tiny.top y10=.45[y2,y7];
+ x9r=.25[x5,x5r];
+ y9r=-o;
+ if y9l>y10-thick_vair: y9l:=y10-thick_vair; y9:=.5[y9r,y9l]; fi
  y8=1/5[y6',y9];
  y8'=2/3[y6',y9];
  z6'r=z6l + down*vair;
- x9r=.25[x5,x5r];
- y9r=-o; x10r=w; tiny.top y10=.45[y2,y7];
  z8=z6'+whatever*(z9-z6') xscaled 2.5;
  z8'=z6'+whatever*(z9-z6') xscaled 1.05;
  make_paths2(rev.l) z6'e{right}...z8e...z8'e...z9e{right}

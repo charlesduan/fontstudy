@@ -119,7 +119,7 @@ fill p1--z6r--z4l--p12
  --combine(p11,subpath (6,infinity) of p2)
  --z5l--pen_rlend3(left,crisp,right)
  --z6l--cycle;
-unfill z5r--combine(subpath(0,6) of p2, z11l--z4r)--cycle;
+unfill z5r--combine(subpath(0,6) of p2, (x11l,y2)--z4r)--cycle;
 penlabels(1,2,3,4,5,6,11,12); endchar;
 
 cmchar "The ligature ffi";

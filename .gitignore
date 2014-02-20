@@ -2,3 +2,8 @@ mathgen/tests-done.txt
 *.swp
 *.swo
 *.log
+*.log
+*.afm
+*.dvi
+*.*gf
+*.tfm

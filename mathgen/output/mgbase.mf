@@ -30,7 +30,7 @@ def beginchar(expr c,w_sharp,h_sharp,d_sharp) =
  begingroup
  charcode:=if known c: byte c else: 0 fi;
  if known get_metric.glyph_width:
-  charwd:=get_metric.glyph_width;
+  charwd:=get_metric.glyph_width if known width_expansion: *width_expansion fi;
  else:
   charwd:=w_sharp;
  fi
