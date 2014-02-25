@@ -173,7 +173,7 @@ bot_thickness=max(fine.breadth,vround(.8vair-vair_corr));
 side_thickness=max(fine.breadth,hround 1/3[stem,curve]);
 pull=min(.25,1.5superpull);
 pos3(side_thickness,-180); pos4(bot_thickness,-90);
-pos5(min(side_thickness,1.7u),0); pos6(.7vair,90);
+pos5(side_thickness,0); pos6(.7vair,90);
 pos7(thin_join,180);
 x3r=w-rt x5r=0;
 .5[x4,x6]=.53[x3r,x5r]; x4-x6=u*slant;
@@ -255,7 +255,7 @@ if hefty: mid_thickness=vround 2/3vair; upper_side=hround(stem-3stem_corr);
  filldraw stroke pulled_arc.e(3,8)
   & pulled_arc.e(8,1);  % right half of upper bowl
 else: theta=90-angle(14u,h); slope:=-h/14u;
- upper_side=max(fine.breadth,hround(.5[hair,stem]-stem_corr));
+ upper_side=max(fine.breadth,hround(.6[hair,stem]-stem_corr));
  lower_side=hround(.5[hair,stem]+stem_corr);
  if lower_side>1.2upper_side: upper_side:=lower_side; fi
  pos1(top_thickness,-90); pos6(bot_thickness,-90);
@@ -291,7 +291,7 @@ bot_thickness=max(fine.breadth,.8vair);
 side_thickness=max(fine.breadth,hround 1/3[stem,curve]);
 pull=min(.25,1.5superpull);
 pos3(side_thickness,0); pos4(top_thickness,90);
-pos5(min(1.7u,side_thickness),180); pos6(.8vair,270);
+pos5(side_thickness,180); pos6(.8vair,270);
 w-x3r=x5r=0;
 .5[x4,x6]=.5w-.2u; x6-x4=2u*slant;
 y2r=-oo; y3=.5[y2r,y4r]; y4r=h+oo;

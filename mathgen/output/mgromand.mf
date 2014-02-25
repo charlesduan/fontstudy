@@ -197,7 +197,7 @@ bot_thickness=max(fine.breadth,vround(slab-vair_corr));
 side_thickness=max(fine.breadth,hround 1/3[curve,cap_curve]);
 pull=min(.25,1.5superpull);
 pos3(side_thickness,-180); pos4(bot_thickness,-90);
-pos5(min(1.7u,side_thickness),0); pos6(vair,90);
+pos5(side_thickness,0); pos6(vair,90);
 x3r=w-rt x5r=0;
 x4=x6-.1u=.5w;
 y2r=h+oo; y3=.5[y2r,y4r]; y4r=-oo;
@@ -267,8 +267,8 @@ beginchar("8",9u#,fig_height#,0);
 italcorr fig_height#*slant-.5u#;
 adjust_fit(0,0);
 numeric top_thickness,mid_thickness,bot_thickness,upper_side,lower_side,theta;
-top_thickness=max(fine.breadth,vround(slab-2vair_corr));
-bot_thickness=max(fine.breadth,vround(slab-vair_corr));
+top_thickness=max(fine.breadth,vround(vair-2vair_corr));
+bot_thickness=max(fine.breadth,vround(vair-vair_corr));
 x0=.5w; y0=.53h;
 if hefty: mid_thickness=vround 2/3vair; upper_side=hround(stem-3stem_corr);
  lower_side=hround min(.5[curve,cap_curve]-stem_corr,upper_side+.25u);
@@ -287,10 +287,12 @@ if hefty: mid_thickness=vround 2/3vair; upper_side=hround(stem-3stem_corr);
   & pulled_arc.e(7,4);  % left half of lower bowl
  filldraw stroke pulled_arc.e(3,8)
   & pulled_arc.e(8,1);  % right half of upper bowl
-else: pickup fine.nib; theta=90-angle(18u,h); slope:=-h/18u;
- upper_side=max(fine.breadth,hround(.5[hair,stem]-stem_corr));
+else:
+ numeric eight_angle_width; eight_angle_width=21u;
+ theta=90-angle(eight_angle_width,h); slope:=-h/eight_angle_width;
+ upper_side=max(fine.breadth,hround(.6[hair,stem]-stem_corr));
  lower_side=hround(.5[hair,stem]+stem_corr);
- if lower_side>1.2upper_side: upper_side:=lower_side; fi
+ if lower_side>1.2upper_side: upper_side:=1.2lower_side; fi
  pos1(top_thickness,-90); pos6(bot_thickness,-90);
  x1=x6=.5w; y1l=h+oo; y6r=-oo; pos0(cap_stem,theta);
  x2l=hround .5u; w-x8l=hround .25u; x7r=w-x5r=0;
@@ -322,7 +324,7 @@ bot_thickness=max(fine.breadth,vround(vair-vair_corr));
 side_thickness=max(fine.breadth,hround 1/3[curve,cap_curve]);
 pull=min(.25,1.5superpull);
 pos3(side_thickness,0); pos4(top_thickness,90);
-pos5(min(1.7u,side_thickness),180); pos6(vair,270);
+pos5(side_thickness,180); pos6(vair,270);
 w-x3r=x5r=0;
 x4-.1u=x6+.1u=.5w;
 y2r=-oo; y3=.5[y2r,y4r]; y4r=h+oo;

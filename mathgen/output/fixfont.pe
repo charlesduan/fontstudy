@@ -5,6 +5,14 @@ Open($1)
 weight=$2
 style=$3
 
+copyright="Copyright 2014 Charles Duan. Based on METAFONT Computer Modern " + \
+    "sources by Donald Knuth. This Font Software is licensed under the " + \
+    "SIL Open Font License, Version 1.1. The license is available at " + \
+    "http://scripts.sil.org/OFL. The name Century Expanded is " + \
+    "being used nominatively to describe the design of the font, and " + \
+    "should not be taken to indicate an association with any commercial " + \
+    "type foundry."
+
 famname="Century Expanded CD"
 psname="CenturyExpandedCD"
 
@@ -23,7 +31,12 @@ endif
 
 SetFontNames(psname + "-" + psstyle, \
     famname, famname + "-" + fullstyle, \
-    weight)
+    weight, copyright)
+SetTTFName(0x409, 0, copyright)
+SetTTFName(0x409, 1, famname)
+SetTTFName(0x409, 2, fullstyle)
+SetTTFName(0x409, 4, psname + "-" + psstyle)
+SetMacStyle(-1)
 
 AddLookup("Ligatures", "gsub_ligature", 0, [["liga", [["latn", ["dflt"]]]]]);
 AddLookupSubtable("Ligatures", "Ligatures 0");
@@ -40,7 +53,8 @@ Select("fl");  AddPosSub("Ligatures 0", "f l");
 AddLookup("Caps to Small Caps", "gsub_single", 0, \
     [["c2sc", [["latn", ["dflt"]]]]]);
 AddLookupSubtable("Caps to Small Caps", "Caps to Small Caps 0");
-AddLookup("Small Caps", "gsub_single", 0, [["smcp", [["latn", ["dflt"]]]]]);
+AddLookup("Small Caps", "gsub_single", 0, \
+    [["smcp", [["latn", ["dflt"]]]], ["ss01", [["latn", ["dflt"]]]]]);
 AddLookupSubtable("Small Caps", "Small Caps 0");
 
 i=Ord('A',0);

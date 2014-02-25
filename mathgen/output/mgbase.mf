@@ -26,11 +26,17 @@ vardef get_metric@#=
  fi
 enddef;
 
+vardef bold_width_expansion=
+ if known width_expansion[charcode]: width_expansion[charcode]
+ elseif known width_expansion: width_expansion
+ else: 1 fi
+enddef;
+
 def beginchar(expr c,w_sharp,h_sharp,d_sharp) =
  begingroup
  charcode:=if known c: byte c else: 0 fi;
  if known get_metric.glyph_width:
-  charwd:=get_metric.glyph_width if known width_expansion: *width_expansion fi;
+  charwd:=get_metric.glyph_width * bold_width_expansion;
  else:
   charwd:=w_sharp;
  fi
@@ -657,7 +663,8 @@ def draw_solid_circle(expr width, height, center, stroke) =
  penpos1(stroke,0); penpos2(stroke,90); penpos3(stroke,180);
  penpos4(stroke,270);
  x1r-x3r=y2r-y4r=circ_width; y1=y3; x2=x4; .5[z1,z3]=.5[z2,z4]=center;
- fill z1r{up}...z2r{left}...z3r{down}...z4r{right}...cycle;
+ fill invert_transforms_around(center,
+   z1r{up}...z2r{left}...z3r{down}...z4r{right}...cycle);
 enddef;
 
 def draw_a_circle(expr width, height, center, stroke) =

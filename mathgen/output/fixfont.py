@@ -49,12 +49,12 @@ font.autoKern("Kern lookup 0", 250, uc_top_list, lc_short_list + sc_list, 50,
 
 font.autoKern("Kern lookup 0", 300, lpunct_list, uc_right_list,
         50, onlyCloser=True)
-font.autoKern("Kern lookup 0", 250, lpunct_list,
+font.autoKern("Kern lookup 0", 200, lpunct_list,
         sc_right_list + lc_short_list,
         50, onlyCloser=True)
 font.autoKern("Kern lookup 0", 250, uc_left_list, rpunct_list,
         50, onlyCloser=True)
-font.autoKern("Kern lookup 0", 250, lc_left_list +
+font.autoKern("Kern lookup 0", 200, lc_left_list +
         lc_left_punct_list + sc_left_list, rpunct_list,
         50, onlyCloser=True)
 

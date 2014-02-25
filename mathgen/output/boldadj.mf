@@ -6,6 +6,13 @@ boldfac.rule:=1.5;
 boldfac.jut:=.9;
 
 width_expansion:=1.1;
+width_expansion[ASCII"M"]:=1.15;
+width_expansion[ASCII"N"]:=1.05;
+width_expansion[ASCII"O"]:=1.15;
+width_expansion[ASCII"o"]:=1.15;
+width_expansion[ASCII"Q"]:=1.15;
+width_expansion[ASCII"R"]:=1.15;
+width_expansion[ASCII"U"]:=1.05;
 
 
 thin_join#:=boldfac.thin*thin_join#;
@@ -49,4 +56,4 @@ thick_cap_band#:=boldfac.thin*thick_cap_band#;
 thin_cap_band#:=boldfac.thin*thin_cap_band#;
 dot_o#:=.75o#;
 
-
+superpull:=3/4superpull;
