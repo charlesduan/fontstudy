@@ -140,3 +140,26 @@ adjust_fit(0,0); autorounded;
 draw_solid_circle(w,w, (.5w,max(.5w,.75x_height)), w);
 labels(1,2,3,4,5,6,7,8); endchar;
 
+cmchar "Single quote";
+beginchar(oct"203",3u#,asc_height#,0);
+adjust_fit(0,0);
+numeric straight_quote_width; straight_quote_width=stem;
+pos1(straight_quote_width,0); pos2(hair,0); x0=x1=x2=.5w;
+y0=h; y1=h-straight_quote_width; y2=h-1.5comma_depth;
+disable_transforms_around((0,.8[y2,y1]));
+fill z1r...z0...z1l---z2l...z2r---cycle;
+penlabels(1,2); endchar;
+
+cmchar "Double quote";
+beginchar(oct"042",6u#,asc_height#,0);
+adjust_fit(0,0);
+pos1(straight_quote_width,0); pos2(hair,0); x0=x1=x2;
+y0=h; y1=h-straight_quote_width; y2=h-1.5comma_depth;
+pos11(straight_quote_width,0); pos12(hair,0); x10=x11=x12;
+y10=h; y11=h-straight_quote_width; y12=h-1.5comma_depth;
+.5[x1,x11]=.5w; x11l-x1r=stem;
+disable_transforms_around((0,.8[y2,y1]));
+fill z1r...z0...z1l---z2l...z2r---cycle;
+fill z11r...z10...z11l---z12l...z12r---cycle;
+penlabels(0,1,2,10,11,12); endchar;
+
