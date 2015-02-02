@@ -123,7 +123,7 @@ ellipse_set(8l,7l,6l,0l);
 numeric theta; theta=90+angle(9u,h); slope:=h/9u;
 ellipse_set(3r,4r,5r,0r); y4=y4r;
 ellipse_set(8r,7r,6r,0r); y7=y7r;
-filldraw stroke super_arc.e(3,4) & z4e{down}
+fill stroke super_arc.e(3,4) & z4e{down}
  ..z5e---z6e..z7e{down} & super_arc.e(7,8)...{up}z9e;  % main stroke
 penlabels(0,1,2,3,4,5,6,7,8,9,10,11); endchar;
 

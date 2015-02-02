@@ -40,7 +40,7 @@ x1l=jut; y1=h; y2=.5x_height;
 p1=sloped_serif_path.l(1,2,a,1/3,jut,serif_drop);  % serif
 pos2'(stem,-180); pos3(vair,-90);
 pos4(curve,0); pos5(vair,90); pos0(hair,180);
-z2=z2'; z0l=z2r; x5=.5[x2,x4]; x3=.5[x2,x4]+u*slant; x4r=w;
+z2=z2'; z0l=z2'l; x5=.5[x2,x4]; x3=.5[x2,x4]+u*slant; x4r=w;
 y3r=-oo; y5r=x_height+oo; y4=y2-.3x_height*slant;
 x3l:=.5[x2'l,x4l]+u*slant;
 make_paths1(rev.l) pulled_arc.e(2',3) & pulled_arc.e(3,4);
@@ -191,12 +191,17 @@ beginchar("i",5u#,min(asc_height#,10/7x_height#+.5flare#),0);
 italcorr max(1/3x_height#*slant+.5hair#+.5u#,h#*slant+.5flare#-2u#);
 adjust_fit(if monospace:u#,u# else: 0,0 fi);
 x0r=0; y0r=.7x_height; x5l=w; x2=.5w; x3=.5w;
-hook_in_points(0,1,2)(skewed);
-p0=hook_in_path(fine,0,1,2)(skewed);
 pos5(.9hair,155);
 y5r=.32x_height;
-hook_out_points(3,4,5)(skewed);  % hooks
-p5=hook_out_path(fine,3,4,5)(skewed);
+hook_in_points(0,1,2)(skewed);
+p0=hook_in_path(fine,0,1,2)(skewed);
+if ital_sloped_serif:
+    hook_out_points(3,4,5);  % hooks
+    p5=hook_out_path(fine,3,4,5);
+else:
+    hook_out_points(3,4,5)(skewed);  % hooks
+    p5=hook_out_path(fine,3,4,5)(skewed);
+fi
 fill p0--p5--cycle;
 pos8(flare,0); pos9(flare,90);
 x8=.5w if not monospace:-.4(h-x_height)*slant fi; top y9r=h+1;
@@ -204,11 +209,8 @@ if bot y9l-top y1<slab: y9l:=min(y9r-eps,y1+fine+slab); fi
 x8=x9; y8=.5[y9l,y9r];
 z8'=z8; z9'=z9;
 numeric i_dot_flare; i_dot_flare=.9small_flare;
-begingroup
- disable_transforms_around(z8);
- pos8'(i_dot_flare,0); pos9'(i_dot_flare,90);
- dot(8',9')
-endgroup;
+pos8'(i_dot_flare,0); pos9'(i_dot_flare,90);
+dot(8',9')
 math_fit(-2/3x_height#*slant+.5hair#+.5u#,ic#);
 penlabels(0,1,2,3,4,5,8,9); endchar;
 
@@ -231,11 +233,8 @@ pos8(flare,0); pos9(flare,90);
 if bot y9l-top y1<slab: y9l:=min(y9r-eps,y1+fine+slab); fi
 x8=x9; y8=.5[y9l,y9r];
 z8'=z8; z9'=z9;
-begingroup
- disable_transforms_around(z8);
- pos8'(i_dot_flare,0); pos9'(i_dot_flare,90);
- dot(8',9')
-endgroup;
+pos8'(i_dot_flare,0); pos9'(i_dot_flare,90);
+dot(8',9')
 math_fit(desc_depth#*slant,x_height#*slant+.5stem#-u#);
 penlabels(0,1,2,3,4,5,6,8,9); endchar;
 
@@ -291,12 +290,12 @@ pos2(stem,0); x1=x2;
 if monospace: pos1(stem,0); lft x1l=hround(2.5u-.5stem); top y1=h;
 else:
  pos0(.9hair,170);
- x0r=0; y0r=.6x_height; x2l=hround(3.2u-.5stem);
+ x0r=0; y0r=.6x_height; x2l=hook_in_offset;
  hook_in_points(0,a,1);
  p0=hook_in_path(fine,0,a,1);
 fi  % opening hook
 y2=0;
-x4+.5stem=hround(.5w+.5stem);
+x4=.5[x1r,x8l] if ital_sloped_serif: + .1stem fi;
 pos5(stem,0); y5=y2; x5=x4;
 x8+.5stem=hround(w-3.2u+.5stem);
 if monospace: pos9(vair,90); x9=good.x .5[x8,w]; bot y9l=0; y8=1/3h;
@@ -307,6 +306,9 @@ p9=hook_out_path(fine,8,b,9)skewed;
 ital_arch_paths8(5,6,8)skewed;  % right arch
 y4=y8;
 ital_arch_paths4(2,3,4);  % right arch
+show z1l;
+show z2l;
+show z2r;
 fill pen_point(1l,2l,fine,2r)--lpath4
  --pen_point(4l,5l,fine,5r)--lpath8 & p9
  & combine(combine(rpath8,z5r--rpath4),z2r--p0)--cycle;
@@ -319,7 +321,7 @@ italcorr 1/3x_height#*slant+.5hair#+.5u#;
 adjust_fit(0,0); pickup fine.nib;
 pos2(stem,0); x1=x2;
 pos0(.9hair,170);
-x0r=0; y0r=.6x_height; x2l=hround(3.2u-.5stem); y2=0;
+x0r=0; y0r=.6x_height; x2l=hook_in_offset; y2=0;
 hook_in_points(0,a,1);
 p0=hook_in_path(fine,0,a,1);
 pos5(.5[stem,curve],0);
@@ -350,7 +352,7 @@ italcorr .7x_height#*slant+.5curve#-u# if math_fitting:-.5u# fi;
 adjust_fit(0,0);
 pos0(hair,164);
 x0r=0; y0r=.62x_height;
-x2-.5stem=hround(3.2u-.5stem);
+x2l=hook_in_offset;
 hook_in_points(0,1,2);  % opening hook
 p0=hook_in_path(fine,0,1,2);
 pos4(hair,-180); pos5(vair,-90); pos6(curve,0); pos7(vair,90);
@@ -426,13 +428,13 @@ ellipse_set(2l,3l,4l,0l); ellipse_set(2r,3r,4r,0r); y3=y3r;
 ellipse_set(7l,6l,5l,0l); ellipse_set(7r,6r,5r,0r); y6=y6r;
 interim superness:=more_super;
 make_paths0(rev.r) z3e{down} ..z0e{z5e-z4e}..z6e{down};
-pos1(hair,0); pos10(hround .75[hair,flare],0);
+pos1(hair,0); pos10(min(hround .75[hair,flare],.8(y2r-y0r)),0);
 y2'r=y2l;
 x10r=hround(w-.6u)+2eps;
 z3'l=z3r; z3'r=z3'=z3l;
 set_bulb_points(vair,.4,.7, 3',2',1,10);
 p10=bulb_path(2',1,10,right);
-pos8(hair,-180); pos9(small_flare,-180);
+pos8(hair,-180); pos9(min(small_flare,.8(y0l-y7l)),-180);
 y7'r=y7r; x9r=.1u;
 set_bulb_points(vair,.4,.7, 6,7',8,9);
 p9=bulb_path(7',8,9,left);
@@ -461,7 +463,7 @@ beginchar("u",9.5u#,x_height#,0);
 italcorr 1/3x_height#*slant+.5hair#+.5u#;
 adjust_fit(0,0); interim superness:=more_super;
 x0r=0; y0r=.62x_height;
-pos2(.5[stem,curve],0); x2=hround(3.2u);
+pos2(.5[stem,curve],0); x2l=hook_in_offset;
 hook_in_points(0,1,2)(skewed);  % opening hook
 p0=hook_in_path(fine,0,1,2)skewed;
 z2'=z2; z2'r=z2l; z2'l=z2r;
@@ -470,7 +472,11 @@ pos6(stem,0); x6r=hround(w-3.2u+.5stem);
 x6=x7; x9l=w; hook_out_points(7,8,9);  % closing hook
 p9=hook_out_path(fine,7,8,9);
 y6=h;
-ital_arch_paths2(6,4,2')skewed;
+if ital_sloped_serif:
+ ital_arch_paths2(6,4,2');
+else:
+ ital_arch_paths2(6,4,2')skewed;
+fi
 fill pen_point(7r,6r,fine,6l)--lpath2 & p0
  & combine(rpath2,z6l--p9)--cycle;
 math_fit(-2/3x_height#*slant+.5hair#+.5u#,ic#);
@@ -482,13 +488,15 @@ italcorr x_height#*slant;
 adjust_fit(0,0); interim superness:=more_super;
 pos0(hair,165);
 y0l=.63x_height;
-x0r=0; pos3(.5[stem,curve],-180); x3=hround(3.2u);
+x0r=0; pos3(.5[stem,curve],-180); x3r=hook_in_offset;
 z2=z3; z2r=z3l; z2l=z3r;
 hook_in_points(0,1,2)(skewed);  % opening hook
 p0=hook_in_path(fine,0,1,2)skewed;
 pos4(vair,-90); pos5(hair,0);
 x4=.5w+1.2u; x5r=w; y4r=-oo; y5=.57h;
-make_paths1(rev.l) z3e{-u,-x_height}...{right}z4e
+pair d_;
+if ital_sloped_serif: d_=down; else: d_=(-u,-x_height); fi
+make_paths1(rev.l) z3e{d_}...{right}z4e
  ..tension atleast 1.05..{up}z5e; % left stem and arc
 p6=v_bulb_path(5,6);  % closing bulb
 math_fit(-2/3x_height#*slant+.5hair#+.5u#,2/3ic#);
@@ -504,7 +512,7 @@ forsuffixes $=hair,stem: shaved$:=mfudged$; save $; $=shaved$; endfor
 pos0(hair,165);
 y0l=.63x_height;
 x0r=0; z2=z3; z2r=z3l; z2l=z3r;
-pos3(.5[stem,curve],-180); x3=hround(3.2u);
+pos3(.5[stem,curve],-180); x3r=hook_in_offset;
 if monospace: pos1(vair,90); x1=good.x .5[x0,x2]; top y1r=h; y2=2/3h;
  pos2(stem,0); filldraw stroke z1e{right}...{-u,-x_height}z2e;
 else:
@@ -513,8 +521,12 @@ else:
 fi  % opening hook
 pos5(hair,0);
 x6=x7; pos6(stem,0); pos7(stem,-180);
-x6=.5[x2l,w]; y6=h; y7=y6;
-ital_arch_paths3(6,4,3)skewed;
+x6=.5[x2l,w] if ital_sloped_serif: + .1stem fi; y6=h; y7=y6;
+if ital_sloped_serif:
+ ital_arch_paths3(6,4,3);
+else:
+ ital_arch_paths3(6,4,3)skewed;
+fi
 pos8(vair,-90); pos9(thick_hair,0);
 x8=w-2.5u; x9r=w; y8r=-oo; y9=.57h;
 %filldraw circ_stroke z6e..super_arc.e(7,8)...{up}z9e;  % middle stem and arc
@@ -537,16 +549,16 @@ x1=.4[x0,x2]; x4=.55[x3,x5];
 make_paths0(rev.r) z0e{dir 80}...pulled_arc.e(1,2); % opening hook
 make_paths5(rev.l) pulled_arc.e(3,4)...{dir 78}z5e;  % closing hook
 pos3'(hair,180);
-pos8(hair,0); pos9(.9small_flare,0);
-x3'l=x3l; y3'=y3; y7r=h+oo;
 x9r=w-.6u;
+pos8(hair,0); pos9(min(.9small_flare,.7(x9r-x3l)),0);
+x3'l=x3l; y3'=y3; y7r=h+oo;
 set_bulb_points(vair,.55,1, 3',7,8,9);
 make_paths3(rev.r) z3'e{up}...{right}z7e;
 p9=bulb_path(7,8,9,right);  % upper link and bulb
 pos2'(hair,0);
-pos18(hair,-180); pos19(.9small_flare,-180);
-x2'l=x2l; y2'=y2; y17r=-oo;
 x19r=.8u;
+pos18(hair,-180); pos19(min(.9small_flare,x9r-x9l),-180);
+x2'l=x2l; y2'=y2; y17r=-oo;
 set_bulb_points(vair,.55,1.1, 2',17,18,19);
 make_paths2(rev.r) z2'e{down}...{left}z17e;
 p19=bulb_path(17,18,19,left);
@@ -560,7 +572,7 @@ italcorr x_height#*slant+.5stem#-u#;
 adjust_fit(0,0); interim superness:=more_super;
 pos0(hair,165);
 y0l=.63x_height;
-x0r=0; pos3(.5[stem,curve],-180); x3r=hround(3.2u-.5stem);
+x0r=0; pos3(.5[stem,curve],-180); x3r=hook_in_offset;
 z2=z3; z2r=z3l; z2l=z3r;
 hook_in_points(0,1,2)(skewed);  % opening hook
 p0=hook_in_path(fine,0,1,2)skewed;
@@ -569,7 +581,7 @@ pos5(hair,0); x4=.5[x3,x5];
 pos6(stem,0); x6r=w;
 pos7(stem,0);
 y6=h;
-ital_arch_paths3(6,4,3)skewed;
+ital_arch_paths3(6,4,3)if not ital_sloped_serif: skewed fi;
 y7=0; y8r=-d; x6=x7;
 pos9(hair,-180); pos10(.9small_flare,-180);
 x10r=2.5u;

@@ -182,7 +182,12 @@ pos4'(.5[hair,stem],0);
 y4'l=y4l-1vair;
 p4=z4l{direction infinity of rpath56}...z4'l{down}...z4'r{up}...z4r
  ..(0.3[z4r,z3r]);
-fill combine(p4,lpath56) & lpath678 & p10 & rpath678
+if y4'-y10>(x4'r-x4')+(x10l-x10)+hair:
+  p456=combine(p4,z4'..lpath56);
+else:
+  p456=pen_point(3l,4l,tiny,5l)--lpath56;
+fi
+fill p456 & lpath678 & p10 & rpath678
  & var_combine(combine(rpath56,z4r--z3r), lpath120)...rpath120
  --pen_angle(left,z3l,tiny,z4l-z3l)--cycle;
 penlabels(0,1,2,3,4,4',5,6,7,8,9,10); endchar;

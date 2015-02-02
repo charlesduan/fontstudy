@@ -8,6 +8,7 @@ boolean small_caps;
 small_caps = false;
 
 input params;
+ital_sloped_serif:=false;
 math_fitting := false;
 arc_join := .2;
 bowl_join := .1;

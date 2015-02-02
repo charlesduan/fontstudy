@@ -1,6 +1,6 @@
 boldfac.thin:=1.2;
-boldfac.thick:=1.4;
-boldfac.circ:=1.1;
+boldfac.thick:=1.6;
+boldfac.circ:=1.3;
 boldfac.brack:=.8;
 boldfac.rule:=1.5;
 boldfac.jut:=.9;
