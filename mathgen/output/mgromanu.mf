@@ -592,7 +592,7 @@ if x4l-x1r<cap_jut: x4l:=x1r+cap_jut; fi
 make_paths1(rev.r) pulled_arc.e(4,5) & pulled_arc.e(5,6)  % lobe
 }};
 if serifs: pos6'(.6vair,-90);
- pos8(cap_band,220); pos9(.85cap_curve,-115); pos10(hair,0);
+ pos8(.3[.8vair,cap_curve],220); pos9(.85cap_curve,-115); pos10(hair,0);
  pos8'(.85cap_curve,200);
  x10r=w; tiny.top y10=.45[y2,y7];
  x9r=.25[x5,x5r];
