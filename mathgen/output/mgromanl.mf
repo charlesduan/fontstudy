@@ -770,7 +770,8 @@ x2r=x2'r=x3r=t_jut;
 y2=y8r; y2'=y8l;y3=max(.5bar_height,2vair);
 %pickup crisp.nib;
 pos8(bar,90);
-x8-x2l=x2l-x7; y8r=x_height; x7=0; y7l=y8l;
+x7=0; y7l=y8l;
+x8=min(2x2l-x7,w-hair); y8r=x_height;
 if hefty:
  pos7(bar,90);
  %pickup tiny.nib;

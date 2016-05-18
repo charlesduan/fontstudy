@@ -48,6 +48,8 @@ font.autoKern("Kern lookup 0", 250, sc_left_list + sc_less_left_list,
         sc_right_list, 50, onlyCloser=True)
 font.autoKern("Kern lookup 0", 250, uc_top_list, lc_short_list + sc_list, 50,
         onlyCloser=True)
+font.autoKern("Kern lookup 0", 250, uc_left_list + uc_less_left_list,
+        lc_right_list + sc_right_list, 50, onlyCloser=True)
 
 font.autoKern("Kern lookup 0", 300, lpunct_list, uc_right_list,
         50, onlyCloser=True)

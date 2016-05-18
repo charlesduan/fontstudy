@@ -102,7 +102,7 @@ if serifs: beginchar("C",13u#,cap_height#,0);
  x2=.5[x3,x1]-2u*slant; x4=.53[x3,x1]+3u*slant;
  y2r=h+o; y4r=-o; y3=.5[y2,y4];
  y1=min(vround max(.6h,x_height-.5vair),y2l-eps);
- y5=max(min(good.y .95(h-y1),vround(y1-1.9stem)),y4l+eps);
+ y5=max(min(good.y .9(h-y1),vround(y1-1stem)),y4l+eps);
  (x2l',y2l)=whatever[z2r,z1l]; x2l:=min(.5[x2l,x2l'],x2l+.5u);
  (x4l',y4l)=whatever[z4r,z5l]; x4l:=min(.5[x4l,x4l'],x4l+.5u);
  make_paths1(rev.l) pulled_arc.e(2,3) & pulled_arc.e(3,4); % arc
