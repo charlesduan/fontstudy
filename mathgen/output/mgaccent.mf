@@ -3,17 +3,11 @@
 % This file contains accents common to text roman and italic fonts.
 
 cmchar "Grave accent";
-beginchar(oct"221",9u#,min(asc_height#,2x_height#),0);
+beginchar(oct"221",9u#,acc_height#,0);
 adjust_fit(0,0);
-if serifs: pickup crisp.nib; x1-.5stem=hround 2u; x2=2/3[x1,w-x1];
- y1+.5stem=h+eps; y2=max(2/3[h,x_height],x_height+o+hair);
- numeric theta; theta=angle(z2-z1)+90;
- pos1(stem,theta); pos2(hair,theta);
- filldraw circ_stroke z1e--z2e;  % diagonal
-else: pickup fine.nib; pos1(stem,0); pos2(vair,0);
- lft x1l=hround 1.5u; rt x2r=hround(.5w+.25u+.5vair);
- top y1=h; bot y2=vround 2/3[h,x_height];
- filldraw stroke z1e--z2e; fi  % diagonal
+pos1(stem, 0); pos2(stem, 90); z1=z2; x1l=0; y2r=h;
+pos3(hair, 0); y3=x_height+o+hair; x3r=w;
+fill z3r--z2r{left}..z1l{down}--z3l--cycle;
 penlabels(1,2); endchar;
 
 cmchar "Acute accent";

@@ -152,6 +152,18 @@ push @letters, ('a' .. 'z', 'A' .. 'Z', '0'..'9');
     "202" => "\\000 [ /ffl ]",
     "203" => "\\251 StandardEncoding",
     "177" => "\\267 StandardEncoding",
+    "221" => "\\221 ISOLatin1Encoding",
+    "264" => "\\264 ISOLatin1Encoding",
+    "237" => "\\237 ISOLatin1Encoding",
+    "226" => "\\226 ISOLatin1Encoding",
+    "257" => "\\257 ISOLatin1Encoding",
+    "232" => "\\232 ISOLatin1Encoding",
+    "270" => "\\270 ISOLatin1Encoding",
+    "223" => "\\223 ISOLatin1Encoding",
+    "227" => "\\227 ISOLatin1Encoding",
+    "235" => "\\235 ISOLatin1Encoding",
+    "224" => "\\224 ISOLatin1Encoding",
+    "250" => "\\250 ISOLatin1Encoding",
 );
 
 for (@letters) {
