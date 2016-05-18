@@ -2,31 +2,52 @@
 
 % This file contains accents common to text roman and italic fonts.
 
+def grave_accent(expr midpoint,height_adj) =
+pos1001(stem, 0); pos1002(stem, 90); z1001=z1002; y1002r=acc_height+height_adj;
+pos1003(1.5hair, 0); y1003=x_height+o+hair+height_adj;
+.3[x1003l,x1001r]=midpoint; x1003r-x1001l=get_accent_width(oct"221");
+z1004l=tangent_point(1003l,1001,x1001l-x1001);
+z1004r=tangent_point(1003l,1002,y1002r-y1002);
+fill z1003r---z1004r..z1002r{left}..z1001l{down}..z1004l---z1003l--cycle;
+penlabels(1001,1002,1003,1004);
+enddef;
+
 cmchar "Grave accent";
 beginchar(oct"221",9u#,acc_height#,0);
 adjust_fit(0,0);
-pos1(stem, 0); pos2(stem, 90); z1=z2; x1l=0; y2r=h;
-pos3(hair, 0); y3=x_height+o+hair; x3r=w;
-fill z3r--z2r{left}..z1l{down}--z3l--cycle;
-penlabels(1,2); endchar;
+grave_accent(.7w,0);
+endchar;
+
+
+def acute_accent(expr midpoint,height_adj) =
+pos1001(stem, 0); pos1002(stem, 90); z1001=z1002; y1002r=acc_height+height_adj;
+pos1003(1.5hair, 0); y1003=x_height+o+hair+height_adj;
+.3[x1003l,x1001r]=midpoint; x1001r-x1003l=get_accent_width(oct"264");
+z1004l=tangent_point(1003l,1001,x1001l-x1001);
+z1004r=tangent_point(1003l,1002,y1002r-y1002);
+fill z1003r---z1004r..z1001r{up}..z1002r{left}..z1004l---z1003l--cycle;
+penlabels(1001,1002,1003,1004);
+enddef;
 
 cmchar "Acute accent";
-beginchar(oct"264",9u#,min(asc_height#,2x_height#),0);
+beginchar(oct"264",9u#,acc_height#,0);
 italcorr h#*slant-if serifs: 1.5 fi u#;
 adjust_fit(0,0);
-if serifs: pickup crisp.nib; x1+.5stem=hround(w-2u); x2=2/3[x1,w-x1];
- y1+.5stem=h+eps; y2=max(2/3[h,x_height],x_height+o+hair);
- numeric theta; theta=angle(z2-z1)+90;
- pos1(stem,theta); pos2(hair,theta);
- filldraw circ_stroke z1e--z2e;  % diagonal
-else: pickup fine.nib; pos1(stem,0); pos2(vair,0);
- rt x1r=hround(w-1.5u); lft x2l=hround(.5w-.25u-.5vair);
- top y1=h; bot y2=vround 2/3[h,x_height];
- filldraw stroke z1e--z2e; fi  % diagonal
-penlabels(1,2); endchar;
+acute_accent(.3w,0);
+penlabels(1,2,3,4); endchar;
+
+cmchar "The letter e with grave accent";
+letter_e(oct"350");
+grave_accent(.5w,0);
+endchar;
+
+cmchar "The letter e with acute accent";
+letter_e(oct"351");
+acute_accent(.5w,0);
+endchar;
 
 cmchar "Hachek (check) accent";
-beginchar(oct"237",9u#,.75[x_height#,min(asc_height#,2x_height#)],0);
+beginchar(oct"237",9u#,acc_height#,0);
 h':=vround min(asc_height,2x_height); % height of circumflex being inverted
 if serifs: italcorr h#*slant+.5hair#-1.75u#;
  adjust_fit(0,0);
@@ -46,7 +67,7 @@ else: italcorr h#*slant-.5stem#+.5vair#-.75u#;
 penlabels(0,1,2,3,4); endchar;
 
 cmchar "Breve accent";
-beginchar(oct"226",9u#,min(asc_height#,2x_height#),0);
+beginchar(oct"226",9u#,acc_height#,0);
 italcorr h#*slant+.5vair#-1.5u#;
 adjust_fit(0,0);
 pickup crisp.nib; pos1(vair,-180); pos3(vair,0);
@@ -59,7 +80,7 @@ penlabels(1,2,3); endchar;
 
 cmchar "Macron (bar) accent";
 numeric macron_breadth#; macron_breadth#=.2[vair#,stem#];
-beginchar(oct"257",9u#,.4[x_height#,asc_height#]+macron_breadth#,0);
+beginchar(oct"257",9u#,acc_height#,0);
 italcorr h#*slant-.75u#;
 adjust_fit(0,0);
 numeric macron_breadth; macron_breadth:=Vround .2[vair,stem];
@@ -70,7 +91,7 @@ filldraw stroke z1e--z2e;  % bar
 penlabels(1,2); endchar;
 
 cmchar "Scandinavian circle accent";
-beginchar(oct"232",13u#+4/3(asc_height#-x_height#)*slant,asc_height#,0);
+beginchar(oct"232",13u#+4/3(asc_height#-x_height#)*slant,acc_height#,0);
 adjust_fit(cap_serif_fit#,cap_serif_fit#);
 numeric circ_hair,circ_vair;
 circ_hair=hround min(hair,u+.5); circ_vair=vround min(vair,(h-x_height)/6+.5);
@@ -115,7 +136,7 @@ penlabels(1,2,3,4,5); endchar;
 %penlabels(1,2); endchar;
 
 cmchar "Circumflex (hat) accent";
-beginchar(oct"223",9u#,min(asc_height#,2x_height#),0);
+beginchar(oct"223",9u#,acc_height#,0);
 if serifs: italcorr .5[x_height#,h#]*slant+.5hair#-1.75u#;
  adjust_fit(0,0);
  pickup crisp.nib; pos2(.5[vair,curve],90); top y2r=h; x2=.5w;
@@ -145,7 +166,7 @@ y1=.5[y2l,y2r]; dot(1,2);  % dot
 penlabels(1,2); endchar;
 
 iff ligs>0: cmchar "Long Hungarian umlaut accent";
-beginchar(oct"235",9u#,min(asc_height#,2x_height#),0);
+beginchar(oct"235",9u#,acc_height#,0);
 italcorr h#*slant-u#;
 adjust_fit(0,0);
 x3-x1=x4-x2=hround 3u; y3=y1; y4=y2;
@@ -165,7 +186,7 @@ else: pickup fine.nib; pos1(stem,0); pos2(vair,0);
 penlabels(1,2,3,4); endchar;
 
 cmchar "Tilde (squiggle) accent";
-beginchar(oct"224",9u#,min(asc_height#,10/7x_height#+.5dot_size#),0);
+beginchar(oct"224",9u#,acc_height#,0);
 italcorr h#*slant-u#;
 adjust_fit(0,0);
 if serifs: numeric theta; theta=angle(1/6(6u-vair),1/4(h-x_height));
@@ -189,7 +210,7 @@ penlabels(1,2,3,4,5); endchar;
 cmchar "Umlaut (double dot) accent";
 numeric dot_diam#,dot_diam;
 dot_diam#=max(dot_size#,cap_curve#);
-beginchar(oct"250",9u#,min(asc_height#,10/7x_height#+.5dot_diam#),0);
+beginchar(oct"250",9u#,acc_height#,0);
 dot_diam=max(tiny.breadth,hround(max(dot_size,cap_curve)-2stem_corr));
 italcorr h#*slant+.5dot_diam#-2.25u#;
 adjust_fit(0,0);

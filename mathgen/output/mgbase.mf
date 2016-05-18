@@ -17,13 +17,31 @@ vardef sc_ital.right_sidebearing =
     right_sidebearing[charcode]italic# * cap_height# / orig_cap_height#
 enddef;
 vardef get_metric@#=
- if small_caps:
-    if slant>0: sc_ital@# else: @#[charcode]sc# fi
- elseif slant>0:
-    @#[charcode]italic#
+ if known realcharcode:
+     if small_caps:
+        if slant>0: sc_ital@# else: @#[realcharcode]sc# fi
+     elseif slant>0:
+        @#[realcharcode]italic#
+     else:
+        @#[realcharcode]roman#
+     fi
  else:
-    @#[charcode]roman#
+     if small_caps:
+        if slant>0: sc_ital@# else: @#[charcode]sc# fi
+     elseif slant>0:
+        @#[charcode]italic#
+     else:
+        @#[charcode]roman#
+     fi
  fi
+enddef;
+
+vardef get_accent_width(expr num)=
+    if slant>0:
+        glyph_width[num]italic#*pt
+    else:
+        glyph_width[num]roman#*pt
+    fi
 enddef;
 
 vardef bold_width_expansion=
@@ -1217,6 +1235,14 @@ def compute_spread(expr normal_spread,big_spread)=
 def v_center(expr h_sharp) =
  .5h_sharp+math_axis#, .5h_sharp-math_axis# enddef;
 
+% Given a point z$ and a circle z$$ of radius r, compute a point that is on the
+% circle where a line through z$ and that point is tangent to the circle.
+vardef tangent_point(suffix $,$$)(expr r) =
+ save h_, d_; numeric h_, d_;
+ h_=abs(z$-z$$); d_=h_+-+r;
+ (r,0) rotated (angle(z$-z$$)+angle(r,d_)) shifted z$$
+enddef;
+
 def circle_points =
  x4=x8=.5[x2,x6]; x1=x3=superness[x4,x2]; x5=x7=superness[x4,x6];
  y2=y6=.5[y4,y8]; y1=y7=superness[y2,y8]; y3=y5=superness[y2,y4];
@@ -1470,6 +1496,7 @@ def mono_adjust_fit(expr left_adjustment,right_adjustment) =
  enddef;
 
 extra_endchar:=extra_endchar&"r:=r+shrink_fit;w:=r-l;";
+extra_endchar:=extra_endchar&"numeric realcharcode;";
 
 def ignore_math_fit(expr left_adjustment,right_adjustment) = enddef;
 def do_math_fit(expr left_adjustment,right_adjustment) =
@@ -1517,7 +1544,7 @@ def font_setup =
  define_blacker_pixels(notch_cut,cap_notch_cut);
  forsuffixes $=notch_cut,cap_notch_cut: if $<3: $:=3; fi endfor
  define_whole_pixels(letter_fit,fine,crisp,tiny);
- define_whole_vertical_pixels(body_height,asc_height,
+ define_whole_vertical_pixels(body_height,asc_height,acc_height,
   cap_height,fig_height,x_height,comma_depth,desc_depth,serif_drop);
  define_whole_blacker_pixels(thin_join,hair,thick_hair,stem,curve,flare,
   small_flare,i_dot_size,

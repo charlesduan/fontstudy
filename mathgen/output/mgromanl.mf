@@ -196,8 +196,9 @@ else:
 fi
 penlabels(0,1,2,3,4,5,6,7); endchar;
 
-cmchar "The letter e";
-beginchar("e",7.25u#+max(.75u#,.5curve#),x_height#,0);
+def letter_e(expr code) =
+realcharcode=byte "e";
+beginchar(code,7.25u#+max(.75u#,.5curve#),x_height#,0);
 italcorr .5[bar_height#,x_height#]*slant+.5min(curve#-1.5u#,0);
 adjust_fit(if monospace: .25u#,.5u# else: 0,0 fi);
 numeric left_curve,right_curve,e_bar_width;
@@ -234,7 +235,12 @@ z1'l=z1r; y0l=y1'l; x0l=x3r;
 pickup pencircle scaled .1pt;
 fill rpath1 & rpath2 & rpath3--combine(lpath3 & lpath2,z0l--z1r) & cycle;
 unfill var_combine(combine(lpath1,z1'r--z0r),lpath2) & cycle;
-penlabels(0,1,2,3,4,5); endchar;
+penlabels(0,1,2,3,4,5);
+enddef;
+
+cmchar "The letter e";
+letter_e("e");
+endchar;
 
 cmchar "The letter f";
 beginchar("f",5.5u#,asc_height#,0);
