@@ -8,8 +8,9 @@
 
 % Character codes \0141 through \0172 are generated.
 
-cmchar "Italic letter a";
-beginchar("a",9u#,x_height#,0);
+def letter_a(expr code) =
+realcharcode=byte "a";
+beginchar(code,9u#,x_height#,0);
 italcorr 1/3x_height#*slant+.5hair#+.5u#;
 adjust_fit(0,0);
 pos0(hair,0); pos1(vair,90); pos2(curve,180); pos3(vair,270);
@@ -29,7 +30,12 @@ fill var_combine(pen_rlend4(up,fine,down)--z5l,rpath1)
  & combine(rpath2,z4l--p1)--cycle;
 unfill lpath1 & lpath2 & cycle;
 math_fit(-.3x_height#*slant+.5curve#-u#,ic#);
-penlabels(0,1,2,3,4,5,6,7); endchar;
+penlabels(0,1,2,3,4,5,6,7);
+enddef;
+
+cmchar "Italic letter a";
+letter_a("a");
+endchar;
 
 cmchar "Italic letter b";
 beginchar("b",8u#,asc_height#,0);
@@ -93,8 +99,9 @@ unfill lpath1 & lpath2 & cycle;
 math_fit(-.3x_height#*slant+.5curve#-u#,ic#);
 penlabels(0,1,2,3,4,5,6,7); endchar;
 
-cmchar "Italic letter e";
-beginchar("e",8u#,x_height#,0);
+def letter_e(expr code) =
+realcharcode=byte "e";
+beginchar(code,8u#,x_height#,0);
 italcorr max(1/3x_height#*slant,x_height#*slant+.5(.2[hair#,stem#])-u#);
 adjust_fit(0,0);
 numeric heavy_hair; heavy_hair=hround .5[thick_hair,stem];
@@ -109,7 +116,12 @@ make_paths2(rev.l) pulled_arc.e(2,3) & pulled_arc.e(3,4)...{curl 0}z5e;  % arc
 fill combine(lpath2,rpath1) & rpath2--cycle;
 unfill combine(lpath1,lpath2) & cycle;
 math_fit(-.3x_height#*slant+.5curve#-u#,ic#);
-penlabels(0,1,2,3,4,5,6); endchar;
+penlabels(0,1,2,3,4,5,6);
+enddef;
+
+cmchar "Italic letter e";
+letter_e("e");
+endchar;
 
 cmchar "Italic letter f";
 beginchar("f",max(1.5u#,stem#)+max(3.5u#,2flare#),asc_height#,desc_depth#);
@@ -186,8 +198,9 @@ fill p7--cycle;
 %filldraw stroke z4e{down}..{-u,-x_height}z5e;  % right stem
 math_fit(0,ic#); penlabels(1,2,3,4,5,6,7); endchar;
 
-cmchar "Italic letter i";
-beginchar("i",5u#,min(asc_height#,10/7x_height#+.5flare#),0);
+def letter_i(expr code) =
+realcharcode=byte "i";
+beginchar(code,5u#,min(asc_height#,10/7x_height#+.5flare#),0);
 italcorr max(1/3x_height#*slant+.5hair#+.5u#,h#*slant+.5flare#-2u#);
 adjust_fit(if monospace:u#,u# else: 0,0 fi);
 x0r=0; y0r=.7x_height; x5l=w; x2=.5w; x3=.5w;
@@ -208,11 +221,17 @@ x8=.5w if not monospace:-.4(h-x_height)*slant fi; top y9r=h+1;
 if bot y9l-top y1<slab: y9l:=min(y9r-eps,y1+fine+slab); fi
 x8=x9; y8=.5[y9l,y9r];
 z8'=z8; z9'=z9;
+math_fit(-2/3x_height#*slant+.5hair#+.5u#,ic#);
+penlabels(0,1,2,3,4,5);
+enddef;
+
+cmchar "Italic letter i";
+letter_i("i");
 numeric i_dot_flare; i_dot_flare=.9small_flare;
 pos8'(i_dot_flare,0); pos9'(i_dot_flare,90);
-dot(8',9')
-math_fit(-2/3x_height#*slant+.5hair#+.5u#,ic#);
-penlabels(0,1,2,3,4,5,8,9); endchar;
+dot(8',9');
+penlabels(8,9);
+endchar;
 
 cmchar "Italic letter j";
 beginchar("j",5u#,min(asc_height#,10/7x_height#+.5flare#),desc_depth#);

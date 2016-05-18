@@ -36,6 +36,16 @@ adjust_fit(0,0);
 acute_accent(.3w,0);
 penlabels(1,2,3,4); endchar;
 
+cmchar "The letter a with grave accent";
+letter_a(oct"340");
+grave_accent(x3r,0);
+endchar;
+
+cmchar "The letter a with acute accent";
+letter_a(oct"341");
+acute_accent(x3r,0);
+endchar;
+
 cmchar "The letter e with grave accent";
 letter_e(oct"350");
 grave_accent(.5w,0);
@@ -44,6 +54,16 @@ endchar;
 cmchar "The letter e with acute accent";
 letter_e(oct"351");
 acute_accent(.5w,0);
+endchar;
+
+cmchar "The letter i with grave accent";
+letter_i(oct"354");
+grave_accent(x1,0);
+endchar;
+
+cmchar "The letter i with acute accent";
+letter_i(oct"355");
+acute_accent(x1,0);
 endchar;
 
 cmchar "Hachek (check) accent";

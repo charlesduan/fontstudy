@@ -9,8 +9,9 @@
 
 % Character codes \0141 through \0172 are generated.
 
-cmchar "The letter a";
-beginchar("a",9u#,x_height#,0);
+def letter_a(expr code) =
+realcharcode=byte "a";
+beginchar(code,9u#,x_height#,0);
 path p[];
 bh#:=min(bar_height#,1.14x_height#-bar_height#); define_pixels(bh);
 italcorr 1/3[bh#,x_height#]*slant+.5stem#-serif_fit#-2u#;
@@ -65,7 +66,7 @@ else: pos1(5/7[vair,flare],95); x1l=good.x 1.5u; x1r:=good.x x1r;
  p1=pen_rlpaths1(fine);
 fi
 (x,y8r)=whatever[z8l,z9l]; x8r:=max(x,x8-u);
-abar_angle=15;
+numeric abar_angle; abar_angle=15;
 pos6'(y6r-y6l,90+abar_angle);
 x6'=x6; z6'=(.5[x7l,x5l],y6) + whatever * (right rotated abar_angle);
 make_paths3(rev.r) z9e{down} arctensed z8e{left}...{up}z7e
@@ -77,7 +78,12 @@ p3=combine(combine(z4l--z5l,rpath3),p2);
 % *path2 is the upper arc
 fill rpath2 & p1 & combine(lpath2,p3)--cycle;
 unfill combine(lpath3, (x9l,y4l)--z9l) & cycle;
-penlabels(1,2,3,4,5,6,6',7,8,9,10,11,12,13); endchar;
+penlabels(1,2,3,4,5,6,6',7,8,9,10,11,12,13);
+enddef;
+
+cmchar "The letter a";
+letter_a("a");
+endchar;
 
 cmchar "The letter b";
 beginchar("b",10u#+serif_fit#,asc_height#,0);
@@ -396,26 +402,36 @@ fi
 fill p1--lpath1--p3--combine(rpath1,z2'r--p2)--cycle;
 penlabels(1,2,3,4); endchar;
 
-cmchar "The letter i";
-beginchar("i",5u#,min(asc_height#,10/7x_height#+.5i_dot_size#),0);
+def letter_i(expr code) =
+realcharcode=byte "i";
+beginchar(code,5u#,min(asc_height#,10/7x_height#+.5i_dot_size#),0);
 italcorr h#*slant-serif_fit# + .5i_dot_size# -2u#;
 adjust_fit(serif_fit#+stem_shift# if monospace:+.25u#fi,serif_fit#-stem_shift#);
 pos1(stem',0); pos2(stem',0);
 x1l=jut; x1=x2;
 y1=x_height if serifs: +min(oo,serif_drop) fi; y2=0;
-pos3(i_dot_size,0); pos4(i_dot_size,90);
-if serifs: x3=x1;
-else: x3=x1-.5 fi;
-y4r=h+1;
-if y4l-y1<slab: y4l:=min(y4r-eps,y1+tiny+slab); fi
-x3=x4; y3=.5[y4l,y4r]; dot_path(3,4);  % dot
 if serifs:
     fill sloped_serif_path.l(1,2,a,sloped_serif_dark,.95jut,serif_drop)--
         dish_serif_path(2,1,b,1/3,x2l,c,1/3,w-x2r)--cycle;
 else:
     fill pen_rlend1(up,tiny,down)--pen_lrend(down,tiny,up)--cycle;
 fi
-penlabels(1,2,3,4); endchar;
+penlabels(1,2);
+enddef;
+
+cmchar "The letter i";
+letter_i("i");
+pos3(i_dot_size,0); pos4(i_dot_size,90);
+if serifs: x3=x1;
+else: x3=x1-.5 fi;
+y4r=h+1;
+if y4l-y1<slab: y4l:=min(y4r-eps,y1+tiny+slab); fi
+x3=x4; y3=.5[y4l,y4r]; dot_path(3,4);  % dot
+penlabels(3,4); endchar;
+
+cmchar "The dotless letter i";
+letter_i(oct"220");
+endchar;
 
 cmchar "The letter j";
 beginchar("j",5.5u#,min(asc_height#,10/7x_height#+.5i_dot_size#),desc_depth#);

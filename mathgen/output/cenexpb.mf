@@ -55,6 +55,7 @@ input mgpunct;
 input mgcomlig;
 input mgromlig;
 input mgascii;
+input mgaccent;
 
 %
 % Small caps
