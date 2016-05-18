@@ -127,9 +127,9 @@
 /braceright
 /asciitilde
 /bullet
-/ff             % 128 / 200
-/ffi
-/ffl
+/f_f             % 128 / 200
+/f_f_i
+/f_f_l
 /quotesingle
 /.notdef
 /.notdef
@@ -152,10 +152,10 @@
 /breve
 /dotaccent
 /quotedblright  % 152 / 230
-/fi
+/f_i
 /ring
 /emdash
-/fl
+/f_l
 /hungarumlaut
 /ogonek
 /caron

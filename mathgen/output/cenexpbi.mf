@@ -34,6 +34,7 @@ E_mid_darkness=.45;
 dot_o#=.75o#;
 angle_jut_power:=1;
 inset_factor:=1;
+acc_height#:=7.05pt#;
 input widths;
 
 
@@ -102,6 +103,7 @@ E_mid_darkness:=.45;
 dot_o#:=.75o#;
 angle_jut_power:=2;
 inset_factor:=.3;
+acc_height#:=7.05pt#;
 input boldadj;
 input widths;
 extra_endchar:=extra_endchar&"charcode:=charcode+code_offset;";

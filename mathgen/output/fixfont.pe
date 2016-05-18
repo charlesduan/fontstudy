@@ -40,15 +40,15 @@ SetMacStyle(-1)
 
 AddLookup("Ligatures", "gsub_ligature", 0, [["liga", [["latn", ["dflt"]]]]]);
 AddLookupSubtable("Ligatures", "Ligatures 0");
-Select("ffi"); AddPosSub("Ligatures 0", "f f i");
-               AddPosSub("Ligatures 0", "ff i");
-               AddPosSub("Ligatures 0", "f fi");
-Select("ffl"); AddPosSub("Ligatures 0", "f f l");
-               AddPosSub("Ligatures 0", "ff l");
-               AddPosSub("Ligatures 0", "f fl");
-Select("ff");  AddPosSub("Ligatures 0", "f f");
-Select("fi");  AddPosSub("Ligatures 0", "f i");
-Select("fl");  AddPosSub("Ligatures 0", "f l");
+Select("f_f_i"); AddPosSub("Ligatures 0", "f f i");
+               AddPosSub("Ligatures 0", "f_f i");
+               AddPosSub("Ligatures 0", "f f_i");
+Select("f_f_l"); AddPosSub("Ligatures 0", "f f l");
+               AddPosSub("Ligatures 0", "f_f l");
+               AddPosSub("Ligatures 0", "f f_l");
+Select("f_f");  AddPosSub("Ligatures 0", "f f");
+Select("f_i");  AddPosSub("Ligatures 0", "f i");
+Select("f_l");  AddPosSub("Ligatures 0", "f l");
 
 AddLookup("Caps to Small Caps", "gsub_single", 0, \
     [["c2sc", [["latn", ["dflt"]]]]]);

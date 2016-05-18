@@ -16,7 +16,7 @@ font.addLookup(
 font.addLookupSubtable("Kern lookup", "Kern lookup 0")
 
 lc_list = [ string.ascii_lowercase[x:x+1] for x in range(26) ] + \
-        [ 'ff', 'ffi', 'ffl', 'fi', 'fl' ]
+        [ 'f_f', 'f_f_i', 'f_f_l', 'f_i', 'f_l' ]
 uc_left_list = [
         'A', 'C', 'D', 'G', 'O', 'Q', 'R', 'S', 'U',
         'V', 'W', 'Y' ]
@@ -28,7 +28,7 @@ sc_less_left_list = [ x.lower() + ".sc" for x in uc_less_left_list ]
 sc_right_list = [ x.lower() + ".sc" for x in uc_right_list ]
 
 lc_left_list = [
-        'a', 'b', 'c', 'e', 'f', 'ff', 'o', 'p', 'r', 'v', 'w', 'y' ]
+        'a', 'b', 'c', 'e', 'f', 'f_f', 'o', 'p', 'r', 'v', 'w', 'y' ]
 lc_left_punct_list = [ 'g', 'h', 'k', 'm', 'n', 's', 't', 'u', 'x', 'z' ]
 lc_right_list = [
         'a', 'c', 'd', 'e', 'j', 'o', 'q', 't', 'u', 'v', 'w', 'y' ]
