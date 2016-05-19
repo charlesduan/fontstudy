@@ -589,8 +589,9 @@ fi
 fill p1--lpath1--p3--combine(rpath1,z2'r--p2)--cycle;
 penlabels(1,2,3,4); endchar;
 
-cmchar "The letter o";
-beginchar("o",9u#,x_height#,0);
+def letter_o(expr code) =
+realcharcode=byte "o";
+beginchar(code,9u#,x_height#,0);
 italcorr .7x_height#*slant;
 adjust_fit(if monospace: .5u#,.5u# else: 0,0 fi);
 penpos1(vair,90); penpos3(vair',-90);
@@ -602,7 +603,12 @@ make_paths1(rev.l) pulled_arc.e(1,2) & pulled_arc.e(2,3)
  & pulled_arc.e(3,4) & pulled_arc.e(4,1) & cycle;  % bowl
 fill rpath1;
 unfill lpath1;
-penlabels(1,2,3,4); endchar;
+penlabels(1,2,3,4);
+enddef;
+
+cmchar "The letter o";
+letter_o("o");
+endchar;
 
 cmchar "The letter p";
 beginchar("p",10u#+serif_fit#,x_height#,desc_depth#);
@@ -837,8 +843,9 @@ else:
 fi
 penlabels(1,2,2',3,4,5,6,7,8); endchar;
 
-cmchar "The letter u";
-beginchar("u",10u#,x_height#,0);
+def letter_u(expr code) =
+realcharcode=byte "u";
+beginchar(code,10u#,x_height#,0);
 italcorr x_height#*slant-serif_fit#+.5stem#-2u#;
 adjust_fit(serif_fit#+stem_shift#,serif_fit#-stem_shift#);
 path p[];
@@ -874,7 +881,12 @@ if y6l>=ypart point infinity of p2:
 else:
  fill p1--combine(rpath1, p3)--p2--lpath1--cycle;
 fi
-penlabels(1,2,2',3,4,5,6); endchar;
+penlabels(1,2,2',3,4,5,6);
+enddef;
+
+cmchar "The letter u";
+letter_u("u");
+endchar;
 
 cmchar "The letter v";
 beginchar("v",if serifs: 9.5u# else:9u# fi,x_height#,0);

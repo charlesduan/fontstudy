@@ -1,0 +1,85 @@
+%!PS-Adobe-3.0
+
+/setupfont {
+    1000 scalefont
+    0 dict copy
+    dup /PaintType 2 put dup /StrokeWidth 1 put
+    dup /Encoding StandardEncoding put
+    definefont pop
+} def
+
+/TheBaseFont /CenturyExpandedLTStd-Italic findfont setupfont
+
+/basefont {
+    /TheBaseFont findfont setfont
+} def
+
+/TheTestFont /CenturyExpandedCD-Italic findfont setupfont
+
+/testfont {
+    /TheTestFont findfont setfont
+} def
+
+/letterPath {
+    newpath 0 0 moveto show
+    0 300 rlineto
+    gsave stroke grestore
+} bind def
+
+/glyphPath {
+    newpath 0 0 moveto glyphshow
+    0 300 rlineto
+    gsave stroke grestore
+} bind def
+
+/doTranslation {
+    50 200 translate
+    0.6 0.6 scale
+} def
+
+/lcalpha (abcdefghijklmnopqrstuvwxyz) def
+0 1 lcalpha length 1 sub {
+    lcalpha exch 1 getinterval
+    4 string dup 3 1 roll copy pop
+    dup 1 (.sc) putinterval
+    cvn /thisglyph exch def
+    doTranslation
+    basefont thisglyph glyphPath
+    1 0 0 setrgbcolor
+    testfont thisglyph glyphPath
+    showpage
+} for
+
+/alphabet
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ\
+abcdefghijklmnopqrstuvwxyz\
+1234567890\
+!#%()*+,./:;=@[]$&?\
+`'\252\272-\261\320<>^_\247\266) def
+
+0 1 alphabet length 1 sub {
+    alphabet exch 1 getinterval /thisletter exch def
+    doTranslation
+
+    thisletter basefont letterPath
+    1 0 0 setrgbcolor
+    thisletter testfont letterPath
+
+    showpage
+} for
+
+/chars [
+    /fi /fl /ff /ffi /ffl /bullet /quotesingle /quotedbl
+    /acute /grave /dieresis /tilde /hungarumlaut /dotaccent /circumflex /cedilla
+    /ring /macron /breve /caron /agrave /aacute /egrave /eacute /igrave /iacute
+    /ograve /oacute /ugrave /uacute
+] {
+    /thisglyph exch def
+    doTranslation
+    basefont thisglyph glyphPath
+    1 0 0 setrgbcolor
+    testfont thisglyph glyphPath
+
+    showpage
+} forall
+

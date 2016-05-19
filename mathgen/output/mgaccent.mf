@@ -58,12 +58,32 @@ endchar;
 
 cmchar "The letter i with grave accent";
 letter_i(oct"354");
-grave_accent(x1,0);
+grave_accent(x2,0);
 endchar;
 
 cmchar "The letter i with acute accent";
 letter_i(oct"355");
+acute_accent(x2,0);
+endchar;
+
+cmchar "The letter o with grave accent";
+letter_o(oct"362");
+grave_accent(x1,0);
+endchar;
+
+cmchar "The letter o with acute accent";
+letter_o(oct"363");
 acute_accent(x1,0);
+endchar;
+
+cmchar "The letter u with grave accent";
+letter_u(oct"371");
+grave_accent(if slant>0: .5[x2,x7] else: .5[x1,x3] fi,0);
+endchar;
+
+cmchar "The letter u with acute accent";
+letter_u(oct"372");
+acute_accent(if slant>0: .5[x2,x7] else: .5[x1,x3] fi,0);
 endchar;
 
 cmchar "Hachek (check) accent";

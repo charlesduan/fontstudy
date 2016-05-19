@@ -352,8 +352,9 @@ fill pen_point(1l,2l,fine,2r)--lpath5 & p7 & combine(rpath5,z2r--p0)--cycle;
 math_fit(-2/3x_height#*slant+.5hair#+.5u#,ic#);
 penlabels(0,a,1,2,3,4,5,6,7); endchar;
 
-cmchar "Italic letter o";
-beginchar("o",9u#,x_height#,0);
+def letter_o(expr code) =
+realcharcode=byte "o";
+beginchar(code,9u#,x_height#,0);
 italcorr .7x_height#*slant+.5curve#-u# if math_fitting:-.5u# fi;
 adjust_fit(0,0);
 pos1(vair,90); pos2(curve,180); pos3(vair,270); pos4(curve,360);
@@ -363,7 +364,12 @@ make_paths1(rev.l) pulled_arc.e(1,2) & pulled_arc.e(2,3)
  & pulled_arc.e(3,4) & pulled_arc.e(4,1); % bowl
 fill rpath1 & cycle;
 unfill lpath1 & cycle;
-math_fit(-.3x_height#*slant+.5curve#-u#,ic#); penlabels(1,2,3,4); endchar;
+math_fit(-.3x_height#*slant+.5curve#-u#,ic#); penlabels(1,2,3,4);
+enddef;
+
+cmchar "Italic letter o";
+letter_o("o");
+endchar;
 
 cmchar "Italic letter p";
 beginchar("p",9u#,x_height#,desc_depth#);
@@ -477,8 +483,9 @@ fill pen_rlend5(left,crisp,right)--(x1l,y5l)--p4--(x2r,y6l)
  --(x1l,y5r)--cycle;
 math_fit(1.25u#-x_height#*slant,ic#); penlabels(1,2,3,4,5,6); endchar;
 
-cmchar "Italic letter u";
-beginchar("u",9.5u#,x_height#,0);
+def letter_u(expr code) =
+realcharcode=byte "u";
+beginchar(code,9.5u#,x_height#,0);
 italcorr 1/3x_height#*slant+.5hair#+.5u#;
 adjust_fit(0,0); interim superness:=more_super;
 x0r=0; y0r=.62x_height;
@@ -499,7 +506,12 @@ fi
 fill pen_point(7r,6r,fine,6l)--lpath2 & p0
  & combine(rpath2,z6l--p9)--cycle;
 math_fit(-2/3x_height#*slant+.5hair#+.5u#,ic#);
-penlabels(0,1,2,3,4,5,6,7,8,9); endchar;
+penlabels(0,1,2,3,4,5,6,7,8,9);
+enddef;
+
+cmchar "Italic letter u";
+letter_u("u");
+endchar;
 
 cmchar "Italic letter v";
 beginchar("v",8u#,x_height#,0);

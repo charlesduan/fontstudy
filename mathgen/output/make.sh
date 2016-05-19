@@ -27,5 +27,5 @@ mf2pt1 --encoding=cdlatin1.enc \
 ./fixfont.pe cenexpi.pfb Regular Italic
 fontforge -script fixfont.py cenexpi.otf cenexpi.otf
 
-#ps2pdf -sFONTPATH=`pwd` letters.ps
-#xelatex test
+ps2pdf -sFONTPATH=`pwd` letters.ps
+xelatex test
