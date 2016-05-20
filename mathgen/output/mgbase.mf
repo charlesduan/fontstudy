@@ -499,6 +499,9 @@ vardef var_combine(expr first, second) =
  & trunc_path_start(second, ypart t_, point xpart t_ of first)
 enddef;
 
+tertiarydef first combined second =
+combine(first, second) enddef;
+tertiarydef first var_combined second = var_combine(first, second) enddef;  
 
 vardef trunc_path_start(expr p, t, startpt) =
  save p_; path p_; p_ = subpath (t,infinity) of p;

@@ -86,25 +86,22 @@ letter_u(oct"372");
 acute_accent(if slant>0: .5[x2,x7] else: .5[x1,x3] fi,0);
 endchar;
 
+def hachek_accent(expr midpoint,height_adj) =
+pos1001(hair,0); pos1002(hair, 0);
+y1001=y1002=acc_height+height_adj;
+.5[x1001l,x1002r]=midpoint; x1002r-x1001l=get_accent_width(oct"237");
+pos1003(1.2stem,0); pos1004(1.2stem,0); y1003=y1004=x_height+o+hair+height_adj;
+.5[x1003l,x1004r]=midpoint; x1003r-x1004l=.5[hair,stem];
+fill (z1002r--z1002l--z1003l) combined (z1004r--z1001r--z1001l--z1004l--z1003r)
+    --cycle;
+penlabels(1001,1002,1003,1004);
+enddef;
+
 cmchar "Hachek (check) accent";
 beginchar(oct"237",9u#,acc_height#,0);
-h':=vround min(asc_height,2x_height); % height of circumflex being inverted
-if serifs: italcorr h#*slant+.5hair#-1.75u#;
- adjust_fit(0,0);
- pickup crisp.nib; pos2'(.5[vair,curve],90); top y2'r=h;
- pos2(.5[vair,curve],90); x2=.5w;
- x1=w-x3=good.x 2.25u; top y1=top y3=h; y1-y2=.5(y2'-x_height);
- pos1(hair,angle(z2-z1)+90); pos3(hair,angle(z3-z2)+90);
- filldraw stroke z1e--z2e--z3e;  % diagonals
-else: italcorr h#*slant-.5stem#+.5vair#-.75u#;
- adjust_fit(0,0);
- pickup fine.nib; pos1(vair,0); pos3(vair,0); x1=w-x3;
- pos2(stem,0); bot y2=vround(1/12[x_height,h']+o); x2=.5w;
- top y1=top y3=h+o; lft x1l=hround(rt x2r-3.25u-.5vair);
- z0=whatever[z1r,z2r]=whatever[z2l,z3l];
- y4l=y4r=y2; x4l=good.x .2[x2l,x2]; x4r=w-x4l;
- filldraw z4l--z1l--z1r--z0--z3l--z3r--z4r--cycle; fi  % diagonals
-penlabels(0,1,2,3,4); endchar;
+adjust_fit(0,0);
+hachek_accent(.5w,0);
+endchar;
 
 cmchar "Breve accent";
 beginchar(oct"226",9u#,acc_height#,0);
@@ -175,23 +172,50 @@ penlabels(1,2,3,4,5); endchar;
 %filldraw stroke z1e--z2e;  % diagonal
 %penlabels(1,2); endchar;
 
+def circumflex_accent(expr midpoint,height_adj) =
+pos1001(hair,0); pos1002(hair, 0);
+y1001=y1002=x_height+o+hair+height_adj;
+.5[x1001l,x1002r]=midpoint; x1002r-x1001l=get_accent_width(oct"237");
+pos1003(1.2stem,0); pos1004(1.2stem,0);
+y1003=y1004=acc_height+height_adj;
+.5[x1003l,x1004r]=midpoint; x1003r-x1004l=.5[hair,stem];
+fill reverse(
+    (z1002r--z1002l--z1003l) combined (z1004r--z1001r--z1001l--z1004l--z1003r)
+    --cycle);
+penlabels(1001,1002,1003,1004);
+enddef;
+
 cmchar "Circumflex (hat) accent";
 beginchar(oct"223",9u#,acc_height#,0);
-if serifs: italcorr .5[x_height#,h#]*slant+.5hair#-1.75u#;
- adjust_fit(0,0);
- pickup crisp.nib; pos2(.5[vair,curve],90); top y2r=h; x2=.5w;
- x1=w-x3=good.x 2.25u; y1=y3=.5[x_height,y2];
- pos1(hair,angle(z2-z1)+90); pos3(hair,angle(z3-z2)+90);
- filldraw stroke z1e--z2e--z3e;  % diagonals
-else: italcorr 2/3[x_height#,h#]*slant-.5stem#+.5vair#-.75u#;
- adjust_fit(0,0);
- pickup fine.nib; pos1(vair,0); pos3(vair,0); x1=w-x3;
- pos2(stem,0); top y2=h; x2=.5w; bot y1=bot y3=vround 2/3[h,x_height]-eps;
- lft x1l=hround(rt x2r-3.25u-.5vair); % same slope as in the acute accent
- z0=whatever[z1r,z2r]=whatever[z2l,z3l];
- y4l=y4r=y2; x4l=good.x .2[x2l,x2]; x4r=w-x4l;
- filldraw z4l--z1l--z1r--z0--z3l--z3r--z4r--cycle; fi  % diagonals
-penlabels(0,1,2,3,4); endchar;
+adjust_fit(0,0);
+circumflex_accent(.5w,0);
+endchar;
+
+cmchar "The letter a with circumflex accent";
+letter_a(oct"342");
+circumflex_accent(x3r,0);
+endchar;
+
+cmchar "The letter e with circumflex accent";
+letter_e(oct"352");
+circumflex_accent(.5w,0);
+endchar;
+
+cmchar "The letter i with circumflex accent";
+letter_i(oct"356");
+circumflex_accent(if slant>0: x1 else: x2 fi,0);
+endchar;
+
+cmchar "The letter o with circumflex accent";
+letter_o(oct"364");
+circumflex_accent(x1,0);
+endchar;
+
+cmchar "The letter u with circumflex accent";
+letter_u(oct"373");
+circumflex_accent(if slant>0: .5[x2,x7] else: .5[x1,x3] fi,0);
+endchar;
+
 
 iff ligs>0: cmchar "Dot accent";
 numeric dot_diam#; dot_diam#=max(dot_size#,cap_curve#);
@@ -247,17 +271,44 @@ else: pickup fine.nib; pos1(vair,180); pos2(vair,90);
  filldraw stroke z1e{up}...z2e{right}..z3e..{right}z4e...{up}z5e; fi % stroke
 penlabels(1,2,3,4,5); endchar;
 
+def umlaut_accent(expr midpoint, height_adj) =
+numeric dot_width; dot_width=.5[stem,dot_size];
+pos1001(dot_width,0); pos1002(dot_width,90); z1001=z1002;
+pos1003(dot_width,0); pos1004(dot_width,90); z1003=z1004;
+y1001=y1003=.5[x_height+o+hair,acc_height]+height_adj;
+.5[x1001l,x1003r]=midpoint; x1003r-x1001l=get_accent_width(oct"250");
+dot(1001,1002); dot(1003,1004);
+penlabels(1001,1002,1003,1004);
+enddef;
+
 cmchar "Umlaut (double dot) accent";
-numeric dot_diam#,dot_diam;
-dot_diam#=max(dot_size#,cap_curve#);
 beginchar(oct"250",9u#,acc_height#,0);
-dot_diam=max(tiny.breadth,hround(max(dot_size,cap_curve)-2stem_corr));
-italcorr h#*slant+.5dot_diam#-2.25u#;
 adjust_fit(0,0);
-pickup tiny.nib; pos1(dot_diam,0); pos2(dot_diam,90);
-x1=x2=2.75u; top y2r=h+1;
-if bot y2l<x_height+o+slab: y2l:=min(y2r-eps,x_height+o+slab+.5tiny); fi
-y1=.5[y2l,y2r]; dot(1,2);  % left dot
-pos3(dot_diam,0); penpos4(y2r-y2l,90); y3=y4=y1; x3=x4=w-x1;
-dot(3,4);  % right dot
-penlabels(1,2,3,4); endchar;
+umlaut_accent(.5w, 0);
+endchar;
+
+cmchar "The letter a with umlaut accent";
+letter_a(oct"344");
+umlaut_accent(x3r,0);
+endchar;
+
+cmchar "The letter e with umlaut accent";
+letter_e(oct"353");
+umlaut_accent(.5w,0);
+endchar;
+
+cmchar "The letter i with umlaut accent";
+letter_i(oct"357");
+umlaut_accent(if slant>0: x1 else: x2 fi,0);
+endchar;
+
+cmchar "The letter o with umlaut accent";
+letter_o(oct"366");
+umlaut_accent(x1,0);
+endchar;
+
+cmchar "The letter u with umlaut accent";
+letter_u(oct"374");
+umlaut_accent(if slant>0: .5[x2,x7] else: .5[x1,x3] fi,0);
+endchar;
+

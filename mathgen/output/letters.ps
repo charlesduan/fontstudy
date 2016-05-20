@@ -8,13 +8,15 @@
     definefont pop
 } def
 
+%/TheBaseFont /CenturyExpandedLTStd findfont setupfont
+%/TheTestFont /CenturyExpandedCD-Regular findfont setupfont
 /TheBaseFont /CenturyExpandedLTStd-Italic findfont setupfont
+/TheTestFont /CenturyExpandedCD-Italic findfont setupfont
 
 /basefont {
     /TheBaseFont findfont setfont
 } def
 
-/TheTestFont /CenturyExpandedCD-Italic findfont setupfont
 
 /testfont {
     /TheTestFont findfont setfont
@@ -73,6 +75,8 @@ abcdefghijklmnopqrstuvwxyz\
     /acute /grave /dieresis /tilde /hungarumlaut /dotaccent /circumflex /cedilla
     /ring /macron /breve /caron /agrave /aacute /egrave /eacute /igrave /iacute
     /ograve /oacute /ugrave /uacute
+    /acircumflex /ecircumflex /icircumflex /ocircumflex /ucircumflex
+    /adieresis /edieresis /idieresis /odieresis /udieresis
 ] {
     /thisglyph exch def
     doTranslation
