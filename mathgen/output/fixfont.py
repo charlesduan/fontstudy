@@ -72,26 +72,33 @@ font.autoKern("Kern lookup 0", 200, lc_left_list +
 font.autoKern("Kern lookup 0", 100, [ 'f', 'f_f' ], rpunct_list,
         50, onlyCloser=False)
 
+font.autoKern("Kern lookup 0", 200, lowpunct_list, lc_right_list,
+        50, onlyCloser=True)
 font.autoKern("Kern lookup 0", 200, lc_left_list,
         lowpunct_list, 50, onlyCloser=True)
 font.autoKern("Kern lookup 0", 300, [ 'F', 'V', 'P' ], lowpunct_list,
         50, onlyCloser=True)
 font.autoKern("Kern lookup 0", 250, [ 'W' ], lowpunct_list,
         50, onlyCloser=True)
-font.autoKern("Kern lookup 0", 200, [ 'T', 'Y' ], lowpunct_list,
+font.autoKern("Kern lookup 0", 220, [ 'T', 'Y' ], lowpunct_list,
         50, onlyCloser=True)
-font.autoKern("Kern lookup 0", 150, [ 'J', 'N', 'U' ], lowpunct_list,
+font.autoKern("Kern lookup 0", 170, [ 'J', 'N', 'U' ], lowpunct_list,
         50, onlyCloser=True)
 font.autoKern("Kern lookup 0", 150, lowpunct_list, uc_top_more_list,
+        50, onlyCloser=True)
+
+font.autoKern("Kern lookup 0", 170, lowpunct_list, [ 'C', 'G', 'O', 'Q' ],
+        50, onlyCloser=True)
+font.autoKern("Kern lookup 0", 170, [ 'C', 'D', 'O', 'Q', 'R' ], lowpunct_list,
         50, onlyCloser=True)
 
 font.autoKern("Kern lookup 0", 300, lowpunct_list, [ 'V' ],
         50, onlyCloser=True)
 font.autoKern("Kern lookup 0", 250, lowpunct_list, [ 'W' ],
         50, onlyCloser=True)
-font.autoKern("Kern lookup 0", 200, lowpunct_list, [ 'T', 'Y' ],
+font.autoKern("Kern lookup 0", 220, lowpunct_list, [ 'T', 'Y' ],
         50, onlyCloser=True)
-font.autoKern("Kern lookup 0", 150, lowpunct_list, [ 'U' ],
+font.autoKern("Kern lookup 0", 170, lowpunct_list, [ 'U' ],
         50, onlyCloser=True)
 
 font.autoKern("Kern lookup 0", 250, [ 'f.sc', 'p.sc', 'v.sc' ], lowpunct_list,
@@ -112,6 +119,25 @@ font.autoKern("Kern lookup 0", 150, lowpunct_list, [ 't.sc', 'y.sc', 'u.sc' ],
         50, onlyCloser=True)
 
 font.autoKern("Kern lookup 0", 120, lowpunct_list, [ 'J', 'j.sc' ],
+        50, onlyCloser=False)
+
+font.autoKern("Kern lookup 0", 250,
+        [ 'A', 'T', 'V', 'W', 'X', 'Y', 'v', 'w', 'x', 'y', 'a.sc', 'v.sc',
+            'w.sc', 'x.sc', 'y.sc' ],
+        [ 'hyphen' ], 50, onlyCloser=True)
+
+font.autoKern("Kern lookup 0", 250,
+        [ 'hyphen' ],
+        [ 'A', 'T', 'V', 'W', 'X', 'Y', 'v', 'w', 'x', 'y', 'a.sc', 'v.sc',
+            'w.sc', 'x.sc', 'y.sc' ],
+        50, onlyCloser=True)
+
+font.autoKern("Kern lookup 0", 120, [ 'hyphen' ], [ 'C', 'G', 'O', 'Q', 'S' ],
+        50, onlyCloser=False)
+font.autoKern("Kern lookup 0", 120, [ 'C', 'D', 'O', 'Q', 'S' ], [ 'hyphen' ],
+        50, onlyCloser=False)
+
+font.autoKern("Kern lookup 0", 200, [ 'hyphen' ], [ 'J' ],
         50, onlyCloser=False)
 
 font.generate(outfile)
